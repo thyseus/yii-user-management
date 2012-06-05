@@ -1,0 +1,10 @@
+Since Yum 0.8 a set of unit tests is being shipped to test portions of your
+Application. The Unit-Tests are included in the tests/unit folder. 
+
+In order to use them, simply copy them over to you application-specific
+unit test folder (webroot/protected/tests/unit) and run them with phpunit. See 
+
+http://www.yiiframework.com/doc/guide/1.1/en/test.overview
+http://www.yiiframework.com/doc/guide/1.1/en/test.unit
+
+on how unit test works.

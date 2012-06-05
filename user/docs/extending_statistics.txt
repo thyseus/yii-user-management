@@ -1,0 +1,5 @@
+This document is an example on how additional, project-specific Statistics
+could be done.
+
+You may have noticed the controllers/YumStatisticsController.php that
+implements some often used Statistics.

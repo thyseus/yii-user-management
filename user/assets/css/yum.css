@@ -1,0 +1,28 @@
+div.form .tooltip { display: none; background-color:#EFFDFF; border:1px solid #79B4DC; padding: 10px; width: 300px; }
+
+#usermenu {float:right; width:25%; margin: 0px 5px 0px 5px;}
+#usermenu span {text-align: center;background-color: #EEEEEE; color: black; padding:3px; margin:5px; width: 300px;}
+#usermenu a {color: gray; padding:3px; text-decoration: none;}
+#usermenu a:hover {color: black; text-decoration:underline;}
+
+#usermenu .active {font-weight: bold; margin: 9px; text-decoration: underline; }
+
+.menucontent {background-color: #EEEEEE;}
+.menucontent ul {margin: 5px 0px 0px 9px; padding: 3px; list-style-type:none;cursor:pointer;}
+.menucontent li {margin: 5px 0px 0px 9px; list-style-type:none;}
+
+.avatar {float:left; margin-right: 5px;}
+#usercontent {padding: 20px; width:70%; margin: 5px;}
+label { display: inline }
+.checkbox { float: left; margin-right: 5px; }
+.listbox { display: inline; } 
+.roles {float: right; }
+.membership { float: left;margin: 5px; }
+.info {background-color: lightgray; padding: 10px; margin:10px; border: 1px dotted black;}
+.new_messages td { border-bottom: 1px solid;} 
+.tooltip { display: none; padding: 5px; margin: 5px; background-color: #ffa;border: 1px solid #cc9; border-radius: 5px;}
+.view_user {float:left; margin:5px;}
+.profile_field_selection { float: right; margin: 5px;}
+.table_profile_fields { width: 50%; }
+.profilefieldlabel { float: left; margin-right: 5px; width: 100px;}
+.friend { margin: 5px; } 

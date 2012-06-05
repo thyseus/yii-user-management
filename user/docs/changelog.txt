@@ -1,0 +1,156 @@
+Changelog for Yii User Management Module (Yum) 
+
+
+New in 0.8-rc6:
+- Added Gravatar support in Avatar submodule
+
+New in 0.8-rc3:
+- Added italian translation (thanks goes to marco@customsoft.it )
+- Moved translation strings away from .php files into the database
+
+New in 0.8-rc2:
+- Changed available YumUser::status values
+- Removed fields group feature. Please overwrite the existing views if you
+	need field groups.
+- ENH: added a RESTful api (docs/RESTful_api.txt)
+- removed the yumsettings table and functionality completely. All options need to be configured in the application configuration now. This really is better.  Note that yumTextSettings are kept. Because they make sense. Yumsettings dont. 
+- started to make the module clean. The avatar, role, usergroup, membership and messages module are now own submodules.
+See docs/avatar.txt and docs/messages.txt on how to use it now. I will do this for all other
+submodules step-by-step, too. 
+
+New in 0.8:
+- BUGFIX: Dont show if the message has been read by the recipient in my sent
+  messages anymore
+- Added 'visitors' to profiles (who visited whom when, and display it)
+- Added possibility to enable profile visit logs for an user in the privacy
+settings (thyseus)
+- Added YumUser::STATUS_ACTIVATED (thyseus) (activated but did not log in yet after
+actiation)
+- Added YumUser::STATUS_REMOVED (thyseus)
+- Added new membership system (thyseus)
+- Messages with CJuiDialog popup (thyseus)
+- Added Documentation about the new, experimental Permission system (thyseus)
+- Added ignore users to privacy settings (thyseus)
+- Introduced YumMailer (bigchirv)
+- reworked messaging System (thyseus)
+- Added User privacy settings (thyseus)
+- Added Usergroup submodule (thyseus)
+- Support for Facebook Connect (bigchirv)
+- New User activity logging subsystem (see YumActivityController) - logging of login, logout, wrong password attempt, recovery and registration into database and Yii log file
+- Added avatar upload possibility for users
+- Added support for send emails out of SwiftMailer (docs/swiftMailer.txt)
+- Added DROPDOWNLIST field type to profile fields. see docs/dropdownlist_in_registration_form.txt for information on how to use this (thyseus)
+- Added possibility to make roles selectable on registration (thyseus)
+- Added user Generator (available under 'other' when debug mode is enabled)
+- New default URL route '<app>/user/login' instead of less beautiful '<app>/user/user/login' (thyseus)
+- Refactored Registration Process into YumRegistrationController (makes YumUserController less fussy) (thyseus)
+- Removed AllowInactiveAccountLogin (don't needed anymore because of the new registration Options) (thyseus)
+- Added User Statistics (thyseus)
+- Removed adminpanel (thyseus)
+- added password expiration date (experimental) (thyseus)
+- added new Relation widget that fixed MANY_MANY DropDownList problems (thyseus)
+- Wrapped Yum::t() around Yii::t() to allow easier translations (thyseus)
+- Renamed YumHelper to Yum (thyseus)
+- introduced components/YumMenu for menu rendering (thyseus)
+- added yumSettings and yumTextSettings (thyseus) 
+- added differences between profile versions in admin View (thyseus)
+- repaired Messages Validation (thyseus)
+- Yum now tries to use the application layout by default. This can be
+  configured in the application configuration (thyseus)
+- Added CEmailValidator to email profile field (thyseus)
+- Made users/admin CGridView filterable (thyseus)
+- Added AllowRegistration & AllowRecovery in Module Configuration
+- Added quick Login widget (thyseus)
+- Fixed registration form and enabled YumPasswordValidator to registration Form
+- added qwerty's CPasswordValidator and ability to configure the password requirements in the Application configuration (renamed to YumPasswordValidator)
+
+New in 0.7:
+- Added User Control Panel (thyseus)
+- fixed many glitches of 0.6
+- rearranged submodule hierarchy
+- added useYiiCheckAccess() in module config if you want to use yii's checkAccess() method
+- a user now can only administrate User he should be able to
+
+New in 0.6:
+Features:
+- Added confirmation for Account deletion (thyseus)
+- Renamed disableEmailActivation to enableEmailActivation (defaults to true) (thyseus)
+- Registration Form is now more intelligent and saves already inserted profile Fields after Validation (thanks to peterlap...@hotmail.com)
+- Added Layout for installation
+- Added Yum class (tomasz.suchanek)
+- Added YumMenuItemHelper class (tomasz.suchanek)
+- Added YumWebModule class (tomasz.suchanek)
+- Added profile field grouping functionality (tomasz.suchanek)
+- Added allowCaptcha property to UserModule, to controle whether Captcha is required (tomasz.suchanek)
+- Added new column for profile field definition: hint (tomasz.suchanek) 
+- Added getFormattedName to YumProfile (tomasz.suchanek)
+- Updated AR models documentation with phpdoc @property improve code usage (tomasz.suchanek)
+- Yum can by used as submodule. To avoid names confict all models are renamed:
+ * Messages => YumMessages,
+ * Profile => YumProfile,
+ * ProfileField => YumProfileField,
+ * RegistrationForm => YumRegistrationForm,
+ * Role => YumRole
+ * User => YumUser,
+ * UserChangePassword => YumUserChangePassword,
+ * UserLogin => YumUserLogin,
+ * UserRecoveryForm => YumUserRecoveryForm.
+ .. following components:
+ * UserIdentity => YumUserIdentity,
+ * WebUser => YumWebUser, 
+ .. following controllers
+ * DefaultController => YumDefaultController,
+ * InstallController => YumInstallcontroller,
+ * MessageController => YumMessageController,
+ * RoleController => YumRoleController,
+ * UserController => YumUserController,  
+Note that this change may break the code.
+
+Enhancements:
+ - Repaired registration Process (biya)
+ - Login url support now all placeholder defined in Yum::route (tomasz.suchanek)
+ - Unified naming convention for all links description (only first letter in sentence is uppercased) (tomasz.suchanek)
+ - Added title property to YumController instead of displaying heading directly in views. Heading is now displayed in layout according to use needs (tomasz.suchanek)
+ - Commas and semicolons can be used as range separators (tomasz.suchanek)
+ 
+Bug Fixes:
+- Changed UserModule::$returnUrl UserModule::$returnLogoutUrl calls to Yii::app()->controller->module->returnUrl/returnLogoutUrl (steve)
+- Fixed the fallback table name in the ProfileField Model (steve)
+- Fixed the incorrect URL generations in user/modules/role/views/role/admin.php view (steve)
+- Fixed bug #35, #40: Usign table prefixes doesn't break relation definitions (tomasz.suchanek)
+- Fixed bug 'Trying to get property of non-object' when typing not existing username/email in login form (tomasz.suchanek) 
+
+New in 0.5:
+- Added Polish messages translaction (Beta, please submit mistakes) (darek.krk)
+- It is possible to pass valid callback function for passwords hashing in module configuraction (as default md5 will be used) (darek.krk) 
+- Password should not be pre-populated in user update form (darek.krk)
+- Fixed profile table name get method when creating or deleting profile fields (darek.krk)
+- Updated french translation Messages (christophe.hurpeau)
+- Added optional salt to Password encryption (darek.krk)
+- Refactored User registration and Password recovery Process (thyseus)
+- fixed the way Models retrieve their tablename so it works even when not in module context (steve, thyseus)
+- started to begin submodularized infrastructure. see docs/submodules.txt (thyseus)
+- Profile submodule now allows to have multiple profiles for an user, with the last one being the default.
+- Role submodule now has the possibility to assing 'slave' users to users. This way you can define an user hierarchy that defines which users can administrate which users (thyseus)
+- Added a checkbox whether to install Demo Data in installation Form (thyseus)
+- Deleting users now deletes profiles, too (reported by rmlodzki) (thyseus)
+- Repaired registration process (thyseus)
+- Added Profile Privacy field (protected/private/public) (thyseus)
+- Added $readOnlyProfiles to UserModule configuration. If this is set, only the
+administrators of the given user can update the profile (thyseus)
+- Added $forceProtectedProfiles to UserModule configuration. If this is set,
+every profile will be protected, regardless what is set in the profile 
+privacy field (thyseus)
+
+New in 0.4:
+
+- One can use User::hasRole(array('role1', 'role2')) to check if the User belongs to role 1 OR role 2 (thyseus)
+- Rearranged Menu Items more logical (thyseus)
+- Much more strict OOP Design (thyseus)
+- Rearranged Menu Items more logical (thyseus)
+- UserIdentity.php no longer needs to be copied (zephca)
+- Created WebUser class to tie in the cookie based user management features to the DB. (zephca)
+- Fixed some references to unset objects (zephca)
+- Changed directory permissions to 755 and file permissions to 644 so it works better with Git source control (zephca)
+- User can log in by username, E-Mail or both depending on loginType (thyseus)
+- Added possibility to set up Roles in User form and Users in Role form (thyseus)

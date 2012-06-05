@@ -1,0 +1,50 @@
+since yii-user-management 0.8rc2 there is a RESTful Api implemented.
+
+To use it, first read this:
+
+http://www.yiiframework.com/wiki/175/how-to-create-a-rest-api/ 
+http://www.gen-x-design.com/archives/create-a-rest-api-with-php/
+
+Thanks to the first wiki article, from which i borrowed most of the code.
+
+Then, add this lines (for example) to your UrlManager rules:
+
+	'urlManager'=>array(
+			'rules'=>array(
+				array('//user/rest/list', 'pattern' => 'rest/<mode:\w+>', 'verb' => 'GET'),
+				array('//user/rest/view', 'pattern' => 'rest/<mode:\w+>/<id:\d+>', 'verb' => 'GET'), 
+				array('//user/rest/create', 'pattern'=>'rest/create/<mode:\w+>', 'verb'=>'POST'),
+				array('//user/rest/update', 'pattern'=>'rest/update/<mode:\w+>/<id:\d+>', 'verb'=>'PUT'),
+
+
+
+[ ... other rules ]
+
+
+Please note that admin:admin needs to be a correct user/password combination
+and that the user needs to be a superuser (superuser = true) in the user table
+
+Now, you can access the data this way:
+
+List all Users:
+
+curl --user admin:admin http://path/to/webapp/index.php/rest/users
+
+List user with id 2:
+
+curl --user admin:admin http://path/to/webapp/index.php/rest/user/2
+
+Create a new User. Note that, if the profile module is enabled, the profile
+must be validated, otherwise the user will not be inserted.
+Also note, that the user will be created using YumUser::register(). This 
+means, that the user is _deactivated_ by default. If you want to activate
+him, call a PUT request after the user is created:
+
+curl --user admin:admin --data "username=johndoe&password=secret&email=e@mail.de&firstname=Jon&lastname=Doe" http://path/to/webapp/index.php/rest/create/user
+
+Update the user with the id 8. Change the username to "another_one"
+
+ curl --user admin:admin -X PUT -d "username=another_one"  http://path/to/webapp/index.php/rest/update/user/    
+
+
+To disable the RESTful api, set 'enableRestfulApi' => false in the application configuration.

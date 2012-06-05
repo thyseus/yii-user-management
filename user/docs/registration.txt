@@ -1,0 +1,162 @@
+How to implement your own registration process.
+
+In this example we want our user to only register with a email address
+and requires him to add some information about him in a text area.
+
+We also do not want him to enter a password. The password should be
+automatically generated and send to him by Email.
+
+This differs from the example registration logic provided by 
+yii-user-management.  We are going to extend the provided classes and change 
+the places that are necessary. In Yum all classes are prefixed with Yum for 
+exactly this purpose.
+
+Lets assume you have the profile and the registration submodule of the
+yii-user-management installed. You will have the following directory
+structure:
+
+modules/
+	profile/
+		controllers/
+			YumProfileController
+			YumFieldController
+		models/
+			YumProfile
+			YumProfileField
+
+	registration/
+		controllers/
+			YumRegistrationController
+		views/
+			registration/
+				registration.php
+
+
+1.) Overriding YumRegistrationController
+
+Create a file RegistrationController.php in your project-specific
+controllers/ directory containing some code like this:
+
+Yii::import(
+		'application.modules.registration.controllers.YumRegistrationController');
+class RegistrationController extends YumRegistrationController {
+
+}
+
+This class extends the YumRegistrationController and has all the abilities
+that the yum registration class has. We will adjust the behavior of this
+controller later.
+
+2.) Adjusting the registration view files
+
+Now we create the view directory for our new created controller and copy
+our example view files over there:
+
+$ cd /path/to/my/webapp/protected
+$ mkdir views/registration
+$ cp modules/registration/views/registration/* views/registration
+
+Our new Controller now uses this view file for its rendering.
+
+We change the registration.php to look something like this:
+
+<h2> My Registration Page </h2>
+
+<p> Hi there, please enter your E-Mail address and drop a note about you </p>
+
+<?php $this->breadcrumbs = array(Yum::t('Registration')); ?>
+
+<div class="form">
+<?php $activeform = $this->beginWidget('CActiveForm', array(
+			'id'=>'registration-form',
+			'enableAjaxValidation'=>false,
+			'focus'=>array($profile,'email'),
+			));
+?>
+
+<?php echo Yum::requiredFieldNote(); ?>
+<?php echo CHtml::errorSummary($profile); ?>
+
+<div class="row"> <?php
+echo $activeform->labelEx($profile,'email');
+echo $activeform->textArea($profile,'email');
+?> </div>  
+
+<div class="row"> <?php
+echo $activeform->labelEx($profile,'about');
+echo $activeform->textArea($profile,'about');
+?> </div>  
+	
+<div class="row submit">
+	<?php echo CHtml::submitButton(Yum::t('Registration')); ?>
+</div>
+
+<?php $this->endWidget(); ?>
+
+3.) Changing the Controller Behavior
+
+override the actionRegistration() of your Controller like this:
+
+ 	public function actionRegistration() {
+		Yii::import('application.modules.profile.models.*');
+		$profile = new YumProfile;
+
+		if (isset($_POST['Profile'])) { 
+			$profile->attributes = $_POST['YumProfile'];
+
+			if($profile->save())
+				$user = new YumUser;
+				$password = YumUser::generatePassword();
+				$user->register(md5($profile->email), $password, $profile);
+
+				$this->sendRegistrationEmail($user, $password);
+				Yum::setFlash('Thank you for your registration. Please check your email.');
+				$this->redirect(Yum::module()->loginUrl);
+			}
+
+		$this->render('registration', array(
+					'profile' => $profile,
+					)
+				);  
+	}
+
+Now, we also need to override the sendRegistrationEmail method, because we want to include the clear-text password in the email:
+
+		public function sendRegistrationEmail($user, $password) {
+			if (!isset($user->profile->email)) {
+				throw new CException(Yum::t('Email is not set when trying to send Registration Email'));
+			}
+			$activation_url = $user->getActivationUrl();
+
+			if (is_object($content)) {
+					$body = strtr('Hi, {email}, your new password is {password}. Please activate your account by clicking this link: {activation_url}', array(
+								'{email}' => $user->profile->email,
+								'{password}' => $password,
+								'{activation_url}' => $activation_url));
+
+				$mail = array(
+						'from' => Yum::module('registration')->registrationEmail,
+						'to' => $user->profile->email,
+						'subject' => 'Your registration on my example Website',
+						'body' => $body,
+						);
+				$sent = YumMailer::send($mail);
+			}
+
+			return $sent;
+		}
+
+4.) Making the "about" field required.
+
+create a file models/Profile.php that extends the YumProfile:
+
+Yii::import('application.modules.profile.models.YumProfile');
+class Profile extends YumProfile {
+
+	function rules() {
+		$rules = parent::rules();
+		$rules[] = array('about', 'required');
+		return $rules;
+	}
+}
+

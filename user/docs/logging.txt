@@ -1,0 +1,52 @@
+Logging is availabe since yii-user-management 0.8. All information is logged
+to the loglevel 'info'. In a default Yii Application, only the loglevels
+error and warning are being logged, so we need to add the info level
+to the CLogRoute whereever we want user information to be written to, like
+this:
+
+	'log'=>array(
+			'class'=>'CLogRouter',
+			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning, info',
+				),
+				array(
+					'class'=>'CWebLogRoute',
+				),
+			),
+
+
+
+Wrong login attempts will always be logged to the log info 'error' so
+a admin can get informed when too many wrong attempts are made for a 
+specific user:
+
+array(
+	'class'=>'CEmailLogRoute',
+	'levels'=>'error',
+	'categories' => 'application.modules.user.*',
+	'emails' => 'emergency_admin@example.com'
+	),
+
+
+If we want to log our Information to the database, we use the CDbLogRoute like this:
+
+		array(
+					'class'=>'CDbLogRoute',
+					'connectionID' => 'db',
+					'levels'=>'error, warning, info',
+					'categories' => 'application.modules.user.*',
+					'logTableName' => 'user_activities'
+				), 
+
+and possibly:
+		array(
+					'class'=>'CDbLogRoute',
+					'connectionID' => 'db',
+					'logTableName' => 'all_other_activities_including_user_activities'
+				), 
+
+
+
+

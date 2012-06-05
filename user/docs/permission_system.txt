@@ -1,0 +1,24 @@
+The Yii User Management Module version 0.8 introduces a new Permission System. 
+
+This document will describe the basics of the configuration and usage, since
+it is neither a pure RBAC nor a ACL based system. It is relatively simple,
+tough.
+
+At first, we have the classical roles. A User can be in none, one or many
+roles. 
+
+Then, we have the permission. A Permission can be either granted to a specific
+user or to a Role, in which case the permission is granted for every User
+in the role. A Permission furthermore has a assigned action, that specifies,
+to which action a user is allowed. 
+
+For example, if we assign the user 'Bob' the permission to run a action
+'removeUsers', we can check if Bob has the permission by:
+
+if(YumUser::model()->find('username = bob')->can('removeUsers')) { ...
+
+A Permission can also have a Subordinate. With this feature, you can 
+further restrict, what a action can affect. 
+
+A Membership system is also available. A membership acts as a temporary
+role assignment to a user that expires after some time.

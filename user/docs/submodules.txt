@@ -1,0 +1,3 @@
+The submodules functionality is no longer available in 0.8. You now can
+enable and disable the behavior functionality in the yumsettings configuration
+options.

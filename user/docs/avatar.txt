@@ -1,0 +1,16 @@
+To enable the Avatar upload, simply enable the 'avatar' module in your
+application configuration like this:
+
+
+		'modules' => array(
+				'avatar' => array(
+					[...]
+					),
+				'user' => array(
+					[...]
+					)
+				);
+
+
+See the file avatar/AvatarModule.php for possible configuration options.
+

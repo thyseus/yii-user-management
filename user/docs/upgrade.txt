@@ -1,0 +1,26 @@
+Upgrading Yii User Management Module (Yum) since Version 0.6
+
+From ver. 0.5 to 0.6
+ - UserModule::disableEmailActivation has been renamed to 
+	UserModule::enableEmailActivation (default to true)
+ - Following models were renamed to avoid conflicts when using Yum as submodule:
+  * Messages => YumMessages,
+  * Profile => YumProfile,
+  * ProfileField => YumProfileField,
+  * RegistrationForm => YumRegistrationForm,
+  * Role => YumRole
+  * User => YumUser,
+  * UserChangePassword => YumUserChangePassword,
+  * UserLogin => YumUserLogin,
+  * UserRecoveryForm => YumUserRecoveryForm
+ Note that this change in some cases may break the code.
+ - Following components were renamed to avoid conflicts when using Yum as submodule:
+  * UserIdentity => YumUserIdentity,
+  * WebUser => YumWebUser,
+ Note that this change in some cases may break the code.
+ - Following controllers were renamed to avoid conflicts when using Yum as submodule
+  * DefaultController => YumDefaultController,
+  * InstallController => YumInstallcontroller,
+  * MessageController => YumMessageController,
+  * RoleController => YumRoleController,
+  * UserController => YumUserController,  

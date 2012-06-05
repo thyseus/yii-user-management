@@ -1,0 +1,17 @@
+To enable the Message subsystem, simply enable the 'messages' module in your
+application configuration like this:
+
+
+		'modules' => array(
+				'message' => array(
+					[...]
+					),
+				'user' => array(
+					[...]
+					)
+				);
+
+
+See the file message/MessageModule.php for possible configuration options.
+
+

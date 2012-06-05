@@ -1,0 +1,3 @@
+how to use the 'daily digest' (or other time-range) feature in Yum:
+
+
