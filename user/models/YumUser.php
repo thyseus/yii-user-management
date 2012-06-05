@@ -225,12 +225,10 @@ class YumUser extends YumActiveRecord
 	 */
 	public function tableName()
 	{
-		if (isset(Yum::module()->usersTable))
-			$this->_tableName = Yum::module()->usersTable;
-		elseif (isset(Yii::app()->modules['user']['usersTable']))
-			$this->_tableName = Yii::app()->modules['user']['usersTable'];
+		if (isset(Yum::module()->userTable))
+			$this->_tableName = Yum::module()->userTable;
 		else
-			$this->_tableName = '{{user}}'; // fallback if nothing is set
+			$this->_tableName = 'user'; // fallback if nothing is set
 
 		return Yum::resolveTableName($this->_tableName, $this->getDbConnection());
 	}

@@ -24,7 +24,7 @@ class YumProfileVisit extends YumActiveRecord {
 	public function tableName() {
 		if (isset(Yum::module('profile')->profileVisitTable))
 			return Yum::module('profile')->profileVisitTable;
-		return '{{profile_visit}}';
+		return 'profile_visit';
 	}
 
 	public function rules() {

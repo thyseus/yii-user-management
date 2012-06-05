@@ -13,7 +13,7 @@ class YumRole extends YumActiveRecord {
 		if (isset(Yum::module('role')->roleTable))
 			$this->_tableName = Yum::module('role')->roleTable;
 		else
-			$this->_tableName = '{{role}}'; // fallback if nothing is set
+			$this->_tableName = 'role'; // fallback if nothing is set
 
 		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
 	}

@@ -9,7 +9,8 @@ class YumAction extends YumActiveRecord{
 		if(isset(Yum::module('role')->actionTable))
 			$this->_tableName = Yum::module('role')->actionTable;
 		else
-			$this->_tableName = '{{action}}'; // fallback if nothing is set
+			$this->_tableName = 'action'; // fallback if nothing is set
+
 		return Yum::resolveTableName($this->_tableName, $this->getDbConnection());
 	}
 

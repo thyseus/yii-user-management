@@ -1,6 +1,8 @@
 Changelog for Yii User Management Module (Yum) 
 
 
+2012-06-05: Yum moved to Github !
+
 New in 0.8-rc6:
 - Added Gravatar support in Avatar submodule
 

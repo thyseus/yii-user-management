@@ -10,7 +10,7 @@ class YumProfileComment extends YumActiveRecord{
 	{
 		if (isset(Yum::module('profile')->profileCommentTable))
 			return Yum::module('profile')->profileCommentTable;
-		return '{{profile_comment}}';
+		return 'profile_comment';
 	}
 
 	public function rules()

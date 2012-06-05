@@ -90,7 +90,7 @@ class YumProfile extends YumActiveRecord
 		if (isset(Yum::module('profile')->profileTable))
 			$this->_tableName = Yum::module('profile')->profileTable;
 		else
-			$this->_tableName = '{{profiles}}'; // fallback if nothing is set
+			$this->_tableName = 'profile'; // fallback if nothing is set
 
 		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
 	}

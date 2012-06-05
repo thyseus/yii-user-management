@@ -114,10 +114,8 @@ class YumFriendship extends YumActiveRecord {
 	{
 		if(isset(Yum::module('friendship')->friendshipTable))
 			$this->_tableName = Yum::module()->friendshipTable;
-		elseif(isset(Yii::app()->modules['user']['friendshipTable']))
-			$this->_tableName = Yii::app()->modules['user']['friendshipTable'];
 		else
-			$this->_tableName = '{{friendship}}'; // fallback if nothing is set
+			$this->_tableName = 'friendship'; // fallback if nothing is set
 
 		return Yum::resolveTableName($this->_tableName, $this->getDbConnection());
 	}
