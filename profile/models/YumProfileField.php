@@ -73,7 +73,7 @@ class YumProfileField extends YumActiveRecord
   	public function tableName()
   	{
     	if (isset(Yum::module('profile')->profileFieldTable))
-      		$this->_tableName = Yum::module('profile')->profileFieldsTable;
+      		$this->_tableName = Yum::module('profile')->profileFieldTable;
     	else
       		$this->_tableName = 'profile_field'; // fallback if nothing is set
 
