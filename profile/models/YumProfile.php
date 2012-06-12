@@ -1,8 +1,5 @@
-<?php
-/**
- */
+<?
 
-Yii::import('application.modules.user.components.Compare');
 class YumProfile extends YumActiveRecord
 {
 	const PRIVACY_PRIVATE = 'private';
@@ -20,15 +17,12 @@ class YumProfile extends YumActiveRecord
 		$this->loadProfileFields();
 	}
 
-	public function behaviors()  {
-		return array_merge(parent::behaviors(), array(
-					'Compare' => array(
-						'class' => 'Compare')));
-	}
-
 	public function afterSave() {
 		if($this->isNewRecord) 
 			Yii::log(Yum::t( 'A profile been created: {profile}', array(
+							'{profile}' => json_encode($this->attributes))));
+		else
+			Yii::log(Yum::t( 'A profile been update: {profile}', array(
 							'{profile}' => json_encode($this->attributes))));
 
 		return parent::afterSave();
@@ -65,24 +59,26 @@ class YumProfile extends YumActiveRecord
 
 		$fields = array();
 
-		if($privacy = @YumUser::model()->cache(500)->with('privacy')->findByPk($this->user_id)->privacy->public_profile_fields) {
+		if($privacy = YumUser::model()
+				->cache(500)
+				->with('privacy')
+				->findByPk($this->user_id)
+				->privacy->public_profile_fields) {
 			$i = 1;
-			foreach(YumProfileField::model()->cache(500)->findAll() as $field) {
-				if($i & $privacy && $field->visible != 0)
+			foreach(YumProfileField::model()->cache(3600)->findAll() as $field) {
+				if(
+						(($i & $privacy) 
+						 && $field->visible != YumProfileField::VISIBLE_HIDDEN) 
+						|| $field->visible == YumProfileField::VISIBLE_PUBLIC)
 					$fields[] = $field;
 				$i*=2;
 			}
 		}
-
 		return $fields;
 	}
 
 	/**
-	 * Returns resolved table name (incl. table prefix when it is set in db configuration)
-	 * Following algorith of searching valid table name is implemented:
-	 *  - try to find out table name stored in currently used module
-	 *  - if not found try to get table name from UserModule configuration
-	 *  - if not found user default {{profiles}} table name
+	 * Returns resolved table name 
 	 * @return string
 	 */
 	public function tableName()
@@ -243,6 +239,7 @@ class YumProfile extends YumActiveRecord
 	/**
 	 * Load profile fields.
 	 * Overwrite this method to get another set of fields
+	 * Makes use of cache so the amount of sql queries per request is reduced
 	 * @since 0.6
 	 * @return array of YumProfileFields or empty array
 	 */

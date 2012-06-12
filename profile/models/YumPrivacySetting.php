@@ -71,7 +71,6 @@ class YumPrivacysetting extends YumActiveRecord
 		);
 	}
 
-
 	public function search()
 	{
 		$criteria = new CDbCriteria;

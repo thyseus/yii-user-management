@@ -1,5 +1,4 @@
-<?php
-
+<?
 class YumProfileVisit extends YumActiveRecord {
 
 	public static function model($className=__CLASS__) {
@@ -69,5 +68,5 @@ class YumProfileVisit extends YumActiveRecord {
 					'criteria' => $criteria,
 					));
 	}
-
 }
+?>
