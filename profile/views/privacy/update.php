@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 		Yum::t('Privacysettings')=>array('index'),
 		$model->user->username=>array(
@@ -12,10 +12,10 @@ $this->title = Yum::t('Privacy settings for {username}', array(
 ?>
 <div class="form">
 <p class="note">
-<?php Yum::requiredFieldNote(); ?>
+<? Yum::requiredFieldNote(); ?>
 </p>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<? $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'privacysetting-form',
 			'enableAjaxValidation'=>true,
 			)); 
@@ -23,7 +23,7 @@ echo $form->errorSummary($model);
 ?>
 
 <div class="profile_field_selection">
-<?php
+<?
 echo '<h3>' . Yum::t('Profile field public options') . '</h3>';
 echo '<p>' . Yum::t('Select the fields that should be public') . ':</p>';
 $i = 1;
@@ -51,29 +51,29 @@ echo '<div class="clear"></div>';
 </div>
 
 
-<?php if(Yum::hasModule('friendship')) { ?>
+<? if(Yum::hasModule('friendship')) { ?>
 <div class="row">
-<?php echo $form->labelEx($model,'message_new_friendship'); ?>
-<?php echo $form->dropDownList($model, 'message_new_friendship', array(
+<? echo $form->labelEx($model,'message_new_friendship'); ?>
+<? echo $form->dropDownList($model, 'message_new_friendship', array(
 			0 => Yum::t('No'),
 			1 => Yum::t('Yes'))); ?>
-<?php echo $form->error($model,'message_new_friendship'); ?>
+<? echo $form->error($model,'message_new_friendship'); ?>
 </div>
-<?php } ?>
+<? } ?>
 
 <div class="row">
-<?php echo $form->labelEx($model,'message_new_message'); ?>
-<?php echo $form->dropDownList($model, 'message_new_message', array(
+<? echo $form->labelEx($model,'message_new_message'); ?>
+<? echo $form->dropDownList($model, 'message_new_message', array(
 			0 => Yum::t('No'),
 			1 => Yum::t('Yes'))); ?>
 
-<?php echo $form->error($model,'message_new_message'); ?>
+<? echo $form->error($model,'message_new_message'); ?>
 </div>
 
-		<?php if(Yum::module('profile')->enableProfileComments) { ?>
+		<? if(Yum::module('profile')->enableProfileComments) { ?>
 
 				<div class="row">
-				<?php 
+				<? 
 				echo CHtml::activeLabelEx($profile, 'allow_comments'); 
 			echo CHtml::activeDropDownList($profile, 'allow_comments',
 					array(
@@ -85,19 +85,19 @@ echo '<div class="clear"></div>';
 				</div>
 
 			<div class="row message_new_profilecomment">
-				<?php echo $form->labelEx($model,'message_new_profilecomment'); ?>
-				<?php echo $form->dropDownList($model, 'message_new_profilecomment', array(
+				<? echo $form->labelEx($model,'message_new_profilecomment'); ?>
+				<? echo $form->dropDownList($model, 'message_new_profilecomment', array(
 							0 => Yum::t('No'),
 							1 => Yum::t('Yes'))); ?>
-				<?php echo $form->error($model,'message_new_profilecomment'); ?>
+				<? echo $form->error($model,'message_new_profilecomment'); ?>
 				</div>
 
-				<?php } ?>
+				<? } ?>
 
 
-<?php if(Yum::hasModule('friendship')) { ?>
+<? if(Yum::hasModule('friendship')) { ?>
 	<div class="row">
-	<?php 
+	<? 
 	echo CHtml::activeLabelEx($profile, 'show_friends'); 
 	echo CHtml::activeDropDownList($profile, 'show_friends',
 			array(
@@ -107,11 +107,11 @@ echo '<div class="clear"></div>';
 			);
 	?>
 	</div>
-<?php } ?>
+<? } ?>
 
-<?php if(Yum::module()->enableOnlineStatus) { ?>
+<? if(Yum::module()->enableOnlineStatus) { ?>
 	<div class="row">
-	<?php 
+	<? 
 	echo CHtml::activeLabelEx($model, 'show_online_status'); 
 	echo CHtml::activeDropDownList($model, 'show_online_status',
 			array(
@@ -121,10 +121,10 @@ echo '<div class="clear"></div>';
 			);
 	?>
 	</div>
-<?php } ?>
+<? } ?>
 
 	<div class="row">
-	<?php 
+	<? 
 	echo CHtml::activeLabelEx($model, 'log_profile_visits'); 
 	echo CHtml::activeDropDownList($model, 'log_profile_visits',
 			array(
@@ -135,9 +135,9 @@ echo '<div class="clear"></div>';
 	?>
 	</div>
 
-<?php if(Yum::hasModule('role')) { ?>
+<? if(Yum::hasModule('role')) { ?>
 	<div class="row">
-	<?php 
+	<? 
 	echo CHtml::activeLabelEx($model, 'appear_in_search'); 
 	echo CHtml::activeDropDownList($model, 'appear_in_search',
 			array(
@@ -147,18 +147,18 @@ echo '<div class="clear"></div>';
 			);
 	?>
 	</div>
-<?php } ?>
+<? } ?>
 
 <div class="row">
-<?php echo $form->labelEx($model,'ignore_users'); ?>
-<?php echo $form->textField($model, 'ignore_users',  array('size' => 100)); ?>
-<?php echo $form->error($model,'ignore_users'); ?>
+<? echo $form->labelEx($model,'ignore_users'); ?>
+<? echo $form->textField($model, 'ignore_users',  array('size' => 100)); ?>
+<? echo $form->error($model,'ignore_users'); ?>
 <div class="hint">
-<p> <?php echo Yum::t('Separate usernames with comma to ignore specified users'); ?> </p>
+<p> <? echo Yum::t('Separate usernames with comma to ignore specified users'); ?> </p>
 </div>
 </div>
 
-<?php
+<?
 echo CHtml::Button(Yum::t( 'Cancel'), array(
 			'submit' => array('//profile/profile/view')));
 echo CHtml::submitButton(Yum::t('Save')); 
@@ -166,7 +166,7 @@ $this->endWidget(); ?>
 </div> <!-- form -->
 
 
-<?php Yii::app()->clientScript->registerScript('profile_toggle', "
+<? Yii::app()->clientScript->registerScript('profile_toggle', "
 	if($('#YumProfile_allow_comments').val() == '0')
 	$('.message_new_profilecomment').hide();
 

@@ -1,4 +1,4 @@
-<?php
+<?
 if(!isset($model)) 
 	$model = new YumUserLogin();
 
@@ -13,23 +13,23 @@ Yum::renderFlash();
 ?>
 
 <p>
-<?php 
+<? 
 echo Yum::t(
 		'Please fill out the following form with your login credentials:'); ?>
 </p>
 
 <div class="form">
-<?php echo CHtml::beginForm(array('//user/auth/login'));  ?>
+<? echo CHtml::beginForm(array('//user/auth/login'));  ?>
 
-<?php
+<?
 if(isset($_GET['action']))
 	echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
 ?>
 
-<?php echo CHtml::errorSummary($model); ?>
+<? echo CHtml::errorSummary($model); ?>
 	
 	<div class="row">
-		<?php 
+		<? 
 		if($module->loginType & UserModule::LOGIN_BY_USERNAME 
 				|| $module->loginType & UserModule::LOGIN_BY_LDAP)
 		echo CHtml::activeLabelEx($model,'username'); 
@@ -38,12 +38,12 @@ if(isset($_GET['action']))
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			printf ('<label for="YumUserLogin_username">%s <span class="required">*</span></label>', Yum::t('OpenID username'));  ?>
 
-		<?php echo CHtml::activeTextField($model,'username') ?>
+		<? echo CHtml::activeTextField($model,'username') ?>
 	</div>
 	
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password');
+		<? echo CHtml::activeLabelEx($model,'password'); ?>
+		<? echo CHtml::activePasswordField($model,'password');
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			echo '<br />'. Yum::t('When logging in with OpenID, password can be omitted');
  ?>
@@ -52,7 +52,7 @@ if(isset($_GET['action']))
 	
 	<div class="row">
 	<p class="hint">
-	<?php 
+	<? 
 	if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
 	echo CHtml::link(Yum::t("Registration"),
 			Yum::module('registration')->registrationUrl);
@@ -69,18 +69,18 @@ if(isset($_GET['action']))
 	</div>
 
 <div class="row rememberMe">
-<?php echo CHtml::activeCheckBox($model,'rememberMe', array('style' => 'display: inline;')); ?>
-<?php echo CHtml::activeLabelEx($model,'rememberMe', array('style' => 'display: inline;')); ?>
+<? echo CHtml::activeCheckBox($model,'rememberMe', array('style' => 'display: inline;')); ?>
+<? echo CHtml::activeLabelEx($model,'rememberMe', array('style' => 'display: inline;')); ?>
 </div>
 
 <div class="row submit">
-<?php echo CHtml::submitButton(Yum::t('Login')); ?>
+<? echo CHtml::submitButton(Yum::t('Login')); ?>
 </div>
 
-<?php echo CHtml::endForm(); ?>
+<? echo CHtml::endForm(); ?>
 </div><!-- form -->
 
-<?php
+<?
 $form = new CForm(array(
 			'elements'=>array(
 				'username'=>array(

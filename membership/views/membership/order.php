@@ -1,9 +1,9 @@
-<?php $this->breadcrumbs = array(Yum::t('Membership'));?>
+<? $this->breadcrumbs = array(Yum::t('Membership'));?>
 
-<?php $this->title = Yum::t('Membership'); ?>
+<? $this->title = Yum::t('Membership'); ?>
 	
 	<div class="form">
-		<?php $form=$this->beginWidget('CActiveForm', array(
+		<? $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'membership-has-company-form',
 			'enableAjaxValidation'=>true,
 			)); 
@@ -12,7 +12,7 @@
 
 		<div class="row">
 		
-			<?php echo CHtml::activeRadioButtonList($model, 'membership_id', 
+			<? echo CHtml::activeRadioButtonList($model, 'membership_id', 
 			CHtml::listData(YumRole::model()->findAll('price != 0'), 'id', 'description'),
 			array('template' => '<div style="float:left;margin-right:5px;">{input}</div>{label}'));
 			?>
@@ -20,16 +20,16 @@
 		</div>
 		<br />
 		<div class="row">
-			<?php echo $form->labelEx($model,'payment_id'); ?> <br />
-			<?php echo CHtml::activeRadioButtonList($model, 'payment_id', 
+			<? echo $form->labelEx($model,'payment_id'); ?> <br />
+			<? echo CHtml::activeRadioButtonList($model, 'payment_id', 
 			CHtml::listData(YumPayment::model()->findAll(), 'id', 'title'),
 			array('template' => '<div style="float:left;margin-right:5px;">{input}</div>{label}'));
 			?>
 			<div class="clear"></div>
 		</div>
-		<?php echo $form->error($model,'membership_id'); ?>
+		<? echo $form->error($model,'membership_id'); ?>
 
-	<?php
+	<?
 		echo CHtml::submitButton(Yum::t('Order membership'));
 		
 	?>
@@ -44,7 +44,7 @@
 			<div class="membership-content"></div>
 		</div>
 	</div>
-	<?php
+	<?
     Yii::app()->clientScript->registerScript('toggle', "
 		$('#detail-information').hide();	  
 		$('#more-information').click(function() {
@@ -52,4 +52,4 @@
 	   });
     ");
     ?>
-	<?php $this->endWidget(); ?>
+	<? $this->endWidget(); ?>

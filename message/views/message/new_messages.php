@@ -1,4 +1,4 @@
-<?php 
+<? 
 $messages = YumMessage::model()->findAll(
 		'to_user_id = :to and message_read = 0',
 		array( ':to' => Yii::app()->user->id)

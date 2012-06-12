@@ -1,4 +1,4 @@
-<?php
+<?
 return array(
 		'Compose new message' => 'اكتب رسالة جديدة',
 		'Composing new message' => 'إعداد رسالة جديدة',

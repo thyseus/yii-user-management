@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 		Yum::t('Permissions')=>array('index'),
 		Yum::t('Manage'),
@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <?php echo Yum::t('Manage permissions'); ?> </h1>
+<h1> <? echo Yum::t('Manage permissions'); ?> </h1>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<? $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'action-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,

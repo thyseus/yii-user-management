@@ -1,4 +1,4 @@
-<?php
+<?
 return array(
 		'The image was uploaded successfully' => 'تم نقل الصورة بنجاح',
 		'Your Avatar image' => 'صورتك التعبيرية',

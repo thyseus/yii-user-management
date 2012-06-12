@@ -1,4 +1,4 @@
-<?php
+<?
 $this->title = Yum::t('Create role');
 
 $this->breadcrumbs=array(
@@ -7,4 +7,4 @@ $this->breadcrumbs=array(
 
 ?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<? echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,4 +1,4 @@
-<?php 
+<? 
 $user = YumUser::model()->findByPk(Yii::app()->user->id);
 
 if($user->friendship_requests) {

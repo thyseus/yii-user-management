@@ -1,9 +1,9 @@
 <div class="view" style="float: left;margin: 5px;"  >
 
-<h2> <?php echo $data->role->title; ?> </h2>
-<p> <?php echo $data->role->description; ?> </p>
+<h2> <? echo $data->role->title; ?> </h2>
+<p> <? echo $data->role->description; ?> </p>
 
-<?php
+<?
 echo Yum::t('Order number'). ': '.$data->id . '<br />';
 if($data->role->price != 0)
 	if($data->payment_date == 0) 
@@ -19,16 +19,16 @@ if($data->role->price != 0)
 
 ?>
 
-<?php if($data->role->price != 0) { ?>
+<? if($data->role->price != 0) { ?>
 <br /> 
-<?php echo Yum::t('Ordered at') . ': '; ?>
-<?php echo date('d. m. Y', $data->order_date); ?> 
+<? echo Yum::t('Ordered at') . ': '; ?>
+<? echo date('d. m. Y', $data->order_date); ?> 
 <br /> 
-<?php echo Yum::t('Payment type') . ': '; ?>
-<?php if(isset($data->payment)) echo $data->payment->title; ?>
-<?php } ?>
+<? echo Yum::t('Payment type') . ': '; ?>
+<? if(isset($data->payment)) echo $data->payment->title; ?>
+<? } ?>
 
-<?php
+<?
 		echo Yum::t('This membership is still {days} days active', array(
 					'{days}' => $data->daysLeft()));
 ?>

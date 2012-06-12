@@ -1,4 +1,4 @@
-<?php
+<?
 $this->title = Yum::t('Yum Text Settings');
 $this->breadcrumbs=array(
 	Yum::t('Yum Text Settings')=>array('admin'),

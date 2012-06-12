@@ -1,8 +1,8 @@
-<?php if(Yum::module('profile')->enableProfileComments 
+<? if(Yum::module('profile')->enableProfileComments 
 		&& $model->allow_comments) { ?>
-	<h2> <?php echo Yum::t('Profile Comments'); ?> </h2>
+	<h2> <? echo Yum::t('Profile Comments'); ?> </h2>
 
-<?php 
+<? 
 $dataProvider = new CActiveDataProvider('YumProfileComment', array(
 			'criteria'=>array(
 				'condition'=>'profile_id = :profile_id',
