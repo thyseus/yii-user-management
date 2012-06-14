@@ -57,28 +57,7 @@ Add these lines:
 The debug option is needed for the installation and should be set to false 
 after the installation. 
 
-5.) Run the User Management Installer in your Web-Browser:
-
-http://localhost/testdrive/index.php/user/install
-or
-http://localhost/testdrive/index.php?r=user/install
-
-depending on your URL route setup. 
-
-6.) Now the Installer of the User Management Module should appear.
-To the right you can set up alternate Table Names used by the
-Module. In most cases this is not needed and you can keep this 
-Settings. If you do change this, be sure to set up the correct table
-Names in your Application Configuration, so the User Module can access
-them.
-
-Click 'Install Module'. After clicking it, the install script will
-create the database tables needed by the module(s). Then it will show
-you the neccesary modifications to be made. Add the Modules you need to your 
-Application Configuration as provided by the install script in config/main.php.
-You can also remove the Yum modules you don't want to use.
-
-7.) To let your Web Application use the Authentification Methods of
+5.) To let your Web Application use the Authentification Methods of
 the User Management Module, we need to overwrite the default 
 Authentification Method in the Application Configuration:
 
@@ -100,6 +79,28 @@ User::hasRole($role) in your Code to check if the logged in User belongs to the
 role. This is explained in the detailed Documentation. It is good to let this 
 line occur as the first included Model, so you can extend the User-Model with 
 your own in your Application models/ Directory if you like.
+
+6.) Run the User Management Installer in your Web-Browser:
+
+http://localhost/testdrive/index.php/user/install
+or
+http://localhost/testdrive/index.php?r=user/install
+
+depending on your URL route setup. 
+
+7.) Now the Installer of the User Management Module should appear.
+To the right you can set up alternate Table Names used by the
+Module. In most cases this is not needed and you can keep this 
+Settings. If you do change this, be sure to set up the correct table
+Names in your Application Configuration, so the User Module can access
+them.
+
+Click 'Install Module'. After clicking it, the install script will
+create the database tables needed by the module(s). Then it will show
+you the neccesary modifications to be made. Add the Modules you need to your 
+Application Configuration as provided by the install script in config/main.php.
+You can also remove the Yum modules you don't want to use.
+
 
 8.) Make sure to set a caching component. Yum relies on it. If you do not
 want to cache, add
@@ -202,6 +203,11 @@ the docs/ directory for all this.
 
 FAQ:
 ----
+Q: I get an exception when running the Installer
+
+A: Please make sure to log out from any session. Clear your cookies to make
+sure you are not logged in in your Web Application anymore.
+
 Q: I get the error Message: CWebUser does not have a method named "isAdmin":
 
 A: Please make sure that you have the following in your application configuration:

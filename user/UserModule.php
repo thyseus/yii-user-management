@@ -29,7 +29,8 @@ class UserModule extends CWebModule {
   // for example, demo and Demo would be the same user then
 	public $caseSensitiveUsers = true;
 
-	// set this to true if you do want to access data through a REST api
+	// set this to true if you do want to access data through a REST api. 
+	// Disabled by default for security reasons.
 	public $enableRESTapi = false;
 
 	// Set this to true to enable RESTful login over the same password as

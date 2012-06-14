@@ -12,13 +12,13 @@ $this->breadcrumbs=array(Yum::t('Login'));
 Yum::renderFlash();
 ?>
 
+<div class="form">
 <p>
 <?php 
 echo Yum::t(
 		'Please fill out the following form with your login credentials:'); ?>
 </p>
 
-<div class="form">
 <?php echo CHtml::beginForm(array('//user/auth/login'));  ?>
 
 <?php

@@ -6,11 +6,8 @@ class YumPermission extends YumActiveRecord {
 	}
 
 	public function tableName() {
-		if(isset(Yum::module('role')->permissionTable))
-			$this->_tableName = Yum::module('role')->permissionTable;
-		else
-			$this->_tableName = 'permission'; // fallback if nothing is set
-		return Yum::resolveTableName($this->_tableName, $this->getDbConnection());
+		$this->_tableName = Yum::module('role')->permissionTable;
+		return $this->_tableName;
 	}
 
 	public function rules() {

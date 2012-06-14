@@ -10,12 +10,8 @@ class YumRole extends YumActiveRecord {
 
 	public function tableName()
 	{
-		if (isset(Yum::module('role')->roleTable))
-			$this->_tableName = Yum::module('role')->roleTable;
-		else
-			$this->_tableName = 'role'; // fallback if nothing is set
-
-		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
+		$this->_tableName = Yum::module('role')->roleTable;
+		return $this->_tableName;
 	}
 
 	public function rules()

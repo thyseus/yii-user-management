@@ -112,12 +112,9 @@ class YumFriendship extends YumActiveRecord {
 
 	public function tableName()
 	{
-		if(isset(Yum::module('friendship')->friendshipTable))
-			$this->_tableName = Yum::module()->friendshipTable;
-		else
-			$this->_tableName = 'friendship'; // fallback if nothing is set
+		$this->_tableName = Yum::module('friendhip')->friendshipTable;
 
-		return Yum::resolveTableName($this->_tableName, $this->getDbConnection());
+		return $this->_tableName;
 	}
 
 	public function rules()

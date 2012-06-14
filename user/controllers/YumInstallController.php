@@ -215,7 +215,7 @@ class YumInstallController extends YumController
 							`id` int unsigned NOT NULL auto_increment,
 							`varname` varchar(50) NOT NULL DEFAULT '',
 							`title` varchar(255) NOT NULL DEFAULT '',
-							`hint` text NOT NULL DEFAULT '',
+							`hint` text NOT NULL,
 							`field_type` varchar(50) NOT NULL DEFAULT '',
 							`field_size` int(3) NOT NULL default '0',
 							`field_size_min` int(3) NOT NULL default '0',

@@ -11,10 +11,8 @@ class YumTranslation extends YumActiveRecord{
 
 	public function tableName()
 	{
-		if(isset(Yum::module()->translationTable))
-			return Yum::module()->translationTable;	
-		else
-			return '{{translation}}';
+		$this->_tableName = Yum::module()->translationTable;	
+		return $this->_tableName;
 	}
 
 	public function rules()

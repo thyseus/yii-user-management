@@ -142,13 +142,8 @@ class Yum
 			return strtr($string, $params);
 	}
 
-	public static function resolveTableName($tablename, CDbConnection $connection=null)
-	{
-		return $tablename;
-	}
-
-	// returns the yii user module. Mostly used for accessing options
-	// by calling Yum::module()->option
+	// returns the Yii User Management module. Frequently used for accessing 
+	// options by calling Yum::module()->option
 	public static function module($module = 'user') {
 		return Yii::app()->getModule($module);
 	}

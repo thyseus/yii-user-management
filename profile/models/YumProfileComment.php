@@ -8,9 +8,8 @@ class YumProfileComment extends YumActiveRecord{
 
 	public function tableName()
 	{
-		if (isset(Yum::module('profile')->profileCommentTable))
-			return Yum::module('profile')->profileCommentTable;
-		return 'profile_comment';
+		$this->_tableName = Yum::module('profile')->profileCommentTable;
+		return $this_>_tableName;
 	}
 
 	public function rules()

@@ -12,12 +12,8 @@ class YumPayment extends YumActiveRecord{
 
 	public function tableName()
 	{
-		if (isset(Yum::module('membership')->paymentTable))
-			$this->_tableName = Yum::module('membership')->paymentTable;
-		else
-			$this->_tableName = '{{payment}}'; // fallback if nothing is set
-
-		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
+		$this->_tableName = Yum::module('membership')->paymentTable;
+		return $this->_tableName;
 	}
 
 	public function rules()
@@ -45,7 +41,6 @@ class YumPayment extends YumActiveRecord{
 			'text' => Yum::t('Text'),
 		);
 	}
-
 
 	public function search()
 	{

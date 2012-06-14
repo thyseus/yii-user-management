@@ -14,9 +14,8 @@ class YumPrivacysetting extends YumActiveRecord
 
 	public function tableName()
 	{
-		if (isset(Yum::module('profile')->privacySettingTable))
-			return Yum::module('profile')->privacySettingTable;
-		return 'privacysetting';
+		$this->_tableName = Yum::module('profile')->privacySettingTable;
+		return $this->_tableName;
 	}
 
 	public function rules()

@@ -142,12 +142,8 @@ class YumMessage extends YumActiveRecord
 	 */
 	public function tableName()
 	{
-		if (isset(Yum::module('message')->messageTable))
-			$this->_tableName = Yum::module('message')->messageTable;
-		else
-			$this->_tableName = 'message'; // fallback if nothing is set
-
-		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
+		$this->_tableName = Yum::module('message')->messageTable;
+		return $this->_tableName;
 	}
 
 	public function rules()

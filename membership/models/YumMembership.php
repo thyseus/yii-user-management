@@ -6,12 +6,8 @@ class YumMembership extends YumActiveRecord{
 	}
 
 	public function tableName() {
-		if (isset(Yum::module('membership')->membershipTable))
-			$this->_tableName = Yum::module('membership')->membershipTable;
-		else
-			$this->_tableName = '{{membership}}'; // fallback if nothing is set
-
-		return Yum::resolveTableName($this->_tableName,$this->getDbConnection());
+		$this->_tableName = Yum::module('membership')->membershipTable;
+		return $this->_tableName;
 	}
 
 	public function activate() {
@@ -38,7 +34,6 @@ class YumMembership extends YumActiveRecord{
 	{
 		return array('lastFirst' => array('order' => 'id DESC'));
 	}
-
 
 	public function afterSave() {
 		return parent::afterSave();
