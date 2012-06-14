@@ -1,33 +1,33 @@
 <div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
+<? $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'membership-form',
 	'enableAjaxValidation'=>true,
 )); 
 	echo $form->errorSummary($model);
 ?>
 <div class="row">
-<?php echo $form->labelEx($model,'type'); ?>
-<?php echo CHtml::activeDropDownList($model, 'type', array(
+<? echo $form->labelEx($model,'type'); ?>
+<? echo CHtml::activeDropDownList($model, 'type', array(
 			'BASIS' => Yii::t('app', 'BASIS') ,
 			'BUSINESS' => Yii::t('app', 'BUSINESS') ,
 )); ?>
-<?php echo $form->error($model,'type'); ?>
+<? echo $form->error($model,'type'); ?>
 </div>
 
 <div class="row">
-<?php echo $form->labelEx($model,'fee'); ?>
-<?php echo $form->textField($model,'fee'); ?>
-<?php echo $form->error($model,'fee'); ?>
+<? echo $form->labelEx($model,'fee'); ?>
+<? echo $form->textField($model,'fee'); ?>
+<? echo $form->error($model,'fee'); ?>
 </div>
 
 <div class="row">
-<?php echo $form->labelEx($model,'period'); ?>
-<?php echo $form->textField($model,'period'); ?>
-<?php echo $form->error($model,'period'); ?>
+<? echo $form->labelEx($model,'period'); ?>
+<? echo $form->textField($model,'period'); ?>
+<? echo $form->error($model,'period'); ?>
 </div>
 
 
-<?php
+<?
 echo CHtml::Button(
 	Yii::t('app', 'Cancel'),
 	array(

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * This is the model class for the Message subsystem of the Yii User 

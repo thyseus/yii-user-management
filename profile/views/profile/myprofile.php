@@ -1,5 +1,5 @@
 <div id="profile">
-<?php
+<?
 $this->pageTitle=Yii::app()->name . ' - ' . Yum::t('Profile');
 $this->breadcrumbs=array(Yum::t('Profile'));
 $this->title = Yum::t('Your profile');
@@ -8,18 +8,18 @@ $this->renderPartial('/messages/new_messages');?>
 
 
 <div class="avatar">
-<?php echo $model->renderAvatar(); ?>
+<? echo $model->renderAvatar(); ?>
 </div>
 
 <table class="dataGrid">
-<?php if(!Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL) {?>
+<? if(!Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL) {?>
 <tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('username')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('username')); ?>
 </th>
-    <td><?php echo CHtml::encode($model->username); ?>
+    <td><? echo CHtml::encode($model->username); ?>
 </td>
 </tr>
-<?php
+<?
 }
 		$profileFields = YumProfileField::model()->forOwner()->sort()->with('group')->together()->findAll();
 		if ($profileFields && Yum::hasModule('profile')) {
@@ -27,69 +27,69 @@ $this->renderPartial('/messages/new_messages');?>
 		if($field->field_type == 'DROPDOWNLIST') {
 			?>
 			<tr>
-				<th class="label"><?php echo CHtml::encode(Yum::t($field->title)); ?>
+				<th class="label"><? echo CHtml::encode(Yum::t($field->title)); ?>
 				</th>
-				<td><?php
+				<td><?
 				if(is_object($model->profile->{ucfirst($field->varname)}))
 					echo CHtml::encode($model->profile->{ucfirst($field->varname)}->{$field->related_field_name}); ?>
 						</td>
 						</tr>
-				<?php
+				<?
 		} else {
 			?>
 				<tr>
-				<th class="label"><?php echo CHtml::encode(Yum::t($field->title)); ?>
+				<th class="label"><? echo CHtml::encode(Yum::t($field->title)); ?>
 				</th>
-				<td><?php echo CHtml::encode($model->profile->getAttribute($field->varname)); ?>
+				<td><? echo CHtml::encode($model->profile->getAttribute($field->varname)); ?>
 				</td>
 				</tr>
-				<?php
+				<?
 		}
 	}
 }
 ?>
 <tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('password')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('password')); ?>
 </th>
-<td><?php echo CHtml::link(Yum::t('Change password'),array(
+<td><? echo CHtml::link(Yum::t('Change password'),array(
 			'//user/user/changepassword')); ?>
 </td>
 </tr>
 <tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('createtime')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createtime')); ?>
 </th>
-    <td><?php echo date(UserModule::$dateFormat,$model->createtime); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->createtime); ?>
 </td>
 </tr>
 <tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>
 </th>
-    <td><?php echo date(UserModule::$dateFormat,$model->lastvisit); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->lastvisit); ?>
 </td>
 </tr>
 <tr>
-	<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('status')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('status')); ?>
 </th>
-    <td><?php echo CHtml::encode(YumUser::itemAlias("UserStatus",$model->status));
+    <td><? echo CHtml::encode(YumUser::itemAlias("UserStatus",$model->status));
     ?>
 </td>
 </tr>
 </table>
 
 <div id="friends">
-<h2> <?php echo Yum::t('My friends'); ?> </h2>
-<?php
+<h2> <? echo Yum::t('My friends'); ?> </h2>
+<?
 if(Yum::hasModule('friendship') && $model->friends)
 {
 foreach($friends as $friend) {
 ?>
 <div id="friend">
 <div id="avatar">
-<?php
+<?
 $model->renderAvatar($friend);
 ?>
 <div id='user'>
-<?php
+<?
 echo CHtml::link(ucwords($friend->username),
 		Yii::app()->createUrl('profile/profile/view',array(
 				'id'=>$friend->id)));
@@ -98,7 +98,7 @@ echo CHtml::link(ucwords($friend->username),
 </div>
 </div>
 </div>
-<?php
+<?
 }
 }else {
 		echo Yum::t('You have no friends yet');
@@ -106,8 +106,8 @@ echo CHtml::link(ucwords($friend->username),
 ?>
 </div>
 <div id="visits">
-<h2> <?php echo Yum::t('This users have visited my profile'); ?> </h2>
-<?php
+<h2> <? echo Yum::t('This users have visited my profile'); ?> </h2>
+<?
 	if($model->visits) {
 		$format = Yum::module()->dateTimeFormat;
 		echo '<table>';

@@ -15,7 +15,7 @@ if you are not using a tablePrefix. If you are using one, of course set the appr
 <p>If you have changed some of the default values, you now only need to modify your config/main.php file to reflect the changes below in user module configuration:</p>
 <code>
 	<div>'modules'=> array(
-	<?php
+	<?
 		foreach ($modules as $module => $config) {
 			echo "<div>'$module' => array(";
 			if ($module == 'user') echo "<div>'debug' => false,</div>";
@@ -31,6 +31,6 @@ if you are not using a tablePrefix. If you are using one, of course set the appr
 <strong> Please change the Administrator Password to something better than
 the default password. </strong>
 
-<p><?php 
+<p><? 
 	echo CHtml::link("Administrate your Users",array('/user/login')); 
 ?></p>

@@ -1,5 +1,5 @@
 <div class="form">
-<?php 
+<? 
 
 $form = $this->beginWidget('CActiveForm', array(
 			'id'=>'user-form',
@@ -7,9 +7,9 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
 
 <div class="note">
-<?php echo Yum::requiredFieldNote(); ?>
+<? echo Yum::requiredFieldNote(); ?>
 
-<?php
+<?
 $models = array($model, $passwordform);
 if(isset($profile) && $profile !== false)
 	$models[] = $profile;
@@ -19,23 +19,23 @@ if(isset($profile) && $profile !== false)
 
 <div style="float: right; margin: 10px;">
 <div class="row">
-<?php echo $form->labelEx($model, 'superuser');
+<? echo $form->labelEx($model, 'superuser');
 echo $form->dropDownList($model, 'superuser',YumUser::itemAlias('AdminStatus'));
 echo $form->error($model, 'superuser'); ?>
 </div>
 
 <div class="row">
-<?php echo $form->labelEx($model,'status');
+<? echo $form->labelEx($model,'status');
 echo $form->dropDownList($model,'status',YumUser::itemAlias('UserStatus'));
 echo $form->error($model,'status'); ?>
 </div>
-<?php if(Yum::hasModule('role')) { 
+<? if(Yum::hasModule('role')) { 
 	Yii::import('application.modules.role.models.*');
 ?>
 <div class="row roles">
-<p> <?php echo Yum::t('User belongs to these roles'); ?> </p>
+<p> <? echo Yum::t('User belongs to these roles'); ?> </p>
 
-	<?php $this->widget('YumModule.components.Relation', array(
+	<? $this->widget('YumModule.components.Relation', array(
 				'model' => $model,
 				'relation' => 'roles',
 				'style' => 'dropdownlist',
@@ -43,13 +43,13 @@ echo $form->error($model,'status'); ?>
 				'showAddButton' => false
 				)); ?>
 </div>
-<?php } ?>
+<? } ?>
 
 </div>
 
 
 <div class="row">
-<?php echo $form->labelEx($model, 'username');
+<? echo $form->labelEx($model, 'username');
 echo $form->textField($model, 'username');
 echo $form->error($model, 'username'); ?>
 </div>
@@ -57,22 +57,22 @@ echo $form->error($model, 'username'); ?>
 
 <div class="row">
 <p> Leave password <em> empty </em> to 
-<?php echo $model->isNewRecord 
+<? echo $model->isNewRecord 
 ? 'generate a random Password' 
 : 'keep it <em> unchanged </em>'; ?> </p>
-<?php $this->renderPartial('/user/passwordfields', array(
+<? $this->renderPartial('/user/passwordfields', array(
 			'form'=>$passwordform)); ?>
 </div>
-<?php if(Yum::hasModule('profile')) 
+<? if(Yum::hasModule('profile')) 
 $this->renderPartial('application.modules.profile.views.profile._form', array(
 			'profile' => $profile)); ?>
 
 <div class="row buttons">
-<?php echo CHtml::submitButton($model->isNewRecord
+<? echo CHtml::submitButton($model->isNewRecord
 			? Yum::t('Create')
 			: Yum::t('Save')); ?>
 </div>
 
-<?php $this->endWidget(); ?>
+<? $this->endWidget(); ?>
 </div>
 	<div style="clear:both;"></div>

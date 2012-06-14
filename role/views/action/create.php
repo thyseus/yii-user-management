@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 	Yum::t('Actions')=>array('index'),
 	Yum::t('Create'),
@@ -6,6 +6,6 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <?php echo Yum::t('Create Action'); ?></h1>
+<h1> <? echo Yum::t('Create Action'); ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<? echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,32 +1,11 @@
-<?php
+<?
 /**
- * This is the model class for table "{{profile_field}}".
+ * This is the model class for table profile field table
  *
- * The followings are the available columns in table '{{profile_field}}':
- * Fields:
- * @property integer $id
- * @property string $varname
- * @property string $title
- * @property string $hint
- * @property string $field_type
- * @property integer $field_size
- * @property integer $field_size_min
- * @property integer $required
- * @property string $match
- * @property string $range
- * @property string $error_message
- * @property string $other_validator
- * @property string $default
- * @property integer $position
- * @property integer $visible
- *
- * Relations
- *
- * Scopes:
- * @method YumProfileField forAll
- * @method YumProfileField forUser
- * @method YumProfileField forOwner
- * @method YumProfileField sort
+ * All available profile fields for the application are stored in this
+ * table. Please make sure to add additional fields by the yum profile
+ * field admin backend to ensure that the profile columns and the profile
+ * field table is in sync.
  */
 class YumProfileField extends YumActiveRecord
 {
@@ -34,7 +13,7 @@ class YumProfileField extends YumActiveRecord
 	const VISIBLE_ONLY_OWNER=1;
 	const VISIBLE_REGISTER_USER=2;
 	const VISIBLE_USER_DECISION=3;
-	const VISIBLE_ALL=4;
+	const VISIBLE_PUBLIC=4; // Field is public even if the user decides to hide it
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -66,51 +45,11 @@ class YumProfileField extends YumActiveRecord
 		$this->_tableName = Yum::module('profile')->profileFieldTable;
 		return $this->_tableName;
 	}
-
-	public function rules()
-	{
-		return array(
-				array('varname, title, field_type', 'required'),
-				array('varname', 'match', 'pattern' => '/^[a-z_0-9]+$/u','message' => Yii::t("UserModule.user", "Incorrect symbol's. (a-z)")),
-				array('varname', 'unique', 'message' => Yii::t("UserModule.user", "This field already exists.")),
-				array('varname, field_type', 'length', 'max'=>50),
-				array('field_size, field_size_min, required, position, visible', 'numerical', 'integerOnly'=>true),
-				array('hint','safe'),
-				array('related_field_name, title, match, range, error_message, other_validator, default', 'length', 'max'=>255),
-				);
-	}
-
-	public function relations()
-	{
-		return array();
-	}
-
-	public function attributeLabels()
-	{
-		return array(
-				'id' => Yum::t('#'),
-				'varname' => Yum::t('Variable name'),
-				'title' => Yum::t('Title'),
-				'hint' => Yum::t('Hint'),
-				'field_type' => Yum::t('Field type'),
-				'field_size' => Yum::t('Field size'),
-				'field_size_min' => Yum::t('Field size min'),
-				'required' => Yum::t('Required'),
-				'match' => Yum::t('Match'),
-				'range' => Yum::t('Range'),
-				'error_message' => Yum::t('Error message'),
-				'other_validator' => Yum::t('Other validator'),
-				'default' => Yum::t('Default'),
-				'position' => Yum::t('Position'),
-				'visible' => Yum::t('Visible'),
-				);
-	}
-
 	public function scopes()
 	{
 		return array(
 				'forAll'=>array(
-					'condition'=>'visible='.self::VISIBLE_ALL,
+					'condition'=>'visible='.self::VISIBLE_PUBLIC,
 					),
 				'forUser'=>array(
 					'condition'=>'visible>='.self::VISIBLE_REGISTER_USER,
@@ -120,7 +59,6 @@ class YumProfileField extends YumActiveRecord
 					),
 				);
 	}
-
 
 	public static function itemAlias($type,$code=NULL) {
 		$_items = array(
@@ -142,7 +80,7 @@ class YumProfileField extends YumActiveRecord
 					),
 				'visible' => array(
 					self::VISIBLE_USER_DECISION => Yum::t('Let the user choose in privacy settings'),
-					self::VISIBLE_ALL => Yum::t('For all'),
+					self::VISIBLE_PUBLIC => Yum::t('For all'),
 					self::VISIBLE_REGISTER_USER => Yum::t('Registered users'),
 					self::VISIBLE_ONLY_OWNER => Yum::t('Only owner'),
 					self::VISIBLE_HIDDEN => Yum::t('Hidden'),
@@ -154,3 +92,4 @@ class YumProfileField extends YumActiveRecord
 			return isset($_items[$type]) ? $_items[$type] : false;
 	}
 }
+?>

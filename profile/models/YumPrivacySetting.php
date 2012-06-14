@@ -1,4 +1,4 @@
-<?php
+<?
 
 class YumPrivacysetting extends YumActiveRecord
 {
@@ -69,7 +69,6 @@ class YumPrivacysetting extends YumActiveRecord
 
 		);
 	}
-
 
 	public function search()
 	{

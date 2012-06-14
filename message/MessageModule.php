@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::setPathOfAlias('MessageModule', dirname(__FILE__));
 
 Yii::import('MessageModule.models.*');

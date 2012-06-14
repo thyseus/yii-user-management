@@ -1,4 +1,4 @@
-<?php
+<?
 return array(
 		'Are you sure you want to remove this friend?' => 'هل أنت متأكد من رغبتك في إزالة هذا الصديق',
 		'Friendship rejected' => 'تم رفض طلب الصداقة',

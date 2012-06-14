@@ -1,4 +1,4 @@
-<?php
+<?
 
 return array(
 		'Your friendship request has been accepted' => 'تم قبول طلبك للصداقة.',

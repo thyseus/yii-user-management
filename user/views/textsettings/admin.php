@@ -1,4 +1,4 @@
-<?php
+<?
 $this->title = Yum::t( 'Manage text settings');
 $this->breadcrumbs=array(
 	Yum::t('User administration panel')=>array('//user/user/admin'),

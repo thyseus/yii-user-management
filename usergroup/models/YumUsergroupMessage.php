@@ -1,4 +1,4 @@
-<?php
+<?
 
 class YumUsergroupMessage extends CActiveRecord{
 	public static function model($className=__CLASS__)

@@ -1,4 +1,4 @@
-<?php
+<?
 $this->title = Yii::t('UserModule.user', 'Text settings');
 $this->breadcrumbs = array(
 	Yii::t('UserModule.user','User administration panel')=>array('//user/user/admin'),
@@ -12,7 +12,7 @@ $this->menu=array(
 );
 ?>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<? $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>

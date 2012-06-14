@@ -1,4 +1,4 @@
-<?php 
+<? 
 $this->breadcrumbs = array(Yum::t('Data Generation'));
 
 if(isset($_POST['user_amount'])) {

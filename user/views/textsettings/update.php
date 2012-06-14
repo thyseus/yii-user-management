@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 	'Manage text settings'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<? $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'yum-text-settings-form',
 	'enableAjaxValidation'=>true,
 )); 
@@ -19,13 +19,13 @@ echo $this->renderPartial('/textsettings/_form', array(
 	)); ?>
 
 <div class="row buttons">
-	<?php
+	<?
 	$url = array('yumTextSettings/admin');
 	echo CHtml::Button(Yum::t( 'Cancel'), array('submit' => $url)); ?>&nbsp;
 
-	<?php echo CHtml::submitButton(Yum::t( 'Update')); ?>
+	<? echo CHtml::submitButton(Yum::t( 'Update')); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+<? $this->endWidget(); ?>
 
 </div><!-- form -->

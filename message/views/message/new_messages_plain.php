@@ -1,4 +1,4 @@
-<?php 
+<? 
 if($messages) {
 	echo '<div class="success">';
 

@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::setPathOfAlias('RoleModule' , dirname(__FILE__));
 
 class RoleModule extends CWebModule {

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * This is the model class for a User in Yum

@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 	'Actions',
 );
@@ -11,7 +11,7 @@ $this->menu=array(
 
 <h1>Actions</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<? $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>

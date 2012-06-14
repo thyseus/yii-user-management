@@ -1,4 +1,4 @@
-<?php
+<?
 $this->title = Yum::t('{role}', array(
 			'{role}' => $model->title));
 
@@ -11,9 +11,9 @@ $this->breadcrumbs=array(
 echo $model->description; ?>
 
 <br />
-<?php echo Yum::p('This users have been assigned to this role'); ?> 
+<? echo Yum::p('This users have been assigned to this role'); ?> 
 
-<?php 
+<? 
 if($assignedUsers);
 $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$assignedUsers,
@@ -25,7 +25,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 <br />
 
-<?php
+<?
 if(Yum::hasModule('membership')) { 
  echo Yum::p('This users have a ordered memberships of this role'); 
 

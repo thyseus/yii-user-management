@@ -1,9 +1,9 @@
-<?php
+<?
 $this->title = $model->title;
 $this->breadcrumbs=array(Yum::t('Messages')=>array('index'),$model->title);
 ?>
 
-<h2> <?php echo Yum::t('Message from') .  ' <em>' . $model->from_user->username . '</em>';
+<h2> <? echo Yum::t('Message from') .  ' <em>' . $model->from_user->username . '</em>';
 
 echo ': ' . $model->title; ?> 
 </h2>
@@ -11,11 +11,11 @@ echo ': ' . $model->title; ?>
 <hr />
 
 <div class="message">
-<?php echo $model->message; ?>
+<? echo $model->message; ?>
 </div>
 
 <hr />
-<?php
+<?
 echo CHtml::link(Yum::t('Back to inbox'), array(
 			'//message/message/index')) . '<br />';
 

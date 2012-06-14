@@ -1,4 +1,4 @@
-<?php
+<?
 
 class YumTextSettingsController extends YumController {
 

@@ -1,4 +1,4 @@
-<?php
+<?
 $this->breadcrumbs=array(
 	Yum::t('Usergroups')=>array('index'),
 	Yum::t('Create'),
@@ -6,8 +6,8 @@ $this->breadcrumbs=array(
 
 ?>
 
-<?php $this->title = Yum::t('Create Usergroup'); ?> 
-<?php
+<? $this->title = Yum::t('Create Usergroup'); ?> 
+<?
 $this->renderPartial('_form', array(
 			'model' => $model,
 			'buttons' => 'create'));

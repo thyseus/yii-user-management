@@ -1,4 +1,4 @@
-<?php 
+<? 
 Yii::app()->clientScript->registerCssFile(
 		Yii::app()->getAssetManager()->publish(
 			Yii::getPathOfAlias('application.modules.user.assets.css').'/yum.css'));
@@ -8,12 +8,12 @@ $this->beginContent($module->baseLayout); ?>
 
 <div id="usermenu">
 
-<?php Yum::renderFlash(); ?>
-<?php $this->renderMenu(); ?>
+<? Yum::renderFlash(); ?>
+<? $this->renderMenu(); ?>
 </div>
 
 <div id="usercontent">
-<?php
+<?
 if (Yum::module()->debug) {
 	echo CHtml::openTag('div', array(
 				'style' => 'background-color: red;color:white;padding:5px;'));
@@ -23,10 +23,10 @@ if (Yum::module()->debug) {
 }
 ?>
 
-<?php 
+<? 
 if($this->title)
 	printf('<h2> %s </h2>', $this->title);  ?>
-	<?php echo $content;  ?>
+	<? echo $content;  ?>
 </div>
 
-<?php $this->endContent(); ?>
+<? $this->endContent(); ?>
