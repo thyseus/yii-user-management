@@ -11,7 +11,7 @@ class YumAvatarController extends YumController {
 		$model->avatar = '';
 		$model->save();
 		$this->redirect(array(
-					'//profile/profile/view', 'id' => $model->id));	
+					Yum::module('profile')->profileViewRoute));	
 	}
 
 	public function actionEnableGravatar() {
@@ -19,7 +19,7 @@ class YumAvatarController extends YumController {
 		$model->avatar = 'gravatar';
 		$model->save();
 		$this->redirect(array(
-					'//profile/profile/view', 'id' => $model->id));	
+					Yum::module('profile')->profileViewRoute));	
 	}
 
 	public function beforeAction($action) {

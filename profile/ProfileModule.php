@@ -18,6 +18,7 @@ class ProfileModule extends CWebModule {
 	public $profileFieldTable = 'profile_field';
 
 	public $profileView = '/profile/view';
+	public $profileViewRoute = '//profile/profile/view';
 
 	public $publicFieldsView =
 		'application.modules.profile.views.profile.public_fields';

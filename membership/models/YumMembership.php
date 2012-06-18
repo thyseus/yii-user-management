@@ -1,4 +1,5 @@
 <?
+Yii::import('application.modules.role.models.*'); 
 
 class YumMembership extends YumActiveRecord{
 	public static function model($className=__CLASS__) {
