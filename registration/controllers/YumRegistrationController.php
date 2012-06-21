@@ -17,7 +17,10 @@ class YumRegistrationController extends YumController {
 	// Only allow the registration if the user is not already logged in and
 	// the function is activated in the Module Configuration
 	public function beforeAction($action) {
-		if (!Yii::app()->user->isGuest) 
+		if(!Yum::hasModule('registration'))
+			throw new CHttpException(401, 'Please activate the registration submodule in your config/main.php. See the installation instructions or registration/RegistrationModule.php for details');
+
+		if(!Yii::app()->user->isGuest) 
 			$this->redirect(Yii::app()->user->returnUrl);
 
 		$this->layout = Yum::module('registration')->layout;
