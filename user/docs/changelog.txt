@@ -1,5 +1,7 @@
 Changelog for Yii User Management Module (Yum) 
 
+- yumsettings & yumtextsettings are removed. To adjust the strings for your
+application, use Yum::t() or extend from the Yum Classes
 
 2012-06-05: Yum moved to Github !
 
@@ -15,7 +17,6 @@ New in 0.8-rc2:
 - Removed fields group feature. Please overwrite the existing views if you
 	need field groups.
 - ENH: added a RESTful api (docs/RESTful_api.txt)
-- removed the yumsettings table and functionality completely. All options need to be configured in the application configuration now. This really is better.  Note that yumTextSettings are kept. Because they make sense. Yumsettings dont. 
 - started to make the module clean. The avatar, role, usergroup, membership and messages module are now own submodules.
 See docs/avatar.txt and docs/messages.txt on how to use it now. I will do this for all other
 submodules step-by-step, too. 

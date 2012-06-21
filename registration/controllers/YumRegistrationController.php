@@ -101,28 +101,20 @@ class YumRegistrationController extends YumController {
 		}
 		$activation_url = $user->getActivationUrl();
 
-		// get the text to sent from the yumtextsettings table
-		$content = YumTextSettings::model()->find('language = :lang', array(
-					'lang' => Yii::app()->language));
-		$sent = null;
-
-		if (is_object($content)) {
-			$body = strtr($content->text_email_registration, array(
-						'{username}' => $user->username,
-						'{activation_url}' => $activation_url));
+		$body = strtr(
+				'Hello, {username}. Please activate your account with this url: {activation_url}', array(
+					'{username}' => $user->username,
+					'{activation_url}' => $activation_url));
 
 			$mail = array(
 					'from' => Yum::module('registration')->registrationEmail,
 					'to' => $user->profile->email,
-					'subject' => strtr($content->subject_email_registration, array(
+					'subject' => strtr(
+						'Please activate your account for {username}', array(
 							'{username}' => $user->username)),
 					'body' => $body,
 					);
 			$sent = YumMailer::send($mail);
-		}
-		else {
-			throw new CException(Yum::t('The messages for your application language are not defined.'));
-		}
 
 		return $sent;
 	}
@@ -218,22 +210,15 @@ class YumRegistrationController extends YumController {
 										'{recovery_url}' => $recovery_url,
 										'{username}' => $form->user->username)));
 
-						$content = YumTextSettings::model()->find(
-								'language = :lang', array('lang' => Yii::app()->language));
-						$sent = null;
-
-						if (is_object($content)) {
 							$mail = array(
 									'from' => Yii::app()->params['adminEmail'],
 									'to' => $form->user->profile->email,
-									'subject' => $content->subject_email_registration,
-									'body' => strtr($content->text_email_recovery, array(
+									'subject' => 'You requested a new password',
+									'body' => strtr(
+										'You have requested a new password. Please use this URL to continue: {recovery_url}', array(
 											'{recovery_url}' => $recovery_url)),
 									);
 							$sent = YumMailer::send($mail);
-						} else {
-							throw new CException(Yum::t('The messages for your application language are not defined.'));
-						}
 					} else
 						Yum::log(Yum::t(
 									'A password has been requested, but no associated user was found in the database. Requested user/email is: {username}', array(

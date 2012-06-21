@@ -64,13 +64,14 @@ class YumFriendship extends YumActiveRecord {
 	public function acceptFriendship() {
 		$this->acknowledgetime = time();
 		$this->status = 2;
-		if(Yum::hasModule('messages') 
+		if(Yum::hasModule('message') 
 				&& isset($this->inviter->privacy) 
 				&& $this->inviter->privacy->message_new_friendship) {
 			Yii::import('application.modules.messages.models.YumMessage');
 			YumMessage::write($this->inviter, $this->invited,
 					Yum::t('Your friendship request has been accepted'),
-					YumTextSettings::getText('text_friendship_confirmed', array(
+					strtr(
+						'Your friendship request to {username} has been accepted', array(
 							'{username}' => $this->inviter->username))); 
 		}
 		$this->save(false, array('acknowledgetime', 'status'));
@@ -161,7 +162,8 @@ class YumFriendship extends YumActiveRecord {
 					YumMessage::write($user, $this->inviter,
 							Yum::t('New friendship request from {username}', array(
 									'{username}' => $this->inviter->username)),
-							YumTextSettings::getText('text_friendship_new', array(
+							strtr(
+								'A new friendship request from {username} has been made: {message} <a href="{link_friends}">Manage my friends</a><br /><a href="{link_profile}">To the profile</a>', array(
 									'{username}' => $this->inviter->username,
 									'{link_friends}' => Yii::app()->controller->createUrl('//friendship/friendship/index'),
 									'{link_profile}' => Yii::app()->controller->createUrl('//profile/profile/view'),

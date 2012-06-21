@@ -112,7 +112,8 @@ class YumMembership extends YumActiveRecord{
 		Yii::import('application.modules.message.models.*');
 		return YumMessage::write($this->user, 1,
 				Yum::t('Payment arrived'),
-				YumTextSettings::getText('text_payment_arrived', array(
+				strtr(
+					'The payment of order {id} has been arrived at {payment_date}', array(
 						'{payment_date}' => date(Yum::module()->dateTimeFormat, $this->payment_date),
 						'{id}' => $this->id,
 						)));

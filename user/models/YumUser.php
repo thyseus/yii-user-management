@@ -287,7 +287,7 @@ class YumUser extends YumActiveRecord
 		Yii::import('application.modules.role.models.*');
 
 		$roles = $this->roles;
-		
+
 		if(Yum::hasModule('membership')) {
 			foreach($this->getActiveMemberships() as $membership)
 				$roles[] = $membership;
@@ -295,8 +295,8 @@ class YumUser extends YumActiveRecord
 
 		foreach ($roles as $role)
 			if ((is_numeric($role) && $role == $role_title) 
-				|| ($role->id == $role_title || $role->title == $role_title))
-					return true;
+					|| ($role->id == $role_title || $role->title == $role_title))
+				return true;
 
 		return false;
 	}
@@ -336,10 +336,10 @@ class YumUser extends YumActiveRecord
 		}
 
 
-			// Direct user permission assignments
-			$sql = "select id, action.title from permission left join action on action.id = permission.action where type = 'user' and principal_id = {$this->id}";
-			foreach (Yii::app()->db->cache(500)->createCommand($sql)->query()->readAll() as $permission)
-				$permissions[$permission['id']] = $permission['title'];
+		// Direct user permission assignments
+		$sql = "select id, action.title from permission left join action on action.id = permission.action where type = 'user' and principal_id = {$this->id}";
+		foreach (Yii::app()->db->cache(500)->createCommand($sql)->query()->readAll() as $permission)
+			$permissions[$permission['id']] = $permission['title'];
 
 
 		return $permissions;
@@ -578,7 +578,8 @@ class YumUser extends YumActiveRecord
 							Yii::import('application.modules.messages.models.YumMessage');
 							YumMessage::write($user, 1,
 									Yum::t('Your activation succeeded'),
-									YumTextSettings::getText('text_email_activation', array(
+									strtr(
+										'The activation of the account {username} succeeded. Please use <a href="{link_login}">this link</a> to go to the login page', array(
 											'{username}' => $user->username,
 											'{link_login}' =>
 											Yii::app()->controller->createUrl('//user/user/login'))));
@@ -744,8 +745,8 @@ class YumUser extends YumActiveRecord
 				$return .= CHtml::image(Yii::app()->getAssetManager()->publish(
 							Yii::getPathOfAlias('YumAssets.images') . ($thumb
 								? '/no_avatar_available_thumb.jpg' : '/no_avatar_available.jpg'),
-						Yum::t('No image available'),
-						$options));
+							Yum::t('No image available'),
+							$options));
 			$return .= '</div><!-- avatar -->';
 			return $return;
 		}

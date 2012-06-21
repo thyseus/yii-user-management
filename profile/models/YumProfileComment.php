@@ -15,18 +15,18 @@ class YumProfileComment extends YumActiveRecord{
 	public function rules()
 	{
 		return array(
-			array('user_id, profile_id, comment, createtime', 'required'),
-			array('user_id, profile_id, createtime', 'numerical', 'integerOnly'=>true),
-			array('id, user_id, profile_id, comment, createtime', 'safe', 'on'=>'search'),
-		);
+				array('user_id, profile_id, comment, createtime', 'required'),
+				array('user_id, profile_id, createtime', 'numerical', 'integerOnly'=>true),
+				array('id, user_id, profile_id, comment, createtime', 'safe', 'on'=>'search'),
+				);
 	}
 
 	public function relations()
 	{
 		return array(
-			'user' => array(self::BELONGS_TO, 'YumUser', 'user_id'),
-			'profile' => array(self::BELONGS_TO, 'YumProfile', 'profile_id'),
-		);
+				'user' => array(self::BELONGS_TO, 'YumUser', 'user_id'),
+				'profile' => array(self::BELONGS_TO, 'YumProfile', 'profile_id'),
+				);
 	}
 
 	public function beforeValidate() {
@@ -42,11 +42,12 @@ class YumProfileComment extends YumActiveRecord{
 			if(Yum::hasModule('messages') 
 					&& $user->privacy 
 					&& $user->privacy->message_new_profilecomment) {
-			Yii::import('application.modules.messages.models.YumMessage');
+				Yii::import('application.modules.messages.models.YumMessage');
 				YumMessage::write($user, $this->user_id,
 						Yum::t('New profile comment from {username}', array(
 								'{username}' => $this->user->username)),
-						YumTextSettings::getText('text_profilecomment_new', array(
+						strtr(
+							'A new profile comment has been made from {username}: {message} <br /> <a href="{link_profile}">to my profile</a>', array(
 								'{username}' => $this->user->username,
 								'{message}' => $this->comment,
 								'{link_profile}' =>
@@ -73,12 +74,12 @@ class YumProfileComment extends YumActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yum::t('ID'),
-			'user_id' => Yum::t('Written from'),
-			'profile_id' => Yum::t('Profile'),
-			'comment' => Yum::t('Comment'),
-			'createtime' => Yum::t('Written at'),
-		);
+				'id' => Yum::t('ID'),
+				'user_id' => Yum::t('Written from'),
+				'profile_id' => Yum::t('Profile'),
+				'comment' => Yum::t('Comment'),
+				'createtime' => Yum::t('Written at'),
+				);
 	}
 
 	public function search()
@@ -92,7 +93,7 @@ class YumProfileComment extends YumActiveRecord{
 		$criteria->compare('createtime', $this->createtime);
 
 		return new CActiveDataProvider(get_class($this), array(
-			'criteria'=>$criteria,
-		));
+					'criteria'=>$criteria,
+					));
 	}
 }
