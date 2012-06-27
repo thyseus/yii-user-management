@@ -273,9 +273,8 @@ class YumUserController extends YumController {
 					));
 	}
 
-
 	/**
-	 * Deletes a user
+	 * Deletes a user by setting the status to 'deleted'
 	 */
 	public function actionDelete($id = null) {
 		if(!$id)
@@ -292,7 +291,8 @@ class YumUserController extends YumController {
 
 			if($user->delete()) {
 				Yum::setFlash('The User has been deleted');
-				$this->redirect('user/user/admin');
+				if(!Yii::app()->request->isAjaxRequest)
+					$this->redirect('//user/user/admin');
 			}
 		} else if(isset($_POST['confirmPassword'])) {
 			if($user->encrypt($_POST['confirmPassword']) == $user->password) {
@@ -304,12 +304,10 @@ class YumUserController extends YumController {
 				Yum::setFlash('Wrong password confirmation! Account was not deleted');
 			}
 			$this->redirect(array('//profile/profile/view'));
-		}
+		} 
 
 		$this->render('confirmDeletion', array('model' => $user));
 	}
-
-
 
 	public function actionBrowse() {
 		$search = '';
@@ -343,6 +341,9 @@ class YumUserController extends YumController {
 	{
 		$dataProvider=new CActiveDataProvider('YumUser', array(
 					'pagination'=>array(
+						'criteria'=>array(
+							'condition'=>'status > 0', 
+							),
 						'pageSize'=>Yum::module()->pageSize,
 						)));
 
