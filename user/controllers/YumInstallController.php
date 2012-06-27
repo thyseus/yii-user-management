@@ -435,24 +435,23 @@ class YumInstallController extends YumController
 			}
 			else {
 				$this->render('start', array(
-					//FIXME: We should normalize table names either in singular or plural.
-					'userTable' => Yum::resolveTableName($this->module->userTable, Yii::app()->db),
-					'privacySettingTable' => Yum::resolveTableName($this->module->privacySettingTable, Yii::app()->db),
-					'translationTable' => Yum::resolveTableName($this->module->translationTable, Yii::app()->db),
-					'roleTable' => Yum::resolveTableName($this->module->roleTable, Yii::app()->db),
-					'membershipTable' => Yum::resolveTableName($this->module->membershipTable, Yii::app()->db),
-					'paymentTable' => Yum::resolveTableName($this->module->paymentTable, Yii::app()->db),
-					'messageTable' => Yum::resolveTableName($this->module->messageTable, Yii::app()->db),
-					'profileTable' => Yum::resolveTableName($this->module->profileTable, Yii::app()->db),
-					'profileCommentTable' => Yum::resolveTableName($this->module->profileCommentTable, Yii::app()->db),
-					'profileVisitTable' => Yum::resolveTableName($this->module->profileVisitTable, Yii::app()->db),
-					'profileFieldTable' => Yum::resolveTableName($this->module->profileFieldTable, Yii::app()->db),
-					'userRoleTable' => Yum::resolveTableName($this->module->userRoleTable, Yii::app()->db),
-					'usergroupTable' => Yum::resolveTableName($this->module->usergroupTable, Yii::app()->db),
-					'usergroupMessagesTable' => Yum::resolveTableName($this->module->usergroupMessagesTable, Yii::app()->db),
-					'permissionTable' => Yum::resolveTableName($this->module->permissionTable, Yii::app()->db),
-					'friendshipTable' => Yum::resolveTableName($this->module->friendshipTable, Yii::app()->db),
-					'actionTable' => Yum::resolveTableName($this->module->actionTable, Yii::app()->db),
+					'userTable' => 'user',
+					'roleTable' => 'role',
+					'privacySettingTable' => 'privacysetting',
+					'translationTable' => 'translation',
+					'membershipTable' => 'membership',
+					'paymentTable' => 'payment',
+					'messageTable' => 'message',
+					'profileTable' => 'profile',
+					'profileCommentTable' => 'profile_comment',
+					'profileVisitTable' => 'profile_visit',
+					'profileFieldTable' => 'profile_field',
+					'userRoleTable' => 'user_role',
+					'usergroupTable' => 'usergroup',
+					'usergroupMessagesTable' => 'user_group_message',
+					'permissionTable' => 'permission',
+					'friendshipTable' => 'friendship',
+					'actionTable' => 'action',
 				));
 			}
 		} else {
