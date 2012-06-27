@@ -113,7 +113,7 @@ class YumFriendship extends YumActiveRecord {
 
 	public function tableName()
 	{
-		$this->_tableName = Yum::module('friendhip')->friendshipTable;
+		$this->_tableName = Yum::module('friendship')->friendshipTable;
 
 		return $this->_tableName;
 	}
