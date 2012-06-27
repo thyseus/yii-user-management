@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 echo $model->description; ?>
 
 <br />
-<? echo Yum::p('This users have been assigned to this role'); ?> 
+<? echo Yum::p('These users have been assigned to this role'); ?> 
 
 <? 
 if($assignedUsers);
@@ -27,7 +27,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 <?
 if(Yum::hasModule('membership')) { 
- echo Yum::p('This users have a ordered memberships of this role'); 
+ echo Yum::p('These users have a ordered memberships of this role'); 
 
 if($activeMemberships)
 $this->widget('zii.widgets.grid.CGridView', array(

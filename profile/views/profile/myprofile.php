@@ -106,7 +106,7 @@ echo CHtml::link(ucwords($friend->username),
 ?>
 </div>
 <div id="visits">
-<h2> <? echo Yum::t('This users have visited my profile'); ?> </h2>
+<h2> <? echo Yum::t('These users have visited my profile'); ?> </h2>
 <?
 	if($model->visits) {
 		$format = Yum::module()->dateTimeFormat;

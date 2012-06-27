@@ -19,7 +19,7 @@
 </div>	
 
 <div class="row" style="float:right;">
-<? echo CHtml::label(Yum::t('This users have been assigned to this role'), ''); ?> 
+<? echo CHtml::label(Yum::t('These users have been assigned to this role'), ''); ?> 
 
 <? 
 $this->widget('YumModule.components.Relation', array(

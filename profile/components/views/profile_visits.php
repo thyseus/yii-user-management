@@ -1,5 +1,5 @@
 <?
-echo '<p>'. Yum::t('This users have visited your profile recently') . ': </p>';
+echo '<p>'. Yum::t('These users have visited your profile recently') . ': </p>';
 
 if($visits) {
 	foreach($visits as $visit)

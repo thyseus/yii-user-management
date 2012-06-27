@@ -1,6 +1,6 @@
 <?
 if($comments) {
-	echo '<p>'.Yum::t('This users have commented your profile recently') . ': </p>';
+	echo '<p>'.Yum::t('These users have commented your profile recently') . ': </p>';
 	foreach($comments as $comment) {
 		printf('<div style="text-align:center;width: 50px;float:left;margin: 0px 10px 10px 0;">%s %s</div>', 
 				CHtml::link($comment->user->getAvatar(true), array(

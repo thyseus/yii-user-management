@@ -7,7 +7,7 @@ return array(
 'Searchable' => 'قابل للبحث',
 'When selecting searchable, users of this role can be searched in the "user Browse" function' => 'لدي إختيار قابل للبحث, جميع الأعضاء التابعين لهذا التصنيف تظهر بياناتهم في  نتائج "البحث عن الأعضاء"',
 'Manage roles' => 'إدارة  تصنيف مستخدمين',
-'This users have a ordered memberships of this role' => 'هذا المستخدم يطلب إشتراك في هذا التصنيف',
+'These users have a ordered memberships of this role' => 'هذا المستخدم يطلب إشتراك في هذا التصنيف',
 	'Price' => 'السعر',
 	'Duration in days' => 'الفترة الزمنية بالأيام',
 	'How expensive is a membership?' => 'ماهو سعر الإشتراك؟',

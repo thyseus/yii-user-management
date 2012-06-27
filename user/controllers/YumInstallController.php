@@ -62,7 +62,6 @@ class YumInstallController extends YumController
 						'usergroupMessagesTable',
 						'translationTable');
 
-
 					/*
 					 * Hey, we're dropping your tables. Did anyone said 'backups'?
 					 */
@@ -390,7 +389,7 @@ class YumInstallController extends YumController
 						$db->createCommand($sql)->execute();
 
 						$sql = "INSERT INTO `" . $roleTable . "` (`title`,`description`, `price`, `duration`) VALUES "
-							."('UserManager', 'This users can manage Users', 0, 0),"
+							."('UserManager', 'These users can manage Users', 0, 0),"
 							."('Demo', 'Users having the demo role', 0, 0),"
 							."('Business', 'Example Business account', 9.99, 7),"
 							."('Premium', 'Example Premium account', 19.99, 28) ";
