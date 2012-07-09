@@ -150,7 +150,7 @@ class YumMessage extends YumActiveRecord
 	public function rules()
 	{
 		return array(
-				array('from_user_id, to_user_id, title', 'required'),
+				array('from_user_id, to_user_id, title, timestamp', 'required'),
 				array('from_user_id, draft, message_read, answered', 'numerical', 'integerOnly'=>true),
 				array('title', 'length', 'max'=>255),
 				array('message', 'safe'),

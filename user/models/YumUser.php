@@ -373,17 +373,22 @@ class YumUser extends YumActiveRecord
 				$relations['roles'] = array(
 						self::MANY_MANY, 'YumRole',
 						Yum::module('role')->userRoleTable . '(user_id, role_id)');
-
 			}
 
-			if (Yum::hasModule('messages')) {
+			if (Yum::hasModule('message')) {
 				Yii::import('application.modules.message.models.*');
 				$relations['messages'] = array(
 						self::HAS_MANY, 'YumMessage', 'to_user_id',
-						'order' => 'messages.timestamp DESC');
+						'order' => 'timestamp DESC');
+
+				$relations['unread_messages'] = array(
+						self::HAS_MANY, 'YumMessage', 'to_user_id',
+						'condition' => 'message_read = 0',
+						'order' => 'timestamp DESC');
 
 				$relations['sent_messages'] = array(
 						self::HAS_MANY, 'YumMessage', 'from_user_id');
+
 			}
 
 			if (Yum::hasModule('profile')) {
