@@ -79,7 +79,7 @@ class YumUser extends YumActiveRecord
 	// last action when a user does something
 	public function setLastAction()
 	{
-		if (!Yii::app()->user->isGuest && !$this->isNewRecord()) {
+		if (!Yii::app()->user->isGuest && !$this->isNewRecord) {
 			$this->lastaction = time();
 			return $this->save(false, array('lastaction'));
 		}
