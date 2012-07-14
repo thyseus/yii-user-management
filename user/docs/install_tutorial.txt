@@ -168,8 +168,8 @@ requirement options
 
 User Registration:
 ------------------
-Set the Variable 'disableEmailActivation' in the module configuration to 
-let users be able to register to your Application without Registration.
+Set the Variable 'enableActivationConfirmation' to false in the module configuration to 
+let users register for your application without needing to receive/click an emailed confirmation link.
 
 
 Role Management:
