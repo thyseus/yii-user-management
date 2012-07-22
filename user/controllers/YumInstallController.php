@@ -354,13 +354,12 @@ class YumInstallController extends YumController
 					}
 
 					// Generate demo data
-					$saltUser = new YumUser();
-					$salt1 = $saltUser->generateSalt();
-					$salt2 = $saltUser->generateSalt();
+					$salt1 = YumEncrypt::generateSalt();
+					$salt2 = YumEncrypt::generateSalt();
 					$sql = "INSERT INTO `" . $userTable
 					   ."` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
-					   ."(1, 'admin', '" . YumUser::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
-					   ."(2, 'demo', '" . YumUser::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
+					   ."(1, 'admin', '" . YumEncrypt::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
+					   ."(2, 'demo', '" . YumEncrypt::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
 					$db->createCommand($sql)->execute();
 
 					if (isset($_POST['installMembership'])) {

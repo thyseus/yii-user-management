@@ -66,10 +66,7 @@ class YumUserIdentity extends CUserIdentity {
 						$user = new YumUser();
 						$user->username = $this->username;
 						if ($settings->ldap_transfer_pw == 1)
-						{
-							$user->salt = $user->generateSalt();
-							$user->password = YumUser::encrypt($this->password, $user->salt);
-						}	
+							$user->password = YumEncrypt::encrypt($this->password);
 						$user->lastpasswordchange = 0;
 						$user->activationKey = '';
 						$user->superuser = 0;
@@ -133,7 +130,7 @@ class YumUserIdentity extends CUserIdentity {
 
 		if($without_password)
 			$this->credentialsConfirmed($user);
-		else if(!YumUser::validate_password($this->password, $user->password, $user->salt))
+		else if(!YumEncrypt::validate_password($this->password, $user->password, $user->salt))
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else if($user->status == YumUser::STATUS_INACTIVE)
 			$this->errorCode=self::ERROR_STATUS_INACTIVE;

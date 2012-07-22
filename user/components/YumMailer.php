@@ -71,8 +71,10 @@ class YumMailer {
 			if($header == null) {
 				$header  = 'MIME-Version: 1.0' . "\r\n";
 				$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-				$header .= 'From: ' . Yum::module('message')->adminEmail . "\r\n";
-				$header .= 'To: ' . $to['to'] . "\r\n";
+				if(Yum::hasModule('message')) 
+					$header .= 'From: ' . Yum::module('message')->adminEmail . "\r\n";
+				else
+					$header .= 'From: ' . Yum::module()->adminEmail . "\r\n";
 			}
 			return mail($to['to'], $to['subject'], $to['body'], $header);
 		}

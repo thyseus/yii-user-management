@@ -40,8 +40,8 @@ class YumUserController extends YumController {
 				$user = new YumUser();
 				$user->username = sprintf('Demo_%d_%d', rand(1, 50000), $i);
 				$user->roles = array($_POST['role']);
-				$user->salt = $user->generateSalt();
-				$user->password = YumUser::encrypt($_POST['password'], $user->salt);
+				$user->salt = YumEncrypt::generateSalt();
+				$user->password = YumEncrypt::encrypt($_POST['password'], $user->salt);
 				$user->createtime = time();
 				$user->status = $_POST['status'];
 
@@ -117,12 +117,15 @@ class YumUserController extends YumController {
 			
 			$form->validate();
 
-			if(!YumUser::validate_password($form->currentPassword, YumUser::model()->findByPk($uid)->password, YumUser::model()->findByPk($uid)->salt))
+			if(!YumEncrypt::validate_password($form->currentPassword,
+						YumUser::model()->findByPk($uid)->password,
+						YumUser::model()->findByPk($uid)->salt))
 				$form->addError('currentPassword',
 						Yum::t('Your current password is not correct'));
 
 			if(!$form->hasErrors()) {
-				if(YumUser::model()->findByPk($uid)->setPassword($form->password, YumUser::model()->findByPk($uid)->salt)) {
+				if(YumUser::model()->findByPk($uid)->setPassword($form->password,
+							YumUser::model()->findByPk($uid)->salt)) {
 					Yum::setFlash('The new password has been saved');
 					Yum::log(Yum::t('User {username} has changed his password', array(
 									'{username}' => Yii::app()->user->name)));
@@ -183,7 +186,7 @@ class YumUserController extends YumController {
 			$model->status = 1;
 
 		if(isset($_POST['YumUser'])) {
-			$model->salt = YumUser::generateSalt();
+			$model->salt = YumEncrypt::generateSalt();
 			$model->attributes=$_POST['YumUser'];
 			
 			if(Yum::hasModule('role'))
@@ -206,7 +209,7 @@ class YumUserController extends YumController {
 				}
 			}
 
-			$model->activationKey = YumUser::encrypt(microtime() . $model->password, $model->salt);
+			$model->activationKey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
 
 			if($model->username == '' && isset($profile))
 				$model->username = $profile->email;
@@ -240,7 +243,7 @@ class YumUserController extends YumController {
 
 		if(isset($_POST['YumUser'])) {
 			if(!isset($model->salt) || empty($model->salt))
-				$model->salt = $model->generateSalt();
+				$model->salt = YumEncrypt::generateSalt();
 			
 			$model->attributes = $_POST['YumUser'];
 			if(Yum::hasModule('role')) {

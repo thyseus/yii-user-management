@@ -46,6 +46,7 @@ class UserModule extends CWebModule {
 	// PHPMailer to use PHPMailer as emailing lib.
 	public $mailer = 'yum'; 
 	public $phpmailer = null; // PHPMailer array options.
+	public $adminEmail = 'admin@example.com';
 
 	public $facebookConfig = false;
 	public $pageSize = 10;
