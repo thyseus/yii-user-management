@@ -36,8 +36,11 @@ if(Yii::app()->user->isAdmin()) {
 	}
 
 	array_push($attributes,
+		/*
+		There is no added value to showing the password/salt/activationKey because these are all encrypted
 		'password',
-		'activationKey',
+		'salt',
+		'activationKey',*/
 		array(
 			'name' => 'createtime',
 			'value' => date(UserModule::$dateFormat,$model->createtime),

@@ -83,8 +83,9 @@ class YumAuthController extends YumController {
 					// New account
 					$user = new YumUser;
 					$user->username = 'fb_'.YumRegistrationForm::genRandomString(Yum::module()->usernameRequirements['maxLen'] - 3);
-					$user->password = YumUser::encrypt(YumUserChangePassword::createRandomPassword());
-					$user->activationKey = YumUser::encrypt(microtime().$user->password);
+					$user->salt = $user->generateSalt();
+					$user->password = YumUser::encrypt(YumUserChangePassword::createRandomPassword(), $user->salt);
+					$user->activationKey = YumUser::encrypt(microtime().$user->password, $user->salt);
 					$user->createtime = time();
 					$user->superuser = 0;
 					if ($user->save()) {

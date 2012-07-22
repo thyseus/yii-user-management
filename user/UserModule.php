@@ -56,10 +56,10 @@ class UserModule extends CWebModule {
   public $rteadapter = false; // Don't use an Adapter
 
 	public $customCsvExportCriteria = '1';
-
-	public $salt = '';
+	
+	//public $salt = '';
 	 // valid callback function for password hashing ie. sha1
-	public $hashFunc = 'md5';
+	//public $hashFunc = 'md5';
 
 	// valid callback function that executes after user login
 	public $afterLogin = false;
@@ -166,11 +166,11 @@ class UserModule extends CWebModule {
 			);
 
 	public $passwordRequirements = array(
-			'minLen' => 8,
-			'maxLen' => 32,
-			'minLowerCase' => 1,
+			'minLen' => 6,
+			'maxLen' => 128,
+			'minLowerCase' => 0,
 			'minUpperCase'=>0,
-			'minDigits' => 1,
+			'minDigits' => 0,
 			'maxRepetition' => 3,
 			);
 
