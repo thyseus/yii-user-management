@@ -107,7 +107,7 @@ override the actionRegistration() of your Controller like this:
 			if($profile->save())
 				$user = new YumUser;
 				$password = YumUser::generatePassword();
-				$user->register(md5($profile->email), $password, $profile);
+				$user->register(md5($profile->email), $password, $profile, $user->generateSalt());
 
 				$this->sendRegistrationEmail($user, $password);
 				Yum::setFlash('Thank you for your registration. Please check your email.');
