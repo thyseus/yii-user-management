@@ -59,7 +59,7 @@ class YumInstallController extends YumController
 						'friendshipTable',
 						'actionTable',
 						'usergroupTable',
-						'usergroupMessagesTable',
+						'usergroupMessageTable',
 						'translationTable');
 
 					/*
@@ -132,7 +132,7 @@ class YumInstallController extends YumController
 						$db->createCommand($sql)->execute();
 						$createdTables['usergroup']['usergroupTable'] = $usergroupTable;
 
-						$sql = "CREATE TABLE IF NOT EXISTS `" . $usergroupMessagesTable . "` (
+						$sql = "CREATE TABLE IF NOT EXISTS `" . $usergroupMessageTable . "` (
 							`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 							`author_id` int(11) unsigned NOT NULL,
 							`group_id` int(11) unsigned NOT NULL,
@@ -143,7 +143,7 @@ class YumInstallController extends YumController
 								) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 						$db->createCommand($sql)->execute();
-						$createdTables['usergroup']['usergroupMessagesTable'] = $usergroupMessagesTable;
+						$createdTables['usergroup']['usergroupMessageTable'] = $usergroupMessageTable;
 					}
 
 					// Install Membership Management submodule
@@ -449,7 +449,7 @@ class YumInstallController extends YumController
 					'profileFieldTable' => 'profile_field',
 					'userRoleTable' => 'user_role',
 					'usergroupTable' => 'usergroup',
-					'usergroupMessagesTable' => 'user_group_message',
+					'usergroupMessageTable' => 'user_group_message',
 					'permissionTable' => 'permission',
 					'friendshipTable' => 'friendship',
 					'actionTable' => 'action',

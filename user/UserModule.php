@@ -152,7 +152,7 @@ class UserModule extends CWebModule {
 			'translation' => 'translation',
 			'message' => 'message',
 			'usergroup' => 'user_group',
-			'usergroupMessages' => 'user_group_message',
+			'usergroupMessage' => 'user_group_message',
 			'profile' => 'profile',
 			'profileComment' => 'profile_comment',
 			'profileVisit' => 'profile_visit',

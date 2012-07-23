@@ -123,8 +123,8 @@ your Database is Accessible in protected/config/main.php. </p>
 			</tr>
 			<tr>
 				<td> User group messages</td>
-				<td> <? echo CHtml::textField('usergroupMessagesTable',
-						$usergroupMessagesTable); ?> </td> 
+				<td> <? echo CHtml::textField('usergroupMessageTable',
+						$usergroupMessageTable); ?> </td> 
 				</tr>
 		</table>
 

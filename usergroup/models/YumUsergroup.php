@@ -14,7 +14,7 @@ class YumUsergroup extends YumActiveRecord{
 
 	public function tableName()
 	{
-		return '{{usergroup}}';
+		return Yum::module('usergroup')->userGroupTable;
 	}
 
 	public function rules()
@@ -63,9 +63,6 @@ class YumUsergroup extends YumActiveRecord{
 		return new CActiveDataProvider('YumUsergroupMessage', array(
 					'criteria' => $criteria));
 	}
-
-
-
 
 	public function search()
 	{
