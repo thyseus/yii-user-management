@@ -40,7 +40,8 @@ class YumUserController extends YumController {
 				$user = new YumUser();
 				$user->username = sprintf('Demo_%d_%d', rand(1, 50000), $i);
 				$user->roles = array($_POST['role']);
-				$user->password = YumUser::encrypt($_POST['password']);
+				$user->salt = YumEncrypt::generateSalt();
+				$user->password = YumEncrypt::encrypt($_POST['password'], $user->salt);
 				$user->createtime = time();
 				$user->status = $_POST['status'];
 
@@ -113,14 +114,18 @@ class YumUserController extends YumController {
 
 		if(isset($_POST['YumUserChangePassword'])) {
 			$form->attributes = $_POST['YumUserChangePassword'];
+			
 			$form->validate();
 
-			if(YumUser::encrypt($form->currentPassword) != YumUser::model()->findByPk($uid)->password)
+			if(!YumEncrypt::validate_password($form->currentPassword,
+						YumUser::model()->findByPk($uid)->password,
+						YumUser::model()->findByPk($uid)->salt))
 				$form->addError('currentPassword',
 						Yum::t('Your current password is not correct'));
 
 			if(!$form->hasErrors()) {
-				if(YumUser::model()->findByPk($uid)->setPassword($form->password)) {
+				if(YumUser::model()->findByPk($uid)->setPassword($form->password,
+							YumUser::model()->findByPk($uid)->salt)) {
 					Yum::setFlash('The new password has been saved');
 					Yum::log(Yum::t('User {username} has changed his password', array(
 									'{username}' => Yii::app()->user->name)));
@@ -181,8 +186,9 @@ class YumUserController extends YumController {
 			$model->status = 1;
 
 		if(isset($_POST['YumUser'])) {
+			$model->salt = YumEncrypt::generateSalt();
 			$model->attributes=$_POST['YumUser'];
-
+			
 			if(Yum::hasModule('role'))
 				$model->roles = Relation::retrieveValues($_POST);
 
@@ -192,18 +198,18 @@ class YumUserController extends YumController {
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
 					$password = YumUser::generatePassword();
-					$model->setPassword($password);
+					$model->setPassword($password, $model->salt);
 					Yum::setFlash(Yum::t('The generated Password is {password}', array(
 									'{password}' => $password)));
 				} else {
 					$passwordform->attributes = $_POST['YumUserChangePassword'];
 
 					if($passwordform->validate())
-						$model->setPassword($_POST['YumUserChangePassword']['password']);
+						$model->setPassword($_POST['YumUserChangePassword']['password'], $model->salt);
 				}
 			}
 
-			$model->activationKey = YumUser::encrypt(microtime() . $model->password);
+			$model->activationKey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
 
 			if($model->username == '' && isset($profile))
 				$model->username = $profile->email;
@@ -236,6 +242,9 @@ class YumUserController extends YumController {
 		$passwordform = new YumUserChangePassword();
 
 		if(isset($_POST['YumUser'])) {
+			if(!isset($model->salt) || empty($model->salt))
+				$model->salt = YumEncrypt::generateSalt();
+			
 			$model->attributes = $_POST['YumUser'];
 			if(Yum::hasModule('role')) {
 				Yii::import('application.modules.role.models.*');
@@ -255,7 +264,7 @@ class YumUserController extends YumController {
 					&& $_POST['YumUserChangePassword']['password'] != '') {
 				$passwordform->attributes = $_POST['YumUserChangePassword'];
 				if($passwordform->validate())
-					$model->setPassword($_POST['YumUserChangePassword']['password']);
+					$model->setPassword($_POST['YumUserChangePassword']['password'], $model->salt);
 			}
 
 			if(!$passwordform->hasErrors() && $model->save()) {
@@ -295,7 +304,7 @@ class YumUserController extends YumController {
 					$this->redirect('//user/user/admin');
 			}
 		} else if(isset($_POST['confirmPassword'])) {
-			if($user->encrypt($_POST['confirmPassword']) == $user->password) {
+			if(YumUser::validate_password($_POST['confirmPassword'], $user->password, $user->salt)) {
 				if($user->delete())
 					$this->actionLogout();
 				else
@@ -340,10 +349,10 @@ class YumUserController extends YumController {
 	public function actionList()
 	{
 		$dataProvider=new CActiveDataProvider('YumUser', array(
-					'criteria'=>array(
-						'condition'=>'status > 0', 
-						),
 					'pagination'=>array(
+						/*'criteria'=>array(
+							'condition'=>'status > 0', 
+							),*/
 						'pageSize'=>Yum::module()->pageSize,
 						)));
 

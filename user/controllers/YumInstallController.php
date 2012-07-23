@@ -81,6 +81,7 @@ class YumInstallController extends YumController
 						`id` int unsigned NOT NULL auto_increment,
 						`username` varchar(20) NOT NULL,
 						`password` varchar(128) NOT NULL,
+						`salt` varchar(128) NOT NULL,
 						`activationKey` varchar(128) NOT NULL default '',
 						`createtime` int(10) NOT NULL default '0',
 						`lastvisit` int(10) NOT NULL default '0',
@@ -353,11 +354,12 @@ class YumInstallController extends YumController
 					}
 
 					// Generate demo data
-
+					$salt1 = YumEncrypt::generateSalt();
+					$salt2 = YumEncrypt::generateSalt();
 					$sql = "INSERT INTO `" . $userTable
-					   ."` (`id`, `username`, `password`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
-					   ."(1, 'admin', '" . YumUser::encrypt('admin') . "', '', " . time() . ", 0, 1, 1),"
-					   ."(2, 'demo', '" . YumUser::encrypt('demo') . "', '', " . time() . ", 0, 0, 1)";
+					   ."` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
+					   ."(1, 'admin', '" . YumEncrypt::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
+					   ."(2, 'demo', '" . YumEncrypt::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
 					$db->createCommand($sql)->execute();
 
 					if (isset($_POST['installMembership'])) {

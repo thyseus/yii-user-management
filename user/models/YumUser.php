@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property string $saltf
  * @property string $activationKey
  * @property integer $createtime
  * @property integer $lastvisit
@@ -34,6 +35,7 @@ class YumUser extends YumActiveRecord
 
 	public $username;
 	public $password;
+	public $salt;
 	public $activationKey;
 	public $password_changed = false;
 
@@ -175,18 +177,22 @@ class YumUser extends YumActiveRecord
 
 	public function beforeValidate()
 	{
-		if ($this->isNewRecord)
+		if ($this->isNewRecord) {
+			if(!$this->salt)
+				$this->salt = YumEncrypt::generateSalt();
 			$this->createtime = time();
+		}
 
 		return true;
 	}
 
-	public function setPassword($password)
+	public function setPassword($password, $salt = null)
 	{
 		if ($password != '') {
-			$this->password = YumUser::encrypt($password);
+			$this->password = YumEncrypt::encrypt($password, $salt);
 			$this->lastpasswordchange = time();
 			$this->password_changed = true;
+			$this->salt = $salt;
 			if (!$this->isNewRecord)
 				return $this->save();
 			else
@@ -260,6 +266,7 @@ class YumUser extends YumActiveRecord
 		$rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
 		$rules[] = array('notifyType, avatar', 'safe');
 		$rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
+		$rules[] = array('salt', 'required', 'on' => array('insert', 'registration'));
 		$rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
 
 		if (Yum::hasModule('avatar')) {
@@ -481,14 +488,15 @@ class YumUser extends YumActiveRecord
 	}
 
 	// Registers a user 
-	public function register($username = null, $password = null, $profile = null)
+	public function register($username = null, $password = null, $profile = null, $salt = null)
 	{
-		if ($username !== null && $password !== null) {
+		if ($username !== null && $password !== null && $salt !== null) {
 			// Password equality is checked in Registration Form
 			$this->username = $username;
-			$this->password = $this->encrypt($password);
+			$this->password = YumEncrypt::encrypt($password, $salt);
+			$this->salt = $salt;
 		}
-		$this->activationKey = $this->generateActivationKey(false, $password);
+		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
 		$this->createtime = time();
 		$this->superuser = 0;
 
@@ -614,7 +622,7 @@ class YumUser extends YumActiveRecord
 			$this->activationKey = $activate;
 			$this->save(false, array('activationKey'));
 		} else
-			$this->activationKey = YumUser::encrypt(microtime() . $this->password);
+			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
 
 		return $this->activationKey;
 	}
@@ -636,23 +644,7 @@ class YumUser extends YumActiveRecord
 				'avatar' => Yum::t("Avatar image"),
 				);
 	}
-
-	/**
-	 * This function is used for password encryption.
-	 * @return hash string.
-	 */
-	public static function encrypt($string = "")
-	{
-		$salt = Yum::module()->salt;
-		$hashFunc = Yum::module()->hashFunc;
-		$string = sprintf("%s%s%s", $salt, $string, $salt);
-
-		if (!function_exists($hashFunc))
-			throw new CException('Function `' . $hashFunc . '` is not a valid callback for hashing algorithm.');
-
-		return $hashFunc($string);
-	}
-
+	
 	public function withRoles($roles)
 	{
 		if(!is_array($roles))
@@ -662,8 +654,6 @@ class YumUser extends YumActiveRecord
 		$this->getDbCriteria()->addInCondition('roles.id', $roles);
 		return $this;
 	}
-
-
 
 	public function scopes()
 	{

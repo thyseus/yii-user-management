@@ -168,8 +168,8 @@ requirement options
 
 User Registration:
 ------------------
-Set the Variable 'disableEmailActivation' in the module configuration to 
-let users be able to register to your Application without Registration.
+Set the Variable 'enableActivationConfirmation' to false in the module configuration to 
+let users register for your application without needing to receive/click an emailed confirmation link.
 
 
 Role Management:
@@ -207,6 +207,10 @@ Q: I get an exception when running the Installer
 
 A: Please make sure to log out from any session. Clear your cookies to make
 sure you are not logged in in your Web Application anymore.
+
+Q: I get the error: Fatal error: Call to a member function get() on a non-object in /home/thyseus/www/yii-user-management/user/models/YumUser.php on line 371
+
+A: make sure to activate a caching component, at least CDummyCache.
 
 Q: I get the error Message: CWebUser does not have a method named "isAdmin":
 

@@ -152,7 +152,6 @@ class Yum
 		return array_key_exists($module, Yii::app()->modules);
 	}
 
-
 	/**
 	 * Parses url for predefined symbols and returns real routes
 	 * Following symbols are allowed:

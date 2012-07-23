@@ -54,58 +54,58 @@ class YumUserIdentity extends CUserIdentity {
 			throw new Exception('OpenLDAP: Could not connect to LDAP-Server');
 
 		if ($r = ldap_search($ds, $settings->ldap_basedn, '(uid=' . $this->username . ')'))
-				{
-				$result = @ldap_get_entries($ds, $r);
-				if ($result[0] && @ldap_bind($ds, $result[0]['dn'], $this->password))
-				{
+		{
+			$result = @ldap_get_entries($ds, $r);
+			if ($result[0] && @ldap_bind($ds, $result[0]['dn'], $this->password))
+			{
 				$user = YumUser::model()->find('username=:username', array(':username' => $this->username));
 				if ($user == NULL)
 				{
-				if ($settings->ldap_autocreate == 1)
-				{
-				$user = new YumUser();
-				$user->username = $this->username;
-				if ($settings->ldap_transfer_pw == 1)
-				$user->password = YumUser::encrypt($this->password);
-				$user->lastpasswordchange = 0;
-				$user->activationKey = '';
-				$user->superuser = 0;
-				$user->createtime = time();
-				$user->status = 1;
-
-				if ($user->save(false))
-				{
-					if (Yum::module()->enableProfiles)
+					if ($settings->ldap_autocreate == 1)
 					{
-						$profile = new YumProfile();
-						$profile->user_id = $user->id;
-						$profile->privacy = 'protected';
-						if ($settings->ldap_transfer_attr == 1)
+						$user = new YumUser();
+						$user->username = $this->username;
+						if ($settings->ldap_transfer_pw == 1)
+							$user->password = YumEncrypt::encrypt($this->password);
+						$user->lastpasswordchange = 0;
+						$user->activationKey = '';
+						$user->superuser = 0;
+						$user->createtime = time();
+						$user->status = 1;
+		
+						if ($user->save(false))
 						{
-							$profile->email = $result[0]['mail'][0];
-							$profile->lastname = $result[0]['sn'][0];
-							$profile->firstname = $result[0]['givenname'][0];
-							$profile->street = $result[0]['postaladdress'][0];
-							$profile->city = $result[0]['l'][0];
+							if (Yum::module()->enableProfiles)
+							{
+								$profile = new YumProfile();
+								$profile->user_id = $user->id;
+								$profile->privacy = 'protected';
+								if ($settings->ldap_transfer_attr == 1)
+								{
+									$profile->email = $result[0]['mail'][0];
+									$profile->lastname = $result[0]['sn'][0];
+									$profile->firstname = $result[0]['givenname'][0];
+									$profile->street = $result[0]['postaladdress'][0];
+									$profile->city = $result[0]['l'][0];
+								}
+								$profile->save(false);
+							}
 						}
-						$profile->save(false);
+						else
+							return!$this->errorCode = self::ERROR_PASSWORD_INVALID;
 					}
-				}
-				else
-					return!$this->errorCode = self::ERROR_PASSWORD_INVALID;
-				}
-				else
-					return!$this->errorCode = self::ERROR_PASSWORD_INVALID;
+					else
+						return!$this->errorCode = self::ERROR_PASSWORD_INVALID;
 				}
 
-		$this->id = $user->id;
-		$this->setState('id', $user->id);
-		$this->username = $user->username;
-		$this->user = $user;
+				$this->id = $user->id;
+				$this->setState('id', $user->id);
+				$this->username = $user->username;
+				$this->user = $user;
 
-		return!$this->errorCode = self::ERROR_NONE;
-				}
-				}
+				return!$this->errorCode = self::ERROR_NONE;
+			}
+		}
 		return!$this->errorCode = self::ERROR_PASSWORD_INVALID;
 	}
 
@@ -130,7 +130,7 @@ class YumUserIdentity extends CUserIdentity {
 
 		if($without_password)
 			$this->credentialsConfirmed($user);
-		else if(YumUser::encrypt($this->password)!==$user->password)
+		else if(!YumEncrypt::validate_password($this->password, $user->password, $user->salt))
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else if($user->status == YumUser::STATUS_INACTIVE)
 			$this->errorCode=self::ERROR_STATUS_INACTIVE;

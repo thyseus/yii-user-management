@@ -80,6 +80,7 @@ class YumRegistrationController extends YumController {
 
 			if(!$form->hasErrors() && !$profile->hasErrors()) {
 				$user = new YumUser;
+				
 				$user->register($form->username, $form->password, $profile->email);
 				$profile->user_id = $user->id;
 				$profile->save();
@@ -99,9 +100,9 @@ class YumRegistrationController extends YumController {
 
 	// Send the Email to the given user object. $user->email needs to be set.
 	public function sendRegistrationEmail($user) {
-		if (!isset($user->profile->email)) {
+		if (!isset($user->profile->email)) 
 			throw new CException(Yum::t('Email is not set when trying to send Registration Email'));
-		}
+
 		$activation_url = $user->getActivationUrl();
 
 		$body = strtr(
@@ -172,8 +173,8 @@ class YumRegistrationController extends YumController {
 					if (isset($_POST['YumUserChangePassword'])) {
 						$passwordform->attributes = $_POST['YumUserChangePassword'];
 						if ($passwordform->validate()) {
-							$user->password = YumUser::encrypt($passwordform->password);
-							$user->activationKey = YumUser::encrypt(microtime() . $passwordform->password);
+							$user->password = YumEncrypt::encrypt($passwordform->password, $user->salt);
+							$user->activationKey = YumEncrypt::encrypt(microtime() . $passwordform->password, $user->salt);
 							$user->save();
 							Yum::setFlash('Your new password has been saved.');
 							$this->redirect(Yum::module()->loginUrl);
