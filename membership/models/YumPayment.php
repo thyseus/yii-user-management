@@ -26,6 +26,12 @@ class YumPayment extends YumActiveRecord{
 		);
 	}
 
+	public function activate() {
+		$membership->payment_date = time();
+		$membership->end_date = time() + $this->role->duration * 86400 ;
+		return true;
+	}
+
 	public function relations()
 	{
 		return array(

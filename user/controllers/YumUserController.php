@@ -340,10 +340,10 @@ class YumUserController extends YumController {
 	public function actionList()
 	{
 		$dataProvider=new CActiveDataProvider('YumUser', array(
+					'criteria'=>array(
+						'condition'=>'status > 0', 
+						),
 					'pagination'=>array(
-						'criteria'=>array(
-							'condition'=>'status > 0', 
-							),
 						'pageSize'=>Yum::module()->pageSize,
 						)));
 

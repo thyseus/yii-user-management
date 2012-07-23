@@ -69,10 +69,10 @@ class YumMailer {
 			return $mailer->Send();
 		} else {
 			if($header == null) {
-				$header  = 'MIME-Version: 1.0' . "\r\n";
-				$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-				$header .= 'From: ' . Yum::module('message')->adminEmail . "\r\n";
-				$header .= 'To: ' . $to['to'] . "\r\n";
+				$header  = 'MIME-Version: 1.0' . "\n";
+				$header .= 'Content-type: text/html; charset=utf-8' . "\n";
+				$header .= 'From: ' . Yum::module('message')->adminEmail . "\n";
+				$header .= 'To: ' . $to['to'] . "\n";
 			}
 			return mail($to['to'], $to['subject'], $to['body'], $header);
 		}
