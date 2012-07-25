@@ -3,6 +3,7 @@ Yii::setPathOfAlias('MembershipModule' , dirname(__FILE__));
 
 class MembershipModule extends CWebModule {
 	public $membershipExpiredView = '/membership/membership_expired';
+	public $membershipIndexRoute = array('//membership/membership/index');
 
 	// set this to false if you do not want to send a confirmation 
 	// message to the user that just ordered a membership

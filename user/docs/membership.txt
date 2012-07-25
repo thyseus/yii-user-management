@@ -1,0 +1,22 @@
+How the membership system in yii-user-management works:
+
+1.) Define your membershop as roles (see the example 'business'
+ and 'premium' account)
+
+2.) Set priorities. higher is more-valued. This is used to determine to which
+account types a user can up/downgrade. If you only have one premium account,
+set it to 1
+
+3.) define the price and the duration in days of your membership
+
+4.) place a function call YumMembership::syncMemberships(); somewhere. 
+
+For example:
+
+4.1) bad: at every request (just place the line in your layouts/main.php)
+
+4.2) good: if your server configuration allows it, place a cron job that
+runs every 5 minutes and checks, if user accounts have been expired
+
+both are fine, but you are adding ~1 millisecond to your request response time
+when choosing the first variant

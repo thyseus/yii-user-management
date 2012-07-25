@@ -11,13 +11,13 @@ class YumMembership extends YumActiveRecord{
 		return $this->_tableName;
 	}
 
-	public function activate() {
-		$this->end_date = time() + ($this->role->duration * 365 * 60 * 60);
-		$this->payment_date = time();
-		$this->save();
+	public function isActive() {
+		return $this->end_date > time() && $this->payment_date < time();	
 	}
 
 	public function daysLeft() {
+		if($this->end_date == 0 || $this->end_date < time())
+			return 0;
 		$difference = abs($this->end_date - time());
 		return sprintf('%d', (int) $difference / 86400 + 1);
 	}
@@ -125,14 +125,16 @@ class YumMembership extends YumActiveRecord{
 	}
 
 	public function sendPaymentConfirmation () {
-		Yii::import('application.modules.message.models.*');
-		return YumMessage::write($this->user, 1,
-				Yum::t('Payment arrived'),
-				strtr(
-					'The payment of order {id} has been arrived at {payment_date}', array(
-						'{payment_date}' => date(Yum::module()->dateTimeFormat, $this->payment_date),
-						'{id}' => $this->id,
-						)));
+		if(Yum::hasModule('message')) {
+			Yii::import('application.modules.message.models.*');
+			return YumMessage::write($this->user, 1,
+					Yum::t('Payment arrived'),
+					strtr(
+						'The payment of order {id} has been arrived at {payment_date}', array(
+							'{payment_date}' => date(Yum::module()->dateTimeFormat, $this->payment_date),
+							'{id}' => $this->id,
+							)));
+		}
 
 	}
 
@@ -143,7 +145,7 @@ class YumMembership extends YumActiveRecord{
 		if($this->save(false, array('payment_date', 'end_date'))) {
 			return $this->sendPaymentConfirmation();
 		} else
-		return false;
+			return false;
 	}
 
 	public function search()
@@ -165,4 +167,35 @@ class YumMembership extends YumActiveRecord{
 					'criteria'=>$criteria,
 					));
 	}
-}	
+
+	// Call this function once in a request to check if a membership is expiring
+	public static function syncMemberships () {
+		if(!Yii::app()->user->isGuest) {
+			foreach(YumMembership::model()->findAll(
+						'user_id = :uid and end_date != 0 and end_date < :date', array(
+							':uid' => Yii::app()->user->id,
+							':date' => time())) as $membership) {
+				if($membership->subscribed != -1) { // renew membership
+					$new_membership = new Membership;	
+
+					$new_membership->user_id = Yii::app()->user->id;
+					$new_membership->payment_id = $membership->payment_id;
+					$new_membership->payment_date = time();
+
+					// the user has choosen to up/downgrade to another membership
+					if($membership->subscribed > 0)
+						$new_membership->membership_id = $membership->subscribed;
+					else
+						$new_membership->membership_id = $membership->membership_id;
+
+					$role = YumRole::model()->findByPk($new_membership->membership_id);
+					$new_membership->end_date = time() + ($role->duration * 86400);
+
+					$new_membership->save();
+				} 
+				$membership->end_date = 0;
+				$membership->save();
+			}
+		}
+	}	
+}

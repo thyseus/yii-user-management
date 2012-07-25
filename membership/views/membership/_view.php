@@ -1,7 +1,6 @@
 <div class="view">
 
-<h2> <? echo $data->role->title; ?> </h2>
-<p> <? echo $data->role->description; ?> </p>
+<h2> <? echo $data->role->description; ?> </h2>
 
 <?
 echo Yum::t('Order number'). ': '.$data->id . '<br />';
@@ -24,28 +23,33 @@ if($data->role->price != 0)
 <? echo date('d. m. Y', $data->order_date); ?> 
 <br /> 
 <? echo Yum::t('Payment type') . ': '; ?>
-<? if(isset($data->payment)) echo $data->payment->title; ?>
+<? if(isset($data->payment)) echo $data->payment->title . '<br />'; ?>
 <? } ?>
 
 <?
-		echo Yum::t('This membership is still {days} days active', array(
-					'{days}' => $data->daysLeft()));
-?>
+if($data->end_date != 0)
+	echo Yum::t('This membership is still active {days} days', array(
+				'{days}' => $data->daysLeft()));
+	?>
 
+
+<? if($data->isActive()) { ?>
 <?= CHtml::beginForm(array('//membership/membership/extend')); ?>
 <p> <?= Yum::t('When the membership expires'); ?>: </p>
 <?
 $options = array(
 		0 => Yum::t('Automatically extend subscription'),
 		'cancel' => Yum::t('Cancel Subscription'));
-$options = array_merge($options, 
-		$data->getPossibleExtendOptions('downgrade'),
-		$data->getPossibleExtendOptions('upgrade')); 
+foreach( $data->getPossibleExtendOptions('downgrade') as $key => $option)
+	$options[$key] = $option;
+foreach( $data->getPossibleExtendOptions('upgrade') as $key => $option)
+	$options[$key] = $option;
 
 echo CHtml::hiddenField('membership_id', $data->id);
 echo CHtml::dropDownList('subscription',
 		$data->subscribed == -1 ? 'cancel' : $data->subscribed, $options); 
 echo CHtml::submitButton(Yum::t('Save'));
 ?>
-<?= CHtml::endForm(); ?>
+	<?= CHtml::endForm(); ?>
+<? } ?>
 </div>

@@ -30,6 +30,9 @@ class YumMembershipController extends YumController {
 
 	public function actionExtend() {
 		$membership = YumMembership::model()->findByPk($_POST['membership_id']);
+		if(!$membership)
+			throw new CHttpException(404);
+
 		if($membership->user_id != Yii::app()->user->id)
 			throw new CHttpException(403);
 
@@ -37,7 +40,7 @@ class YumMembershipController extends YumController {
 		$membership->subscribed = $subscription == 'cancel' ? -1 : $subscription;
 		$membership->save(false, array('subscribed'));
 		Yum::setFlash('Your subscription setting has been saved');
-		$this->redirect(array('//membership/membership/index'));
+		$this->redirect(Yum::module('membership')->membershipIndexRoute);
 	}
 
 	public function actionUpdate($id = null) {
