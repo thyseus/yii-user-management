@@ -1,5 +1,7 @@
 Changelog for Yii User Management Module (Yum) 
 
+- membership: downgrading support
+- membership: user can chooses if he want to subscribe to his membership
 - yumsettings & yumtextsettings are removed. To adjust the strings for your
 application, use Yum::t() or extend from the Yum Classes
 

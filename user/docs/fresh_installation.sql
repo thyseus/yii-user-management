@@ -189,17 +189,17 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `is_membership_possible` tinyint(1) NOT NULL DEFAULT '0',
+  `membership_priority` tinyint(1) NOT NULL DEFAULT '0',
   `price` double DEFAULT NULL COMMENT 'Price (when using membership module)',
   `duration` int(11) DEFAULT NULL COMMENT 'How long a membership is valid',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
-INSERT INTO `roles` (`id`, `title`, `description`, `is_membership_possible`, `price`, `duration`) VALUES
+INSERT INTO `roles` (`id`, `title`, `description`, `membership_priority`, `price`, `duration`) VALUES
 (1, 'UserManager', 'These users can manage Users', 0, 0, 0),
 (2, 'Demo', 'Users having the demo role', 0, 0, 0),
-(3, 'Business', 'Example Business account', 0, 9.99, 7),
-(4, 'Premium', 'Example Premium account', 0, 19.99, 28);
+(3, 'Business', 'Example Business account', 1, 9.99, 7),
+(4, 'Premium', 'Example Premium account', 2, 19.99, 28);
 
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (

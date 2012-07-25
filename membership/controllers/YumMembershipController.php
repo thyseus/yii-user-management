@@ -1,5 +1,4 @@
 <?
-
 Yii::import('application.modules.user.controllers.YumController');
 Yii::import('application.modules.user.models.Yum');
 Yii::import('application.modules.role.models.*');
@@ -11,11 +10,7 @@ class YumMembershipController extends YumController {
 	public function accessRules() {
 		return array(
 				array('allow', 
-					'actions'=>array('activate'),
-					'users'=>array('*'),
-					),
-				array('allow', 
-					'actions'=>array('index', 'order'),
+					'actions'=>array('index', 'order', 'extend'),
 					'users'=>array('@'),
 					),
 				array('allow', 
@@ -31,6 +26,18 @@ class YumMembershipController extends YumController {
 	public function actionView()
 	{
 		return false;
+	}
+
+	public function actionExtend() {
+		$membership = YumMembership::model()->findByPk($_POST['membership_id']);
+		if($membership->user_id != Yii::app()->user->id)
+			throw new CHttpException(403);
+
+		$subscription = $_POST['subscription'];
+		$membership->subscribed = $subscription == 'cancel' ? -1 : $subscription;
+		$membership->save(false, array('subscribed'));
+		Yum::setFlash('Your subscription setting has been saved');
+		$this->redirect(array('//membership/membership/index'));
 	}
 
 	public function actionUpdate($id = null) {

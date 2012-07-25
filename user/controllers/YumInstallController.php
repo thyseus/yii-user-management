@@ -149,7 +149,7 @@ class YumInstallController extends YumController
 					// Install Membership Management submodule
 					if (isset($_POST['installMembership'])) {
 						$sql = "CREATE TABLE IF NOT EXISTS `{$membershipTable}` (
-							`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+							`id` int(11) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 							`membership_id` int(11) NOT NULL,
 							`user_id` int(11) NOT NULL,
 							`payment_id` int(11) NOT NULL,
@@ -159,7 +159,8 @@ class YumInstallController extends YumController
 							`street` varchar(255) DEFAULT NULL,
 							`zipcode` varchar(255) DEFAULT NULL,
 							`city` varchar(255) DEFAULT NULL,
-							`payment_date` int(11) NULL
+							`payment_date` int(11) NULL,
+							`subscribed` tinyint(1) NOT NULL 
 								) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000;";
 
 						$db->createCommand($sql)->execute();
@@ -287,7 +288,7 @@ class YumInstallController extends YumController
 							`id` INT unsigned NOT NULL AUTO_INCREMENT ,
 							`title` VARCHAR(255) NOT NULL ,
 							`description` VARCHAR(255) NULL,
-							`is_membership_possible` tinyint(1) NOT NULL DEFAULT 0,
+							`membership_priority` int(11) NULL DEFAULT NULL,
 							`price` double COMMENT 'Price (when using membership module)',
 							`duration` int COMMENT 'How long a membership is valid',
 							PRIMARY KEY (`id`)
@@ -390,11 +391,11 @@ class YumInstallController extends YumController
 
 						$db->createCommand($sql)->execute();
 
-						$sql = "INSERT INTO `" . $roleTable . "` (`title`,`description`, `price`, `duration`) VALUES "
-							."('UserManager', 'These users can manage Users', 0, 0),"
-							."('Demo', 'Users having the demo role', 0, 0),"
-							."('Business', 'Example Business account', 9.99, 7),"
-							."('Premium', 'Example Premium account', 19.99, 28) ";
+						$sql = "INSERT INTO `" . $roleTable . "` (`title`,`description`, `membership_priority`, `price`, `duration`) VALUES "
+							."('UserManager', 'These users can manage Users', 0, 0, 0),"
+							."('Demo', 'Users having the demo role', 0, 0, 0),"
+							."('Business', 'Example Business account', 1, 9.99, 7),"
+							."('Premium', 'Example Premium account', 2, 19.99, 28) ";
 						$db->createCommand($sql)->execute();
 
 						$sql = "INSERT INTO `" . $userRoleTable . "` (`user_id`, `role_id`) VALUES (2, 3)";
@@ -435,6 +436,10 @@ class YumInstallController extends YumController
 				}
 			}
 			else {
+				if(Yii::app()->db->getSchema()->getTable('user'))
+					throw new CHttpException(403, Yum::t(
+								'Yii-user-management is already installed. Please remove it manually to continue'));
+
 				$this->render('start', array(
 					'userTable' => 'user',
 					'roleTable' => 'role',

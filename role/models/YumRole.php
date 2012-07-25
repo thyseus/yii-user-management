@@ -18,7 +18,7 @@ class YumRole extends YumActiveRecord {
 	{
 		return array(
 				array('title', 'required'),
-				array('is_membership_possible', 'numerical'),
+				array('membership_priority', 'numerical'),
 				array('price', 'numerical'),
 				array('duration', 'numerical'),
 				array('title, description', 'length', 'max' => '255'),
@@ -27,7 +27,8 @@ class YumRole extends YumActiveRecord {
 
 	public function scopes() {
 		return array(
-				'possible_memberships' => array('condition' => 'is_membership_possible = 1'),
+				'possible_memberships' => array(
+					'condition' => 'membership_priority > 0'),
 				);
 	}
 

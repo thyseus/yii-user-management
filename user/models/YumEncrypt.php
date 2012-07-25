@@ -45,9 +45,9 @@ class YumEncrypt
 	public static function validate_password($password, $good_hash, $salt)
 	{
 		$enc_pwd = YumEncrypt::encrypt($password, $salt);
-	    return YumEncrypt::slow_equals($enc_pwd, $good_hash);
+		return YumEncrypt::slow_equals($enc_pwd, $good_hash);
 	}	
-	
+
 	// Compares two strings $a and $b in length-constant time.
 	private static function slow_equals($a, $b)
 	{

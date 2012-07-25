@@ -1,4 +1,4 @@
-<div class="view" style="float: left;margin: 5px;"  >
+<div class="view">
 
 <h2> <? echo $data->role->title; ?> </h2>
 <p> <? echo $data->role->description; ?> </p>
@@ -16,7 +16,6 @@ if($data->role->price != 0)
 					'{date}' =>  date('d. m. Y', $data->end_date)));  
 		echo '<br />';
 	}
-
 ?>
 
 <? if($data->role->price != 0) { ?>
@@ -33,4 +32,20 @@ if($data->role->price != 0)
 					'{days}' => $data->daysLeft()));
 ?>
 
+<?= CHtml::beginForm(array('//membership/membership/extend')); ?>
+<p> <?= Yum::t('When the membership expires'); ?>: </p>
+<?
+$options = array(
+		0 => Yum::t('Automatically extend subscription'),
+		'cancel' => Yum::t('Cancel Subscription'));
+$options = array_merge($options, 
+		$data->getPossibleExtendOptions('downgrade'),
+		$data->getPossibleExtendOptions('upgrade')); 
+
+echo CHtml::hiddenField('membership_id', $data->id);
+echo CHtml::dropDownList('subscription',
+		$data->subscribed == -1 ? 'cancel' : $data->subscribed, $options); 
+echo CHtml::submitButton(Yum::t('Save'));
+?>
+<?= CHtml::endForm(); ?>
 </div>

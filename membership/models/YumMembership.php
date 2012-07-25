@@ -80,7 +80,7 @@ class YumMembership extends YumActiveRecord{
 		return array(
 				array('membership_id, user_id, payment_id, order_date', 'required'),
 				array('end_date', 'default', 'setOnEmpty' => true, 'value' => null),
-				array('membership_id, user_id, payment_id, order_date, end_date, payment_date', 'numerical', 'integerOnly'=>true),
+				array('membership_id, user_id, payment_id, order_date, end_date, payment_date, subscribed', 'numerical', 'integerOnly'=>true),
 				array('id, membership_id, user_id, payment_id, order_date, end_date, payment_date', 'safe', 'on'=>'search'),
 				);
 	}
@@ -98,7 +98,6 @@ class YumMembership extends YumActiveRecord{
 	{
 		return array(
 				'id' => Yum::t('Order number'),
-				'is_membership_possible' => Yum::t('Membership is possible'),
 				'membership_id' => Yum::t('Membership'),
 				'user_id' => Yum::t('User'),
 				'payment_id' => Yum::t('Payment'),
@@ -106,6 +105,23 @@ class YumMembership extends YumActiveRecord{
 				'end_date' => Yum::t('End date'),
 				'payment_date' => Yum::t('Payment date'),
 				);
+	}
+
+	public function getPossibleExtendOptions($dir = 'downgrade') {
+		$criteria = new CDbCriteria;
+		if($dir == 'downgrade')
+			$criteria->condition = 'membership_priority < :priority and membership_priority > 0';
+		else if($dir == 'upgrade')
+			$criteria->condition = 'membership_priority > :priority and membership_priority > 0';
+		$criteria->params = array(':priority' => $this->role->membership_priority);
+
+		$options = array();
+
+		foreach(YumRole::model()->findAll($criteria) as $role) 
+			$options[$role->id] = Yum::t(
+					($dir == 'downgrade' ? 'Downgrade' : 'Upgrade') .' to {role}', array(
+						'{role}' => $role->description));
+		return $options;
 	}
 
 	public function sendPaymentConfirmation () {

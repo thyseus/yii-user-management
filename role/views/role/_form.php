@@ -18,30 +18,17 @@
 <? echo CHtml::error($model,'description'); ?>
 </div>	
 
-<div class="row" style="float:right;">
-<? echo CHtml::label(Yum::t('These users have been assigned to this role'), ''); ?> 
-
-<? 
-$this->widget('YumModule.components.Relation', array(
-			'model' => $model,
-			'relation' => 'users',
-			'style' => 'dropdownlist',
-			'fields' => 'username',
-			'htmlOptions' => array(
-				'checkAll' => Yum::t('Choose All'),
-				'template' => '<div style="float:left;margin-right:5px;">{input}</div>{label}'),
-			'showAddButton' => false
-			));  
-?>
-</div>
 
 <? if(Yum::hasModule('membership')) { ?>
 <div class="row">
-<? echo CHtml::activeLabelEx($model,'is_membership_possible'); ?>
-<? echo CHtml::activeCheckBox($model, 'is_membership_possible'); ?>
-
+<? echo CHtml::activeLabelEx($model,'membership_priority'); ?>
+<? echo CHtml::activeTextField($model, 'membership_priority'); ?>
+<div class="hint">
+<?= Yum::t('Leave empty or set to 0 to disable membership for this role.'); ?>
+<?= Yum::t('Set to >0 to enable membership for this role and set a priority.'); ?>
+<?= Yum::t('Higher is usually more worthy. This is used to determine downgrade possibilities.'); ?>
 </div>
-<div class="membership">
+</div>
 <div class="row">
 <? echo CHtml::activeLabelEx($model,'price'); ?>
 <? echo CHtml::activeTextField($model, 'price'); ?>
@@ -58,18 +45,27 @@ $this->widget('YumModule.components.Relation', array(
 </div>
 <div class="hint"> 
 <? echo Yum::t('How many days will the membership be valid after payment?'); ?>
-</div>
 
 </div>
-<? Yii::app()->clientScript->registerScript('membership_toggle', "
-	if(!$('#YumRole_is_membership_possible').attr('checked'))
-		$('.membership').hide();
-	$('#YumRole_is_membership_possible').click(function() {
-	$('.membership').toggle(500);
-});
-"); ?>
 <div style="clear: both;"> </div>
 <? } ?>
+
+<div class="row">
+<? echo CHtml::label(Yum::t('These users have been assigned to this role'), ''); ?> 
+
+<? 
+$this->widget('YumModule.components.Relation', array(
+			'model' => $model,
+			'relation' => 'users',
+			'style' => 'dropdownlist',
+			'fields' => 'username',
+			'htmlOptions' => array(
+				'checkAll' => Yum::t('Choose All'),
+				'template' => '<div style="float:left;margin-right:5px;">{input}</div>{label}'),
+			'showAddButton' => false
+			));  
+?>
+</div>
 
 <div class="row buttons">
 <? echo CHtml::submitButton($model->isNewRecord 
@@ -78,5 +74,5 @@ $this->widget('YumModule.components.Relation', array(
 </div>
 
 <? echo CHtml::endForm(); ?>
-
 </div><!-- form -->
+

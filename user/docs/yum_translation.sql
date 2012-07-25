@@ -2438,5 +2438,6 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Your request succeeded. Please enter below your new password:', 'Tu solicitud fué exitosa. Por favor, escribe a continuación tu nueva contraseña:', 'es', 'yum'),
 ('zipcode', 'CAP', 'it', 'yum'),
 ('zipcode', 'c', 'es', 'yum'),
+('Yii-user-management is already installed. Please remove it manually to continue', 'Yii-user-management ist bereits installiert. Bitte löschen Sie es manuell, um fortzufahren', 'de', 'yum'),
 ('zipcode', 'code postal', 'fr', 'yum'),
 ('zipcode', 'Postleitzahl', 'de', 'yum');

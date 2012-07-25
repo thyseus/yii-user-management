@@ -18,7 +18,7 @@ $this->breadcrumbs=array(
 				array(Yum::route("role/view"),"id"=>$data->id))',
 		),
 		'price',
-		'is_membership_possible',
+		'membership_priority',
 		array(
 			'class'=>'CButtonColumn',
 		),
