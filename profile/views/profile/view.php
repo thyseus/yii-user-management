@@ -3,7 +3,7 @@ if(!$profile = $model->profile)
 	$profile = new YumProfile;
 
 
-$this->pageTitle = Yii::app()->name . ' - ' . Yum::t('Profile');
+$this->pageTitle = Yum::t('Profile');
 $this->title = CHtml::activeLabel($model,'username');
 $this->breadcrumbs = array(Yum::t('Profile'), $model->username);
 Yum::renderFlash();

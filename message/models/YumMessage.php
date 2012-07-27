@@ -224,7 +224,7 @@ class YumMessage extends YumActiveRecord
 
 	public function getDate()
 	{
-		return date(Yii::app()->getModule('user')->dateTimeFormat, $this->timestamp);
+		return date(Yum::module('message')->dateFormat, $this->timestamp);
 	}
 
 	public function beforeDelete() {

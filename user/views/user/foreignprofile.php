@@ -1,5 +1,5 @@
 <?
-$this->pageTitle=Yii::app()->name . ' - '.Yii::t('UserModule.user', "Profile");
+$this->pageTitle=Yii::t('UserModule.user', "Profile");
 $this->title = Yii::t('UserModule.user', 'Profile of ') . $model->username;
 $this->breadcrumbs = array(Yii::t('UserModule.user', "Profile"), $model->username); 
 ?>

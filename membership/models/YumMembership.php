@@ -176,7 +176,7 @@ class YumMembership extends YumActiveRecord{
 							':uid' => Yii::app()->user->id,
 							':date' => time())) as $membership) {
 				if($membership->subscribed != -1) { // renew membership
-					$new_membership = new Membership;	
+					$new_membership = new YumMembership;	
 
 					$new_membership->user_id = Yii::app()->user->id;
 					$new_membership->payment_id = $membership->payment_id;

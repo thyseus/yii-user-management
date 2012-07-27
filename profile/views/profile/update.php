@@ -1,5 +1,5 @@
 <? 
-$this->pageTitle = Yii::app()->name . ' - '.Yum::t( "Profile");
+$this->pageTitle = Yum::t( "Profile");
 $this->breadcrumbs=array(
 		Yum::t('Edit profile'));
 $this->title = Yum::t('Edit profile');

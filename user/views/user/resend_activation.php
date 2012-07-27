@@ -1,5 +1,5 @@
 <? 
-$this->pageTitle=Yii::app()->name . ' - '.Yii::t("UserModule.user", "Activate");
+$this->pageTitle=Yii::t("UserModule.user", "Activate");
 
 $this->breadcrumbs=array(
 	Yii::t("UserModule.user", "Login") => array(Yum::route('{user}/login')),

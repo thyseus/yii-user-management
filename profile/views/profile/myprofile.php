@@ -1,6 +1,6 @@
 <div id="profile">
 <?
-$this->pageTitle=Yii::app()->name . ' - ' . Yum::t('Profile');
+$this->pageTitle= Yum::t('Profile');
 $this->breadcrumbs=array(Yum::t('Profile'));
 $this->title = Yum::t('Your profile');
 if(Yum::hasModule('messages'))

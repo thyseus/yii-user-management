@@ -424,8 +424,6 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Date', 'Date', 'fr', 'yum'),
 ('Date', 'Datum', 'de', 'yum'),
 ('Date', 'Fecha', 'es', 'yum'),
-('{days} D, {hours} H, {minutes} M', '{days} D, {hours} H, {minutes} M', 'es', 'yum')
-('{days} D, {hours} H, {minutes} M', '{days} T, {hours} S, {minutes} M', 'de', 'yum'),
 ('Default', 'Default', 'de', 'yum'),
 ('Default', 'Default', 'fr', 'yum'),
 ('Default', 'ÐŸÐ¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ', 'ru', 'yum'),
@@ -1551,7 +1549,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Registration', 'Rejestracja', 'pl', 'yum'),
 ('Regular expression (example: ''/^[A-Za-z0-9s,]+$/u'').', 'Ð ÐµÐ³ÑƒÐ»ÑÑ€Ð½Ñ‹Ðµ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ (Ð¿Ñ€Ð¸Ð¼ÐµÑ€: ''/^[A-Za-z0-9s,]+$/u'')', 'ru', 'yum'),
 ('Regular expression (example: ''/^[A-Za-z0-9s,]+$/u'').', 'Espressione regolare (esempio: ''/^[A-Za-z0-9s,]+$/u'')', 'it', 'yum'),
-('Regular expression (example: '/^[A-Za-z0-9s,]+$/u').', 'Expresión regular (ejemplo: '/^[A-Za-z0-9s,]+$/u')', 'es', 'yum'),
+('Regular expression (example: "/^[A-Za-z0-9s,]+$/u").', 'Expresión regular (ejemplo: "/^[A-Za-z0-9s,]+$/u")', 'es', 'yum'),
 ('Regular expression (example: ''/^[A-Za-z0-9s,]+$/u'').', 'Expression regulaire (exemple.: ''/^[A-Za-z0-9s,]+$/u'')', 'fr', 'yum'),
 ('Regular expression (example: ''/^[A-Za-z0-9s,]+$/u'').', 'Regulärer Ausdruck (z. B.: ''/^[A-Za-z0-9s,]+$/u'')', 'de', 'yum'),
 ('Remember me net time', 'ZapamiÄ™taj mnie nastÄ™pnym razem', 'pl', 'yum'),

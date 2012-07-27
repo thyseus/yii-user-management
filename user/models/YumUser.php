@@ -490,11 +490,13 @@ class YumUser extends YumActiveRecord
 	// Registers a user 
 	public function register($username = null, $password = null, $profile = null, $salt = null)
 	{
-		if ($username !== null && $password !== null && $salt !== null) {
+		if ($username !== null && $password !== null) {
 			// Password equality is checked in Registration Form
 			$this->username = $username;
-			$this->password = YumEncrypt::encrypt($password, $salt);
-			$this->salt = $salt;
+			if(!$salt)
+				$salt = YumEncrypt::generateSalt();
+
+			$this->setPassword($password, $salt);
 		}
 		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
 		$this->createtime = time();
@@ -515,7 +517,7 @@ class YumUser extends YumActiveRecord
 			$profile = $this->profile;
 		}
 
-		if (!$this->hasErrors() && !$profile->hasErrors()) {
+		if ($this->validate() && $profile->validate()) {
 			$this->save();
 			$profile->user_id = $this->id;
 			$profile->save();

@@ -14,6 +14,8 @@ class MessageModule extends CWebModule
 
 	public $layout = 'application.modules.user.views.layouts.yum';
 
+	public $dateFormat = 'Y-m-d G:i:s';
+
 	public $inboxView = 'application.modules.message.views.message.index';
 	public $inboxRoute = array('index');
 
