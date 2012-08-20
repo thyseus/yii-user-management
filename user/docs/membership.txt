@@ -1,6 +1,6 @@
 How the membership system in yii-user-management works:
 
-1.) Define your membershop as roles (see the example 'business'
+1.) Define your membership as roles (see the example 'business'
  and 'premium' account)
 
 2.) Set priorities. higher is more-valued. This is used to determine to which
