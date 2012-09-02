@@ -288,8 +288,8 @@ class YumUserController extends YumController {
 	public function actionDelete($id = null) {
 		if(!$id)
 			$id = Yii::app()->user->id;
-
-		$user = YumUser::model()->findByPk($id);
+		
+		$user = YumUser::model()->findByAttributes(array('username' => $id));
 
 		if(Yii::app()->user->isAdmin()) {
 			//This is necesary for handling human stupidity.
