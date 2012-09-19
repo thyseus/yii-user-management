@@ -135,6 +135,7 @@ class YumUser extends YumActiveRecord
 		Yii::import('application.modules.membership.models.*');
 
 		$roles = array();
+
 		if ($this->memberships)
 			foreach ($this->memberships as $membership) {
 				if ($membership->end_date > time())
@@ -314,6 +315,8 @@ class YumUser extends YumActiveRecord
 			Yii::import('application.modules.role.models.*');
 			$roles = '';
 			foreach ($this->roles as $role)
+				$roles .= ' ' . $role->title;
+			foreach ($this->getActiveMemberships() as $role)
 				$roles .= ' ' . $role->title;
 
 			return $roles;
@@ -626,6 +629,7 @@ class YumUser extends YumActiveRecord
 		} else
 			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
 
+		$this->save(false, array('activationKey'));
 		return $this->activationKey;
 	}
 
