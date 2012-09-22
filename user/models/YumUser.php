@@ -629,7 +629,9 @@ class YumUser extends YumActiveRecord
 		} else
 			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
 
-		$this->save(false, array('activationKey'));
+		if(!$this->isNewRecord)
+			$this->save(false, array('activationKey'));
+
 		return $this->activationKey;
 	}
 

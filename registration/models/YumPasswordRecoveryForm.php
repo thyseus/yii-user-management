@@ -14,14 +14,19 @@ class YumPasswordRecoveryForm extends YumFormModel {
 	
 	public function rules()
 	{
-		return array(
-			// username and password are required
-			array('login_or_email', 'required'),
-			array('login_or_email', 'match',
-				'pattern' => '/^[A-Za-z0-9@.\s,]+$/u',
-				'message' => Yum::t('Incorrect symbols. (A-z0-9)')),
-			array('login_or_email', 'checkexists'),
-		);
+		$rules = array(
+				// username and password are required
+				array('login_or_email', 'required'),
+				array('login_or_email', 'checkexists'),
+				);
+
+		if(Yum::module('registration')->validEmailPattern) 
+			$rules[] =	array('login_or_email', 'match',
+					'pattern' => Yum::module('registration')->validEmailPattern,
+					'message' => Yum::t('Incorrect symbols. (A-z0-9)'));
+
+		return $rules;
+
 	}
 
 	public function attributeLabels()
