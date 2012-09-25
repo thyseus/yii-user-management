@@ -304,7 +304,8 @@ class YumUserController extends YumController {
 					$this->redirect('//user/user/admin');
 			}
 		} else if(isset($_POST['confirmPassword'])) {
-			if(YumUser::validate_password($_POST['confirmPassword'], $user->password, $user->salt)) {
+			if(YumEncrypt::validate_password($_POST['confirmPassword'],
+						$user->password, $user->salt)) {
 				if($user->delete())
 					$this->actionLogout();
 				else
@@ -312,7 +313,7 @@ class YumUserController extends YumController {
 			} else {
 				Yum::setFlash('Wrong password confirmation! Account was not deleted');
 			}
-			$this->redirect(array('//profile/profile/view'));
+			$this->redirect(Yum::module()->deleteUrl);
 		} 
 
 		$this->render('confirmDeletion', array('model' => $user));
