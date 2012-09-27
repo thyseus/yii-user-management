@@ -28,6 +28,8 @@ if(Yii::app()->user->id != $model->from_user_id) {
 
 	if(substr($model->title, 0, 3) != 'Re:')
 		$reply->title = 'Re: ' . $model->title;
+	else
+		$reply->title = $model->title;
 
 	$this->renderPartial('reply', array(
 				'to_user_id' => $model->from_user_id,
