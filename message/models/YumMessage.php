@@ -39,21 +39,23 @@ class YumMessage extends YumActiveRecord
 		return false;
 	} 
 
-	public function afterSave() {
-		// If the user has activated email receiving, send a email
-		if($this->to_user->privacy && $this->to_user->privacy->message_new_message) {
-			Yum::log( Yum::t(
-						'Message id {id} has been sent from user {from_user_id} to user {to_user_id}', array(
-						'{id}' => $this->id,
-						'{from_user_id}' => $this->from_user_id,
-						'{to_user_id}' => $this->to_user_id,
-						)));
+	public function beforeSave() {
+		if($this->isNewRecord) {
+			// If the user has activated email receiving, send a email
+			if($this->to_user->privacy && $this->to_user->privacy->message_new_message) {
+				Yum::log( Yum::t(
+							'Message id {id} has been sent from user {from_user_id} to user {to_user_id}', array(
+								'{id}' => $this->id,
+								'{from_user_id}' => $this->from_user_id,
+								'{to_user_id}' => $this->to_user_id,
+								)));
 
-			YumMailer::send($this->to_user->profile->email,
-					$this->title,
-					$this->message);
-}
-		return parent::afterSave();
+				YumMailer::send($this->to_user->profile->email,
+						$this->title,
+						$this->message);
+			}
+		}
+		return parent::beforeSave();
 	}  
 
 	// Small wrapper function to quickly send messages from inside the workflow

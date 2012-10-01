@@ -35,6 +35,7 @@ class YumUser extends YumActiveRecord
 
 	public $username;
 	public $password;
+	public $profile;
 	public $salt;
 	public $activationKey;
 	public $password_changed = false;
@@ -491,8 +492,13 @@ class YumUser extends YumActiveRecord
 	}
 
 	// Registers a user 
-	public function register($username = null, $password = null, $profile = null, $salt = null)
-	{
+	public function register($username = null,
+			$password = null,
+			$profile = null,
+			$salt = null) {
+		if (!($profile instanceof YumProfile)) 
+			return false;
+
 		if ($username !== null && $password !== null) {
 			// Password equality is checked in Registration Form
 			$this->username = $username;
@@ -513,17 +519,11 @@ class YumUser extends YumActiveRecord
 		if(Yum::hasModule('avatar') && Yum::module('avatar')->enableGravatar)
 			$this->avatar = 'gravatar';
 
-		if (!($profile instanceof YumProfile)) {
-			$email = $profile;
-			$this->profile = new YumProfile;
-			$this->profile->email = $email;
-			$profile = $this->profile;
-		}
-
 		if ($this->validate() && $profile->validate()) {
 			$this->save();
 			$profile->user_id = $this->id;
 			$profile->save();
+			$this->profile = $profile;
 
 			Yum::log(Yum::t('User {username} registered. Generated activation Url is {activation_url} and has been sent to {email}',
 						array(

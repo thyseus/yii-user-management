@@ -19,6 +19,8 @@ class YumRegistrationController extends YumController {
 	public function beforeAction($action) {
 		if(!Yum::hasModule('registration'))
 			throw new CHttpException(401, 'Please activate the registration submodule in your config/main.php. See the installation instructions or registration/RegistrationModule.php for details');
+		if(!Yum::hasModule('profile'))
+			throw new CHttpException(401, 'The Registration submodule depends on the profile submodule. Please see the installation instructions or registration/RegistrationModule.php for details');
 
 		if(!Yii::app()->user->isGuest) 
 			$this->redirect(Yii::app()->user->returnUrl);
@@ -80,10 +82,7 @@ class YumRegistrationController extends YumController {
 
 			if(!$form->hasErrors() && !$profile->hasErrors()) {
 				$user = new YumUser;
-				
-				$user->register($form->username, $form->password, $profile->email);
-				$profile->user_id = $user->id;
-				$profile->save();
+				$user->register($form->username, $form->password, $profile);
 
 				$this->sendRegistrationEmail($user);
 				Yum::setFlash('Thank you for your registration. Please check your email.');
@@ -98,7 +97,8 @@ class YumRegistrationController extends YumController {
 				);  
 	}
 
-	// Send the Email to the given user object. $user->email needs to be set.
+	// Send the Email to the given user object. 
+	// $user->profile->email needs to be set.
 	public function sendRegistrationEmail($user) {
 		if (!isset($user->profile->email)) 
 			throw new CException(Yum::t('Email is not set when trying to send Registration Email'));
