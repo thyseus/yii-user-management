@@ -208,10 +208,6 @@ Q: I get an exception when running the Installer
 A: Please make sure to log out from any session. Clear your cookies to make
 sure you are not logged in in your Web Application anymore.
 
-Q: I get the error: Fatal error: Call to a member function get() on a non-object in /home/thyseus/www/yii-user-management/user/models/YumUser.php on line 371
-
-A: make sure to activate a caching component, at least CDummyCache.
-
 Q: I get the error Message: CWebUser does not have a method named "isAdmin":
 
 A: Please make sure that you have the following in your application configuration:
@@ -248,4 +244,21 @@ Comment the folowing lines in YumInstallController.php
 
 Insert the translation data manually in a cmd window as:
 mysql -u yourusername -p testyum < docs/yum_translation.sql
+
+
+Q: I still got errors ! 
+
+A: Make sure to enable a caching component, at least CDummyCache, in your config/main.php:
+
+'cache'=>array( 'class'=>'system.caching.CDummyCache',	),  
+
+Q: I still got errors !
+
+A: Try to add this in your config/main.php:
+
+'session' => array(
+		'sessionName' => 'SiteSession',
+		'class' => 'CHttpSession',
+		'autoStart' => true,
+		),
 

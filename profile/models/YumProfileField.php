@@ -45,6 +45,7 @@ class YumProfileField extends YumActiveRecord
 		$this->_tableName = Yum::module('profile')->profileFieldTable;
 		return $this->_tableName;
 	}
+
 	public function scopes()
 	{
 		return array(
@@ -60,14 +61,13 @@ class YumProfileField extends YumActiveRecord
 				);
 	}
 
-	public static function itemAlias($type,$code=NULL) {
+	public static function itemAlias($type, $code = NULL) {
 		$_items = array(
 				'field_type' => array(
 					'INTEGER' => Yum::t('INTEGER'),
 					'VARCHAR' => Yum::t( 'VARCHAR'),
 					'TEXT'=> Yum::t( 'TEXT'),
 					'DATE'=> Yum::t( 'DATE'),
-					'DROPDOWNLIST' => Yum::t('DROPDOWNLIST'),
 					'FLOAT'=> Yum::t('FLOAT'),
 					'BOOL'=> Yum::t('BOOL'),
 					'BLOB'=> Yum::t('BLOB'),
@@ -79,8 +79,8 @@ class YumProfileField extends YumActiveRecord
 					'1' => Yum::t('Yes'),
 					),
 				'visible' => array(
-					self::VISIBLE_USER_DECISION => Yum::t('Let the user choose in privacy settings'),
 					self::VISIBLE_PUBLIC => Yum::t('For all'),
+					self::VISIBLE_USER_DECISION => Yum::t('Let the user choose in privacy settings'),
 					self::VISIBLE_REGISTER_USER => Yum::t('Registered users'),
 					self::VISIBLE_ONLY_OWNER => Yum::t('Only owner'),
 					self::VISIBLE_HIDDEN => Yum::t('Hidden'),

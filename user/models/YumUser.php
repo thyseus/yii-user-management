@@ -35,7 +35,6 @@ class YumUser extends YumActiveRecord
 
 	public $username;
 	public $password;
-	public $profile;
 	public $salt;
 	public $activationKey;
 	public $password_changed = false;
@@ -365,6 +364,8 @@ class YumUser extends YumActiveRecord
 		return false;
 	}
 
+	// possible relations are cached because they depend on the active submodules
+	// and it takes many expensive milliseconds to evaluate them all the time
 	public function relations()
 	{
 		Yii::import('application.modules.profile.models.*');

@@ -30,9 +30,6 @@ class YumUserChangePassword extends YumFormModel
 		return $rules;
 	}
 
-	/**
-	 * Declares attribute labels.
-	 */
 	public function attributeLabels() {
 		return array(
 			'password'=>Yum::t('New password'),
@@ -41,8 +38,7 @@ class YumUserChangePassword extends YumFormModel
 		);
 	}
 
-	public function createRandomPassword() {
-
+	public static function createRandomPassword() {
 		$lowercase = Yum::module()->passwordRequirements['minLowerCase'];
 		$uppercase = Yum::module()->passwordRequirements['minUpperCase'];
 		$minnumbers = Yum::module()->passwordRequirements['minDigits'];

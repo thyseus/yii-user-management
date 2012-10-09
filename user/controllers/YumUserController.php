@@ -50,6 +50,8 @@ class YumUserController extends YumController {
 						$profile = new YumProfile();
 						$profile->user_id = $user->id;
 						$profile->timestamp = time();
+						$profile->firstname = $user->username;
+						$profile->lastname = $user->username;
 						$profile->privacy = 'protected';
 						$profile->email = 'e@mail.de';
 						$profile->save();
