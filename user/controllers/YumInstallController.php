@@ -136,7 +136,7 @@ class YumInstallController extends YumController
 							`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 							`author_id` int(11) unsigned NOT NULL,
 							`group_id` int(11) unsigned NOT NULL,
-							`createtime` int(11) unsigned NOT NULL,
+							`createTime` int(11) unsigned NOT NULL,
 							`title` varchar(255) NOT NULL,
 							`message` text NOT NULL,
 							PRIMARY KEY (`id`)
