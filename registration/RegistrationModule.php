@@ -17,8 +17,6 @@ class RegistrationModule extends CWebModule {
 	// Whether to confirm the activation of an user by email
 	public $enableActivationConfirmation = true; 
 
-	public $validEmailPattern = '/^[A-Za-z0-9@.\s,]+$/u';
-
 	public $registrationEmail='register@website.com';
 	public $recoveryEmail='restore@website.com';
 

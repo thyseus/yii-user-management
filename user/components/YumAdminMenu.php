@@ -24,7 +24,7 @@ class YumAdminMenu extends CPortlet {
 		return array(
 				array('label'=>'Users', 'items' => array(
 						array('label'=> 'Statistics', 'url'=>array('//user/statistics/index')),
-						array('label' => 'Administration', 'url' => array('//user/user/admin')),
+						array('label' => 'User administration', 'url' => array('//user/user/admin')),
 						array('label' => 'Create new user', 'url' => array('//user/user/create')),
 						array('label' => 'Generate Demo Data', 'url' => array('//user/user/generateData'), 'visible' => Yum::module()->debug),
 						)
@@ -61,8 +61,8 @@ class YumAdminMenu extends CPortlet {
 							array('label' => 'Write a message', 'url' => array('/message/message/compose')),
 							),
 						),
-				array('label' => 'Text translations', 'url' => array('//user/translation/admin')),
 				array('label' => 'Misc', 'items' => array(
+				array('label' => 'Text translations', 'url' => array('//user/translation/admin')),
 							array('label' => 'Upload avatar for admin', 'url' => array('//avatar/avatar/editAvatar'),
 								'visible' => Yum::hasModule('avatar')),
 							array('label' => 'Change admin Password', 'url' => array('//user/user/changePassword')),
