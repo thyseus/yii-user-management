@@ -239,13 +239,13 @@ class YumRestController extends CController
 
 			if(Yum::module()->RESTfulCleartextPasswords 
 					&& $user !==null 
-					&& $user->superuser 
+					&& $user->superUser 
 					&& md5($password) == $user->password)
 				return true;
 
 			if(!Yum::module()->RESTfulCleartextPasswords 
 					&& $user !==null 
-					&& $user->superuser 
+					&& $user->superUser 
 					&& $password == $user->password)
 				return true;
 

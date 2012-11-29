@@ -42,7 +42,7 @@ class YumUserController extends YumController {
 				$user->roles = array($_POST['role']);
 				$user->salt = YumEncrypt::generateSalt();
 				$user->password = YumEncrypt::encrypt($_POST['password'], $user->salt);
-				$user->createtime = time();
+				$user->createTime = time();
 				$user->status = $_POST['status'];
 
 				if($user->save()) {

@@ -26,10 +26,10 @@ class YumStatisticsController extends YumController {
 		$this->render('statistics', array(
 					'total_users' => YumUser::model()->count(),
 					'active_users' => YumUser::model()->count('status = '.YumUser::STATUS_ACTIVE),
-					'todays_registered_users' => YumUser::model()->count('createtime >= '.strtotime(date('Y-m-d'))),
+					'todays_registered_users' => YumUser::model()->count('createTime >= '.strtotime(date('Y-m-d'))),
 					'inactive_users' => YumUser::model()->count('status = '.YumUser::STATUS_INACTIVE),
 					'banned_users' => YumUser::model()->count('status = '.YumUser::STATUS_BANNED),
-					'admin_users' => YumUser::model()->count('superuser = 1'),
+					'admin_users' => YumUser::model()->count('superUser = 1'),
 //					'roles' => YumRole::model()->count(),
 //					'profiles' => YumProfile::model()->count(),
 //					'profile_fields' => YumProfileField::model()->count(),
@@ -64,7 +64,7 @@ class YumStatisticsController extends YumController {
 	{
 		$day = $this->getStartOfDay(time());
 		return YumUser::model()->count(
-				'lastvisit > :begin and lastvisit < :end', array(
+				'lastVisit > :begin and lastVisit < :end', array(
 					':begin' => $day,
 					':end' => $day + 86400));
 	}

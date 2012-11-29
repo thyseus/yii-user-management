@@ -29,7 +29,7 @@ $this->widget('zii.widgets.CListView', array(
 		'template' => '{summary} {sorter} {items} <div style="clear:both;"></div> {pager}',
     'sortableAttributes'=>array(
         'username',
-        'lastvisit',
+        'lastVisit',
     ),
 ));
 
