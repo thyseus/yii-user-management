@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('RoleModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class RoleModule extends CWebModule {
 	// set useYiiCheckAccess to true to disable Yums own checkAccess routines.

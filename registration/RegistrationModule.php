@@ -1,8 +1,9 @@
 <?
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class RegistrationModule extends CWebModule {
-	// why enableRegistration ? - in case you only want a recovery ! 
+	// why enableRegistration ? - in case you only want a recovery !
 	public $layout = 'YumModule.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;
@@ -15,7 +16,7 @@ class RegistrationModule extends CWebModule {
 	public $activationFailureView = '/registration/activation_failure';
 
 	// Whether to confirm the activation of an user by email
-	public $enableActivationConfirmation = true; 
+	public $enableActivationConfirmation = true;
 
 	public $validEmailPattern = '/^[A-Za-z0-9@.\s,]+$/u';
 
@@ -23,10 +24,10 @@ class RegistrationModule extends CWebModule {
 	public $recoveryEmail='restore@website.com';
 
 	public $registrationView = '/registration/registration';
-	public $changePasswordView = 
+	public $changePasswordView =
 		'YumModule.views.user.changepassword';
-	public $recoverPasswordView = 
-		'YumModule.registration.views.registration.recovery';
+	public $recoverPasswordView =
+		'RegistrationModule.views.registration.recovery';
 
 	/**
 	 * Whether to use captcha in registration process
