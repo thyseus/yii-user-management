@@ -1,6 +1,6 @@
 <?
 
-Yii::import('application.modules.user.controllers.YumController');
+Yii::import('YumModule.controllers.YumController');
 class YumUserController extends YumController {
 	public $defaultAction = 'login';
 
@@ -34,7 +34,7 @@ class YumUserController extends YumController {
 
 	public function actionGenerateData() {
 		if(Yum::hasModule('role'))
-			Yii::import('application.modules.role.models.*');
+			Yii::import('YumModule.role.models.*');
 		if(isset($_POST['user_amount'])) {
 			for($i = 0; $i < $_POST['user_amount']; $i++) {
 				$user = new YumUser();
@@ -249,7 +249,7 @@ class YumUserController extends YumController {
 			
 			$model->attributes = $_POST['YumUser'];
 			if(Yum::hasModule('role')) {
-				Yii::import('application.modules.role.models.*');
+				Yii::import('YumModule.role.models.*');
 				// Assign the roles and belonging Users to the model
 				$model->roles = Relation::retrieveValues($_POST);
 			}
@@ -367,7 +367,7 @@ class YumUserController extends YumController {
 	public function actionAdmin()
 	{
 		if(Yum::hasModule('role'))
-			Yii::import('application.modules.role.models.*');
+			Yii::import('YumModule.role.models.*');
 
 		$this->layout = Yum::module()->adminLayout;
 

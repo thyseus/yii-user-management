@@ -114,7 +114,7 @@ class YumInstallController extends YumController
 
 					// Insert the translation strings that come with yum
 					$sql = file_get_contents(Yii::getPathOfAlias(
-								'application.modules.user.docs') . '/yum_translation.sql');
+								'YumModule.docs') . '/yum_translation.sql');
 
 					$db->createCommand($sql)->execute();
 

@@ -30,12 +30,12 @@ echo $form->dropDownList($model,'status',YumUser::itemAlias('UserStatus'));
 echo $form->error($model,'status'); ?>
 </div>
 <? if(Yum::hasModule('role')) { 
-	Yii::import('application.modules.role.models.*');
+	Yii::import('YumModule.role.models.*');
 ?>
 <div class="row roles">
 <p> <? echo Yum::t('User belongs to these roles'); ?> </p>
 
-	<? $this->widget('YumModule.components.Relation', array(
+	<? $this->widget('YumComponents.Relation', array(
 				'model' => $model,
 				'relation' => 'roles',
 				'style' => 'dropdownlist',
@@ -64,7 +64,7 @@ echo $form->error($model, 'username'); ?>
 			'form'=>$passwordform)); ?>
 </div>
 <? if(Yum::hasModule('profile')) 
-$this->renderPartial('application.modules.profile.views.profile._form', array(
+$this->renderPartial('YumModule.profile.views.profile._form', array(
 			'profile' => $profile)); ?>
 
 <div class="row buttons">

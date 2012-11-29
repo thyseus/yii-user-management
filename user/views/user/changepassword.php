@@ -22,7 +22,7 @@ if(isset($expired) && $expired)
 	} ?>
 
 <? $this->renderPartial(
-		'application.modules.user.views.user.passwordfields', array(
+		'YumModule.views.user.passwordfields', array(
 			'form'=>$form)); ?>
 
 	<div class="row submit">

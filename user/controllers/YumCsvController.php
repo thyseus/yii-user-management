@@ -1,6 +1,6 @@
 <?
 /**
- * 
+ *
  **/
 class YumCsvController extends YumController
 {
@@ -24,15 +24,15 @@ class YumCsvController extends YumController
 				$fields .= $field .',';
 			$fields = substr($fields, 0, -1);
 
-			Yii::import('application.modules.user.components.CSVExport');
+			Yii::import('YumComponents.CSVExport');
 			$sql = sprintf('select %s from profiles where %s',
-					$fields, 
+					$fields,
 					Yum::module()->customCsvExportCriteria);
 			$result = Yii::app()->db->createCommand($sql)->queryAll();
 			$csv = new CSVExport($result);
 			$content = $csv->toCSV();
 			$filename = Yii::app()->basePath.'/runtime/yum_user_export.csv';
-			$content = $csv->toCSV($filename, ",", "\"");                 
+			$content = $csv->toCSV($filename, ",", "\"");
 			Yii::app()->getRequest()->sendFile(basename($filename),
 					@file_get_contents($filename),
 					"text/csv", false);

@@ -1,5 +1,5 @@
 <?
-Yii::import('application.modules.user.models.*');
+Yii::import('YumModule.models.*');
 
 class YumProfileCommentController extends YumController
 {

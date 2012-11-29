@@ -2,8 +2,8 @@
 /* This is the controller for the internal messaging System of
  * the Yii User Management Module. */
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.message.models.YumMessage');
+Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModule.message.models.YumMessage');
 
 class YumMessageController extends YumController {
 	public function accessRules() {

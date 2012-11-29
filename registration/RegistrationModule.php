@@ -3,7 +3,7 @@ Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
 
 class RegistrationModule extends CWebModule {
 	// why enableRegistration ? - in case you only want a recovery ! 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModule.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;
 
@@ -24,9 +24,9 @@ class RegistrationModule extends CWebModule {
 
 	public $registrationView = '/registration/registration';
 	public $changePasswordView = 
-		'application.modules.user.views.user.changepassword';
+		'YumModule.views.user.changepassword';
 	public $recoverPasswordView = 
-		'application.modules.registration.views.registration.recovery';
+		'YumModule.registration.views.registration.recovery';
 
 	/**
 	 * Whether to use captcha in registration process

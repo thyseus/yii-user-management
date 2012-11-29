@@ -14,10 +14,10 @@ class UsergroupModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'application.modules.user.controllers.*',
-					'application.modules.user.models.*',
-					'application.modules.usergroup.controllers.*',
-					'application.modules.usergroup.models.*',
+					'YumModule.controllers.*',
+					'YumModule.models.*',
+					'YumModulegroup.controllers.*',
+					'YumModulegroup.models.*',
 					));
 	}
 

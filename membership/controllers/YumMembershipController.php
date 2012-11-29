@@ -1,8 +1,8 @@
 <?
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.Yum');
-Yii::import('application.modules.role.models.*');
-Yii::import('application.modules.membership.models.*');
+Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModule.models.Yum');
+Yii::import('YumModule.role.models.*');
+Yii::import('YumModule.membership.models.*');
 
 class YumMembershipController extends YumController {
 	public $defaultAction = 'index';

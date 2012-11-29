@@ -21,13 +21,13 @@ class ProfileModule extends CWebModule {
 	public $profileViewRoute = '//profile/profile/view';
 
 	public $publicFieldsView =
-		'application.modules.profile.views.profile.public_fields';
+		'YumModule.profile.views.profile.public_fields';
 	public $profileCommentView =
-		'application.modules.profile.views.profileComment._view';
+		'YumModule.profile.views.profileComment._view';
 	public $profileCommentIndexView =
-		'application.modules.profile.views.profileComment.index';
+		'YumModule.profile.views.profileComment.index';
 	public $profileCommentCreateView =
-		'application.modules.profile.views.profileComment.create';
+		'YumModule.profile.views.profileComment.create';
   public $profileEditView = '/profile/update';
   public $privacySettingView= '/privacy/update';
 
@@ -48,8 +48,8 @@ class ProfileModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-			'application.modules.user.controllers.*',
-			'application.modules.user.models.*',
+			'YumModule.controllers.*',
+			'YumModule.models.*',
 			'ProfileModule.components.*',
 			'ProfileModule.models.*',
 		));

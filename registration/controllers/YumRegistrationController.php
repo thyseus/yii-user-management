@@ -6,10 +6,10 @@
  * Registration process. If this example does exactly what you want in your
  * Project, then you can feel lucky already! */
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.profile.models.*');
-Yii::import('application.modules.registration.models.*');
+Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModule.models.*');
+Yii::import('YumModule.profile.models.*');
+Yii::import('YumModule.registration.models.*');
 
 class YumRegistrationController extends YumController {
 	public $defaultAction = 'registration';
@@ -67,7 +67,7 @@ class YumRegistrationController extends YumController {
 					'//registration/registration/registration'))
 			throw new CHttpException(403);
 
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('YumModule.profile.models.*');
 		$form = new YumRegistrationForm;
 		$profile = new YumProfile;
 
