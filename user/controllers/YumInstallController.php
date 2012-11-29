@@ -261,7 +261,7 @@ class YumInstallController extends YumController
 							`user_id` int(11) NOT NULL,
 							`profile_id` int(11) NOT NULL,
 							`comment` text NOT NULL,
-							`createtime` int(11) NOT NULL,
+							`createTime` int(11) NOT NULL,
 							PRIMARY KEY (`id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 
