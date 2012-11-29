@@ -29,18 +29,17 @@ class YumTranslationController extends YumController
 	public function actionUpdate($category = null, $message = null, $language = null)
 	{
 		$models = array();
-			foreach(Yum::getAvailableLanguages() as $language) {
-				$models[] = $this->loadModel($category, $message, $language);
-			}
+		foreach(Yum::getAvailableLanguages() as $language) {
+			$models[] = $this->loadModel($category, $message, $language);
+		}
 
-		if(isset($_POST['YumTranslation']))
-		{
+		if(isset($_POST['YumTranslation'])) {
 			$category = $_POST['YumTranslation']['category'];
 			$message = $_POST['YumTranslation']['message'];
 
 			foreach($_POST as $key => $translation) {
 				if(substr($key, 0, 11) == 'translation') {
-					$lang = explode('_', $key);
+					$lang = explode('_', $key, 2);
 					if(isset($lang[1])) {
 						$lang = $lang[1];
 						foreach(Yum::getAvailableLanguages() as $language) {
