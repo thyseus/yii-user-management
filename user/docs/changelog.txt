@@ -1,5 +1,6 @@
 Changelog for Yii User Management Module (Yum) 
 
+- removed Yum::route
 - membership: downgrading support
 - membership: user can chooses if he want to subscribe to his membership
 - yumsettings & yumtextsettings are removed. To adjust the strings for your

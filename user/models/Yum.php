@@ -153,39 +153,6 @@ class Yum
 	}
 
 	/**
-	 * Parses url for predefined symbols and returns real routes
-	 * Following symbols are allowed:
-	 *  - {yum} - points to base path of Yum
-	 *  - {users} - points to user controller 
-	 *  - {messsages} - points to base messages module
-	 *  - {roles} - points to base roles module
-	 *  - {profiles} - points to base profile module
-	 * @param string $url
-	 * @since 0.6
-	 * @return string 
-	 */
-	public static function route($url)
-	{
-		$yumBaseRoute=Yum::module()->yumBaseRoute;
-		$tr=array();
-		$tr['{yum}']=$yumBaseRoute;
-		$tr['{messages}']=$yumBaseRoute.'/messages';
-		$tr['{roles}']=$yumBaseRoute.'/role';
-		$tr['{profiles}']=$yumBaseRoute.'/profiles';
-		$tr['{user}']=$yumBaseRoute.'/user';
-		if(is_array($url))
-		{
-			$ret=array();
-			foreach($url as $k=>$entry)
-				$ret[$k]=strtr($entry,$tr);
-			return $ret;
-		}
-		else
-			return strtr($url,$tr);
-
-	}
-
-	/**
 	 * Produces note: "Field with * are required"
 	 * @since 0.6
 	 * @return string 

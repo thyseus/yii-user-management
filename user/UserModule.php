@@ -7,7 +7,7 @@ Yii::import('YumModule.models.*');
 Yii::import('YumModule.controllers.YumController');
 
 class UserModule extends CWebModule {
-	public $version = '0.8-rc7';
+	public $version = '0.8';
 	public $debug = false;
 
 	//layout related control vars
@@ -68,8 +68,6 @@ class UserModule extends CWebModule {
 	// Set this to true to really remove users instead of setting the status
 	// to -2 (YumUser::REMOVED)
 	public $trulyDelete = false;
-
-	public $yumBaseRoute = '/user';
 
 	// set avoidSql to true if you intent do use yii-user-management on a non
 	// mysql database. All places where a SQL query would be used for performance
@@ -190,7 +188,7 @@ class UserModule extends CWebModule {
 	public function __get($name) {
 		if(substr($name, -3) === 'Url')
 			if(isset($this->_urls[substr($name, 0, -3)]))
-				return Yum::route($this->_urls[substr($name, 0, -3)]);
+				return $this->_urls[substr($name, 0, -3)];
 
 		if(substr($name, -4) === 'View')
 			if(isset($this->_views[substr($name, 0, -4)]))

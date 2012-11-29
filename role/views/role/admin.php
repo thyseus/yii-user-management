@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 			'name' => 'title',
 			'type' => 'raw',
 			'value'=> 'CHtml::link(CHtml::encode($data->title),
-				array(Yum::route("role/view"),"id"=>$data->id))',
+				array("//role/role/view","id"=>$data->id))',
 		),
 		'price',
 		'membership_priority',

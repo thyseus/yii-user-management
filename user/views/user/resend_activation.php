@@ -2,10 +2,10 @@
 $this->pageTitle=Yii::t("UserModule.user", "Activate");
 
 $this->breadcrumbs=array(
-	Yii::t("UserModule.user", "Login") => array(Yum::route('{user}/login')),
-	Yii::t("UserModule.user", "Activate"));
+	Yum::t('Login') => array('//user/user/login'),
+	Yum::t('Activate'));
 
-$this->title = Yii::t("UserModule.user", "Activate"); 
+$this->title = Yum::t('Activate'); 
 ?>
 
 <? 
@@ -25,7 +25,7 @@ if(Yii::app()->user->hasFlash('registration'))
 
 <div id="activatiion_code">
 <div class="row">
-<? echo Yii::t("UserModule.user", "Enter the activation code you recieved below."); ?>
+<? echo Yii::t("UserModule.user", "Enter the activation code you received below."); ?>
 </div>
 <div class="row">
 <? if(isset($form->email)){ 
