@@ -720,8 +720,8 @@ echo '</ul>';
 					array('multiple' => 'multiple'));
 		}
 
-		public function handleAjaxRequest($_POST) {
-			print_r($_POST);
+		public function handleAjaxRequest($POST) {
+			print_r($POST);
 		}
 
 		public function renderTwoPaneSelection() 
