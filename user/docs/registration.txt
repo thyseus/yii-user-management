@@ -104,7 +104,7 @@ override the actionRegistration() of your Controller like this:
 		if (isset($_POST['Profile'])) { 
 			$profile->attributes = $_POST['YumProfile'];
 
-			if($profile->save())
+			if($profile->save()) {
 				$user = new YumUser;
 				$password = YumUser::generatePassword();
 				$user->register(md5($profile->email), $password, $profile, $user->generateSalt());
@@ -117,7 +117,8 @@ override the actionRegistration() of your Controller like this:
 		$this->render('registration', array(
 					'profile' => $profile,
 					)
-				);  
+				);
+		}
 	}
 
 Now, we also need to override the sendRegistrationEmail method, because we want to include the clear-text password in the email:
