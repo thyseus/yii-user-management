@@ -1,8 +1,8 @@
 <?
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.role.models.*');
+Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModule.models.*');
+Yii::import('YumModule.role.models.*');
 
 class YumRoleController extends YumController {
 	public function accessRules() {
@@ -28,7 +28,7 @@ class YumRoleController extends YumController {
 
 		$activeMemberships = false;
 		if(Yum::hasModule('membership')) {
-			Yii::import('application.modules.membership.models.*');
+			Yii::import('YumModule.membership.models.*');
 			$activeMemberships= new CActiveDataProvider('YumMembership', array(
 						'criteria' => array(
 							'condition' => "membership_id = {$model->id}")));

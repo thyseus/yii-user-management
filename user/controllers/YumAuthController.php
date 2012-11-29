@@ -67,7 +67,7 @@ class YumAuthController extends YumController {
 			throw new Exception('actionFacebook was called, but is not activated in application configuration');
 
 		Yii::app()->user->logout();
-		Yii::import('application.modules.user.vendors.facebook.*');
+		Yii::import('YumModule.vendors.facebook.*');
 		$facebook = new Facebook(Yum::module()->facebookConfig);
 		$fb_uid = $facebook->getUser();
 		if ($fb_uid) {
@@ -206,7 +206,7 @@ class YumAuthController extends YumController {
 
 	public function loginByEmail() {
 		if(Yum::hasModule('profile')) {
-			Yii::import('application.modules.profile.models.*');
+			Yii::import('YumModule.profile.models.*');
 
 			$profile = YumProfile::model()->find('email = :email', array(
 						':email' => $this->loginForm->username));
@@ -223,7 +223,7 @@ class YumAuthController extends YumController {
 			throw new Exception('login by Open Id was called, but is not activated in application configuration');
 
 		Yii::app()->user->logout();
-		Yii::import('application.modules.user.vendors.openid.*');
+		Yii::import('YumModule.vendors.openid.*');
 		$openid = new EOpenID;
 		$openid->authenticate($this->loginForm->username);
 		return Yii::app()->user->login($openid);
@@ -361,7 +361,7 @@ public function actionLogout() {
 			if (!Yum::module()->loginType & UserModule::LOGIN_BY_FACEBOOK)
 				throw new Exception('actionLogout for Facebook was called, but is not activated in main.php');
 
-			Yii::import('application.modules.user.vendors.facebook.*');
+			Yii::import('YumModule.vendors.facebook.*');
 			require_once('Facebook.php');
 			$facebook = new Facebook(Yum::module()->facebookConfig);
 			$fb_cookie = 'fbs_'.Yum::module()->facebookConfig['appId'];

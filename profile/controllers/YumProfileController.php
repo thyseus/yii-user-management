@@ -1,8 +1,8 @@
 <?
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.profile.models.*');
+Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModule.models.*');
+Yii::import('YumModule.profile.models.*');
 
 class YumProfileController extends YumController {
 	public $_model;

@@ -1,5 +1,5 @@
 <?
-Yii::import('application.modules.user.UserModule');
+Yii::import('YumModule.UserModule');
 Yii::import('zii.widgets.CPortlet');
 
 class ProfileVisitWidget extends CPortlet

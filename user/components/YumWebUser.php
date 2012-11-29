@@ -24,7 +24,7 @@ class YumWebUser extends CWebUser
 	}
 
 	public function can($action) {
-		Yii::import('application.modules.role.models.*');
+		Yii::import('YumModule.role.models.*');
 		foreach ($this->data()->getPermissions() as $permission)
 			if ($permission == $action)
 				return true;
@@ -108,7 +108,7 @@ public function getRoles() {
 	 */
 	public function hasRole($role, $uid = 0) {
 		if(Yum::hasModule('role')) {
-			Yii::import('application.modules.role.models.*');
+			Yii::import('YumModule.role.models.*');
 
 			if($uid == 0)
 				$uid = Yii::app()->user->id;

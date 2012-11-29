@@ -5,7 +5,7 @@ class AvatarModule extends CWebModule {
 	public $defaultController = 'avatar';
 
 	// override this with your custom layout, if available
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModule.views.layouts.yum';
 
 	public $avatarPath = 'images';
 
@@ -23,10 +23,10 @@ class AvatarModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'application.modules.user.controllers.*',
-					'application.modules.user.models.*',
-					'application.modules.avatar.controllers.*',
-					'application.modules.avatar.models.*',
+					'YumModule.controllers.*',
+					'YumModule.models.*',
+					'YumModule.avatar.controllers.*',
+					'YumModule.avatar.models.*',
 					));
 	}
 

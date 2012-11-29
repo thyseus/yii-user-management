@@ -1,6 +1,6 @@
 <?
 /**
- * 
+ *
  **/
 class YumCsvController extends YumController
 {
@@ -33,7 +33,7 @@ class YumCsvController extends YumController
 			$csv = new CSVExport($result);
 			$content = $csv->toCSV();
 			$filename = Yii::app()->basePath.'/runtime/yum_user_export.csv';
-			$content = $csv->toCSV($filename, ",", "\"");                 
+			$content = $csv->toCSV($filename, ",", "\"");
 			Yii::app()->getRequest()->sendFile(basename($filename),
 					@file_get_contents($filename),
 					"text/csv", false);

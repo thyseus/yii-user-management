@@ -63,14 +63,14 @@ Authentification Method in the Application Configuration:
 
  'components'=>array(
  'user'=>array(
-      'class' => 'application.modules.user.components.YumWebUser',
+      'class' => 'YumComponents.YumWebUser',
       'allowAutoLogin'=>true,
       'loginUrl' => array('//user/user/login'),
       [...]
     ),
 
  'import'=>array(  
-  'application.modules.user.models.*',
+  'YumModule.models.*',
 	[...]
     
 This tells our Web Application that is can access the Model 'User'
@@ -147,7 +147,7 @@ Quick Login Widget:
 If you want to display a quick login widget somewhere in your Web Application,
 just call in your view file:
 
-<? $this->widget('application.modules.user.components.LoginWidget'); ?>
+<? $this->widget('YumComponents.LoginWidget'); ?>
 
 
 Password Requirements:
@@ -215,7 +215,7 @@ A: Please make sure that you have the following in your application configuratio
 
 	'components'=>array(
 		'user'=>array(
-			'class' => 'application.modules.user.components.YumWebUser',
+			'class' => 'YumComponents.YumWebUser',
 
 
 Q: I get the error Message: the table "{{users}}" for active record class "YumUser" cannot be found in the database.
@@ -230,7 +230,7 @@ A: Please make sure that you have the following in your application configuratio
 Q: Why doesn´ t the yii-user-management have submodules?
 
 A: Submodules are supported by yii, but having a path like 
-application.modules.user.modules.role.controllers.YumRoleController
+YumModule.modules.role.controllers.YumRoleController
 really looks strange, so we decided it is better to keep all modules inside
 the root modules/ directory.
 
@@ -240,7 +240,7 @@ General error: 2014 Cannot execute queries while other unbuffered queries are ac
 A: thanks to NetDabbler, there is a workaround:
 
 Comment the folowing lines in YumInstallController.php
-// $sql = file_get_contents(Yii::getPathOfAlias('application.modules.user.docs') . '/yum_translation.sql');
+// $sql = file_get_contents(Yii::getPathOfAlias('YumModule.docs') . '/yum_translation.sql');
 // $db->createCommand($sql)->execute();
 
 Insert the translation data manually in a cmd window as:

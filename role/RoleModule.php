@@ -7,7 +7,7 @@ class RoleModule extends CWebModule {
 	// SrBAC
 	public $useYiiCheckAccess = false;
 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModule.views.layouts.yum';
 
 	public $roleTable = 'role';
 	public $permissionTable = 'permission';

@@ -10,11 +10,11 @@ $this->beginContent($module->baseLayout); ?>
 <? Yum::renderFlash(); ?>
 <? 
 if(Yum::hasModule('message')) {
-	Yii::import('application.modules.message.components.*');
+	Yii::import('YumModule.message.components.*');
 	$this->widget('MessageWidget');
 }
 if(Yum::hasModule('profile') && Yum::module('profile')->enableProfileVisitLogging) {
-	Yii::import('application.modules.profile.components.*');
+	Yii::import('YumModule.profile.components.*');
 	$this->widget('ProfileVisitWidget'); 
 }
 $this->renderMenu(); ?>

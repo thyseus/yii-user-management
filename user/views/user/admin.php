@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 
 echo Yum::renderFlash();
 
-$this->widget('application.modules.user.components.CsvGridView', array(
+$this->widget('YumComponents.CsvGridView', array(
 	'dataProvider'=>$model->search(),
 	'filter' => $model,
 		'columns'=>array(
