@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class ProfileModule extends CWebModule {
 	public $layout = 'yumprofile';
@@ -21,6 +22,7 @@ class ProfileModule extends CWebModule {
 	public $profileViewRoute = '//profile/profile/view';
 
 	public $publicFieldsView =
+<<<<<<< HEAD
 		'YumModule.profile.views.profile.public_fields';
 	public $profileCommentView =
 		'YumModule.profile.views.profileComment._view';
@@ -28,6 +30,15 @@ class ProfileModule extends CWebModule {
 		'YumModule.profile.views.profileComment.index';
 	public $profileCommentCreateView =
 		'YumModule.profile.views.profileComment.create';
+=======
+		'ProfileModule.views.profile.public_fields';
+	public $profileCommentView =
+		'ProfileModule.views.profileComment._view';
+	public $profileCommentIndexView =
+		'ProfileModule.views.profileComment.index';
+	public $profileCommentCreateView =
+		'ProfileModule.views.profileComment.create';
+>>>>>>> All modules now use aliases set in UserModule
   public $profileEditView = '/profile/update';
   public $privacySettingView= '/privacy/update';
 

@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('AvatarModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class AvatarModule extends CWebModule {
 	public $defaultController = 'avatar';

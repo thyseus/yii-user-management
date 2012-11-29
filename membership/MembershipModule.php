@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('MembershipModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class MembershipModule extends CWebModule {
 	public $membershipExpiredView = '/membership/membership_expired';

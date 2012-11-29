@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('UsergroupModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 class UsergroupModule extends CWebModule {
 	public $usergroupTable = 'usergroup';

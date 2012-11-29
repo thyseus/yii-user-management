@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('MessageModule', dirname(__FILE__));
+Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
 
 Yii::import('MessageModule.models.*');
 
@@ -16,7 +17,7 @@ class MessageModule extends CWebModule
 
 	public $dateFormat = 'Y-m-d G:i:s';
 
-	public $inboxView = 'YumModule.message.views.message.index';
+	public $inboxView = 'MessageModule.views.message.index';
 	public $inboxRoute = array('index');
 
 	// Send a message to the user if the email changing has been succeeded
