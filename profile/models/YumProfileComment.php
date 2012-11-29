@@ -15,9 +15,9 @@ class YumProfileComment extends YumActiveRecord{
 	public function rules()
 	{
 		return array(
-				array('user_id, profile_id, comment, createtime', 'required'),
-				array('user_id, profile_id, createtime', 'numerical', 'integerOnly'=>true),
-				array('id, user_id, profile_id, comment, createtime', 'safe', 'on'=>'search'),
+				array('user_id, profile_id, comment, createTime', 'required'),
+				array('user_id, profile_id, createTime', 'numerical', 'integerOnly'=>true),
+				array('id, user_id, profile_id, comment, createTime', 'safe', 'on'=>'search'),
 				);
 	}
 
@@ -32,7 +32,7 @@ class YumProfileComment extends YumActiveRecord{
 	public function beforeValidate() {
 		parent::beforeValidate();
 		$this->user_id = Yii::app()->user->id;
-		$this->createtime = time();
+		$this->createTime = time();
 		return true;
 	}
 
@@ -66,7 +66,7 @@ class YumProfileComment extends YumActiveRecord{
 			$timestamp2 = time();
 		}
 
-		$sql = "select count(*) from profile_comment where createtime > {$timestamp} and createtime < {$timestamp2}";
+		$sql = "select count(*) from profile_comment where createTime > {$timestamp} and createTime < {$timestamp2}";
 		$result = Yii::app()->db->createCommand($sql)->queryAll();
 		return $result[0]['count(*)'];
 	}
@@ -78,7 +78,7 @@ class YumProfileComment extends YumActiveRecord{
 				'user_id' => Yum::t('Written from'),
 				'profile_id' => Yum::t('Profile'),
 				'comment' => Yum::t('Comment'),
-				'createtime' => Yum::t('Written at'),
+				'createTime' => Yum::t('Written at'),
 				);
 	}
 
@@ -90,7 +90,7 @@ class YumProfileComment extends YumActiveRecord{
 		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('profile_id', $this->profile_id);
 		$criteria->compare('comment', $this->comment, true);
-		$criteria->compare('createtime', $this->createtime);
+		$criteria->compare('createTime', $this->createTime);
 
 		return new CActiveDataProvider(get_class($this), array(
 					'criteria'=>$criteria,

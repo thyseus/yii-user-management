@@ -56,15 +56,15 @@ $this->renderPartial('/messages/new_messages');?>
 </td>
 </tr>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createtime')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createTime')); ?>
 </th>
-    <td><? echo date(UserModule::$dateFormat,$model->createtime); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->createTime); ?>
 </td>
 </tr>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastVisit')); ?>
 </th>
-    <td><? echo date(UserModule::$dateFormat,$model->lastvisit); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->lastVisit); ?>
 </td>
 </tr>
 <tr>

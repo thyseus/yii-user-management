@@ -4,9 +4,9 @@
 			<? echo CHtml::link(CHtml::encode($data->user->username), array(
 						'//profile/profile/view', 'id' => $data->user_id)); ?>
 			|
-			<strong><? echo CHtml::encode($data->getAttributeLabel('createtime')); ?>:</strong>
+			<strong><? echo CHtml::encode($data->getAttributeLabel('createTime')); ?>:</strong>
 			<? $locale = CLocale::getInstance(Yii::app()->language);
-			echo $locale->getDateFormatter()->formatDateTime($data->createtime, 'medium', 'medium'); ?>
+			echo $locale->getDateFormatter()->formatDateTime($data->createTime, 'medium', 'medium'); ?>
 	</div>
 		
 	<div class="guestbook-avatar">

@@ -26,8 +26,8 @@
         </div>
     
         <div class="row">
-                <? echo $form->label($model,'createtime'); ?>
-                <? echo $form->textField($model,'createtime'); ?>
+                <? echo $form->label($model,'createTime'); ?>
+                <? echo $form->textField($model,'createTime'); ?>
         </div>
     
         <div class="row buttons">

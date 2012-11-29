@@ -31,7 +31,7 @@ class YumProfile extends YumActiveRecord
 	public function recentComments($count = 3) {
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'id = ' .$this->id;
-		$criteria->order = 'createtime DESC';
+		$criteria->order = 'createTime DESC';
 		$criteria->limit = $count;
 		return YumProfileComment::model()->findAll($criteria);
 	}
