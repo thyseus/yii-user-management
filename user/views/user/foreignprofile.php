@@ -31,13 +31,13 @@ $this->breadcrumbs = array(Yii::t('UserModule.user', "Profile"), $model->usernam
 		}
 ?>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createtime')); ?></th>
-    <td><? echo date(UserModule::$dateFormat,$model->createtime); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createTime')); ?></th>
+    <td><? echo date(UserModule::$dateFormat,$model->createTime); ?>
 </td>
 </tr>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?></th>
-    <td><? echo date(UserModule::$dateFormat,$model->lastvisit); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastVisit')); ?></th>
+    <td><? echo date(UserModule::$dateFormat,$model->lastVisit); ?>
 </td>
 </tr>
 </table>

@@ -24,24 +24,24 @@
 <td><? echo $form->error($model,'activationKey') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'createtime') ?></td>
-<td><? echo $form->textField($model,'createtime') ?></td>
-<td><? echo $form->error($model,'createtime') ?></td>
+<td><? echo $form->labelEx($model,'createTime') ?></td>
+<td><? echo $form->textField($model,'createTime') ?></td>
+<td><? echo $form->error($model,'createTime') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'lastvisit') ?></td>
-<td><? echo $form->textField($model,'lastvisit') ?></td>
-<td><? echo $form->error($model,'lastvisit') ?></td>
+<td><? echo $form->labelEx($model,'lastVisit') ?></td>
+<td><? echo $form->textField($model,'lastVisit') ?></td>
+<td><? echo $form->error($model,'lastVisit') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'lastpasswordchange') ?></td>
-<td><? echo $form->textField($model,'lastpasswordchange') ?></td>
-<td><? echo $form->error($model,'lastpasswordchange') ?></td>
+<td><? echo $form->labelEx($model,'lastPasswordChange') ?></td>
+<td><? echo $form->textField($model,'lastPasswordChange') ?></td>
+<td><? echo $form->error($model,'lastPasswordChange') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'superuser') ?></td>
-<td><? echo $form->textField($model,'superuser') ?></td>
-<td><? echo $form->error($model,'superuser') ?></td>
+<td><? echo $form->labelEx($model,'superUser') ?></td>
+<td><? echo $form->textField($model,'superUser') ?></td>
+<td><? echo $form->error($model,'superUser') ?></td>
 </tr>
 <tr>
 <td><? echo $form->labelEx($model,'status') ?></td>

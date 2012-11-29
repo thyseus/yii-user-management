@@ -21,14 +21,14 @@ $this->title=Yii::t('UserModule.user','User list');
 <? echo CHtml::encode($model->getAttributeLabel('activationKey')); ?>:
 <? echo CHtml::encode($model->activationKey); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('createtime')); ?>:
-<? echo CHtml::encode($model->createtime); ?>
+<? echo CHtml::encode($model->getAttributeLabel('createTime')); ?>:
+<? echo CHtml::encode($model->createTime); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>:
-<? echo CHtml::encode($model->lastvisit); ?>
+<? echo CHtml::encode($model->getAttributeLabel('lastVisit')); ?>:
+<? echo CHtml::encode($model->lastVisit); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('superuser')); ?>:
-<? echo CHtml::encode($model->superuser); ?>
+<? echo CHtml::encode($model->getAttributeLabel('superUser')); ?>:
+<? echo CHtml::encode($model->superUser); ?>
 <br/>
 <? echo CHtml::encode($model->getAttributeLabel('status')); ?>:
 <? echo CHtml::encode($model->status); ?>

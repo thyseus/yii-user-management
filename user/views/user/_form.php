@@ -19,9 +19,9 @@ if(isset($profile) && $profile !== false)
 
 <div style="float: right; margin: 10px;">
 <div class="row">
-<? echo $form->labelEx($model, 'superuser');
-echo $form->dropDownList($model, 'superuser',YumUser::itemAlias('AdminStatus'));
-echo $form->error($model, 'superuser'); ?>
+<? echo $form->labelEx($model, 'superUser');
+echo $form->dropDownList($model, 'superUser',YumUser::itemAlias('AdminStatus'));
+echo $form->error($model, 'superUser'); ?>
 </div>
 
 <div class="row">

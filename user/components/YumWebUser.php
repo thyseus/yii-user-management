@@ -149,8 +149,8 @@ public function getRoles() {
 	public function isAdmin() {
 		if($this->isGuest)
 			return false;
-		else 
-			return Yii::app()->user->data()->superuser;
+		else
+			return Yii::app()->user->data()->superUser;
 	}
 }
 ?>

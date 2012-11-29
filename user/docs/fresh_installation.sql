@@ -2747,25 +2747,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   `salt` varchar(128) NOT NULL,
   `activationKey` varchar(128) NOT NULL DEFAULT '',
-  `createtime` int(10) NOT NULL DEFAULT '0',
-  `lastvisit` int(10) NOT NULL DEFAULT '0',
-  `lastaction` int(10) NOT NULL DEFAULT '0',
-  `lastpasswordchange` int(10) NOT NULL DEFAULT '0',
-  `superuser` int(1) NOT NULL DEFAULT '0',
+  `createTime` int(10) NOT NULL DEFAULT '0',
+  `lastVisit` int(10) NOT NULL DEFAULT '0',
+  `lastAction` int(10) NOT NULL DEFAULT '0',
+  `lastPasswordChange` int(10) NOT NULL DEFAULT '0',
+  `superUser` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
   `avatar` varchar(255) DEFAULT NULL,
   `notifyType` enum('None','Digest','Instant','Threshold') DEFAULT 'Instant',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `status` (`status`),
-  KEY `superuser` (`superuser`)
+  KEY `superUser` (`superUser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- 
 -- Data for table `user`
 -- 
 
-INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `lastaction`, `lastpasswordchange`, `superuser`, `status`, `avatar`, `notifyType`) VALUES
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationKey`, `createTime`, `lastVisit`, `lastAction`, `lastPasswordChange`, `superUser`, `status`, `avatar`, `notifyType`) VALUES
   ('1', 'admin', 'c9d1d9d5b11ecb9de06515628e9aefc72a8627656825b0aa2dd46ccaee979a0d061eca76600f0fa0d8b956d487ddc8e18b994a024e3c4660e0ce5d48ed33b956', 'wOt9haRwGV4oTXbXSM5TJYRZOL/KAuH1glUOdJ5mC61vI7ZXVi2xMJOHpCe1VRmBkR7vaQMWNJsA8VVg4OZl4w==', '', '1349788374', '0', '0', '0', '1', '1', NULL, 'Instant'),
   ('2', 'demo', '7a2aed2f418adcbb11d07e592bdff6e4ab43e12f04bbb825b31919e817f465a4d6ba29e5ec328bd36223f40cf05ee862fb8d3415684c3f43a5928825bc21f8c5', 'Kolq4aEqFMBWt5ucoiE5Zw82PfY7IQoCXaaejCXPuPgnV6omcPumYuqR00aXHP1YJdVmCuDT0S3erq8oDY3UcQ==', '', '1349788374', '0', '0', '0', '0', '1', NULL, 'Instant');
 
