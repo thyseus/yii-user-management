@@ -1,12 +1,12 @@
 <?
 Yii::setPathOfAlias('AvatarModule' , dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class AvatarModule extends CWebModule {
 	public $defaultController = 'avatar';
 
 	// override this with your custom layout, if available
-	public $layout = 'YumModule.views.layouts.yum';
+	public $layout = 'YumModulesRoot.user.views.layouts.yum';
 
 	public $avatarPath = 'images';
 
@@ -24,10 +24,10 @@ class AvatarModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'YumModule.controllers.*',
-					'YumModule.models.*',
-					'YumModule.avatar.controllers.*',
-					'YumModule.avatar.models.*',
+					'YumModulesRoot.user.controllers.*',
+					'YumModulesRoot.user.models.*',
+					'YumModulesRoot.avatar.controllers.*',
+					'YumModulesRoot.avatar.models.*',
 					));
 	}
 
