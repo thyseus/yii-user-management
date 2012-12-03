@@ -1,5 +1,6 @@
 <?
 Yii::setPathOfAlias('YumModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 Yii::setPathOfAlias('YumComponents' , dirname(__FILE__) . '/components/');
 Yii::setPathOfAlias('YumAssets' , dirname(__FILE__) . '/assets/');
 
@@ -113,7 +114,7 @@ class UserModule extends CWebModule {
 			'activate' => '/user/resend_activation',
 			'message' => '/user/message',
 			'passwordForm' => '/user/_activation_passwordform',
-			'messageCompose' =>'YumModule.message.views.message.compose');
+			'messageCompose' =>'YumModulesRoot.message.views.message.compose');
 
 	// LoginType :
 	// If you want to activate many types of login just sum up the values below and assign them to 'loginType' in
