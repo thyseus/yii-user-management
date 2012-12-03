@@ -7,11 +7,11 @@ $messages = YumMessage::model()->findAll(
 if(count($messages) > 0) {
 	if(Yum::module('message')->messageSystem == YumMessage::MSG_PLAIN) 
 		$this->renderPartial(
-				'YumModule.message.views.message.new_messages_plain', array(
+				'YumModulesRoot.message.views.message.new_messages_plain', array(
 					'message' => $message));
 	else if(Yum::module('message')->messageSystem == YumMessage::MSG_DIALOG)
 		$this->renderPartial(
-				'YumModule.message.views.message.new_messages_dialog', array(
+				'YumModulesRoot.message.views.message.new_messages_dialog', array(
 					'message' => $message));
 }
 ?>
