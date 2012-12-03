@@ -1,8 +1,8 @@
 <?
 
-Yii::import('YumModule.controllers.YumController');
-Yii::import('YumModule.models.*');
-Yii::import('YumModule.role.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.role.models.*');
 
 class YumRoleController extends YumController {
 	public function accessRules() {
@@ -28,7 +28,7 @@ class YumRoleController extends YumController {
 
 		$activeMemberships = false;
 		if(Yum::hasModule('membership')) {
-			Yii::import('YumModule.membership.models.*');
+			Yii::import('YumModulesRoot.membership.models.*');
 			$activeMemberships= new CActiveDataProvider('YumMembership', array(
 						'criteria' => array(
 							'condition' => "membership_id = {$model->id}")));
@@ -76,10 +76,10 @@ class YumRoleController extends YumController {
 
 			$model->users = Relation::retrieveValues($_POST);
 
-			if ($model->validate() && $model->save()) 
+			if ($model->validate() && $model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
-	
+
 
 		$this->render('update', array(
 			'model' => $model,

@@ -1,8 +1,8 @@
 <?
 
-Yii::import('YumModule.controllers.YumController');
-Yii::import('YumModule.models.*');
-Yii::import('YumModule.role.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.role.models.*');
 
 class YumPermissionController extends YumController
 {
@@ -32,15 +32,15 @@ class YumPermissionController extends YumController
 			Yum::setFlash(Yum::t('The permission has been removed'));
 		else
 			Yum::setFlash(Yum::t('Error while removing the permission'));
-	
-		$this->redirect(array('//role/permission/admin')); 
+
+		$this->redirect(array('//role/permission/admin'));
 	}
 
 	public function actionAdmin()
 	{
 		$this->layout = Yum::module('role')->layout;
 		$model=new YumPermission('search');
-		$model->unsetAttributes();  
+		$model->unsetAttributes();
 
 		if(isset($_GET['YumPermission']))
 			$model->attributes=$_GET['YumPermission'];
