@@ -160,7 +160,7 @@ class YumInstallController extends YumController
 							`zipcode` varchar(255) DEFAULT NULL,
 							`city` varchar(255) DEFAULT NULL,
 							`payment_date` int(11) NULL,
-							`subscribed` tinyint(1) NOT NULL 
+							`subscribed` tinyint(1) NOT NULL
 								) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000;";
 
 						$db->createCommand($sql)->execute();

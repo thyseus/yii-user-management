@@ -1,6 +1,6 @@
 <?
 
-Yii::import('YumModule.controllers.YumController');
+Yii::import('YumModulesRoot.user.controllers.YumController');
 class YumUserController extends YumController {
 	public $defaultAction = 'login';
 
@@ -34,7 +34,7 @@ class YumUserController extends YumController {
 
 	public function actionGenerateData() {
 		if(Yum::hasModule('role'))
-			Yii::import('YumModule.role.models.*');
+			Yii::import('YumModulesRoot.role.models.*');
 		if(isset($_POST['user_amount'])) {
 			for($i = 0; $i < $_POST['user_amount']; $i++) {
 				$user = new YumUser();
@@ -55,7 +55,7 @@ class YumUserController extends YumController {
 						$profile->privacy = 'protected';
 						$profile->email = 'e@mail.de';
 						$profile->save();
-					} 
+					}
 				}
 			}
 		}
@@ -192,7 +192,7 @@ class YumUserController extends YumController {
 		if(isset($_POST['YumUser'])) {
 			$model->salt = YumEncrypt::generateSalt();
 			$model->attributes=$_POST['YumUser'];
-			
+
 			if(Yum::hasModule('role'))
 				$model->roles = Relation::retrieveValues($_POST);
 
@@ -248,10 +248,10 @@ class YumUserController extends YumController {
 		if(isset($_POST['YumUser'])) {
 			if(!isset($model->salt) || empty($model->salt))
 				$model->salt = YumEncrypt::generateSalt();
-			
+
 			$model->attributes = $_POST['YumUser'];
 			if(Yum::hasModule('role')) {
-				Yii::import('YumModule.role.models.*');
+				Yii::import('YumModulesRoot.role.models.*');
 				// Assign the roles and belonging Users to the model
 				$model->roles = Relation::retrieveValues($_POST);
 			}
@@ -272,7 +272,7 @@ class YumUserController extends YumController {
 			}
 
 			if(!$passwordform->hasErrors() && $model->save()) {
-				if(isset($profile)) 
+				if(isset($profile))
 					$profile->save();
 
 				$this->redirect(array('//user/user/view', 'id' => $model->id));
@@ -320,7 +320,7 @@ class YumUserController extends YumController {
 				Yum::setFlash('Wrong password confirmation! Account was not deleted');
 			}
 			$this->redirect(Yum::module()->deleteUrl);
-		} 
+		}
 
 		$this->render('confirmDeletion', array('model' => $user));
 	}
@@ -334,15 +334,15 @@ class YumUserController extends YumController {
 
 		/*		if(Yum::hasModule('profile')) {
 					$criteria->join = 'LEFT JOIN '.Yum::module('profile')->privacysettingTable .' on t.id = privacysetting.user_id';
-					$criteria->addCondition('appear_in_search = 1'); 
+					$criteria->addCondition('appear_in_search = 1');
 					} */
 
 		$criteria->addCondition('status = 1 or status = 2 or status = 3');
-		if($search) 
+		if($search)
 			$criteria->addCondition("username = '{$search}'");
 
 		$dataProvider=new CActiveDataProvider('YumUser', array(
-					'criteria' => $criteria, 
+					'criteria' => $criteria,
 					'pagination'=>array(
 						'pageSize'=>50,
 						)));
@@ -358,7 +358,7 @@ class YumUserController extends YumController {
 		$dataProvider=new CActiveDataProvider('YumUser', array(
 					'pagination'=>array(
 						/*'criteria'=>array(
-							'condition'=>'status > 0', 
+							'condition'=>'status > 0',
 							),*/
 						'pageSize'=>Yum::module()->pageSize,
 						)));
@@ -371,7 +371,7 @@ class YumUserController extends YumController {
 	public function actionAdmin()
 	{
 		if(Yum::hasModule('role'))
-			Yii::import('YumModule.role.models.*');
+			Yii::import('YumModulesRoot.role.models.*');
 
 		$this->layout = Yum::module()->adminLayout;
 

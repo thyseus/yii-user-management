@@ -1,4 +1,6 @@
 <?
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(dirname(__FILE__))));
+
 /**
  * Helper class
  * @author tomasz.suchanek@gmail.com
@@ -77,7 +79,7 @@ class Yum
 	 * In addition to that, the message is being translated by Yum::t() */
 	public static function log($message,
 			$level = 'info',
-			$category = 'YumModule.controllers.YumController') {
+			$category = 'YumModulesRoot.user.controllers.YumController') {
 		if(Yum::module()->enableLogging)
 			return Yii::log(Yum::t($message), $level, $category);
 	}
