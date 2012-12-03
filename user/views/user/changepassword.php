@@ -1,4 +1,4 @@
-<? 
+<?
 $this->pageTitle = Yum::t("change password");
 echo '<h2>'. Yum::t('change password') .'</h2>';
 
@@ -16,13 +16,13 @@ if(isset($expired) && $expired)
 
 	<? if(!Yii::app()->user->isGuest) {
 		echo '<div class="row">';
-		echo CHtml::activeLabelEx($form,'currentPassword'); 
-		echo CHtml::activePasswordField($form,'currentPassword'); 
+		echo CHtml::activeLabelEx($form,'currentPassword');
+		echo CHtml::activePasswordField($form,'currentPassword');
 		echo '</div>';
 	} ?>
 
 <? $this->renderPartial(
-		'YumModule.views.user.passwordfields', array(
+		'YumModulesRoot.user.views.user.passwordfields', array(
 			'form'=>$form)); ?>
 
 	<div class="row submit">

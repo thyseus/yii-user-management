@@ -206,7 +206,7 @@ class YumAuthController extends YumController {
 
 	public function loginByEmail() {
 		if(Yum::hasModule('profile')) {
-			Yii::import('YumModule.profile.models.*');
+			Yii::import('YumModulesRoot.profile.models.*');
 
 			$profile = YumProfile::model()->find('email = :email', array(
 						':email' => $this->loginForm->username));
@@ -234,9 +234,9 @@ class YumAuthController extends YumController {
 	}
 
 	public function actionLogin() {
-		// If the user is already logged in send them to the return Url 
+		// If the user is already logged in send them to the return Url
 		if (!Yii::app()->user->isGuest)
-			$this->redirect(Yum::module()->returnUrl);   
+			$this->redirect(Yum::module()->returnUrl);
 
 		$this->layout = Yum::module()->loginLayout;
 		$this->loginForm = new YumUserLogin('login');
@@ -303,7 +303,7 @@ class YumAuthController extends YumController {
 							'User {username} successfully logged in (Ip: {ip})', array(
 								'{ip}' => Yii::app()->request->getUserHostAddress(),
 								'{username}' => $success->username)));
-				if(Yum::module()->afterLogin !== false) 
+				if(Yum::module()->afterLogin !== false)
 					call_user_func(Yum::module()->afterLogin);
 
 				$this->redirectUser($success);
@@ -325,7 +325,7 @@ class YumAuthController extends YumController {
 		if(isset($_POST) && isset($_POST['returnUrl']))
 			$this->redirect(array($_POST['returnUrl']));
 
-		if ($user->superUser && Yum::module()->returnAdminUrl) 
+		if ($user->superUser && Yum::module()->returnAdminUrl)
 			$this->redirect(Yum::module()->returnAdminUrl);
 
 		if(isset(Yii::app()->user->returnUrl))

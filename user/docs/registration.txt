@@ -38,7 +38,7 @@ Create a file RegistrationController.php in your project-specific
 controllers/ directory containing some code like this:
 
 Yii::import(
-		'YumModule.registration.controllers.YumRegistrationController');
+		'YumModulesRoot.registration.controllers.YumRegistrationController');
 class RegistrationController extends YumRegistrationController {
 
 }
@@ -98,7 +98,7 @@ echo $activeform->textArea($profile,'about');
 override the actionRegistration() of your Controller like this:
 
  	public function actionRegistration() {
-		Yii::import('YumModule.profile.models.*');
+		Yii::import('YumModulesRoot.profile.models.*');
 		$profile = new YumProfile;
 
 		if (isset($_POST['Profile'])) { 
@@ -150,7 +150,7 @@ Now, we also need to override the sendRegistrationEmail method, because we want 
 
 create a file models/Profile.php that extends the YumProfile:
 
-Yii::import('YumModule.profile.models.YumProfile');
+Yii::import('YumModulesRoot.profile.models.YumProfile');
 class Profile extends YumProfile {
 
 	function rules() {

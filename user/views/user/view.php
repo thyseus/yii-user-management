@@ -109,7 +109,7 @@ if(Yii::app()->user->isAdmin()) {
 
 
 if(Yum::hasModule('role') && Yii::app()->user->isAdmin()) {
-	Yii::import('YumModule.role.models.*');
+	Yii::import('YumModulesRoot.role.models.*');
 	echo '<h2>'.Yum::t('This user belongs to these roles:') .'</h2>';
 
 	if($model->roles) {

@@ -1,5 +1,5 @@
 <div class="form">
-<? 
+<?
 
 $form = $this->beginWidget('CActiveForm', array(
 			'id'=>'user-form',
@@ -29,8 +29,8 @@ echo $form->error($model, 'superUser'); ?>
 echo $form->dropDownList($model,'status',YumUser::itemAlias('UserStatus'));
 echo $form->error($model,'status'); ?>
 </div>
-<? if(Yum::hasModule('role')) { 
-	Yii::import('YumModule.role.models.*');
+<? if(Yum::hasModule('role')) {
+	Yii::import('YumModulesRoot.role.models.*');
 ?>
 <div class="row roles">
 <p> <? echo Yum::t('User belongs to these roles'); ?> </p>
@@ -56,15 +56,15 @@ echo $form->error($model, 'username'); ?>
 
 
 <div class="row">
-<p> Leave password <em> empty </em> to 
-<? echo $model->isNewRecord 
-? 'generate a random Password' 
+<p> Leave password <em> empty </em> to
+<? echo $model->isNewRecord
+? 'generate a random Password'
 : 'keep it <em> unchanged </em>'; ?> </p>
 <? $this->renderPartial('/user/passwordfields', array(
 			'form'=>$passwordform)); ?>
 </div>
-<? if(Yum::hasModule('profile')) 
-$this->renderPartial('YumModule.profile.views.profile._form', array(
+<? if(Yum::hasModule('profile'))
+$this->renderPartial('YumModulesRoot.profile.views.profile._form', array(
 			'profile' => $profile)); ?>
 
 <div class="row buttons">

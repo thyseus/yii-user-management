@@ -2,8 +2,8 @@
 // This unit test tests, if the Registration and Activation process provided 
 // by Yum works
 
-Yii::import('YumModule.models.*');
-Yii::import('YumModule.controllers.*');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.user.controllers.*');
 
 class RegistrationTest extends CDbTestCase
 {
