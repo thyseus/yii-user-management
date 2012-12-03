@@ -1,6 +1,6 @@
 <?
 Yii::setPathOfAlias('MessageModule', dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 Yii::import('MessageModule.models.*');
 
@@ -13,7 +13,7 @@ class MessageModule extends CWebModule
 	public $messageTable = 'message';
 	public $notifyType = 'user';
 
-	public $layout = 'YumModule.views.layouts.yum';
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 
 	public $dateFormat = 'Y-m-d G:i:s';
 
