@@ -1,12 +1,12 @@
 <?
 Yii::setPathOfAlias('MembershipModule' , dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class MembershipModule extends CWebModule {
 	public $membershipExpiredView = '/membership/membership_expired';
 	public $membershipIndexRoute = array('//membership/membership/index');
 
-	// set this to false if you do not want to send a confirmation 
+	// set this to false if you do not want to send a confirmation
 	// message to the user that just ordered a membership
 	public $confirmOrders = true;
 
@@ -14,7 +14,7 @@ class MembershipModule extends CWebModule {
 	public $paymentTable = '{{payment}}';
 
 	// override this with your custom layout, if available
-	public $layout = 'YumModule.views.layouts.yum';
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 
 
 	public $controllerMap=array(
