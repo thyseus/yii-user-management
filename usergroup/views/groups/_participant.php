@@ -1,3 +1,3 @@
-<? $this->renderPartial('YumModule.views.user._view', array(
+<? $this->renderPartial('YumModulesRoot.user.views.user._view', array(
 			'data' => $data)); ?>
 

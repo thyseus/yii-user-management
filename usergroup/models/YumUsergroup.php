@@ -51,15 +51,15 @@ class YumUsergroup extends YumActiveRecord{
 	public function getParticipantDataProvider() {
 		$criteria = new CDbCriteria;
 		$criteria->addInCondition('id', $this->participants);
-	
+
 		return new CActiveDataProvider('YumUser', array('criteria' => $criteria));
 	}
 
 	public function getMessageDataProvider() {
-		Yii::import('YumModulegroup.models.*');
+		Yii::import('UsergroupModule.models.*');
 		$criteria = new CDbCriteria;
 		$criteria->compare('group_id', $this->id);
-	
+
 		return new CActiveDataProvider('YumUsergroupMessage', array(
 					'criteria' => $criteria));
 	}

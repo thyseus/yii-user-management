@@ -3,26 +3,26 @@
 class YumUsergroupController extends YumController {
 	public function accessRules() {
 		return array(
-				array('allow',  
+				array('allow',
 					'actions'=>array('index','view'),
 					'users'=>array('*'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('getOptions', 'create','update', 'browse', 'join', 'write'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('admin','delete'),
 					'users'=>array('admin'),
 					),
-				array('deny', 
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
 	}
 
 	public function actionWrite() {
-		Yii::import('YumModulegroup.models.YumUsergroupMessage');
+		Yii::import('UserGroupModule.models.YumUsergroupMessage');
 		$message = new YumUsergroupMessage;
 
 		if(isset($_POST['YumUsergroupMessage'])) {
@@ -30,12 +30,12 @@ class YumUsergroupController extends YumController {
 			$message->author_id = Yii::app()->user->id;
 
 			$message->save();
-		}	
+		}
 
 		$this->redirect(array('//usergroup/groups/view',
 					'id' => $message->group_id));
 
-	}	
+	}
 
 	public function actionJoin($id = null) {
 		if($id !== null) {
@@ -72,9 +72,9 @@ class YumUsergroupController extends YumController {
 	{
 		if($this->_model === null)
 		{
-			if(is_numeric($id))	
+			if(is_numeric($id))
 				$this->_model = YumUsergroup::model()->findByPk($id);
-			else if(is_string($id))	
+			else if(is_string($id))
 				$this->_model = YumUsergroup::model()->find('title = :title', array(
 							':title' => $id));
 			if($this->_model === null)
@@ -94,7 +94,7 @@ class YumUsergroupController extends YumController {
 			$model->owner_id = Yii::app()->user->id;
 			$model->participants = array($model->owner_id);
 
-			if($model->save()) 
+			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
@@ -133,7 +133,7 @@ class YumUsergroupController extends YumController {
 			if(!isset($_GET['ajax']))
 			{
 				if(isset($_POST['returnUrl']))
-					$this->redirect($_POST['returnUrl']); 
+					$this->redirect($_POST['returnUrl']);
 				else
 					$this->redirect(array('admin'));
 			}

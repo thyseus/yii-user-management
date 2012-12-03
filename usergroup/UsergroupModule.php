@@ -1,6 +1,6 @@
 <?
 Yii::setPathOfAlias('UsergroupModule' , dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class UsergroupModule extends CWebModule {
 	public $usergroupTable = 'user_group';
@@ -15,10 +15,10 @@ class UsergroupModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'YumModule.controllers.*',
-					'YumModule.models.*',
-					'YumModulegroup.controllers.*',
-					'YumModulegroup.models.*',
+					'YumModulesRoot.user.controllers.*',
+					'YumModulesRoot.user.models.*',
+					'UsergroupModule.controllers.*',
+					'UsergroupModule.models.*',
 					));
 	}
 
