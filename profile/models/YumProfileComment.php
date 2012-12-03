@@ -42,7 +42,7 @@ class YumProfileComment extends YumActiveRecord{
 			if(Yum::hasModule('messages') 
 					&& $user->privacy 
 					&& $user->privacy->message_new_profilecomment) {
-				Yii::import('YumModule.messages.models.YumMessage');
+				Yii::import('YumModulesRoot.messages.models.YumMessage');
 				YumMessage::write($user, $this->user_id,
 						Yum::t('New profile comment from {username}', array(
 								'{username}' => $this->user->username)),

@@ -1,30 +1,32 @@
 <?
-Yii::import('YumModule.models.*');
+Yii::import('YumModulesRoot.user.models.*');
 
 class YumProfileCommentController extends YumController
 {
 	public function accessRules()
 	{
 		return array(
-				array('allow',  
+				array('allow',
 					'actions'=>array('index'),
 					'users'=>array('*'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('create', 'delete'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('admin'),
 					'users'=>array('admin'),
 					),
-				array('deny', 
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
 	}
 
 	public function actionCreate() {
+
+		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfileComment;
 
 		$this->performAjaxValidation($model, 'profile-comment-form');

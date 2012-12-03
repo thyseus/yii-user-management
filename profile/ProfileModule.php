@@ -1,6 +1,6 @@
 <?
 Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class ProfileModule extends CWebModule {
 	public $layout = 'yumprofile';
@@ -50,8 +50,8 @@ class ProfileModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-			'YumModule.controllers.*',
-			'YumModule.models.*',
+			'YumModulesRoot.user.controllers.*',
+			'YumModulesRoot.user.models.*',
 			'ProfileModule.components.*',
 			'ProfileModule.models.*',
 		));
