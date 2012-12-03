@@ -1,10 +1,10 @@
 <?
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
-Yii::setPathOfAlias('YumModule' , dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'user');
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class RegistrationModule extends CWebModule {
 	// why enableRegistration ? - in case you only want a recovery !
-	public $layout = 'YumModule.views.layouts.yum';
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;
 
@@ -26,7 +26,7 @@ class RegistrationModule extends CWebModule {
 
 	public $registrationView = '/registration/registration';
 	public $changePasswordView =
-		'YumModule.views.user.changepassword';
+		'YumModulesRoot.user.views.user.changepassword';
 	public $recoverPasswordView =
 		'RegistrationModule.views.registration.recovery';
 
