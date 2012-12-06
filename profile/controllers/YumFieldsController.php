@@ -7,7 +7,7 @@ class YumFieldsController extends YumController
 	public function accessRules()
 	{
 		return array(
-			array('allow', 
+			array('allow',
 				'actions'=>array('index', 'create', 'update', 'view', 'admin','delete'),
 				'users'=>array(Yii::app()->user->name),
 				'expression' => 'Yii::app()->user->isAdmin()'
@@ -67,8 +67,8 @@ class YumFieldsController extends YumController
 		if(isset($_POST['YumProfileField']))
 		{
 			$model->attributes=$_POST['YumProfileField'];
-			
-			// ALTER TABLE `test` CHANGE `profiles` `field` INT( 10 ) NOT NULL 
+
+			// ALTER TABLE `test` CHANGE `profiles` `field` INT( 10 ) NOT NULL
 			// ALTER TABLE `test` CHANGE `profiles` `description` INT( 1 ) NOT NULL DEFAULT '0'
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));

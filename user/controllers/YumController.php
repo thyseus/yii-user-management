@@ -68,6 +68,6 @@ abstract class YumController extends CController {
 		return array(
 			'accessControl',
 		);
-	}	
+	}
 }
 ?>

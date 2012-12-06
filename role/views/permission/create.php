@@ -1,3 +1,10 @@
+<?php
+$this->title = Yum::t('Create A New Permission');
+$this->breadcrumbs=array(
+		Yum::t('Permissions')=>array('index'),
+		Yum::t('New'),
+		);
+?>
 <div class="form">
 
 <? $form=$this->beginWidget('CActiveForm', array(

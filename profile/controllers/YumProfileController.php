@@ -84,7 +84,7 @@ class YumProfileController extends YumController {
 	}
 
 	public function actionView($id = null) {
-		if(!Yum::module('profile')->profilesViewableByGuests 
+		if(!Yum::module('profile')->profilesViewableByGuests
 				&& Yii::app()->user->isGuest)
 			throw new CHttpException(403);
 
@@ -112,10 +112,10 @@ class YumProfileController extends YumController {
 
 		// If the user does not want to log his profile visits, cancel here
 		if(Yum::module('profile')->enableProfileVisitLogging
-				&& isset(Yii::app()->user->data()->privacy) 
+				&& isset(Yii::app()->user->data()->privacy)
 				&& !Yii::app()->user->data()->privacy->log_profile_visits)
 			return false;
-			
+
 		// Visiting my own profile doesn't count as visit
 		if($visitor_id == $visited_id)
 			return true;
