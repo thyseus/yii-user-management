@@ -13,7 +13,7 @@ class YumUsergroupMessage extends YumActiveRecord{
 
 	public function beforeValidate() {
 		if($this->isNewRecord)
-			$this->createTime = time();
+			$this->createtime = time();
 
 		return parent::beforeValidate();
 
@@ -22,10 +22,10 @@ class YumUsergroupMessage extends YumActiveRecord{
 	public function rules()
 	{
 		return array(
-			array('author_id, group_id, createTime, title, message', 'required'),
-			array('id, author_id, group_id, createTime', 'length', 'max'=>11),
+			array('author_id, group_id, createtime, title, message', 'required'),
+			array('id, author_id, group_id, createtime', 'length', 'max'=>11),
 			array('title', 'length', 'max'=>255),
-			array('id, author_id, group_id, createTime, title, message', 'safe', 'on'=>'search'),
+			array('id, author_id, group_id, createtime, title, message', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +43,7 @@ class YumUsergroupMessage extends YumActiveRecord{
 			'id' => Yum::t('ID'),
 			'author_id' => Yum::t('Author'),
 			'group_id' => Yum::t('Group'),
-			'createTime' => Yum::t('Createtime'),
+			'createtime' => Yum::t('Createtime'),
 			'title' => Yum::t('Title'),
 			'message' => Yum::t('Message'),
 		);
@@ -56,7 +56,7 @@ class YumUsergroupMessage extends YumActiveRecord{
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('author_id', $this->author_id, true);
 		$criteria->compare('group_id', $this->group_id, true);
-		$criteria->compare('createTime', $this->createTime, true);
+		$criteria->compare('createtime', $this->createtime, true);
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('message', $this->message, true);
 

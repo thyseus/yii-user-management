@@ -8,10 +8,10 @@
  * @property string $username
  * @property string $password
  * @property string $saltf
- * @property string $activationKey
- * @property integer $createTime
- * @property integer $lastVisit
- * @property integer $superUser
+ * @property string $activationkey
+ * @property integer $createtime
+ * @property integer $lastvisit
+ * @property integer $superuser
  * @property integer $status
  *
  * Relations
@@ -23,7 +23,7 @@
  * @property YumUser $active
  * @property YumUser $notactive
  * @property YumUser $banned
- * @property YumUser $superUser
+ * @property YumUser $superuser
  *
  */
 class YumUser extends YumActiveRecord
@@ -36,7 +36,7 @@ class YumUser extends YumActiveRecord
 	public $username;
 	public $password;
 	public $salt;
-	public $activationKey;
+	public $activationkey;
 	public $password_changed = false;
 
 	public function behaviors()
@@ -76,7 +76,7 @@ class YumUser extends YumActiveRecord
 
 	public function isOnline()
 	{
-		return $this->lastAction > time() - Yum::module()->offlineIndicationTime;
+		return $this->lastaction > time() - Yum::module()->offlineIndicationTime;
 	}
 
 	// If Online status is enabled, we need to set the timestamp of the
@@ -84,8 +84,8 @@ class YumUser extends YumActiveRecord
 	public function setLastAction()
 	{
 		if (!Yii::app()->user->isGuest && !$this->isNewRecord) {
-			$this->lastAction = time();
-			return $this->save(false, array('lastAction'));
+			$this->lastaction = time();
+			return $this->save(false, array('lastaction'));
 		}
 	}
 
@@ -99,8 +99,8 @@ class YumUser extends YumActiveRecord
 	public function logout()
 	{
 		if (Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest) {
-			$this->lastAction = 0;
-			$this->save('lastAction');
+			$this->lastaction = 0;
+			$this->save('lastaction');
 		}
 	}
 
@@ -162,15 +162,15 @@ class YumUser extends YumActiveRecord
 
 		// Show newest users first by default
 		if (!isset($_GET['YumUser_sort']))
-			$criteria->order = 't.createTime DESC';
+			$criteria->order = 't.createtime DESC';
 
 		$criteria->together = false;
 		$criteria->compare('t.id', $this->id, true);
 		$criteria->compare('t.username', $this->username, true);
 		$criteria->compare('t.status', $this->status);
-		$criteria->compare('t.superUser', $this->superUser);
-		$criteria->compare('t.createTime', $this->createTime, true);
-		$criteria->compare('t.lastVisit', $this->lastVisit, true);
+		$criteria->compare('t.superuser', $this->superuser);
+		$criteria->compare('t.createtime', $this->createtime, true);
+		$criteria->compare('t.lastvisit', $this->lastvisit, true);
 
 		return new CActiveDataProvider(get_class($this), array(
 					'criteria' => $criteria,
@@ -183,7 +183,7 @@ class YumUser extends YumActiveRecord
 		if ($this->isNewRecord) {
 			if(!$this->salt)
 				$this->salt = YumEncrypt::generateSalt();
-			$this->createTime = time();
+			$this->createtime = time();
 		}
 
 		return true;
@@ -193,7 +193,7 @@ class YumUser extends YumActiveRecord
 	{
 		if ($password != '') {
 			$this->password = YumEncrypt::encrypt($password, $salt);
-			$this->lastPasswordChange = time();
+			$this->lastpasswordchange = time();
 			$this->password_changed = true;
 			$this->salt = $salt;
 			if (!$this->isNewRecord)
@@ -265,12 +265,12 @@ class YumUser extends YumActiveRecord
 				'pattern' => $usernameRequirements['match'],
 				'message' => Yum::t($usernameRequirements['dontMatchMessage']));
 		$rules[] = array('status', 'in', 'range' => array(0, 1, 2, 3, -1, -2));
-		$rules[] = array('superUser', 'in', 'range' => array(0, 1));
-		$rules[] = array('username, createTime, lastVisit, lastPasswordChange, superUser, status', 'required');
-		$rules[] = array('notifyType, avatar', 'safe');
+		$rules[] = array('superuser', 'in', 'range' => array(0, 1));
+		$rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
+		$rules[] = array('notifytype, avatar', 'safe');
 		$rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
 		$rules[] = array('salt', 'required', 'on' => array('insert', 'registration'));
-		$rules[] = array('createTime, lastVisit, lastAction, superUser, status', 'numerical', 'integerOnly' => true);
+		$rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
 
 		if (Yum::hasModule('avatar')) {
 			// require an avatar image in the avatar upload screen
@@ -510,9 +510,9 @@ class YumUser extends YumActiveRecord
 
 			$this->setPassword($password, $salt);
 		}
-		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
-		$this->createTime = time();
-		$this->superUser = 0;
+		$this->activationkey = $this->generateActivationKey(false/*, $password*/);
+		$this->createtime = time();
+		$this->superuser = 0;
 
 		// Users stay banned until they confirm their email address.
 		$this->status = YumUser::STATUS_INACTIVE;
@@ -558,7 +558,7 @@ class YumUser extends YumActiveRecord
 			$activationUrl = Yum::module('registration')->activationUrl;
 			if (is_array($activationUrl) && isset($this->profile)) {
 				$activationUrl = $activationUrl[0];
-				$params['key'] = $this->activationKey;
+				$params['key'] = $this->activationkey;
 				$params['email'] = $this->profile->email;
 
 				return Yii::app()->controller->createAbsoluteUrl($activationUrl, $params);
@@ -570,14 +570,14 @@ class YumUser extends YumActiveRecord
 	public function isPasswordExpired()
 	{
 		$distance = Yum::module('user')->password_expiration_time * 60 * 60;
-		return $this->lastPasswordChange - $distance > time();
+		return $this->lastpasswordchange - $distance > time();
 	}
 
 	/**
 	 * Activation of an user account.
 	 * If everything is set properly, and the emails exists in the database,
 	 * and is associated with a correct user, and this user has the status
-	 * NOTACTIVE and the given activationKey is identical to the one in the
+	 * NOTACTIVE and the given activationkey is identical to the one in the
 	 * database then generate a new Activation key to avoid double activation,
 	 * set the status to ACTIVATED and save the data
 	 * Error Codes:
@@ -595,10 +595,10 @@ class YumUser extends YumActiveRecord
 			if ($user = $profile->user) {
 				if ($user->status != self::STATUS_INACTIVE)
 					return -1;
-				if ($user->activationKey == $key) {
-					$user->activationKey = $user->generateActivationKey(true);
+				if ($user->activationkey == $key) {
+					$user->activationkey = $user->generateActivationKey(true);
 					$user->status = self::STATUS_ACTIVE;
-					if ($user->save(false, array('activationKey', 'status'))) {
+					if ($user->save(false, array('activationkey', 'status'))) {
 						Yum::log(Yum::t('User {username} has been activated', array(
 										'{username}' => $user->username)));
 						if (Yum::hasModule('messages')
@@ -635,15 +635,15 @@ class YumUser extends YumActiveRecord
 	public function generateActivationKey($activate = false)
 	{
 		if($activate) {
-			$this->activationKey = $activate;
-			$this->save(false, array('activationKey'));
+			$this->activationkey = $activate;
+			$this->save(false, array('activationkey'));
 		} else
-			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
+			$this->activationkey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
 
 		if(!$this->isNewRecord)
-			$this->save(false, array('activationKey'));
+			$this->save(false, array('activationkey'));
 
-		return $this->activationKey;
+		return $this->activationkey;
 	}
 
 	public function attributeLabels()
@@ -654,11 +654,11 @@ class YumUser extends YumActiveRecord
 				'password' => Yum::t("Password"),
 				'verifyPassword' => Yum::t("Retype password"),
 				'verifyCode' => Yum::t("Verification code"),
-				'activationKey' => Yum::t("Activation key"),
-				'createTime' => Yum::t("Registration date"),
-				'lastVisit' => Yum::t("Last visit"),
-				'lastAction' => Yum::t("Online status"),
-				'superUser' => Yum::t("Superuser"),
+				'activationkey' => Yum::t("Activation key"),
+				'createtime' => Yum::t("Registration date"),
+				'lastvisit' => Yum::t("Last visit"),
+				'lastaction' => Yum::t("Online status"),
+				'superuser' => Yum::t("Superuser"),
 				'status' => Yum::t("Status"),
 				'avatar' => Yum::t("Avatar image"),
 				);
@@ -680,7 +680,7 @@ class YumUser extends YumActiveRecord
 				'active' => array('condition' => 'status=' . self::STATUS_ACTIVE,),
 				'inactive' => array('condition' => 'status=' . self::STATUS_INACTIVE,),
 				'banned' => array('condition' => 'status=' . self::STATUS_BANNED,),
-				'superUser' => array('condition' => 'superUser = 1',),
+				'superuser' => array('condition' => 'superuser = 1',),
 				'public' => array(
 					'join' => 'LEFT JOIN privacysetting on t.id = privacysetting.user_id',
 					'condition' => 'appear_in_search = 1',),
@@ -724,7 +724,7 @@ class YumUser extends YumActiveRecord
 	 */
 	public static function getAdmins()
 	{
-		$admins = YumUser::model()->active()->superUser()->findAll();
+		$admins = YumUser::model()->active()->superuser()->findAll();
 		$returnarray = array();
 		foreach ($admins as $admin)
 			array_push($returnarray, $admin->username);

@@ -24,9 +24,9 @@
 </div>
 
 <div class="row">
-<? echo $form->labelEx($model,'createTime'); ?>
-<? echo $form->textField($model,'createTime'); ?>
-<? echo $form->error($model,'createTime'); ?>
+<? echo $form->labelEx($model,'createtime'); ?>
+<? echo $form->textField($model,'createtime'); ?>
+<? echo $form->error($model,'createtime'); ?>
 </div>
 
 

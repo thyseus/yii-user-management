@@ -18,17 +18,17 @@ $this->title=Yii::t('UserModule.user','User list');
 <? echo CHtml::encode($model->getAttributeLabel('email')); ?>:
 <? echo CHtml::encode($model->email); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('activationKey')); ?>:
-<? echo CHtml::encode($model->activationKey); ?>
+<? echo CHtml::encode($model->getAttributeLabel('activationkey')); ?>:
+<? echo CHtml::encode($model->activationkey); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('createTime')); ?>:
-<? echo CHtml::encode($model->createTime); ?>
+<? echo CHtml::encode($model->getAttributeLabel('createtime')); ?>:
+<? echo CHtml::encode($model->createtime); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('lastVisit')); ?>:
-<? echo CHtml::encode($model->lastVisit); ?>
+<? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>:
+<? echo CHtml::encode($model->lastvisit); ?>
 <br/>
-<? echo CHtml::encode($model->getAttributeLabel('superUser')); ?>:
-<? echo CHtml::encode($model->superUser); ?>
+<? echo CHtml::encode($model->getAttributeLabel('superuser')); ?>:
+<? echo CHtml::encode($model->superuser); ?>
 <br/>
 <? echo CHtml::encode($model->getAttributeLabel('status')); ?>:
 <? echo CHtml::encode($model->status); ?>

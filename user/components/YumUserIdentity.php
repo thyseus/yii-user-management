@@ -67,10 +67,10 @@ class YumUserIdentity extends CUserIdentity {
 						$user->username = $this->username;
 						if ($settings->ldap_transfer_pw == 1)
 							$user->password = YumEncrypt::encrypt($this->password);
-						$user->lastPasswordChange = 0;
-						$user->activationKey = '';
-						$user->superUser = 0;
-						$user->createTime = time();
+						$user->lastpasswordchange = 0;
+						$user->activationkey = '';
+						$user->superuser = 0;
+						$user->createtime = time();
 						$user->status = 1;
 		
 						if ($user->save(false))

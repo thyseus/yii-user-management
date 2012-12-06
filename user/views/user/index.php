@@ -13,12 +13,12 @@ $this->breadcrumbs=array(Yum::t("Users"));
 				array("//profile/profile/view","id"=>$data->id))',
 			),
 		array(
-			'name' => 'createTime',
-			'value' => 'date(UserModule::$dateFormat,$data->createTime)',
+			'name' => 'createtime',
+			'value' => 'date(UserModule::$dateFormat,$data->createtime)',
 		),
 		array(
-			'name' => 'lastVisit',
-			'value' => 'date(UserModule::$dateFormat,$data->lastVisit)',
+			'name' => 'lastvisit',
+			'value' => 'date(UserModule::$dateFormat,$data->lastvisit)',
 		),
 	),
 )); ?>

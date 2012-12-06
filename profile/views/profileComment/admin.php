@@ -47,8 +47,8 @@ $locale = CLocale::getInstance(Yii::app()->language);
 		'profile_id',
 		'comment',
 		array(
-				'name'=>'createTime',
-				'value' =>'date("Y. m. d G:i:s", $data->createTime)'),
+				'name'=>'createtime',
+				'value' =>'date("Y. m. d G:i:s", $data->createtime)'),
 		array(
 			'class'=>'CButtonColumn',
 		),

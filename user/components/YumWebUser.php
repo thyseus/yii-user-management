@@ -150,7 +150,7 @@ public function getRoles() {
 		if($this->isGuest)
 			return false;
 		else
-			return Yii::app()->user->data()->superUser;
+			return Yii::app()->user->data()->superuser;
 	}
 }
 ?>
