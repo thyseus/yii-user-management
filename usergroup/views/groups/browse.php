@@ -1,12 +1,10 @@
 <?
+$this->title = Yum::t('Browse user groups');
 $this->breadcrumbs=array(
 	Yum::t('Groups'),
 	Yum::t('Browse'));
 
-?>
-<h1> <? echo Yum::t('Browse user groups'); ?> </h1>
-
-<? $form=$this->beginWidget('CActiveForm', array(
+$form=$this->beginWidget('CActiveForm', array(
         'action'=>Yii::app()->createUrl($this->route),
         'method'=>'get',
 )); ?>
@@ -29,5 +27,5 @@ $this->breadcrumbs=array(
 	'id'=>'usergroup-grid',
 	'dataProvider'=>$model->search(),
 	'itemView' => '_view',
-	)); 
+	));
 ?>
