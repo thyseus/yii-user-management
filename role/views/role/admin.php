@@ -1,14 +1,11 @@
 <?
-$this->title = Yum::t('Manage roles'); 
-
+$this->title = Yum::t('Manage roles');
 $this->breadcrumbs=array(
 	Yum::t('Roles')=>array('index'),
 	Yum::t('Manage'),
 );
 
-?>
-
-<? $this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 		array(
@@ -23,4 +20,4 @@ $this->breadcrumbs=array(
 			'class'=>'CButtonColumn',
 		),
 	),
-)); ?>
+));

@@ -1,14 +1,11 @@
 <?
+$this->title = Yum::t($model->title);
 $this->breadcrumbs=array(
 	Yum::t('Actions')=>array('index'),
 	$model->title,
 );
 
-?>
-
-<h1> <? echo $model->title; ?></h1>
-
-<? $this->widget('zii.widgets.CDetailView', array(
+ $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
@@ -16,4 +13,4 @@ $this->breadcrumbs=array(
 		'comment',
 		'subject',
 	),
-)); ?>
+));
