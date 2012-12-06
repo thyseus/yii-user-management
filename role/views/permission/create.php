@@ -1,8 +1,8 @@
 <?php
-$this->title = Yum::t('Create A New Permission');
+$this->title = Yum::t('Grant New Permissions');
 $this->breadcrumbs=array(
 		Yum::t('Permissions')=>array('index'),
-		Yum::t('New'),
+		Yum::t('Grant'),
 		);
 ?>
 <div class="form">
