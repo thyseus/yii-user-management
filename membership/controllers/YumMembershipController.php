@@ -118,8 +118,6 @@ class YumMembershipController extends YumController {
 	}
 
 	public function actionAdmin() {
-		$this->layout = Yum::module()->adminLayout;
-
 		$model=new YumMembership('search');
 		$model->unsetAttributes();
 

@@ -24,11 +24,9 @@ class YumProfileCommentController extends YumController
 				);
 	}
 
-	public function actionCreate() {
-
-		$this->layout = Yum::module()->adminLayout;
+	public function actionCreate()
+	{
 		$model = new YumProfileComment;
-
 		$this->performAjaxValidation($model, 'profile-comment-form');
 
 		if(isset($_POST['YumProfileComment'])) {

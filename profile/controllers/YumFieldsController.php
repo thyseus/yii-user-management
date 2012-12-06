@@ -20,14 +20,12 @@ class YumFieldsController extends YumController
 
 	public function actionView()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$this->render('view',array(
 			'model'=>$this->loadModel('YumProfileField'),
 		));
 	}
 
 	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfileField;
 
 		// add to group?
@@ -65,8 +63,6 @@ class YumFieldsController extends YumController
 
 	public function actionUpdate()
 	{
-		$this->layout = Yum::module()->adminLayout;
-
 		$model = $this->loadModel('YumProfileField');
 		if(isset($_POST['YumProfileField']))
 		{
@@ -85,7 +81,6 @@ class YumFieldsController extends YumController
 
 	public function actionDelete()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -104,7 +99,6 @@ class YumFieldsController extends YumController
 
 	public function actionIndex()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
 				'pageSize'=>self::PAGE_SIZE,
@@ -121,8 +115,6 @@ class YumFieldsController extends YumController
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
-
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
 				'pageSize'=>self::PAGE_SIZE,

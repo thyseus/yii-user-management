@@ -38,7 +38,6 @@ class YumPermissionController extends YumController
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module('role')->layout;
 		$model=new YumPermission('search');
 		$model->unsetAttributes();
 
@@ -50,8 +49,8 @@ class YumPermissionController extends YumController
 					));
 	}
 
-	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
+	public function actionCreate()
+	{
 		$model = new YumPermission;
 
 		$this->performAjaxValidation($model, 'permission-create-form');

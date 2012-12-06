@@ -35,7 +35,6 @@ class YumPaymentController extends YumController {
 
 	public function actionCreate()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumPayment;
 
 		if(isset($_POST['YumPayment'])) {
@@ -103,7 +102,6 @@ class YumPaymentController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumPayment('search');
 		$model->unsetAttributes();
 

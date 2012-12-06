@@ -13,6 +13,12 @@ abstract class YumController extends CController {
 	public $title ='';
 	public $_model;
 
+	public function init()
+	{
+		// set the default layout
+		$this->layout = Yum::module()->layout;
+	}
+
 	protected function performAjaxValidation($model, $form) {
 		if(isset($_POST['ajax']) && $_POST['ajax'] == $form) {
 			echo CActiveForm::validate($model);

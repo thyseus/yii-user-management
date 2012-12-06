@@ -25,7 +25,6 @@ class YumRegistrationController extends YumController {
 		if(!Yii::app()->user->isGuest) 
 			$this->redirect(Yii::app()->user->returnUrl);
 
-		$this->layout = Yum::module('registration')->layout;
 		return parent::beforeAction($action);
 	}
 
