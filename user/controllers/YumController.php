@@ -26,9 +26,13 @@ abstract class YumController extends CController {
 		}
 	}
 
-	public function beforeAction($action) {
+	public function beforeAction($action)
+	{
 		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
 			Yii::app()->user->data()->setLastAction();
+
+		if (Yii::app()->user->isAdmin())
+			$this->layout = Yum::module()->adminLayout;
 
 		return parent::beforeAction($action);
 	}
