@@ -40,7 +40,6 @@ class YumProfileCommentController extends YumController
 						), false, true);
 	}
 
-
 	public function actionDelete($id) {
 		$comment = YumProfileComment::model()->findByPk($id);
 
