@@ -2,7 +2,7 @@
 <? echo CHtml::errorSummary($form); ?>
 <div class="row">
 <? echo CHtml::hiddenField('email', $email); ?>
-<? echo CHtml::hiddenField('activationKey', $key); ?>
+<? echo CHtml::hiddenField('activationkey', $key); ?>
 </div>
 
 <div class="row">

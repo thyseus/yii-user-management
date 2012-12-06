@@ -11,7 +11,7 @@ class MessageModule extends CWebModule
 	// None, Digest, Instant, User, Threshold
 	// 'User' means to use the user-specific option in the user table
 	public $messageTable = 'message';
-	public $notifyType = 'user';
+	public $notifytype = 'user';
 
 	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 

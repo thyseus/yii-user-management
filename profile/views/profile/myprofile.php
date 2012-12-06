@@ -62,9 +62,9 @@ $this->renderPartial('/messages/new_messages');?>
 </td>
 </tr>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastVisit')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('lastvisit')); ?>
 </th>
-    <td><? echo date(UserModule::$dateFormat,$model->lastVisit); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->lastvisit); ?>
 </td>
 </tr>
 <tr>

@@ -84,9 +84,9 @@ class YumAuthController extends YumController {
 					$user = new YumUser;
 					$user->username = 'fb_'.YumRegistrationForm::genRandomString(Yum::module()->usernameRequirements['maxLen'] - 3);
 					$user->password = YumEncrypt::encrypt(YumUserChangePassword::createRandomPassword());
-					$user->activationKey = YumEncrypt::encrypt(microtime().$user->password, $user->salt);
-					$user->createTime = time();
-					$user->superUser = 0;
+					$user->activationkey = YumEncrypt::encrypt(microtime().$user->password, $user->salt);
+					$user->createtime = time();
+					$user->superuser = 0;
 					if ($user->save()) {
 						$profile = new YumProfile;
 						$profile->user_id = $user->id;
@@ -97,7 +97,7 @@ class YumAuthController extends YumController {
 				} else {
 					//No superuser account can log in using Facebook
 					$user = $profile->user;
-					if ($user->superUser) {
+					if ($user->superuser) {
 						Yum::log('A superuser tried to login by facebook', 'error');
 						return false;
 					}
@@ -106,7 +106,7 @@ class YumAuthController extends YumController {
 					$profile->save(false);
 					$user->username = 'fb_'.YumRegistrationForm::genRandomString(Yum::module()->usernameRequirements['maxLen'] - 3);
 
-					$user->superUser = 0;
+					$user->superuser = 0;
 					$user->save();
 				}
 
@@ -318,14 +318,14 @@ class YumAuthController extends YumController {
 	}
 
 	public function redirectUser($user) {
-		$user->lastVisit = time();
-		$user->save(true, array('lastVisit'));
+		$user->lastvisit = time();
+		$user->save(true, array('lastvisit'));
 
 		Yii::app()->user->setState('first_login', true);
 		if(isset($_POST) && isset($_POST['returnUrl']))
 			$this->redirect(array($_POST['returnUrl']));
 
-		if ($user->superUser && Yum::module()->returnAdminUrl)
+		if ($user->superuser && Yum::module()->returnAdminUrl)
 			$this->redirect(Yum::module()->returnAdminUrl);
 
 		if(isset(Yii::app()->user->returnUrl))

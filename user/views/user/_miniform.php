@@ -19,29 +19,29 @@
 <td><? echo $form->error($model,'password') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'activationKey') ?></td>
-<td><? echo $form->textField($model,'activationKey',array('size'=>60,'maxlength'=>128)) ?></td>
-<td><? echo $form->error($model,'activationKey') ?></td>
+<td><? echo $form->labelEx($model,'activationkey') ?></td>
+<td><? echo $form->textField($model,'activationkey',array('size'=>60,'maxlength'=>128)) ?></td>
+<td><? echo $form->error($model,'activationkey') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'createTime') ?></td>
-<td><? echo $form->textField($model,'createTime') ?></td>
-<td><? echo $form->error($model,'createTime') ?></td>
+<td><? echo $form->labelEx($model,'createtime') ?></td>
+<td><? echo $form->textField($model,'createtime') ?></td>
+<td><? echo $form->error($model,'createtime') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'lastVisit') ?></td>
-<td><? echo $form->textField($model,'lastVisit') ?></td>
-<td><? echo $form->error($model,'lastVisit') ?></td>
+<td><? echo $form->labelEx($model,'lastvisit') ?></td>
+<td><? echo $form->textField($model,'lastvisit') ?></td>
+<td><? echo $form->error($model,'lastvisit') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'lastPasswordChange') ?></td>
-<td><? echo $form->textField($model,'lastPasswordChange') ?></td>
-<td><? echo $form->error($model,'lastPasswordChange') ?></td>
+<td><? echo $form->labelEx($model,'lastpasswordchange') ?></td>
+<td><? echo $form->textField($model,'lastpasswordchange') ?></td>
+<td><? echo $form->error($model,'lastpasswordchange') ?></td>
 </tr>
 <tr>
-<td><? echo $form->labelEx($model,'superUser') ?></td>
-<td><? echo $form->textField($model,'superUser') ?></td>
-<td><? echo $form->error($model,'superUser') ?></td>
+<td><? echo $form->labelEx($model,'superuser') ?></td>
+<td><? echo $form->textField($model,'superuser') ?></td>
+<td><? echo $form->error($model,'superuser') ?></td>
 </tr>
 <tr>
 <td><? echo $form->labelEx($model,'status') ?></td>

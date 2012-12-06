@@ -36,8 +36,8 @@ echo CHtml::hiddenField('email',$form->email);
 		}
 ?>
 
-<? echo CHtml::activeLabelEx($user,'activationKey'); ?>
-<? echo CHtml::textField('activationKey'); //fixme ?> 
+<? echo CHtml::activeLabelEx($user,'activationkey'); ?>
+<? echo CHtml::textField('activationkey'); //fixme ?> 
 </div>
 <div class="row_submit">
 <? echo CHtml::submitButton(Yii::t("UserModule.user", "Activate")); ?>

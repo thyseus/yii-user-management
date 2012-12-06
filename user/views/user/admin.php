@@ -26,14 +26,14 @@ $this->widget('YumComponents.CsvGridView', array(
 				array("//user/user/view","id"=>$data->id))',
 			),
 			array(
-				'name'=>'createTime',
+				'name'=>'createtime',
 				'filter' => false,
-				'value'=>'date(UserModule::$dateFormat,$data->createTime)',
+				'value'=>'date(UserModule::$dateFormat,$data->createtime)',
 			),
 			array(
-				'name'=>'lastVisit',
+				'name'=>'lastvisit',
 				'filter' => false,
-				'value'=>'date(UserModule::$dateFormat,$data->lastVisit)',
+				'value'=>'date(UserModule::$dateFormat,$data->lastvisit)',
 			),
 			array(
 				'name'=>'status',

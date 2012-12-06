@@ -37,25 +37,25 @@ if(Yii::app()->user->isAdmin()) {
 
 	array_push($attributes,
 		/*
-		There is no added value to showing the password/salt/activationKey because these are all encrypted
+		There is no added value to showing the password/salt/activationkey because these are all encrypted
 		'password',
 		'salt',
-		'activationKey',*/
+		'activationkey',*/
 		array(
-			'name' => 'createTime',
-			'value' => date(UserModule::$dateFormat,$model->createTime),
+			'name' => 'createtime',
+			'value' => date(UserModule::$dateFormat,$model->createtime),
 			),
 		array(
-			'name' => 'lastVisit',
-			'value' => date(UserModule::$dateFormat,$model->lastVisit),
+			'name' => 'lastvisit',
+			'value' => date(UserModule::$dateFormat,$model->lastvisit),
 			),
 		array(
-			'name' => 'lastPasswordChange',
-			'value' => date(UserModule::$dateFormat,$model->lastPasswordChange),
+			'name' => 'lastpasswordchange',
+			'value' => date(UserModule::$dateFormat,$model->lastpasswordchange),
 			),
 		array(
-			'name' => 'superUser',
-			'value' => YumUser::itemAlias("AdminStatus",$model->superUser),
+			'name' => 'superuser',
+			'value' => YumUser::itemAlias("AdminStatus",$model->superuser),
 			),
 		array(
 			'name' => Yum::t('Activation link'),
@@ -92,12 +92,12 @@ if(Yii::app()->user->isAdmin()) {
 
 	array_push($attributes,
 			array(
-				'name' => 'createTime',
-				'value' => date(UserModule::$dateFormat,$model->createTime),
+				'name' => 'createtime',
+				'value' => date(UserModule::$dateFormat,$model->createtime),
 				),
 			array(
-				'name' => 'lastVisit',
-				'value' => date(UserModule::$dateFormat,$model->lastVisit),
+				'name' => 'lastvisit',
+				'value' => date(UserModule::$dateFormat,$model->lastvisit),
 				)
 			);
 

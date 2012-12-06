@@ -42,7 +42,7 @@ class YumUserController extends YumController {
 				$user->roles = array($_POST['role']);
 				$user->salt = YumEncrypt::generateSalt();
 				$user->password = YumEncrypt::encrypt($_POST['password'], $user->salt);
-				$user->createTime = time();
+				$user->createtime = time();
 				$user->status = $_POST['status'];
 
 				if($user->save()) {
@@ -208,7 +208,7 @@ class YumUserController extends YumController {
 				}
 			}
 
-			$model->activationKey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
+			$model->activationkey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
 
 			if($model->username == '' && isset($profile))
 				$model->username = $profile->email;
