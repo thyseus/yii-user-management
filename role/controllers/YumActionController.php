@@ -41,7 +41,6 @@ class YumActionController extends YumController {
 
 	public function actionCreate()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumAction;
 
 		$this->performAjaxValidation($model, 'action-form');
@@ -99,7 +98,6 @@ class YumActionController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumAction('search');
 		$model->unsetAttributes();
 		if(isset($_GET['YumAction']))

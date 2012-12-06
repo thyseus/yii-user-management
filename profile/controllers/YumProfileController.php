@@ -61,18 +61,15 @@ class YumProfileController extends YumController {
 						));
 	}
 
-	public function actionVisits() {
-		$this->layout = Yum::module()->adminLayout;
-
+	public function actionVisits()
+	{
 		$this->render('visits',array(
 			'model'=>new YumProfileVisit(),
 		));
-
 	}
 
-	public function beforeAction($action) {
-		if(!isset($this->layout))
-			$this->layout = Yum::module('profile')->layout;
+	public function beforeAction($action)
+	{
 		return parent::beforeAction($action);
 	}
 
@@ -147,7 +144,6 @@ class YumProfileController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfile;
 
 		$dataProvider=new CActiveDataProvider('YumProfile', array(

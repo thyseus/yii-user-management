@@ -17,8 +17,8 @@ class YumRoleController extends YumController {
 				);
 	}
 
-	public function actionView() {
-		$this->layout = Yum::module()->adminLayout;
+	public function actionView()
+	{
 		$model = $this->loadModel();
 
 		$assignedUsers = new CActiveDataProvider('YumUser', array(
@@ -40,9 +40,8 @@ class YumRoleController extends YumController {
 					'model'=>$model));
 	}
 
-	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
-
+	public function actionCreate()
+	{
 		$model = new YumRole();
 
 		$this->performAjaxValidation($model, 'yum-role-form');
@@ -65,7 +64,6 @@ class YumRoleController extends YumController {
 	}
 
 	public function actionUpdate() {
-		$this->layout = Yum::module()->adminLayout;
 		$model = $this->loadModel();
 
 		$this->performAjaxValidation($model, 'yum-role-form');
@@ -87,7 +85,6 @@ class YumRoleController extends YumController {
 	}
 
 	public function actionAdmin() {
-		$this->layout = Yum::module()->adminLayout;
 		$dataProvider = new CActiveDataProvider('YumRole', array(
 					'pagination' => array(
 						'pageSize' => 20,
