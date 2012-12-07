@@ -2,8 +2,12 @@
 
 class YumInstallController extends YumController
 {
-	public $layout = 'install';
 	public $defaultAction = 'install';
+
+	public function init()
+	{
+		$this->layout = 'install';
+	}
 
 	public function accessRules()
 	{
