@@ -56,9 +56,9 @@ $this->renderPartial('/messages/new_messages');?>
 </td>
 </tr>
 <tr>
-	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createTime')); ?>
+	<th class="label"><? echo CHtml::encode($model->getAttributeLabel('createtime')); ?>
 </th>
-    <td><? echo date(UserModule::$dateFormat,$model->createTime); ?>
+    <td><? echo date(UserModule::$dateFormat,$model->createtime); ?>
 </td>
 </tr>
 <tr>

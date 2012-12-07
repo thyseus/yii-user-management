@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `profile_comment` (
   `user_id` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `createTime` int(11) NOT NULL,
+  `createtime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2747,7 +2747,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   `salt` varchar(128) NOT NULL,
   `activationkey` varchar(128) NOT NULL DEFAULT '',
-  `createTime` int(10) NOT NULL DEFAULT '0',
+  `createtime` int(10) NOT NULL DEFAULT '0',
   `lastvisit` int(10) NOT NULL DEFAULT '0',
   `lastaction` int(10) NOT NULL DEFAULT '0',
   `lastpasswordchange` int(10) NOT NULL DEFAULT '0',
@@ -2765,7 +2765,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationkey`, `createTime`, `lastvisit`, `lastaction`, `lastpasswordchange`, `superuser`, `status`, `avatar`, `notifytype`) VALUES
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationkey`, `createtime`, `lastvisit`, `lastaction`, `lastpasswordchange`, `superuser`, `status`, `avatar`, `notifytype`) VALUES
   ('1', 'admin', 'c9d1d9d5b11ecb9de06515628e9aefc72a8627656825b0aa2dd46ccaee979a0d061eca76600f0fa0d8b956d487ddc8e18b994a024e3c4660e0ce5d48ed33b956', 'wOt9haRwGV4oTXbXSM5TJYRZOL/KAuH1glUOdJ5mC61vI7ZXVi2xMJOHpCe1VRmBkR7vaQMWNJsA8VVg4OZl4w==', '', '1349788374', '0', '0', '0', '1', '1', NULL, 'Instant'),
   ('2', 'demo', '7a2aed2f418adcbb11d07e592bdff6e4ab43e12f04bbb825b31919e817f465a4d6ba29e5ec328bd36223f40cf05ee862fb8d3415684c3f43a5928825bc21f8c5', 'Kolq4aEqFMBWt5ucoiE5Zw82PfY7IQoCXaaejCXPuPgnV6omcPumYuqR00aXHP1YJdVmCuDT0S3erq8oDY3UcQ==', '', '1349788374', '0', '0', '0', '0', '1', NULL, 'Instant');
 
@@ -2792,7 +2792,7 @@ CREATE TABLE IF NOT EXISTS `user_group_message` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `author_id` int(11) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,
-  `createTime` int(11) unsigned NOT NULL,
+  `createtime` int(11) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `message` text NOT NULL,
   PRIMARY KEY (`id`)

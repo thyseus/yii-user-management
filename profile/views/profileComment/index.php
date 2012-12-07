@@ -7,7 +7,7 @@ $dataProvider = new CActiveDataProvider('YumProfileComment', array(
 			'criteria'=>array(
 				'condition'=>'profile_id = :profile_id',
 				'params' => array(':profile_id' => $model->id),
-				'order'=>'createTime DESC')
+				'order'=>'createtime DESC')
 			)
 		);
 
