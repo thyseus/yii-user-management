@@ -119,7 +119,8 @@ class YumInstallController extends YumController
 					// Insert the translation strings that come with yum
 					$sql = file_get_contents(Yii::getPathOfAlias(
 								'YumModule.docs') . '/yum_translation.sql');
-
+					if ($translationTable != 'translation')
+						$sql = preg_replace('#INTO `translation`#', "INTO `{$translationTable}`", $sql);
 					$db->createCommand($sql)->execute();
 
 					// Install Usergroups submodule
