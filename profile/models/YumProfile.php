@@ -18,7 +18,7 @@ class YumProfile extends YumActiveRecord
 	}
 
 	public function afterSave() {
-		if($this->isNewRecord) 
+		if($this->isNewRecord)
 			Yii::log(Yum::t( 'A profile been created: {profile}', array(
 							'{profile}' => json_encode($this->attributes))));
 		else
@@ -31,7 +31,7 @@ class YumProfile extends YumActiveRecord
 	public function recentComments($count = 3) {
 		$criteria = new CDbCriteria;
 		$criteria->condition = 'id = ' .$this->id;
-		$criteria->order = 'createTime DESC';
+		$criteria->order = 'createtime DESC';
 		$criteria->limit = $count;
 		return YumProfileComment::model()->findAll($criteria);
 	}
@@ -67,8 +67,8 @@ class YumProfile extends YumActiveRecord
 			$i = 1;
 			foreach(YumProfileField::model()->cache(3600)->findAll() as $field) {
 				if(
-						(($i & $privacy) 
-						 && $field->visible != YumProfileField::VISIBLE_HIDDEN) 
+						(($i & $privacy)
+						 && $field->visible != YumProfileField::VISIBLE_HIDDEN)
 						|| $field->visible == YumProfileField::VISIBLE_PUBLIC)
 					$fields[] = $field;
 				$i*=2;
@@ -78,7 +78,7 @@ class YumProfile extends YumActiveRecord
 	}
 
 	/**
-	 * Returns resolved table name 
+	 * Returns resolved table name
 	 * @return string
 	 */
 	public function tableName()

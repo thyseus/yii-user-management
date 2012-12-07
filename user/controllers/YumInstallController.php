@@ -87,7 +87,7 @@ class YumInstallController extends YumController
 						`password` varchar(128) NOT NULL,
 						`salt` varchar(128) NOT NULL,
 						`activationkey` varchar(128) NOT NULL default '',
-						`createTime` int(10) NOT NULL default '0',
+						`createtime` int(10) NOT NULL default '0',
 						`lastvisit` int(10) NOT NULL default '0',
 						`lastaction` int(10) NOT NULL default '0',
 						`lastpasswordchange` int(10) NOT NULL default '0',
@@ -140,7 +140,7 @@ class YumInstallController extends YumController
 							`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 							`author_id` int(11) unsigned NOT NULL,
 							`group_id` int(11) unsigned NOT NULL,
-							`createTime` int(11) unsigned NOT NULL,
+							`createtime` int(11) unsigned NOT NULL,
 							`title` varchar(255) NOT NULL,
 							`message` text NOT NULL,
 							PRIMARY KEY (`id`)
@@ -265,7 +265,7 @@ class YumInstallController extends YumController
 							`user_id` int(11) NOT NULL,
 							`profile_id` int(11) NOT NULL,
 							`comment` text NOT NULL,
-							`createTime` int(11) NOT NULL,
+							`createtime` int(11) NOT NULL,
 							PRIMARY KEY (`id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 
@@ -362,7 +362,7 @@ class YumInstallController extends YumController
 					$salt1 = YumEncrypt::generateSalt();
 					$salt2 = YumEncrypt::generateSalt();
 					$sql = "INSERT INTO `" . $userTable
-					   ."` (`id`, `username`, `password`, `salt`, `activationkey`, `createTime`, `lastvisit`, `superuser`, `status`) VALUES "
+					   ."` (`id`, `username`, `password`, `salt`, `activationkey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
 					   ."(1, 'admin', '" . YumEncrypt::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
 					   ."(2, 'demo', '" . YumEncrypt::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
 					$db->createCommand($sql)->execute();
