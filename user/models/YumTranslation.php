@@ -1,4 +1,4 @@
-<?
+<?php
 /** This is the Active Record class file of a translation string in 
 	Yii-user-Management. Please note that it is highly suggested to use a cache
 	when using translation strings coming from a database. */

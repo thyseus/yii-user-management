@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Sent messages');
 
 $this->breadcrumbs=array(

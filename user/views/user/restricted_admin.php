@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yii::t('UserModule.user', 'Manage users');
 
 $this->breadcrumbs = array(

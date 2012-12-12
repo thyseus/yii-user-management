@@ -1,3 +1,3 @@
-<p> The Payment <? echo $model; ?> has been successfully created </p>
+<p> The Payment <?php echo $model; ?> has been successfully created </p>
 
-<? echo CHtml::Button(Yii::t('app', 'Back'), array('id' => $relation.'_done')); ?><? echo CHtml::Button(Yii::t('app', 'Add another Payment'), array('id' => $relation.'_create'));
+<?php echo CHtml::Button(Yii::t('app', 'Back'), array('id' => $relation.'_done')); ?><?php echo CHtml::Button(Yii::t('app', 'Add another Payment'), array('id' => $relation.'_create'));

@@ -1,10 +1,10 @@
 <div class="row">
-<? echo CHtml::activeLabelEx($form,'password'); ?>
-<? echo CHtml::activePasswordField($form,'password'); ?>
+<?php echo CHtml::activeLabelEx($form,'password'); ?>
+<?php echo CHtml::activePasswordField($form,'password'); ?>
 </div>
 
 <div class="row">
-<? echo CHtml::activeLabelEx($form,'verifyPassword'); ?>
-<? echo CHtml::activePasswordField($form,'verifyPassword'); ?>
+<?php echo CHtml::activeLabelEx($form,'verifyPassword'); ?>
+<?php echo CHtml::activePasswordField($form,'verifyPassword'); ?>
 </div>
 

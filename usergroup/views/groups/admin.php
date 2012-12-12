@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('app', 'Manage')." Usergroups";
 $this->breadcrumbs=array(
 	Yum::t('Usergroups')=>array(Yii::t('app', 'index')),
@@ -26,12 +26,12 @@ data: $(this).serialize()
 			");
 echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<? $this->renderPartial('_search',array(
+<?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div>
 
-<?
+<?php
 $locale = CLocale::getInstance(Yii::app()->language);
 
  $this->widget('zii.widgets.grid.CGridView', array(

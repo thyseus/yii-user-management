@@ -1,4 +1,4 @@
-<?
+<?php
 echo '<p>'. Yum::t('These users have visited your profile recently') . ': </p>';
 
 if($visits) {

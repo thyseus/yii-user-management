@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * RegistrationForm class.
  * RegistrationForm is the data structure for keeping

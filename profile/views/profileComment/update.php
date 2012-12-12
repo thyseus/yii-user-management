@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('app', 'Update')." ProfileComment #".$model->id;
 $this->breadcrumbs=array(
 	'Profile Comments'=>array('index'),

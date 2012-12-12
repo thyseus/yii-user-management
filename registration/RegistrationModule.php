@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
 Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 

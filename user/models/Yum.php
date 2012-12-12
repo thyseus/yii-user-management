@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(dirname(__FILE__))));
 
 /**

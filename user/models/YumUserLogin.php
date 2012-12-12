@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * LoginForm class.

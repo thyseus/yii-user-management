@@ -1,4 +1,4 @@
-<?
+<?php
 $this->beginWidget('zii.widgets.jui.CJuiDialog', array(
 			'id'=>rand(1, 999999),
 			'options'=>array(

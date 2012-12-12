@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('app', 'Update').' Usergroup #'.$model->id;
 $this->breadcrumbs=array(
 	'Usergroups'=>array('index'),

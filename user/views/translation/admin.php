@@ -1,13 +1,13 @@
-<?
+<?php
 $this->breadcrumbs=array(
 		Yum::t('Translation')=>array('admin'),
 		Yum::t('Manage'),
 		);
 ?>
 
-<h2><? echo Yum::t('Manage Translations'); ?> </h2>
+<h2><?php echo Yum::t('Manage Translations'); ?> </h2>
 
-<? $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'category-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
@@ -32,4 +32,4 @@ $this->breadcrumbs=array(
 				),
 			)); ?>
 
-			<? echo CHtml::link(Yum::t('Create new Translation'), array('create')); ?>
+			<?php echo CHtml::link(Yum::t('Create new Translation'), array('create')); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::import('YumModule.UserModule');
 /**
  * EPhotoValidator class file.

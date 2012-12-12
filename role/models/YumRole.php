@@ -1,4 +1,4 @@
-<?
+<?php
 class YumRole extends YumActiveRecord {
 	private $_userRoleTable;
 	private $_roleRoleTable;

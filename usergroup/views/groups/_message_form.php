@@ -1,4 +1,4 @@
-<?
+<?php
   echo CHtml::beginForm(array('//usergroup/groups/write'));
 
 	echo CHtml::hiddenField('YumUsergroupMessage[group_id]', $group_id);

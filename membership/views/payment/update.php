@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Update payment type').': '.$model->title;
 $this->breadcrumbs=array(
 	Yum::t('Payments')=>array('index'),
