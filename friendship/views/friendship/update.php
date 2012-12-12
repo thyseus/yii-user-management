@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Friendships')=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
@@ -6,6 +6,6 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Update Friendship #<? echo $model->id; ?></h1>
+<h1>Update Friendship #<?php echo $model->id; ?></h1>
 
-<? echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

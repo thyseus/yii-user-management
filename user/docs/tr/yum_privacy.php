@@ -1,4 +1,4 @@
-<?
+<?php
 return array(
 		'Log profile visits' => 'سجل زيارات البروفايل',
 		'Do not show the owner of a profile when i visit him' => 'عدم عرض مالك البروفايل خلال زيارتي له',

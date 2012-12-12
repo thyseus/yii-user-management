@@ -1,4 +1,4 @@
-<?
+<?php
 class YumProfileVisit extends YumActiveRecord {
 
 	public static function model($className=__CLASS__) {

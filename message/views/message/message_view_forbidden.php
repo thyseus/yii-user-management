@@ -1,4 +1,4 @@
-<?
+<?php
 
 echo Yum::t('You are not allowed to see this message.');
 echo '<br />';

@@ -1,4 +1,4 @@
-<?
+<?php
 return array(
 'Create role' => 'إنشاء تصنيف مستخدمين',
 'Save role' => 'حفظ التصنيف',

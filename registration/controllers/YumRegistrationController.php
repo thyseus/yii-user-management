@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* This file handles a example registration process logic and some of the
  * most used functions for Registration and Activation. It is recommended to

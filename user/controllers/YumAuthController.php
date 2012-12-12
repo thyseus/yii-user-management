@@ -1,4 +1,4 @@
-<?
+<?php
 class YumAuthController extends YumController {
 	public $defaultAction = 'login';
 	public $loginForm = null;

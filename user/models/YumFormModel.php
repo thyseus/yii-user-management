@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Base form model class
  * @author tomasz.suchanek

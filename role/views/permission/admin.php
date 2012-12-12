@@ -1,4 +1,4 @@
-<?
+<?php
 	$this->title = Yum::t('Manage Permissions');
 	$this->breadcrumbs=array(
 		Yum::t('Permissions')=>array('index'),

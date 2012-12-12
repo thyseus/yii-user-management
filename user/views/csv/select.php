@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs = array(
 		Yum::t('Users') => array('//user/user/admin'),
 		Yum::t('Csv export'));

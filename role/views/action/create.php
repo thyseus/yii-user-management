@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Create Action');
 $this->breadcrumbs=array(
 	Yum::t('Actions')=>array('index'),

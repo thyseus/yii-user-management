@@ -1,4 +1,4 @@
-<?
+<?php
 return array(
 	'Your account has been activated' => 'Ihr Zugang wurde aktiviert',
 	'Activation did not work' => 'Die Aktivierung ist fehlgeschlagen',

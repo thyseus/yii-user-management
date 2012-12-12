@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Translation')=>array('admin'),
 	sprintf('%s-%s-%s',
@@ -11,7 +11,7 @@ $models[0]->message),
 ?>
 
 <h2>
-<?
+<?php
 
 if($models[0]->isNewRecord)
 	echo Yum::t('New translation');
@@ -19,4 +19,4 @@ if($models[0]->isNewRecord)
 	echo Yum::t('Update translation {message}', array(
 				'{message}' => $models[0]->message)); ?></h2>
 
-<? echo $this->renderPartial('_form', array('models'=>$models)); ?>
+<?php echo $this->renderPartial('_form', array('models'=>$models)); ?>

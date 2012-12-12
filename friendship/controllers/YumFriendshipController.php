@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::import('YumModulesRoot.user.controllers.YumController');
 Yii::import('YumComponents.*');
 Yii::import('YumModulesRoot.user.models.*');
