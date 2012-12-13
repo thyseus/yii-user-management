@@ -67,7 +67,7 @@ class YumFriendship extends YumActiveRecord {
 		if(Yum::hasModule('message') 
 				&& isset($this->inviter->privacy) 
 				&& $this->inviter->privacy->message_new_friendship) {
-			Yii::import('application.modules.messages.models.YumMessage');
+			Yii::import('application.modules.message.models.YumMessage');
 			YumMessage::write($this->inviter, $this->invited,
 					Yum::t('Your friendship request has been accepted'),
 					strtr(
