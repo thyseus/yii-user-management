@@ -2445,4 +2445,6 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Downgrade to {role}', 'Wechsle auf {role}', 'de', 'yum'),
 ('Your subscription setting has been saved', 'Ihre Einstellungen wurden gespeichert', 'de', 'yum'),
 ('zipcode', 'code postal', 'fr', 'yum'),
+('New message from {from}: {subject}', 'Neue Nachricht von {from}: {subject}', 'de', 'yum'),
+('Click here to respond to {username}', 'Klicke hier, um {username} zu antworten', 'de', 'yum'),
 ('zipcode', 'Postleitzahl', 'de', 'yum');

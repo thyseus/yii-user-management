@@ -50,9 +50,18 @@ class YumMessage extends YumActiveRecord
 								'{to_user_id}' => $this->to_user_id,
 								)));
 
+				$answer_link = CHtml::link(Yum::t('Click here to respond to {username}', array(
+								'{username}' => $this->from_user->username)),
+						Yii::app()->controller->createAbsoluteUrl(
+							'//message/message/compose', array(
+							'to_user_id' => $this->from_user_id)));
+
 				YumMailer::send($this->to_user->profile->email,
-						$this->title,
-						$this->message);
+						Yum::t('New message from {from}: {subject}', array(
+								'{from}' => $this->from_user->username,
+								'{subject}' => $this->title,
+								)),
+						$this->message . '<br />' . $answer_link);
 			}
 		}
 		return parent::beforeSave();
