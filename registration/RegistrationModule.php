@@ -33,6 +33,7 @@ class RegistrationModule extends CWebModule {
 	public $enableCaptcha = true;
 
 	public $loginAfterSuccessfulActivation = false;
+	public $loginAfterSuccessfulRecovery = false;
 
 	public $controllerMap=array(
 			'registration'=>array(
