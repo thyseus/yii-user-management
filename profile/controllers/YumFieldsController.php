@@ -2,8 +2,6 @@
 
 class YumFieldsController extends YumController
 {
-	const PAGE_SIZE=10;
-
 	public function accessRules()
 	{
 		return array(
@@ -30,18 +28,11 @@ class YumFieldsController extends YumController
 		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfileField;
 
-		// add to group?
-		if(isset($_GET['in_group']))
-			$model->field_group_id=$_GET['in_group'];
-
 		if(isset($_POST['YumProfileField'])) {
 			$model->attributes = $_POST['YumProfileField'];
 
-			$field_type = $model->field_type;
-			if($field_type == 'DROPDOWNLIST')
-				$field_type = 'INTEGER';
-
 			if($model->validate()) {
+				$field_type = $model->field_type;
 				$sql = 'ALTER TABLE '.YumProfile::model()->tableName().' ADD `'.$model->varname.'` ';
 				$sql .= $field_type;
 				if ($field_type!='TEXT' && $field_type!='DATE')
@@ -107,7 +98,7 @@ class YumFieldsController extends YumController
 		$this->layout = Yum::module()->adminLayout;
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
-				'pageSize'=>self::PAGE_SIZE,
+				'pageSize'=>Yum::module()->pageSize,
 			),
 			'sort'=>array(
 				'defaultOrder'=>'position',
@@ -125,7 +116,7 @@ class YumFieldsController extends YumController
 
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
-				'pageSize'=>self::PAGE_SIZE,
+				'pageSize'=>Yum::module()->pageSize,
 			),
 			'sort'=>array(
 				'defaultOrder'=>'position',

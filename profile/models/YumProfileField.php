@@ -46,6 +46,19 @@ class YumProfileField extends YumActiveRecord
 		return $this->_tableName;
 	}
 
+public function rules()
+{
+	return array(
+			array('varname, title, field_type', 'required'),
+			array('varname', 'match', 'pattern' => '/^[a-z_0-9]+$/u','message' => Yii::t("UserModule.user", "Incorrect symbol's. (a-z)")),
+			array('varname', 'unique', 'message' => Yii::t("UserModule.user", "This field already exists.")),
+			array('varname, field_type', 'length', 'max'=>50),
+			array('field_size, field_size_min, required, position, visible', 'numerical', 'integerOnly'=>true),
+			array('hint','safe'),
+			array('related_field_name, title, match, range, error_message, other_validator, default', 'length', 'max'=>255),
+			);
+}
+
 	public function scopes()
 	{
 		return array(
