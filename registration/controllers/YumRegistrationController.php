@@ -177,7 +177,15 @@ class YumRegistrationController extends YumController {
 							$user->activationKey = YumEncrypt::encrypt(microtime() . $passwordform->password, $user->salt);
 							$user->save();
 							Yum::setFlash('Your new password has been saved.');
-							$this->redirect(Yum::module()->loginUrl);
+							if(Yum::module('registration')->loginAfterSuccessfulRecovery) {
+								$login = new YumUserIdentity($user->username, false); 
+								$login->authenticate(true);
+								Yii::app()->user->login($login);
+								$this->redirect(Yii::app()->homeUrl);
+							}
+							else {
+								$this->redirect(Yum::module()->loginUrl);
+							}
 						}
 					}
 					$this->render(
