@@ -66,7 +66,8 @@ class UserModule extends CWebModule {
 	public $afterLogin = false;
 
 	// Set this to true to really remove users instead of setting the status
-	// to -2 (YumUser::REMOVED)
+	// to -2 (YumUser::REMOVED)	
+	// Handle with care. User and Profile will get removed physically from the db.
 	public $trulyDelete = false;
 
 	// set avoidSql to true if you intent do use yii-user-management on a non

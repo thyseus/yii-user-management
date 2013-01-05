@@ -53,9 +53,11 @@ class YumUser extends YumActiveRecord
 
 	public function delete()
 	{
-		if (Yum::module()->trulyDelete)
+		if (Yum::module()->trulyDelete) {
+			if($this->profile)
+				$this->profile->delete();
 			return parent::delete();
-		else {
+		} else {
 			$this->status = self::STATUS_REMOVED;
 			return $this->save(false, array('status'));
 		}

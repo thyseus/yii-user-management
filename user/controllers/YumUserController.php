@@ -310,8 +310,10 @@ class YumUserController extends YumController {
 		} else if(isset($_POST['confirmPassword'])) {
 			if(YumEncrypt::validate_password($_POST['confirmPassword'],
 						$user->password, $user->salt)) {
-				if($user->delete())
+				if($user->delete()) {
+					Yii::app()->user->logout();
 					$this->actionLogout();
+				}
 				else
 					Yum::setFlash('Error while deleting Account. Account was not deleted');
 			} else {
