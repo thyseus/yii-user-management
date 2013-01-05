@@ -1,6 +1,14 @@
 <?
 
 class YumUsergroupController extends YumController {
+	public function beforeAction($event) {
+		if (Yii::app()->user->isAdmin())
+			$this->layout = Yum::module('usergroup')->adminLayout;
+		else
+			$this->layout = Yum::module('usergroup')->layout;
+		return parent::beforeAction($event);
+	}
+
 	public function accessRules() {
 		return array(
 				array('allow',  
@@ -8,7 +16,8 @@ class YumUsergroupController extends YumController {
 					'users'=>array('*'),
 					),
 				array('allow', 
-					'actions'=>array('getOptions', 'create','update', 'browse', 'join', 'write'),
+					'actions'=>array(
+						'getOptions', 'create','update', 'browse', 'join', 'leave', 'write'),
 					'users'=>array('@'),
 					),
 				array('allow', 
@@ -57,7 +66,33 @@ class YumUsergroupController extends YumController {
 				}
 			}
 			$this->redirect(array('//usergroup/groups/view', 'id' => $id));
-		}
+		} else throw new CHttpException(404);
+	}
+
+	public function actionLeave($id = null) {
+		if($id !== null) {
+			$p = YumUsergroup::model()->findByPk($id);
+
+			$participants = $p->participants;
+			if(!in_array(Yii::app()->user->id, $participants)) {
+				Yum::setFlash(Yum::t('You are not participating in this group'));
+			} else {
+				$participants = $p->participants;
+				foreach($participants as $key => $participant)
+					if($participant == Yii::app()->user->id)
+						unset($participants[$key]);
+				$p->participants = $participants;
+
+				if($p->save(array('participants'))) {
+					Yum::setFlash(Yum::t('You have left this group'));
+					Yum::log(Yum::t('User {username} left group id {id}', array(
+									'{username}' => Yii::app()->user->data()->username,
+									'{id}' => $id)));
+
+				}
+			}
+			$this->redirect(array('//usergroup/groups/index'));
+		} else throw new CHttpException(404);
 	}
 
 	public function actionView($id) {
@@ -83,7 +118,6 @@ class YumUsergroupController extends YumController {
 		return $this->_model;
 	}
 
-
 	public function actionCreate() {
 		$model = new YumUsergroup;
 
@@ -100,7 +134,6 @@ class YumUsergroupController extends YumController {
 
 		$this->render('create',array( 'model'=>$model));
 	}
-
 
 	public function actionUpdate()
 	{

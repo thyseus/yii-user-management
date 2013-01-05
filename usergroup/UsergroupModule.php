@@ -2,10 +2,12 @@
 Yii::setPathOfAlias('UsergroupModule' , dirname(__FILE__));
 
 class UsergroupModule extends CWebModule {
-	public $usergroupTable = 'user_group';
-	public $usergroupMessageTable = 'user_group_message';
-
+	public $usergroupTable = 'usergroup';
+	public $usergroupMessageTable = 'usergroup_message';
 	public $userparticipationTable = 'user_usergroup';
+
+	public $adminLayout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'application.modules.user.views.layouts.yum';
 
 	public $controllerMap=array(
 			'groups'=>array(

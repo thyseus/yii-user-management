@@ -116,7 +116,8 @@ some general information about caching in yii.
 9.) Congratulations, you have installed the User Management Module! Lets
 tidy up a little bit:
 
-10.) Click on "Administrate your Users"
+10.) Login as admin/admin and navigate to index.php?r=user/user/admin.
+This is your user management administration panel. Click on "Administrate your Users"
 Now you are taken to the default Front-End Login-Screen of the User 
 Management Module. Log in with the Username admin and Password admin.
 

@@ -8,7 +8,7 @@ class YumUsergroupMessage extends YumActiveRecord{
 
 	public function tableName()
 	{
-		return Yum::module('usergroup')->userGroupMessageTable;
+		return Yum::module('usergroup')->usergroupMessageTable;
 	}
 
 	public function beforeValidate() {

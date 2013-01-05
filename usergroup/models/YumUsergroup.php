@@ -14,7 +14,7 @@ class YumUsergroup extends YumActiveRecord{
 
 	public function tableName()
 	{
-		return Yum::module('usergroup')->userGroupTable;
+		return Yum::module('usergroup')->usergroupTable;
 	}
 
 	public function rules()
