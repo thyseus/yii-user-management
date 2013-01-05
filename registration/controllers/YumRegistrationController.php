@@ -168,7 +168,9 @@ class YumRegistrationController extends YumController {
 			if($profile = YumProfile::model()->find('email = :email', array(
 							'email' =>  $email))) {
 				$user = $profile->user;
-				if($user->activationKey == $key) {
+				if($user->status <= 0)
+					throw new CHttpException(403, 'User is not active');
+				else if($user->activationKey == $key) {
 					$passwordform = new YumUserChangePassword;
 					if (isset($_POST['YumUserChangePassword'])) {
 						$passwordform->attributes = $_POST['YumUserChangePassword'];
@@ -206,10 +208,9 @@ class YumRegistrationController extends YumController {
 				$form->attributes = $_POST['YumPasswordRecoveryForm'];
 
 				if ($form->validate()) {
-					Yum::setFlash(
-							'Instructions have been sent to you. Please check your email.');
-
 					if($form->user instanceof YumUser) {
+						if($form->user->status <= 0)	
+							throw new CHttpException(403, 'User is not active');
 						$form->user->generateActivationKey();
 						$recovery_url = $this->createAbsoluteUrl(
 								Yum::module('registration')->recoveryUrl[0], array(
@@ -222,15 +223,17 @@ class YumRegistrationController extends YumController {
 										'{recovery_url}' => $recovery_url,
 										'{username}' => $form->user->username)));
 
-							$mail = array(
-									'from' => Yii::app()->params['adminEmail'],
-									'to' => $form->user->profile->email,
-									'subject' => 'You requested a new password',
-									'body' => strtr(
-										'You have requested a new password. Please use this URL to continue: {recovery_url}', array(
-											'{recovery_url}' => $recovery_url)),
-									);
-							$sent = YumMailer::send($mail);
+						$mail = array(
+								'from' => Yii::app()->params['adminEmail'],
+								'to' => $form->user->profile->email,
+								'subject' => 'You requested a new password',
+								'body' => strtr(
+									'You have requested a new password. Please use this URL to continue: {recovery_url}', array(
+										'{recovery_url}' => $recovery_url)),
+								);
+						$sent = YumMailer::send($mail);
+						Yum::setFlash(
+								'Instructions have been sent to you. Please check your email.');
 					} else
 						Yum::log(Yum::t(
 									'A password has been requested, but no associated user was found in the database. Requested user/email is: {username}', array(

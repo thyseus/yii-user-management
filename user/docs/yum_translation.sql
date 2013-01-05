@@ -419,6 +419,8 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Create Usergroup', 'Crear un grupo de usuarios', 'es', 'yum'),
 ('Create Usergroup', 'Neue Gruppe erstellen', 'de', 'yum'),
 ('Create User', 'Nuovo utente', 'it', 'yum'),
+('User can not be found', 'Benutzer kann nicht gefunden werden', 'de', 'yum'),
+('User is not active', 'Benutzer ist nicht aktiv', 'de', 'yum'),
 ('Date', 'Data', 'it', 'yum'),
 ('Date', 'Data', 'pl', 'yum'),
 ('Date', 'Date', 'fr', 'yum'),

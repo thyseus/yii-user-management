@@ -107,35 +107,37 @@ class YumUserController extends YumController {
 	 * Change password
 	 */
 	public function actionChangePassword($expired = false) {
-		$uid = Yii::app()->user->id;
-		if(isset($_GET['id']))
-			$uid = $_GET['id'];
+		$id = Yii::app()->user->id;
+
+		$user = YumUser::model()->findByPk($id);
+		if(!$user)
+			throw new CHttpException(403, Yum::t('User can not be found'));
+		else if($user->status <= 0)
+			throw new CHttpException(404, Yum::t('User is not active'));
 
 		$form = new YumUserChangePassword;
 		$form->scenario = 'user_request';
 
 		if(isset($_POST['YumUserChangePassword'])) {
 			$form->attributes = $_POST['YumUserChangePassword'];
-			
 			$form->validate();
 
 			if(!YumEncrypt::validate_password($form->currentPassword,
-						YumUser::model()->findByPk($uid)->password,
-						YumUser::model()->findByPk($uid)->salt))
+						YumUser::model()->findByPk($id)->password,
+						YumUser::model()->findByPk($id)->salt))
 				$form->addError('currentPassword',
 						Yum::t('Your current password is not correct'));
 
 			if(!$form->hasErrors()) {
-				if(YumUser::model()->findByPk($uid)->setPassword($form->password,
-							YumUser::model()->findByPk($uid)->salt)) {
+				if(YumUser::model()->findByPk($id)->setPassword($form->password,
+							YumUser::model()->findByPk($id)->salt)) {
 					Yum::setFlash('The new password has been saved');
 					Yum::log(Yum::t('User {username} has changed his password', array(
 									'{username}' => Yii::app()->user->name)));
 				}
 				else  {
 					Yum::setFlash('There was an error saving the password');
-					Yum::log(
-							Yum::t(
+					Yum::log( Yum::t(
 								'User {username} tried to change his password, but an error occured', array(
 									'{username}' => Yii::app()->user->name)), 'error');
 				}
