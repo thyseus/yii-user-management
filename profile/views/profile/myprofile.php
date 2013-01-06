@@ -3,7 +3,7 @@
 $this->pageTitle= Yum::t('Profile');
 $this->breadcrumbs=array(Yum::t('Profile'));
 $this->title = Yum::t('Your profile');
-if(Yum::hasModule('messages'))
+if(Yum::hasModule('message'))
 $this->renderPartial('/messages/new_messages');?>
 
 

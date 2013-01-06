@@ -1,7 +1,7 @@
 <?php
 
 class YumFriendship extends YumActiveRecord {
-	const FRIENDSHIP_NONE = 0; 
+	const FRIENDSHIP_NONE = 0;
 	const FRIENDSHIP_REQUEST = 1;
 	const FRIENDSHIP_ACCEPTED = 2;
 	const FRIENDSHIP_REJECTED = 3;
@@ -44,7 +44,7 @@ class YumFriendship extends YumActiveRecord {
 			$this->message = $message;
 		$this->status = 1;
 		return $this->save();
-	} 
+	}
 
 	// How many friendship requests have been made in month $month of year $year?
 	public static function countRequest($month = null, $year = null) {
@@ -64,19 +64,19 @@ class YumFriendship extends YumActiveRecord {
 	public function acceptFriendship() {
 		$this->acknowledgetime = time();
 		$this->status = 2;
-		if(Yum::hasModule('message') 
-				&& isset($this->inviter->privacy) 
+		if(Yum::hasModule('message')
+				&& isset($this->inviter->privacy)
 				&& $this->inviter->privacy->message_new_friendship) {
-			Yii::import('YumModulesRoot.messages.models.YumMessage');
+			Yii::import('YumModulesRoot.message.models.YumMessage');
 			YumMessage::write($this->inviter, $this->invited,
 					Yum::t('Your friendship request has been accepted'),
 					strtr(
 						'Your friendship request to {username} has been accepted', array(
-							'{username}' => $this->inviter->username))); 
+							'{username}' => $this->inviter->username)));
 		}
 		$this->save(false, array('acknowledgetime', 'status'));
 
-	} 
+	}
 
 	public function getFriend() {
 		if($this->friend_id == Yii::app()->user->id)
@@ -103,13 +103,13 @@ class YumFriendship extends YumActiveRecord {
 		$this->acknowledgetime = time();
 		$this->status = 3;
 		return($this->save());
-	} 
+	}
 
 	public function ignoreFriendship() {
 		$this->acknowledgetime = time();
 		$this->status = 0;
 		return($this->save());
-	} 
+	}
 
 	public function tableName()
 	{
@@ -155,10 +155,10 @@ class YumFriendship extends YumActiveRecord {
 		// If the user has activated email receiving, send a email
 		if($this->isNewRecord)
 			if($user = YumUser::model()->findByPk($this->friend_id))  {
-				if(Yum::hasModule('messages')
-						&& $user->privacy 
+				if(Yum::hasModule('message')
+						&& $user->privacy
 						&& $user->privacy->message_new_friendship) {
-					Yii::import('YumModulesRoot.messages.models.YumMessage');
+					Yii::import('YumModulesRoot.message.models.YumMessage');
 					YumMessage::write($user, $this->inviter,
 							Yum::t('New friendship request from {username}', array(
 									'{username}' => $this->inviter->username)),
@@ -199,7 +199,7 @@ class YumFriendship extends YumActiveRecord {
 			$friendship = YumFriendship::model()->find('status = 2 and inviter_id = '.$uid2 . ' and friend_id = '.$uid1);
 			if($friendship)
 				return true;
-		} 
+		}
 		return false;
 
 	}
