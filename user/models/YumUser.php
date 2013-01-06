@@ -601,10 +601,10 @@ class YumUser extends YumActiveRecord
 					if ($user->save(false, array('activationkey', 'status'))) {
 						Yum::log(Yum::t('User {username} has been activated', array(
 										'{username}' => $user->username)));
-						if (Yum::hasModule('messages')
+						if (Yum::hasModule('message')
 								&& Yum::module('registration')->enableActivationConfirmation
 							 ) {
-							Yii::import('YumModulesRoot.messages.models.YumMessage');
+							Yii::import('YumModulesRoot.message.models.YumMessage');
 							YumMessage::write($user, 1,
 									Yum::t('Your activation succeeded'),
 									strtr(

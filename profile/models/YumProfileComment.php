@@ -39,10 +39,10 @@ class YumProfileComment extends YumActiveRecord{
 	public function afterSave() {
 		// If the user has activated email receiving, send a email
 		if($user = $this->profile->user) {
-			if(Yum::hasModule('messages') 
-					&& $user->privacy 
+			if(Yum::hasModule('message')
+					&& $user->privacy
 					&& $user->privacy->message_new_profilecomment) {
-				Yii::import('YumModulesRoot.messages.models.YumMessage');
+				Yii::import('YumModulesRoot.message.models.YumMessage');
 				YumMessage::write($user, $this->user_id,
 						Yum::t('New profile comment from {username}', array(
 								'{username}' => $this->user->username)),

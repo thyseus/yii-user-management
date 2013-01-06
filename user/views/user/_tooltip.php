@@ -16,7 +16,7 @@ printf($template, Yum::t('Username'), $data->username);
 printf($template, Yum::t('First visit'), date(UserModule::$dateFormat, $data->createtime));
 printf($template, Yum::t('Last visit'), date(UserModule::$dateFormat, $data->lastvisit));
 
-if(Yum::hasModule('messages')){
+if(Yum::hasModule('message')){
 	echo CHtml::link(Yum::t('Write a message'), array(
 				'//message/message/compose', 'to_user_id' => $data->id)) . '<br />';
 }
