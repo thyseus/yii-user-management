@@ -207,7 +207,7 @@ class YumUser extends YumActiveRecord
 	{
 		if (Yum::hasModule('profile') && Yum::module('profile')->enablePrivacySetting) {
 			// create a new privacy setting, if not already available
-			$setting = YumPrivacySetting::model()->cache(500)->findByPk($this->id);
+			$setting = YumPrivacySetting::model()->findByPk($this->id);
 			if (!$setting) {
 				$setting = new YumPrivacySetting();
 				$setting->user_id = $this->id;
@@ -527,6 +527,14 @@ class YumUser extends YumActiveRecord
 			$profile->user_id = $this->id;
 			$profile->save();
 			$this->profile = $profile;
+
+			if(Yum::hasModule('role'))
+				foreach(Yum::module('registration')->defaultRoles as $role) 
+					Yii::app()->db->createCommand(sprintf(
+								'insert into %s (user_id, role_id) values(%s, %s)',
+								Yum::module('role')->userRoleTable,
+								$this->id,
+								$role))->execute(); 
 
 			Yum::log(Yum::t('User {username} registered. Generated activation Url is {activation_url} and has been sent to {email}',
 						array(

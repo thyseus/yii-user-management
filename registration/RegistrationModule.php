@@ -20,6 +20,9 @@ class RegistrationModule extends CWebModule {
 	public $registrationEmail='register@website.com';
 	public $recoveryEmail='restore@website.com';
 
+	// Which roles should be assigned automatically to a registered user 
+	public $defaultRoles = array();
+
 	public $registrationView = '/registration/registration';
 	public $changePasswordView = 
 		'application.modules.user.views.user.changepassword';
