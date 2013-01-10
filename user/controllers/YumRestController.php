@@ -118,7 +118,7 @@ class YumRestController extends CController
 			$this->_sendResponse(200, CJSON::encode($result));
 	}
 
-	public function actionList($model) {
+	public function actionList($mode) {
 		switch($mode)
 		{
 			case 'users':
