@@ -1,4 +1,4 @@
-To enable the Message subsystem, simply enable the 'messages' module in your
+To enable the Message subsystem, simply enable the 'message' module in your
 application configuration like this:
 
 
