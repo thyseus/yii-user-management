@@ -23,12 +23,18 @@
 
 	<?php echo CHtml::link(Yum::t('View Details'), array(
 					'//usergroup/groups/view', 'id' => $data->id)); ?>
+<<<<<<< HEAD
 	<? 
 	if(is_array($data->participants) &&
 			in_array(Yii::app()->user->id, $data->participants))
 	echo CHtml::link(Yum::t('Leave group'), array(
 				'//usergroup/groups/leave', 'id' => $data->id)); 
 	else
+=======
+	<?php 
+	if(is_array($data->participants))
+if(!(in_array(Yii::app()->user->id, $data->participants)))
+>>>>>>> cdac699f63279b86fedf8df5fc9747c6c798de90
 	echo CHtml::link(Yum::t('Join group'), array(
 				'//usergroup/groups/join', 'id' => $data->id)); ?>
 
