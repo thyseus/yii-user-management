@@ -33,7 +33,7 @@ class YumAvatarController extends YumController {
 	public function actionEditAvatar() {
 		$model = YumUser::model()->findByPk(Yii::app()->user->id);
 
-		if(isset($_POST['YumUser'])) {
+		if(isset($_POST['YumUser']['avatar'])) {
 			$model->attributes = $_POST['YumUser'];
 			$model->setScenario('avatarUpload');
 
