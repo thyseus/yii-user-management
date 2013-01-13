@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumUsergroupController extends YumController {
 	public function beforeAction($event) {
