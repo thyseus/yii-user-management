@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yii::t("UserModule.user", 'Update profile field'). ' ' . $model->varname;
 $this->breadcrumbs=array(
 	Yii::t("UserModule.user", 'Profile fields')=>array('admin'),
@@ -6,4 +6,4 @@ $this->breadcrumbs=array(
 	Yii::t("UserModule.user", 'Update'));
 ?>
 
-<? echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

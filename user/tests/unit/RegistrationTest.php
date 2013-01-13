@@ -1,9 +1,9 @@
-<?
+<?php
 // This unit test tests, if the Registration and Activation process provided 
 // by Yum works
 
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.user.controllers.*');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.user.controllers.*');
 
 class RegistrationTest extends CDbTestCase
 {
@@ -32,7 +32,7 @@ class RegistrationTest extends CDbTestCase
 			$profile = new YumRegistrationForm;
 			$profile->setAttributes(array(
 					'firstname' => 'My first Name !"§$%&/()=',
-					'lastname' => 'My last Name !"§$%&/()=<? die() ?>',
+					'lastname' => 'My last Name !"§$%&/()=<?php die() ?>',
 					'password' => 'hiddenpassword1', 
 					'verifyPassword' => 'hiddenpassword1', 
 

@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumUserIdentity extends CUserIdentity {
 	private $id;
@@ -16,7 +16,7 @@ class YumUserIdentity extends CUserIdentity {
 		if (!$fbconfig || $fbconfig && !is_array($fbconfig))
 			throw new Exception('actionLogout for Facebook was called, but is not activated in application configuration');
 
-		Yii::import('application.modules.user.vendors.facebook.*');
+		Yii::import('YumModule.vendors.facebook.*');
 		require_once('Facebook.php');
 		$facebook = new Facebook($fbconfig);
 
@@ -68,7 +68,7 @@ class YumUserIdentity extends CUserIdentity {
 						if ($settings->ldap_transfer_pw == 1)
 							$user->password = YumEncrypt::encrypt($this->password);
 						$user->lastpasswordchange = 0;
-						$user->activationKey = '';
+						$user->activationkey = '';
 						$user->superuser = 0;
 						$user->createtime = time();
 						$user->status = 1;

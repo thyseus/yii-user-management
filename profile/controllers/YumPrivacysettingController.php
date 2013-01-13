@@ -1,8 +1,8 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.Yum');
-Yii::import('application.modules.profile.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.Yum');
+Yii::import('YumModulesRoot.profile.models.*');
 
 class YumPrivacysettingController extends YumController
 {

@@ -1,5 +1,5 @@
-<?
-Yii::import('application.modules.user.UserModule');
+<?php
+Yii::import('YumModulesRoot.user.UserModule');
 Yii::import('zii.widgets.CPortlet');
 
 class MessageWidget extends CPortlet
@@ -28,5 +28,5 @@ class MessageWidget extends CPortlet
 						));
 		}
 	}
-} 
+}
 ?>

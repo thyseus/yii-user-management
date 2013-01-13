@@ -1,5 +1,5 @@
-<?
-Yii::import('application.modules.user.UserModule');
+<?php
+Yii::import('YumModule.UserModule');
 /**
  * EPhotoValidator class file.
  *

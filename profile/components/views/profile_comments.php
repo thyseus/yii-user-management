@@ -1,4 +1,4 @@
-<?
+<?php
 if($comments) {
 	echo '<p>'.Yum::t('These users have commented your profile recently') . ': </p>';
 	foreach($comments as $comment) {

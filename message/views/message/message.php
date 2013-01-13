@@ -1,8 +1,8 @@
-<? $this->pageTitle=Yum::t('Messages'); ?>
+<?php $this->pageTitle=Yum::t('Messages'); ?>
 
-<h1><? echo $title; ?></h1>
+<h1><?php echo $title; ?></h1>
 
 <div class="form">
-<? echo $content; ?>
+<?php echo $content; ?>
 
 </div><!-- yiiForm -->

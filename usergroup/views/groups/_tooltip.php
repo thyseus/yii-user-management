@@ -1,4 +1,4 @@
-<?
+<?php
 
 $template = '<p> %s: %s </p>';
 

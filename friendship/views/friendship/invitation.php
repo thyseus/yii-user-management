@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Request friendship for user {username}', array(
 			'{username}' => $invited->username));
 $this->breadcrumbs = array(

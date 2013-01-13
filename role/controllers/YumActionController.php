@@ -1,32 +1,32 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.role.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.role.models.*');
 
 class YumActionController extends YumController {
 
 	public function filters() {
 		return array(
-			'accessControl', 
+			'accessControl',
 		);
 	}
 
 	public function accessRules() {
 		return array(
-			array('allow',  
+			array('allow',
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', 
+			array('allow',
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
-			array('allow', 
+			array('allow',
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
-			array('deny',  
+			array('deny',
 				'users'=>array('*'),
 			),
 		);
@@ -41,7 +41,6 @@ class YumActionController extends YumController {
 
 	public function actionCreate()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumAction;
 
 		$this->performAjaxValidation($model, 'action-form');
@@ -99,9 +98,8 @@ class YumActionController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumAction('search');
-		$model->unsetAttributes();  
+		$model->unsetAttributes();
 		if(isset($_GET['YumAction']))
 			$model->attributes=$_GET['YumAction'];
 

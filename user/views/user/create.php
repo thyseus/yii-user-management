@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t("Create user");
 $this->breadcrumbs = array(
 		Yum::t('Users') => array('index'),

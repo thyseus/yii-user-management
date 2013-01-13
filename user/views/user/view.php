@@ -1,4 +1,4 @@
-<?
+<?php
 $profiles = Yum::hasModule('profile');
 
 if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL & $profiles)
@@ -107,14 +107,14 @@ if(Yii::app()->user->isAdmin()) {
 
 
 if(Yum::hasModule('role') && Yii::app()->user->isAdmin()) {
-	Yii::import('application.modules.role.models.*');
+	Yii::import('YumModulesRoot.role.models.*');
 	echo '<h2>'.Yum::t('This user belongs to these roles:') .'</h2>';
 
 	if($model->roles) {
 		echo "<ul>";
 		foreach($model->roles as $role) {
 			echo CHtml::tag('li',array(),CHtml::link(
-						$role->title,array('//role/role/view','id'=>$role->id)),true);
+						$role->title,array(Yum::route('role/view'),'id'=>$role->id)),true);
 		}
 		echo "</ul>";
 	} else {

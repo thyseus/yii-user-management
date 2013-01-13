@@ -1,19 +1,19 @@
-<?
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.components.*');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.friendship.models.*');
+<?php
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumComponents.*');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.friendship.models.*');
 
 class YumFriendshipController extends YumController {
 	// make sure that friendship is enabled in the configuration
 	public function beforeAction($action) {
-		if(!Yum::hasModule('friendship')) 
+		if(!Yum::hasModule('friendship'))
 			return false;
 		return(parent::beforeAction($action));
 	}
 
 	public function actionIndex() {
-		if(isset($_POST['YumFriendship']['inviter_id']) 
+		if(isset($_POST['YumFriendship']['inviter_id'])
 				&& isset($_POST['YumFriendship']['friend_id']) ) {
 			$friendship = YumFriendship::model()->find(
 					'inviter_id = :inviter_id and friend_id = :friend_id', array(
@@ -21,7 +21,7 @@ class YumFriendshipController extends YumController {
 						':friend_id' => $_POST['YumFriendship']['friend_id']));
 
 			if(isset($friendship))
-				if($friendship->inviter_id == Yii::app()->user->id 
+				if($friendship->inviter_id == Yii::app()->user->id
 						|| $friendship->friend_id == Yii::app()->user->id)
 					if(isset($_POST['YumFriendship']['add_request']))
 					{
@@ -32,7 +32,7 @@ class YumFriendshipController extends YumController {
 					} elseif(isset($_POST['YumFriendship']['ignore_request'])) {
 						$friendship->status = 0;
 						$friendship->save();
-					} elseif(isset($_POST['YumFriendship']['cancel_request']) 
+					} elseif(isset($_POST['YumFriendship']['cancel_request'])
 							|| isset($_POST['YumFriendship']['remove_friend'])) {
 						$friendship->delete();
 					}
@@ -54,7 +54,7 @@ class YumFriendshipController extends YumController {
 
 		$this->render('admin', array('friendships' => $friendships));
 
-	} 
+	}
 
 	public function actionInvite($user_id = null) {
 		if(isset($_POST['user_id']))
@@ -71,7 +71,7 @@ class YumFriendshipController extends YumController {
 				Yum::setFlash('The friendship request has been sent');
 				$this->redirect(array('//profile/profile/view', 'id' => $user_id));
 			}
-		} 
+		}
 
 		$this->render('invitation', array(
 					'inviter' => YumUser::model()->findByPk(Yii::app()->user->id),
@@ -149,7 +149,7 @@ class YumFriendshipController extends YumController {
 
 		$friends = $inviter->getFriends(true);
 		if($friends && $friends[0] != NULL)
-			foreach($friends as $friend) 
+			foreach($friends as $friend)
 				if($friend->id == $invited->id)
 					return false; // already friends, rejected or request pending
 

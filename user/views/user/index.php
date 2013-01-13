@@ -1,9 +1,9 @@
-<?
+<?php
 $this->title = Yum::t('Users');
 $this->breadcrumbs=array(Yum::t("Users"));
 ?>
 
-<? $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'dataProvider'=>$dataProvider,
 			'columns'=>array(
 		array(

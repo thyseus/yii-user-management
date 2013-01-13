@@ -1,9 +1,9 @@
-<?
+<?php
 
 // This controller handles the upload and the deletion of an Avatar
 // image for the user profile.
 
-Yii::import('application.modules.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.controllers.YumController');
 
 class YumAvatarController extends YumController {
 	public function actionRemoveAvatar() {
@@ -11,7 +11,7 @@ class YumAvatarController extends YumController {
 		$model->avatar = '';
 		$model->save();
 		$this->redirect(array(
-					Yum::module('profile')->profileViewRoute));	
+					Yum::module('profile')->profileViewRoute));
 	}
 
 	public function actionEnableGravatar() {
@@ -19,7 +19,7 @@ class YumAvatarController extends YumController {
 		$model->avatar = 'gravatar';
 		$model->save();
 		$this->redirect(array(
-					Yum::module('profile')->profileViewRoute));	
+					Yum::module('profile')->profileViewRoute));
 	}
 
 	public function beforeAction($action) {
@@ -53,7 +53,7 @@ class YumAvatarController extends YumController {
 						Yum::log(Yum::t('User {username} uploaded avatar image {filename}', array(
 										'{username}' => $model->username,
 										'{filename}' => $model->avatar)));
-						$this->redirect(array('//profile/profile/view'));	
+						$this->redirect(array('//profile/profile/view'));
 					}
 				}
 			}

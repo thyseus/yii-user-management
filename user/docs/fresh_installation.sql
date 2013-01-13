@@ -1,6 +1,6 @@
--- 
+--
 -- Structure for table `action`
--- 
+--
 
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE IF NOT EXISTS `action` (
@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS `action` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `action`
--- 
+--
 
 INSERT INTO `action` (`id`, `title`, `comment`, `subject`) VALUES
   ('1', 'message_write', NULL, NULL),
@@ -23,9 +23,9 @@ INSERT INTO `action` (`id`, `title`, `comment`, `subject`) VALUES
   ('5', 'user_remove', NULL, NULL),
   ('6', 'user_admin', NULL, NULL);
 
--- 
+--
 -- Structure for table `friendship`
--- 
+--
 
 DROP TABLE IF EXISTS `friendship`;
 CREATE TABLE IF NOT EXISTS `friendship` (
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `friendship` (
   PRIMARY KEY (`inviter_id`,`friend_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- 
+--
 -- Structure for table `membership`
--- 
+--
 
 DROP TABLE IF EXISTS `membership`;
 CREATE TABLE IF NOT EXISTS `membership` (
@@ -60,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `membership` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Structure for table `message`
--- 
+--
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
@@ -78,9 +78,9 @@ CREATE TABLE IF NOT EXISTS `message` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Structure for table `payment`
--- 
+--
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE IF NOT EXISTS `payment` (
@@ -90,17 +90,17 @@ CREATE TABLE IF NOT EXISTS `payment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `payment`
--- 
+--
 
 INSERT INTO `payment` (`id`, `title`, `text`) VALUES
   ('1', 'Prepayment', NULL),
   ('2', 'Paypal', NULL);
 
--- 
+--
 -- Structure for table `permission`
--- 
+--
 
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE IF NOT EXISTS `permission` (
@@ -113,9 +113,9 @@ CREATE TABLE IF NOT EXISTS `permission` (
   PRIMARY KEY (`principal_id`,`subordinate_id`,`type`,`action`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `permission`
--- 
+--
 
 INSERT INTO `permission` (`principal_id`, `subordinate_id`, `type`, `action`, `template`, `comment`) VALUES
   ('1', '0', 'role', '4', '0', ''),
@@ -126,9 +126,9 @@ INSERT INTO `permission` (`principal_id`, `subordinate_id`, `type`, `action`, `t
   ('2', '0', 'role', '2', '0', 'Users can receive messages'),
   ('2', '0', 'role', '3', '0', 'Users are able to view visits of his profile');
 
--- 
+--
 -- Structure for table `privacysetting`
--- 
+--
 
 DROP TABLE IF EXISTS `privacysetting`;
 CREATE TABLE IF NOT EXISTS `privacysetting` (
@@ -144,16 +144,16 @@ CREATE TABLE IF NOT EXISTS `privacysetting` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `privacysetting`
--- 
+--
 
 INSERT INTO `privacysetting` (`user_id`, `message_new_friendship`, `message_new_message`, `message_new_profilecomment`, `appear_in_search`, `show_online_status`, `log_profile_visits`, `ignore_users`, `public_profile_fields`) VALUES
   ('2', '1', '1', '1', '1', '1', '1', NULL, NULL);
 
--- 
+--
 -- Structure for table `profile`
--- 
+--
 
 DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
@@ -172,17 +172,17 @@ CREATE TABLE IF NOT EXISTS `profile` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `profile`
--- 
+--
 
 INSERT INTO `profile` (`id`, `user_id`, `timestamp`, `privacy`, `lastname`, `firstname`, `show_friends`, `allow_comments`, `email`, `street`, `city`, `about`) VALUES
   ('1', '1', '2012-10-09 15:12:54', 'protected', 'admin', 'admin', '1', '1', 'webmaster@example.com', NULL, NULL, NULL),
   ('2', '2', '2012-10-09 15:12:54', 'protected', 'demo', 'demo', '1', '1', 'demo@example.com', NULL, NULL, NULL);
 
--- 
+--
 -- Structure for table `profile_comment`
--- 
+--
 
 DROP TABLE IF EXISTS `profile_comment`;
 CREATE TABLE IF NOT EXISTS `profile_comment` (
@@ -194,9 +194,9 @@ CREATE TABLE IF NOT EXISTS `profile_comment` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Structure for table `profile_field`
--- 
+--
 
 DROP TABLE IF EXISTS `profile_field`;
 CREATE TABLE IF NOT EXISTS `profile_field` (
@@ -220,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `profile_field` (
   KEY `varname` (`varname`,`visible`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `profile_field`
--- 
+--
 
 INSERT INTO `profile_field` (`id`, `varname`, `title`, `hint`, `field_type`, `field_size`, `field_size_min`, `required`, `match`, `range`, `error_message`, `other_validator`, `default`, `position`, `visible`, `related_field_name`) VALUES
   ('1', 'email', 'E-Mail', '', 'VARCHAR', '255', '0', '1', '', '', '', 'CEmailValidator', '', '0', '3', ''),
@@ -232,9 +232,9 @@ INSERT INTO `profile_field` (`id`, `varname`, `title`, `hint`, `field_type`, `fi
   ('5', 'city', 'City', '', 'VARCHAR', '255', '0', '0', '', '', '', '', '', '0', '3', ''),
   ('6', 'about', 'About', '', 'TEXT', '255', '0', '0', '', '', '', '', '', '0', '3', '');
 
--- 
+--
 -- Structure for table `profile_visit`
--- 
+--
 
 DROP TABLE IF EXISTS `profile_visit`;
 CREATE TABLE IF NOT EXISTS `profile_visit` (
@@ -246,9 +246,9 @@ CREATE TABLE IF NOT EXISTS `profile_visit` (
   PRIMARY KEY (`visitor_id`,`visited_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- 
+--
 -- Structure for table `role`
--- 
+--
 
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
@@ -261,9 +261,9 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `role`
--- 
+--
 
 INSERT INTO `role` (`id`, `title`, `description`, `membership_priority`, `price`, `duration`) VALUES
   ('1', 'UserManager', 'These users can manage Users', '0', '0', '0'),
@@ -271,9 +271,9 @@ INSERT INTO `role` (`id`, `title`, `description`, `membership_priority`, `price`
   ('3', 'Business', 'Example Business account', '1', '9.99', '7'),
   ('4', 'Premium', 'Example Premium account', '2', '19.99', '28');
 
--- 
+--
 -- Structure for table `translation`
--- 
+--
 
 DROP TABLE IF EXISTS `translation`;
 CREATE TABLE IF NOT EXISTS `translation` (
@@ -284,9 +284,9 @@ CREATE TABLE IF NOT EXISTS `translation` (
   PRIMARY KEY (`message`,`language`,`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `translation`
--- 
+--
 
 INSERT INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
   ('About', 'Über', 'de', 'yum'),
@@ -2736,9 +2736,9 @@ INSERT INTO `translation` (`message`, `translation`, `language`, `category`) VAL
   ('{attribute} must not contain whitespace.', '{attribute} non deve contenere spazi.', 'it', 'yum'),
   ('{attribute} must not contain whitespace.', '{attribute} nie moÅ¼e zawieraÄ‡ biaÅ‚ych znakÃ³w.', 'pl', 'yum');
 
--- 
+--
 -- Structure for table `user`
--- 
+--
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
@@ -2746,7 +2746,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
   `salt` varchar(128) NOT NULL,
-  `activationKey` varchar(128) NOT NULL DEFAULT '',
+  `activationkey` varchar(128) NOT NULL DEFAULT '',
   `createtime` int(10) NOT NULL DEFAULT '0',
   `lastvisit` int(10) NOT NULL DEFAULT '0',
   `lastaction` int(10) NOT NULL DEFAULT '0',
@@ -2754,24 +2754,24 @@ CREATE TABLE IF NOT EXISTS `user` (
   `superuser` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
   `avatar` varchar(255) DEFAULT NULL,
-  `notifyType` enum('None','Digest','Instant','Threshold') DEFAULT 'Instant',
+  `notifytype` enum('None','Digest','Instant','Threshold') DEFAULT 'Instant',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `user`
--- 
+--
 
-INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `lastaction`, `lastpasswordchange`, `superuser`, `status`, `avatar`, `notifyType`) VALUES
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `activationkey`, `createtime`, `lastvisit`, `lastaction`, `lastpasswordchange`, `superuser`, `status`, `avatar`, `notifytype`) VALUES
   ('1', 'admin', 'c9d1d9d5b11ecb9de06515628e9aefc72a8627656825b0aa2dd46ccaee979a0d061eca76600f0fa0d8b956d487ddc8e18b994a024e3c4660e0ce5d48ed33b956', 'wOt9haRwGV4oTXbXSM5TJYRZOL/KAuH1glUOdJ5mC61vI7ZXVi2xMJOHpCe1VRmBkR7vaQMWNJsA8VVg4OZl4w==', '', '1349788374', '0', '0', '0', '1', '1', NULL, 'Instant'),
   ('2', 'demo', '7a2aed2f418adcbb11d07e592bdff6e4ab43e12f04bbb825b31919e817f465a4d6ba29e5ec328bd36223f40cf05ee862fb8d3415684c3f43a5928825bc21f8c5', 'Kolq4aEqFMBWt5ucoiE5Zw82PfY7IQoCXaaejCXPuPgnV6omcPumYuqR00aXHP1YJdVmCuDT0S3erq8oDY3UcQ==', '', '1349788374', '0', '0', '0', '0', '1', NULL, 'Instant');
 
--- 
+--
 -- Structure for table `user_activities`
--- 
+--
 
 DROP TABLE IF EXISTS `user_activities`;
 CREATE TABLE IF NOT EXISTS `user_activities` (
@@ -2783,9 +2783,9 @@ CREATE TABLE IF NOT EXISTS `user_activities` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
+--
 -- Structure for table `user_group_message`
--- 
+--
 
 DROP TABLE IF EXISTS `user_group_message`;
 CREATE TABLE IF NOT EXISTS `user_group_message` (
@@ -2798,9 +2798,9 @@ CREATE TABLE IF NOT EXISTS `user_group_message` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Structure for table `user_role`
--- 
+--
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE IF NOT EXISTS `user_role` (
@@ -2809,16 +2809,16 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   PRIMARY KEY (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Data for table `user_role`
--- 
+--
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
   ('2', '3');
 
--- 
+--
 -- Structure for table `usergroup`
--- 
+--
 
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (

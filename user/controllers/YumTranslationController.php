@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumTranslationController extends YumController
 {

@@ -1,11 +1,11 @@
-<?
+<?php
 
 class YumFieldsController extends YumController
 {
 	public function accessRules()
 	{
 		return array(
-			array('allow', 
+			array('allow',
 				'actions'=>array('index', 'create', 'update', 'view', 'admin','delete'),
 				'users'=>array(Yii::app()->user->name),
 				'expression' => 'Yii::app()->user->isAdmin()'
@@ -18,14 +18,12 @@ class YumFieldsController extends YumController
 
 	public function actionView()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$this->render('view',array(
 			'model'=>$this->loadModel('YumProfileField'),
 		));
 	}
 
 	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfileField;
 
 		if(isset($_POST['YumProfileField'])) {
@@ -56,14 +54,12 @@ class YumFieldsController extends YumController
 
 	public function actionUpdate()
 	{
-		$this->layout = Yum::module()->adminLayout;
-
 		$model = $this->loadModel('YumProfileField');
 		if(isset($_POST['YumProfileField']))
 		{
 			$model->attributes=$_POST['YumProfileField'];
-			
-			// ALTER TABLE `test` CHANGE `profiles` `field` INT( 10 ) NOT NULL 
+
+			// ALTER TABLE `test` CHANGE `profiles` `field` INT( 10 ) NOT NULL
 			// ALTER TABLE `test` CHANGE `profiles` `description` INT( 1 ) NOT NULL DEFAULT '0'
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -76,7 +72,6 @@ class YumFieldsController extends YumController
 
 	public function actionDelete()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
@@ -95,7 +90,6 @@ class YumFieldsController extends YumController
 
 	public function actionIndex()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
 				'pageSize'=>Yum::module()->pageSize,
@@ -112,8 +106,6 @@ class YumFieldsController extends YumController
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
-
 		$dataProvider=new CActiveDataProvider('YumProfileField', array(
 			'pagination'=>array(
 				'pageSize'=>Yum::module()->pageSize,

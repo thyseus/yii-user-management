@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Base class for all active records
  * @author tomasz.suchanek
@@ -18,7 +18,7 @@ abstract class YumActiveRecord extends CActiveRecord {
 		$behaviors = array( 'CAdvancedArBehavior' );
 		if(Yum::module()->enableAuditTrail)
 			$behaviors = array_merge($behaviors, array( 
-						'LoggableBehavior' => 'application.modules.auditTrail.behaviors.LoggableBehavior')
+						'LoggableBehavior' => 'YumModulesRoot.auditTrail.behaviors.LoggableBehavior')
 					);
 
 		return $behaviors;

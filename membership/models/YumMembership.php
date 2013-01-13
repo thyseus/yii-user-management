@@ -1,5 +1,5 @@
-<?
-Yii::import('application.modules.role.models.*'); 
+<?php
+Yii::import('YumModulesRoot.role.models.*'); 
 
 class YumMembership extends YumActiveRecord{
 	public static function model($className=__CLASS__) {
@@ -126,7 +126,7 @@ class YumMembership extends YumActiveRecord{
 
 	public function sendPaymentConfirmation () {
 		if(Yum::hasModule('message')) {
-			Yii::import('application.modules.message.models.*');
+			Yii::import('YumModulesRoot.message.models.*');
 			return YumMessage::write($this->user, 1,
 					Yum::t('Payment arrived'),
 					strtr(

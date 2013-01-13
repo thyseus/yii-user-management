@@ -1,4 +1,5 @@
-<?
+<?php
+$this->title = Yum::t('app', 'Update').' Usergroup #'.$model->id;
 $this->breadcrumbs=array(
 	'Usergroups'=>array('index'),
 	$model->title=>array('view','id'=>$model->id),
@@ -11,10 +12,6 @@ $this->menu=array(
 	array('label'=>Yii::t('app', 'View') . ' Usergroup', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>Yii::t('app', 'Manage') . ' Usergroup', 'url'=>array('admin')),
 );
-?>
-
-<h1> <? echo Yii::t('app', 'Update');?> Usergroup #<? echo $model->id; ?> </h1>
-<?
 $this->renderPartial('_form', array(
 			'model'=>$model));
-?>
+

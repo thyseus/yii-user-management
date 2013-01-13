@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yii::t("UserModule.user", 'Profile field {fieldname}', array(
 			'{fieldname}'=>$model->varname));
 
@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<? $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',

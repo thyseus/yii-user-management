@@ -1,5 +1,6 @@
-<?
+<?php
 Yii::setPathOfAlias('RoleModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class RoleModule extends CWebModule {
 	// set useYiiCheckAccess to true to disable Yums own checkAccess routines.
@@ -7,7 +8,7 @@ class RoleModule extends CWebModule {
 	// SrBAC
 	public $useYiiCheckAccess = false;
 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 
 	public $roleTable = 'role';
 	public $permissionTable = 'permission';

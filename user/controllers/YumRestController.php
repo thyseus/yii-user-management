@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This function implements the RESTful Api features of yii-user-management
  * @since 0.8rc2 

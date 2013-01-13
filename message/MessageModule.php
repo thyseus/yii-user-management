@@ -1,5 +1,6 @@
-<?
+<?php
 Yii::setPathOfAlias('MessageModule', dirname(__FILE__));
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 Yii::import('MessageModule.models.*');
 
@@ -10,13 +11,13 @@ class MessageModule extends CWebModule
 	// None, Digest, Instant, User, Threshold
 	// 'User' means to use the user-specific option in the user table
 	public $messageTable = 'message';
-	public $notifyType = 'user';
+	public $notifytype = 'user';
 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 
 	public $dateFormat = 'Y-m-d G:i:s';
 
-	public $inboxView = 'application.modules.message.views.message.index';
+	public $inboxView = 'MessageModule.views.message.index';
 	public $inboxRoute = array('index');
 
 	// Send a message to the user if the email changing has been succeeded

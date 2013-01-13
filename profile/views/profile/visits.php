@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('All Profile visits in the system');
 
 $this->breadcrumbs = array(

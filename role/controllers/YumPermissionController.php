@@ -1,8 +1,8 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.role.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.role.models.*');
 
 class YumPermissionController extends YumController
 {
@@ -32,15 +32,14 @@ class YumPermissionController extends YumController
 			Yum::setFlash(Yum::t('The permission has been removed'));
 		else
 			Yum::setFlash(Yum::t('Error while removing the permission'));
-	
-		$this->redirect(array('//role/permission/admin')); 
+
+		$this->redirect(array('//role/permission/admin'));
 	}
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module('role')->layout;
 		$model=new YumPermission('search');
-		$model->unsetAttributes();  
+		$model->unsetAttributes();
 
 		if(isset($_GET['YumPermission']))
 			$model->attributes=$_GET['YumPermission'];
@@ -50,8 +49,8 @@ class YumPermissionController extends YumController
 					));
 	}
 
-	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
+	public function actionCreate()
+	{
 		$model = new YumPermission;
 
 		$this->performAjaxValidation($model, 'permission-create-form');

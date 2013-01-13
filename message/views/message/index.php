@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('My inbox');
 
 $this->breadcrumbs=array(

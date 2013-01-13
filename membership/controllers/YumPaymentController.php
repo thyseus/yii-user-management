@@ -1,26 +1,26 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.membership.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.membership.models.*');
 
 class YumPaymentController extends YumController {
 
 	public function accessRules() {
 		return array(
-				array('allow',  
+				array('allow',
 					'actions'=>array('index','view'),
 					'users'=>array('*'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('getOptions', 'create','update'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('admin','delete'),
 					'users'=>array('admin'),
 					),
-				array('deny', 
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
@@ -35,7 +35,6 @@ class YumPaymentController extends YumController {
 
 	public function actionCreate()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumPayment;
 
 		if(isset($_POST['YumPayment'])) {
@@ -83,7 +82,7 @@ class YumPaymentController extends YumController {
 			if(!isset($_GET['ajax']))
 			{
 				if(isset($_POST['returnUrl']))
-					$this->redirect($_POST['returnUrl']); 
+					$this->redirect($_POST['returnUrl']);
 				else
 					$this->redirect(array('admin'));
 			}
@@ -103,7 +102,6 @@ class YumPaymentController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model=new YumPayment('search');
 		$model->unsetAttributes();
 

@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumUsergroup extends YumActiveRecord{
 	public static function model($className=__CLASS__)
@@ -8,7 +8,7 @@ class YumUsergroup extends YumActiveRecord{
 
 	public function behaviors() {
 		return array('CSerializeBehavior' => array(
-					'class' => 'application.modules.user.components.CSerializeBehavior',
+					'class' => 'YumComponents.CSerializeBehavior',
 					'serialAttributes' => array('participants')));
 	}
 
@@ -51,15 +51,15 @@ class YumUsergroup extends YumActiveRecord{
 	public function getParticipantDataProvider() {
 		$criteria = new CDbCriteria;
 		$criteria->addInCondition('id', $this->participants);
-	
+
 		return new CActiveDataProvider('YumUser', array('criteria' => $criteria));
 	}
 
 	public function getMessageDataProvider() {
-		Yii::import('application.modules.usergroup.models.*');
+		Yii::import('UsergroupModule.models.*');
 		$criteria = new CDbCriteria;
 		$criteria->compare('group_id', $this->id);
-	
+
 		return new CActiveDataProvider('YumUsergroupMessage', array(
 					'criteria' => $criteria));
 	}

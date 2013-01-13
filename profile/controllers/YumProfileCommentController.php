@@ -1,32 +1,32 @@
-<?
-Yii::import('application.modules.user.models.*');
+<?php
+Yii::import('YumModulesRoot.user.models.*');
 
 class YumProfileCommentController extends YumController
 {
 	public function accessRules()
 	{
 		return array(
-				array('allow',  
+				array('allow',
 					'actions'=>array('index'),
 					'users'=>array('*'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('create', 'delete'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('admin'),
 					'users'=>array('admin'),
 					),
-				array('deny', 
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
 	}
 
-	public function actionCreate() {
+	public function actionCreate()
+	{
 		$model = new YumProfileComment;
-
 		$this->performAjaxValidation($model, 'profile-comment-form');
 
 		if(isset($_POST['YumProfileComment'])) {
@@ -39,7 +39,6 @@ class YumProfileCommentController extends YumController
 						'model'=>$user
 						), false, true);
 	}
-
 
 	public function actionDelete($id) {
 		$comment = YumProfileComment::model()->findByPk($id);

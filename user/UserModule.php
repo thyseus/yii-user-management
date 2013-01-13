@@ -1,5 +1,6 @@
-<?
+<?php
 Yii::setPathOfAlias('YumModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 Yii::setPathOfAlias('YumComponents' , dirname(__FILE__) . '/components/');
 Yii::setPathOfAlias('YumAssets' , dirname(__FILE__) . '/assets/');
 
@@ -12,9 +13,9 @@ class UserModule extends CWebModule {
 
 	//layout related control vars
 	public $baseLayout = 'application.views.layouts.main';
-	public $layout = 'application.modules.user.views.layouts.yum';
-	public $loginLayout = 'application.modules.user.views.layouts.yum';
-	public $adminLayout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'YumModule.views.layouts.yum';
+	public $loginLayout = 'YumModule.views.layouts.yum';
+	public $adminLayout = 'YumModule.views.layouts.yum';
 
 	// configuration related control vars
 	public $enableLogging = true;
@@ -29,7 +30,7 @@ class UserModule extends CWebModule {
   // for example, demo and Demo would be the same user then
 	public $caseSensitiveUsers = true;
 
-	// set this to true if you do want to access data through a REST api. 
+	// set this to true if you do want to access data through a REST api.
 	// Disabled by default for security reasons.
 	public $enableRESTapi = false;
 
@@ -42,9 +43,9 @@ class UserModule extends CWebModule {
 	public $activationPasswordSet = false;
 	public $autoLogin = false;
 
-	// set to swift to active emailing by swiftMailer or 
+	// set to swift to active emailing by swiftMailer or
 	// PHPMailer to use PHPMailer as emailing lib.
-	public $mailer = 'yum'; 
+	public $mailer = 'yum';
 	public $phpmailer = null; // PHPMailer array options.
 	public $adminEmail = 'admin@example.com';
 
@@ -57,7 +58,7 @@ class UserModule extends CWebModule {
   public $rteadapter = false; // Don't use an Adapter
 
 	public $customCsvExportCriteria = '1';
-	
+
 	//public $salt = '';
 	 // valid callback function for password hashing ie. sha1
 	//public $hashFunc = 'md5';
@@ -113,7 +114,7 @@ class UserModule extends CWebModule {
 			'activate' => '/user/resend_activation',
 			'message' => '/user/message',
 			'passwordForm' => '/user/_activation_passwordform',
-			'messageCompose' =>'application.modules.message.views.message.compose');
+			'messageCompose' =>'YumModulesRoot.message.views.message.compose');
 
 	// LoginType :
 	// If you want to activate many types of login just sum up the values below and assign them to 'loginType' in
@@ -228,7 +229,7 @@ class UserModule extends CWebModule {
 		$this->setImport(array(
 			'YumModule.controllers.*',
 			'YumModule.models.*',
-			'YumModule.components.*',
+			'YumComponents.*',
 			'YumModule.core.*',
 		));
 	}

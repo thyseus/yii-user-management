@@ -1,8 +1,8 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.profile.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.profile.models.*');
 
 class YumProfileController extends YumController {
 	public $_model;
@@ -61,18 +61,15 @@ class YumProfileController extends YumController {
 						));
 	}
 
-	public function actionVisits() {
-		$this->layout = Yum::module()->adminLayout;
-
+	public function actionVisits()
+	{
 		$this->render('visits',array(
 			'model'=>new YumProfileVisit(),
 		));
-
 	}
 
-	public function beforeAction($action) {
-		if(!isset($this->layout))
-			$this->layout = Yum::module('profile')->layout;
+	public function beforeAction($action)
+	{
 		return parent::beforeAction($action);
 	}
 
@@ -87,7 +84,7 @@ class YumProfileController extends YumController {
 	}
 
 	public function actionView($id = null) {
-		if(!Yum::module('profile')->profilesViewableByGuests 
+		if(!Yum::module('profile')->profilesViewableByGuests
 				&& Yii::app()->user->isGuest)
 			throw new CHttpException(403);
 
@@ -115,10 +112,10 @@ class YumProfileController extends YumController {
 
 		// If the user does not want to log his profile visits, cancel here
 		if(Yum::module('profile')->enableProfileVisitLogging
-				&& isset(Yii::app()->user->data()->privacy) 
+				&& isset(Yii::app()->user->data()->privacy)
 				&& !Yii::app()->user->data()->privacy->log_profile_visits)
 			return false;
-			
+
 		// Visiting my own profile doesn't count as visit
 		if($visitor_id == $visited_id)
 			return true;
@@ -147,7 +144,6 @@ class YumProfileController extends YumController {
 
 	public function actionAdmin()
 	{
-		$this->layout = Yum::module()->adminLayout;
 		$model = new YumProfile;
 
 		$dataProvider=new CActiveDataProvider('YumProfile', array(

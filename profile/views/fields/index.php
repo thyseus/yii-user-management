@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yii::t("UserModule.user", 'List profile field');
 $this->breadcrumbs=array(Yii::t("UserModule.user", 'Profile fields'));
 

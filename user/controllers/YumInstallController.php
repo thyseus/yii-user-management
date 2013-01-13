@@ -1,9 +1,13 @@
-<?
+<?php
 
 class YumInstallController extends YumController
 {
-	public $layout = 'install';
 	public $defaultAction = 'install';
+
+	public function init()
+	{
+		$this->layout = 'install';
+	}
 
 	public function accessRules()
 	{
@@ -82,7 +86,7 @@ class YumInstallController extends YumController
 						`username` varchar(20) NOT NULL,
 						`password` varchar(128) NOT NULL,
 						`salt` varchar(128) NOT NULL,
-						`activationKey` varchar(128) NOT NULL default '',
+						`activationkey` varchar(128) NOT NULL default '',
 						`createtime` int(10) NOT NULL default '0',
 						`lastvisit` int(10) NOT NULL default '0',
 						`lastaction` int(10) NOT NULL default '0',
@@ -90,7 +94,7 @@ class YumInstallController extends YumController
 						`superuser` int(1) NOT NULL default '0',
 						`status` int(1) NOT NULL default '0',
 						`avatar` varchar(255) default NULL,
-						`notifyType` enum('None', 'Digest', 'Instant', 'Threshold') default 'Instant',
+						`notifytype` enum('None', 'Digest', 'Instant', 'Threshold') default 'Instant',
 						PRIMARY KEY  (`id`),
 						UNIQUE KEY `username` (`username`),
 						KEY `status` (`status`),
@@ -114,8 +118,9 @@ class YumInstallController extends YumController
 
 					// Insert the translation strings that come with yum
 					$sql = file_get_contents(Yii::getPathOfAlias(
-								'application.modules.user.docs') . '/yum_translation.sql');
-
+								'YumModule.docs') . '/yum_translation.sql');
+					if ($translationTable != 'translation')
+						$sql = preg_replace('#INTO `translation`#', "INTO `{$translationTable}`", $sql);
 					$db->createCommand($sql)->execute();
 
 					// Install Usergroups submodule
@@ -160,7 +165,7 @@ class YumInstallController extends YumController
 							`zipcode` varchar(255) DEFAULT NULL,
 							`city` varchar(255) DEFAULT NULL,
 							`payment_date` int(11) NULL,
-							`subscribed` tinyint(1) NOT NULL 
+							`subscribed` tinyint(1) NOT NULL
 								) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=10000;";
 
 						$db->createCommand($sql)->execute();
@@ -358,7 +363,7 @@ class YumInstallController extends YumController
 					$salt1 = YumEncrypt::generateSalt();
 					$salt2 = YumEncrypt::generateSalt();
 					$sql = "INSERT INTO `" . $userTable
-					   ."` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
+					   ."` (`id`, `username`, `password`, `salt`, `activationkey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
 					   ."(1, 'admin', '" . YumEncrypt::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
 					   ."(2, 'demo', '" . YumEncrypt::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
 					$db->createCommand($sql)->execute();

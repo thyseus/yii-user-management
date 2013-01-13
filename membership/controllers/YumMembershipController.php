@@ -1,23 +1,23 @@
-<?
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.Yum');
-Yii::import('application.modules.role.models.*');
-Yii::import('application.modules.membership.models.*');
+<?php
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.Yum');
+Yii::import('YumModulesRoot.role.models.*');
+Yii::import('YumModulesRoot.membership.models.*');
 
 class YumMembershipController extends YumController {
 	public $defaultAction = 'index';
 
 	public function accessRules() {
 		return array(
-				array('allow', 
+				array('allow',
 					'actions'=>array('index', 'order', 'extend'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions'=>array('admin','delete', 'update', 'view', 'orders'),
 					'users'=>array('admin'),
 					),
-				array('deny', 
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
@@ -44,13 +44,13 @@ class YumMembershipController extends YumController {
 	}
 
 	public function actionUpdate($id = null) {
-		if($id !== null) 
+		if($id !== null)
 			$model = YumMembership::model()->findByPk($id);
 
 		if(isset($_POST['YumMembership'])) {
-			$model = YumMembership::model()->findByPk($_POST['YumMembership']['id']); 
+			$model = YumMembership::model()->findByPk($_POST['YumMembership']['id']);
 			$model->attributes = $_POST['YumMembership'];
-			if($model->confirmPayment()) 
+			if($model->confirmPayment())
 				$this->redirect(array('admin'));
 		}
 
@@ -82,7 +82,7 @@ class YumMembershipController extends YumController {
 			if(!isset($_GET['ajax']))
 			{
 				if(isset($_POST['returnUrl']))
-					$this->redirect($_POST['returnUrl']); 
+					$this->redirect($_POST['returnUrl']);
 				else
 					$this->redirect(array('admin'));
 			}
@@ -118,8 +118,6 @@ class YumMembershipController extends YumController {
 	}
 
 	public function actionAdmin() {
-		$this->layout = Yum::module()->adminLayout;
-
 		$model=new YumMembership('search');
 		$model->unsetAttributes();
 

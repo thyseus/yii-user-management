@@ -1,13 +1,10 @@
-<?
+<?php
+$this->title = Yum::t('Memberships');
 $this->breadcrumbs=array(
 		Yum::t('Memberships')=>array('index'),
 		Yum::t('Manage'),
 		);
-?>
 
-<h1> <? echo Yum::t('Memberships'); ?></h1>
-
-<?
 $locale = CLocale::getInstance(Yii::app()->language);
 
 $this->widget('zii.widgets.grid.CGridView', array(
@@ -38,11 +35,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
 				'payment.title',
 				array(
 						'header' => Yum::t('Time left'),
-						'value' => '$data->timeLeft()', 
+						'value' => '$data->timeLeft()',
 						'type' => 'raw'),
 				array(
 						'class'=>'CButtonColumn',
 						'template' => '{update}{delete}',
 						),
 				),
-				)); ?>
+				));
+

@@ -1,9 +1,9 @@
-<?
+<?php
 /* This is the controller for the internal messaging System of
  * the Yii User Management Module. */
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.message.models.YumMessage');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.message.models.YumMessage');
 
 class YumMessageController extends YumController {
 	public function accessRules() {
@@ -123,8 +123,8 @@ class YumMessageController extends YumController {
 		$recipients = array();
 		if(isset($_POST['sendDigest'])) {
 			foreach(YumMessage::model()->with('to_user')->findAll('not message_read') as $message) {
-				if((is_object($message->to_user) && $message->to_user->notifyType == 'Digest')
-						|| Yum::module('message')->notifyType == 'Digest') { 
+				if((is_object($message->to_user) && $message->to_user->notifytype == 'Digest')
+						|| Yum::module('message')->notifytype == 'Digest') { 
 					$this->mailMessage($message);
 					$recipients[] = $message->to_user->profile->email;
 				}

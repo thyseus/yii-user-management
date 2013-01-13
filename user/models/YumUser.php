@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * This is the model class for a User in Yum
@@ -8,7 +8,7 @@
  * @property string $username
  * @property string $password
  * @property string $saltf
- * @property string $activationKey
+ * @property string $activationkey
  * @property integer $createtime
  * @property integer $lastvisit
  * @property integer $superuser
@@ -36,14 +36,14 @@ class YumUser extends YumActiveRecord
 	public $username;
 	public $password;
 	public $salt;
-	public $activationKey;
+	public $activationkey;
 	public $password_changed = false;
 
 	public function behaviors()
 	{
 		return array(
 				'CAdvancedArBehavior' => array(
-					'class' => 'application.modules.user.components.CAdvancedArBehavior'));
+					'class' => 'YumComponents.CAdvancedArBehavior'));
 	}
 
 	public static function model($className = __CLASS__)
@@ -133,8 +133,8 @@ class YumUser extends YumActiveRecord
 		if (!Yum::hasModule('membership'))
 			return array();
 
-		Yii::import('application.modules.role.models.*');
-		Yii::import('application.modules.membership.models.*');
+		Yii::import('YumModulesRoot.role.models.*');
+		Yii::import('YumModulesRoot.membership.models.*');
 
 		$roles = array();
 
@@ -267,7 +267,7 @@ class YumUser extends YumActiveRecord
 		$rules[] = array('status', 'in', 'range' => array(0, 1, 2, 3, -1, -2));
 		$rules[] = array('superuser', 'in', 'range' => array(0, 1));
 		$rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
-		$rules[] = array('notifyType, avatar', 'safe');
+		$rules[] = array('notifytype, avatar', 'safe');
 		$rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
 		$rules[] = array('salt', 'required', 'on' => array('insert', 'registration'));
 		$rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
@@ -294,7 +294,7 @@ class YumUser extends YumActiveRecord
 		if (!Yum::hasModule('role'))
 			return false;
 
-		Yii::import('application.modules.role.models.*');
+		Yii::import('YumModulesRoot.role.models.*');
 
 		$roles = $this->roles;
 
@@ -314,7 +314,7 @@ class YumUser extends YumActiveRecord
 	public function getRoles()
 	{
 		if (Yum::hasModule('role')) {
-			Yii::import('application.modules.role.models.*');
+			Yii::import('YumModulesRoot.role.models.*');
 			$roles = '';
 			foreach ($this->roles as $role)
 				$roles .= ' ' . $role->title;
@@ -334,7 +334,7 @@ class YumUser extends YumActiveRecord
 		if (!Yum::hasModule('role') || !$this->id)
 			return array();
 
-		Yii::import('application.modules.role.models.*');
+		Yii::import('YumModulesRoot.role.models.*');
 		$roles = $this->roles;
 
 		if (Yum::hasModule('membership'))
@@ -370,14 +370,14 @@ class YumUser extends YumActiveRecord
 	// and it takes many expensive milliseconds to evaluate them all the time
 	public function relations()
 	{
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('YumModulesRoot.profile.models.*');
 
 		$relations = Yii::app()->cache->get('yum_user_relations');
 		if($relations === false) {
 			$relations = array();
 
 			if (Yum::hasModule('role')) {
-				Yii::import('application.modules.role.models.*');
+				Yii::import('YumModulesRoot.role.models.*');
 				$relations['permissions'] = array(
 						self::HAS_MANY, 'YumPermission', 'principal_id');
 
@@ -390,7 +390,7 @@ class YumUser extends YumActiveRecord
 			}
 
 			if (Yum::hasModule('message')) {
-				Yii::import('application.modules.message.models.*');
+				Yii::import('YumModulesRoot.message.models.*');
 				$relations['messages'] = array(
 						self::HAS_MANY, 'YumMessage', 'to_user_id',
 						'order' => 'timestamp DESC');
@@ -427,7 +427,7 @@ class YumUser extends YumActiveRecord
 			}
 
 			if (Yum::hasModule('membership')) {
-				Yii::import('application.modules.membership.models.*');
+				Yii::import('YumModulesRoot.membership.models.*');
 				$relations['memberships'] = array(
 						self::HAS_MANY, 'YumMembership', 'user_id');
 			}
@@ -465,7 +465,7 @@ class YumUser extends YumActiveRecord
 			$condition = 'inviter_id = :uid and status = 2';
 
 		$friends = array();
-		Yii::import('application.modules.friendship.models.YumFriendship');
+		Yii::import('YumModulesRoot.friendship.models.YumFriendship');
 		$friendships = YumFriendship::model()->findAll($condition, array(
 					':uid' => $this->id));
 		if ($friendships != NULL && !is_array($friendships))
@@ -510,7 +510,7 @@ class YumUser extends YumActiveRecord
 
 			$this->setPassword($password, $salt);
 		}
-		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
+		$this->activationkey = $this->generateActivationKey(false/*, $password*/);
 		$this->createtime = time();
 		$this->superuser = 0;
 
@@ -558,7 +558,7 @@ class YumUser extends YumActiveRecord
 			$activationUrl = Yum::module('registration')->activationUrl;
 			if (is_array($activationUrl) && isset($this->profile)) {
 				$activationUrl = $activationUrl[0];
-				$params['key'] = $this->activationKey;
+				$params['key'] = $this->activationkey;
 				$params['email'] = $this->profile->email;
 
 				return Yii::app()->controller->createAbsoluteUrl($activationUrl, $params);
@@ -577,7 +577,7 @@ class YumUser extends YumActiveRecord
 	 * Activation of an user account.
 	 * If everything is set properly, and the emails exists in the database,
 	 * and is associated with a correct user, and this user has the status
-	 * NOTACTIVE and the given activationKey is identical to the one in the
+	 * NOTACTIVE and the given activationkey is identical to the one in the
 	 * database then generate a new Activation key to avoid double activation,
 	 * set the status to ACTIVATED and save the data
 	 * Error Codes:
@@ -587,7 +587,7 @@ class YumUser extends YumActiveRecord
 	 */
 	public static function activate($email, $key)
 	{
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('YumModulesRoot.profile.models.*');
 
 		if ($profile = YumProfile::model()->find("email = :email", array(
 						':email' => $email))
@@ -595,16 +595,16 @@ class YumUser extends YumActiveRecord
 			if ($user = $profile->user) {
 				if ($user->status != self::STATUS_INACTIVE)
 					return -1;
-				if ($user->activationKey == $key) {
-					$user->activationKey = $user->generateActivationKey(true);
+				if ($user->activationkey == $key) {
+					$user->activationkey = $user->generateActivationKey(true);
 					$user->status = self::STATUS_ACTIVE;
-					if ($user->save(false, array('activationKey', 'status'))) {
+					if ($user->save(false, array('activationkey', 'status'))) {
 						Yum::log(Yum::t('User {username} has been activated', array(
 										'{username}' => $user->username)));
-						if (Yum::hasModule('messages')
+						if (Yum::hasModule('message')
 								&& Yum::module('registration')->enableActivationConfirmation
 							 ) {
-							Yii::import('application.modules.messages.models.YumMessage');
+							Yii::import('YumModulesRoot.message.models.YumMessage');
 							YumMessage::write($user, 1,
 									Yum::t('Your activation succeeded'),
 									strtr(
@@ -635,15 +635,15 @@ class YumUser extends YumActiveRecord
 	public function generateActivationKey($activate = false)
 	{
 		if($activate) {
-			$this->activationKey = $activate;
-			$this->save(false, array('activationKey'));
+			$this->activationkey = $activate;
+			$this->save(false, array('activationkey'));
 		} else
-			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
+			$this->activationkey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
 
 		if(!$this->isNewRecord)
-			$this->save(false, array('activationKey'));
+			$this->save(false, array('activationkey'));
 
-		return $this->activationKey;
+		return $this->activationkey;
 	}
 
 	public function attributeLabels()
@@ -654,7 +654,7 @@ class YumUser extends YumActiveRecord
 				'password' => Yum::t("Password"),
 				'verifyPassword' => Yum::t("Retype password"),
 				'verifyCode' => Yum::t("Verification code"),
-				'activationKey' => Yum::t("Activation key"),
+				'activationkey' => Yum::t("Activation key"),
 				'createtime' => Yum::t("Registration date"),
 				'lastvisit' => Yum::t("Last visit"),
 				'lastaction' => Yum::t("Online status"),

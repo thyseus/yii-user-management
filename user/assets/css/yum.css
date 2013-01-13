@@ -12,17 +12,17 @@ div.form .tooltip { display: none; background-color:#EFFDFF; border:1px solid #7
 .menucontent li {margin: 5px 0px 0px 9px; list-style-type:none;}
 
 .avatar {float:left; margin-right: 5px;}
-#usercontent {padding: 20px; width:70%; margin: 5px;}
+#usercontent {float:left; padding: 20px; width:69%; margin: 5px;}
 label { display: inline }
 .checkbox { float: left; margin-right: 5px; }
-.listbox { display: inline; } 
+.listbox { display: inline; }
 .roles {float: right; }
 .membership { float: left;margin: 5px; }
 .info {background-color: lightgray; padding: 10px; margin:10px; border: 1px dotted black;}
-.new_messages td { border-bottom: 1px solid;} 
+.new_messages td { border-bottom: 1px solid;}
 .tooltip { display: none; padding: 5px; margin: 5px; background-color: #ffa;border: 1px solid #cc9; border-radius: 5px;}
 .view_user {float:left; margin:5px;}
 .profile_field_selection { float: right; margin: 5px;}
 .table_profile_fields { width: 50%; }
 .profilefieldlabel { float: left; margin-right: 5px; width: 100px;}
-.friend { margin: 5px; } 
+.friend { margin: 5px; }

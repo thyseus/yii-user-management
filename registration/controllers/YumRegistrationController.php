@@ -1,15 +1,15 @@
-<?
+<?php
 
 /* This file handles a example registration process logic and some of the
  * most used functions for Registration and Activation. It is recommended to
- * extend from this class and implement your own, project-specific 
+ * extend from this class and implement your own, project-specific
  * Registration process. If this example does exactly what you want in your
  * Project, then you can feel lucky already! */
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.profile.models.*');
-Yii::import('application.modules.registration.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.profile.models.*');
+Yii::import('YumModulesRoot.registration.models.*');
 
 class YumRegistrationController extends YumController {
 	public $defaultAction = 'registration';
@@ -22,10 +22,9 @@ class YumRegistrationController extends YumController {
 		if(!Yum::hasModule('profile'))
 			throw new CHttpException(401, 'The Registration submodule depends on the profile submodule. Please see the installation instructions or registration/RegistrationModule.php for details');
 
-		if(!Yii::app()->user->isGuest) 
+		if(!Yii::app()->user->isGuest)
 			$this->redirect(Yii::app()->user->returnUrl);
 
-		$this->layout = Yum::module('registration')->layout;
 		return parent::beforeAction($action);
 	}
 
@@ -67,13 +66,13 @@ class YumRegistrationController extends YumController {
 					'//registration/registration/registration'))
 			throw new CHttpException(403);
 
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('YumModulesRoot.profile.models.*');
 		$form = new YumRegistrationForm;
 		$profile = new YumProfile;
 
 		$this->performAjaxValidation('YumRegistrationForm', $form);
 
-		if (isset($_POST['YumRegistrationForm'])) { 
+		if (isset($_POST['YumRegistrationForm'])) {
 			$form->attributes = $_POST['YumRegistrationForm'];
 			$profile->attributes = $_POST['YumProfile'];
 
@@ -88,19 +87,19 @@ class YumRegistrationController extends YumController {
 				Yum::setFlash('Thank you for your registration. Please check your email.');
 				$this->redirect(Yum::module()->loginUrl);
 			}
-		} 
+		}
 
 		$this->render(Yum::module()->registrationView, array(
 					'form' => $form,
 					'profile' => $profile,
 					)
-				);  
+				);
 	}
 
-	// Send the Email to the given user object. 
+	// Send the Email to the given user object.
 	// $user->profile->email needs to be set.
 	public function sendRegistrationEmail($user) {
-		if (!isset($user->profile->email)) 
+		if (!isset($user->profile->email))
 			throw new CException(Yum::t('Email is not set when trying to send Registration Email'));
 
 		$activation_url = $user->getActivationUrl();
@@ -127,7 +126,7 @@ class YumRegistrationController extends YumController {
 	 * Activation of an user account. The Email and the Activation key send
 	 * by email needs to correct in order to continue. The Status will
 	 * be initially set to 1 (active - first Visit) so the administrator
-	 * can see, which accounts have been activated, but not yet logged in 
+	 * can see, which accounts have been activated, but not yet logged in
 	 * (more than once)
 	 */
 	public function actionActivation($email, $key) {
@@ -144,10 +143,10 @@ class YumRegistrationController extends YumController {
 
 		if($status instanceof YumUser) {
 			if(Yum::module('registration')->loginAfterSuccessfulActivation) {
-				$login = new YumUserIdentity($status->username, false); 
+				$login = new YumUserIdentity($status->username, false);
 				$login->authenticate(true);
-				Yii::app()->user->login($login);	
-			} 
+				Yii::app()->user->login($login);
+			}
 
 			$this->render(Yum::module('registration')->activationSuccessView);
 		}

@@ -1,8 +1,8 @@
-<?
+<?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.role.models.*');
+Yii::import('YumModulesRoot.user.controllers.YumController');
+Yii::import('YumModulesRoot.user.models.*');
+Yii::import('YumModulesRoot.role.models.*');
 
 class YumRoleController extends YumController {
 	public function accessRules() {
@@ -17,8 +17,8 @@ class YumRoleController extends YumController {
 				);
 	}
 
-	public function actionView() {
-		$this->layout = Yum::module()->adminLayout;
+	public function actionView()
+	{
 		$model = $this->loadModel();
 
 		$assignedUsers = new CActiveDataProvider('YumUser', array(
@@ -28,7 +28,7 @@ class YumRoleController extends YumController {
 
 		$activeMemberships = false;
 		if(Yum::hasModule('membership')) {
-			Yii::import('application.modules.membership.models.*');
+			Yii::import('YumModulesRoot.membership.models.*');
 			$activeMemberships= new CActiveDataProvider('YumMembership', array(
 						'criteria' => array(
 							'condition' => "membership_id = {$model->id}")));
@@ -40,9 +40,8 @@ class YumRoleController extends YumController {
 					'model'=>$model));
 	}
 
-	public function actionCreate() {
-		$this->layout = Yum::module()->adminLayout;
-
+	public function actionCreate()
+	{
 		$model = new YumRole();
 
 		$this->performAjaxValidation($model, 'yum-role-form');
@@ -65,7 +64,6 @@ class YumRoleController extends YumController {
 	}
 
 	public function actionUpdate() {
-		$this->layout = Yum::module()->adminLayout;
 		$model = $this->loadModel();
 
 		$this->performAjaxValidation($model, 'yum-role-form');
@@ -76,10 +74,10 @@ class YumRoleController extends YumController {
 
 			$model->users = Relation::retrieveValues($_POST);
 
-			if ($model->validate() && $model->save()) 
+			if ($model->validate() && $model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
-	
+
 
 		$this->render('update', array(
 			'model' => $model,
@@ -87,7 +85,6 @@ class YumRoleController extends YumController {
 	}
 
 	public function actionAdmin() {
-		$this->layout = Yum::module()->adminLayout;
 		$dataProvider = new CActiveDataProvider('YumRole', array(
 					'pagination' => array(
 						'pageSize' => 20,

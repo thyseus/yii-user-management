@@ -1,9 +1,10 @@
-<?
+<?php
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
+Yii::setPathOfAlias('YumModulesRoot' , dirname(dirname(__FILE__)));
 
 class RegistrationModule extends CWebModule {
-	// why enableRegistration ? - in case you only want a recovery ! 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	// why enableRegistration ? - in case you only want a recovery !
+	public $layout = 'YumModulesRoot.users.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;
 
@@ -15,7 +16,9 @@ class RegistrationModule extends CWebModule {
 	public $activationFailureView = '/registration/activation_failure';
 
 	// Whether to confirm the activation of an user by email
-	public $enableActivationConfirmation = true; 
+	public $enableActivationConfirmation = true;
+
+	public $validEmailPattern = '/^[A-Za-z0-9@.\s,]+$/u';
 
 	public $registrationEmail='register@website.com';
 	public $recoveryEmail='restore@website.com';
@@ -24,10 +27,10 @@ class RegistrationModule extends CWebModule {
 	public $defaultRoles = array();
 
 	public $registrationView = '/registration/registration';
-	public $changePasswordView = 
-		'application.modules.user.views.user.changepassword';
-	public $recoverPasswordView = 
-		'application.modules.registration.views.registration.recovery';
+	public $changePasswordView =
+		'YumModulesRoot.user.views.user.changepassword';
+	public $recoverPasswordView =
+		'RegistrationModule.views.registration.recovery';
 
 	/**
 	 * Whether to use captcha in registration process
