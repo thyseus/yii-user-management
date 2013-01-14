@@ -58,7 +58,7 @@ class YumAvatarController extends YumController {
 		if(!$model)
 			throw new CHttpException(404);
 
-		if(isset($_POST['YumUser'])) {
+		if(isset($_POST['YumUser']) && isset($_POST['YumUser']['avatar'])) {
 			$model->attributes = $_POST['YumUser'];
 			$model->setScenario('avatarUpload');
 
