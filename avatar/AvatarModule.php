@@ -5,6 +5,7 @@ class AvatarModule extends CWebModule {
 	public $defaultController = 'avatar';
 
 	// override this with your custom layout, if available
+	public $adminLayout = 'application.modules.user.views.layouts.yum';
 	public $layout = 'application.modules.user.views.layouts.yum';
 
 	public $avatarPath = 'images';
@@ -29,7 +30,4 @@ class AvatarModule extends CWebModule {
 					'application.modules.avatar.models.*',
 					));
 	}
-
-
-
 }

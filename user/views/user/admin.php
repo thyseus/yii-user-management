@@ -1,5 +1,4 @@
 <?
-
 $this->title = Yum::t('Manage users');
 
 $this->breadcrumbs = array(

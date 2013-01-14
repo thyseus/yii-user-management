@@ -153,11 +153,10 @@ class YumUser extends YumActiveRecord
 
 		if (Yum::hasModule('profile') && $this->profile) {
 			$criteria->with = array('profile');
-			if ($this->profile)
-				$criteria->compare('profile.email', $this->profile->email, true);
-
 			if (isset($this->email))
 				$criteria->addSearchCondition('profile.email', $this->email, true);
+			else if ($this->profile && $this->profile->email)
+				$criteria->compare('profile.email', $this->profile->email, true);
 		}
 
 		// Show newest users first by default
@@ -174,7 +173,7 @@ class YumUser extends YumActiveRecord
 
 		return new CActiveDataProvider(get_class($this), array(
 					'criteria' => $criteria,
-					'pagination' => array('pageSize' => 10),
+					'pagination' => array('pageSize' => Yum::module()->pageSize),
 					));
 	}
 
