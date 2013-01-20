@@ -24,9 +24,9 @@
 <? echo CHtml::activeLabelEx($model,'membership_priority'); ?>
 <? echo CHtml::activeTextField($model, 'membership_priority'); ?>
 <div class="hint">
-<?= Yum::t('Leave empty or set to 0 to disable membership for this role.'); ?>
-<?= Yum::t('Set to >0 to enable membership for this role and set a priority.'); ?>
-<?= Yum::t('Higher is usually more worthy. This is used to determine downgrade possibilities.'); ?>
+<? echo Yum::t('Leave empty or set to 0 to disable membership for this role.'); ?>
+<? echo Yum::t('Set to >0 to enable membership for this role and set a priority.'); ?>
+<? echo Yum::t('Higher is usually more worthy. This is used to determine downgrade possibilities.'); ?>
 </div>
 </div>
 <div class="row">

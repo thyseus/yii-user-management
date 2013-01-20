@@ -1,4 +1,4 @@
-<?php
+<?
 class YumWebUser extends CWebUser
 {
 	public $_data;
