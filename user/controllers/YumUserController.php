@@ -201,7 +201,7 @@ class YumUserController extends YumController {
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
-					$password = YumUser::generatePassword();
+					$password = YumEncrypt::generatePassword();
 					$model->setPassword($password, $model->salt);
 					Yum::setFlash(Yum::t('The generated Password is {password}', array(
 									'{password}' => $password)));
