@@ -13,7 +13,7 @@ class YumPermissionController extends YumController
 		return array(
 				array('allow',
 					'actions'=>array('admin', 'create', 'index', 'delete'),
-					'users'=>array('admin')
+					'expression' => 'Yii::app()->user->isAdmin()',
 					),
 				array('deny',  // deny all other users
 					'users'=>array('*'),
