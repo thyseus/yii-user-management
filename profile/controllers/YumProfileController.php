@@ -76,9 +76,19 @@ class YumProfileController extends YumController {
 		return parent::beforeAction($action);
 	}
 
-	public function loadModel($id = null) {
-		if(!$id)
+	public function loadModel($id = null) { 
+		if(!$id){
 			$id = Yii::app()->user->id;
+		}
+		else{
+			$sql='
+				SELECT user_id
+				FROM tbl_profile
+				WHERE id = '. $id .'
+			';	
+			$result = Yii::app()->db->createCommand($sql)->queryRow();
+			$id 	= $result['user_id'];
+		}
 
 		if(is_numeric($id))
 			return $this->_model = YumUser::model()->findByPk($id);
