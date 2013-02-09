@@ -17,7 +17,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 					'type' => 'raw',
 					'name' => Yum::t('From'),
 					'value' => 'CHtml::link($data->from_user->username, array(
-							"//profile/profile/profile"),
+							"//profile/profile/view",
 							"id" => $data->from_user_id)
 						)'
 					),
