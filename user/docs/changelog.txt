@@ -1,5 +1,9 @@
 Changelog for Yii User Management Module (Yum) 
 
+
+New in 0.8 final release:
+
+- Added Avatar Management
 - removed Yum::route
 - membership: downgrading support
 - membership: user can chooses if he want to subscribe to his membership

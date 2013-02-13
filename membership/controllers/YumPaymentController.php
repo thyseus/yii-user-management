@@ -18,7 +18,7 @@ class YumPaymentController extends YumController {
 					),
 				array('allow', 
 					'actions'=>array('admin','delete'),
-					'users'=>array('admin'),
+					'expression' => 'Yii::app()->user->isAdmin()',
 					),
 				array('deny', 
 					'users'=>array('*'),

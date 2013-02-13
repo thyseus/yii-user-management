@@ -44,6 +44,5 @@ class RegistrationTest extends CDbTestCase
 			// only safe Attributes are being assigned:
 			$_POST['YumRegistrationForm'] = $user->getAttributes();
 			$_POST['YumProfile'] = $profile->getAttributes();
-			
 		}
 }

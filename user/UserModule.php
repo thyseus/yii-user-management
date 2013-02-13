@@ -16,7 +16,6 @@ class UserModule extends CWebModule {
 	public $loginLayout = 'application.modules.user.views.layouts.yum';
 	public $adminLayout = 'application.modules.user.views.layouts.yum';
 
-	// configuration related control vars
 	public $enableLogging = true;
 	public $enableOnlineStatus = true;
 
@@ -58,10 +57,6 @@ class UserModule extends CWebModule {
 
 	public $customCsvExportCriteria = '1';
 	
-	//public $salt = '';
-	 // valid callback function for password hashing ie. sha1
-	//public $hashFunc = 'md5';
-
 	// valid callback function that executes after user login
 	public $afterLogin = false;
 
@@ -73,7 +68,7 @@ class UserModule extends CWebModule {
 	// set avoidSql to true if you intent do use yii-user-management on a non
 	// mysql database. All places where a SQL query would be used for performance
 	// reason are overwritten with a ActiveRecord implementation. This should
-	// make it more compatible with other rdbms.
+	// make it more compatible with other rdbms. Experimental of course.
 	public $avoidSql = false;
 
 	// When the auditTrail extension
@@ -243,5 +238,4 @@ class UserModule extends CWebModule {
 
 		return parent::beforeControllerAction($controller, $action);
 	}
-
 }
