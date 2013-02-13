@@ -241,7 +241,7 @@ class YumUser extends YumActiveRecord
 
 		$rules[] = array('username',
 				'unique',
-				'message' => Yum::t("This user's name already exists."));
+				'message' => Yum::t("This username already exists."));
 		$rules[] = array(
 				'username',
 				'match',
@@ -493,16 +493,19 @@ class YumUser extends YumActiveRecord
 
 			$this->setPassword($password, $salt);
 		}
-		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
+		$this->activationKey = $this->generateActivationKey(false);
 		$this->createtime = time();
 		$this->superuser = 0;
 
 		// Users stay banned until they confirm their email address.
 		$this->status = YumUser::STATUS_INACTIVE;
 
-		// If the avatar module and avatar->enableGravatar is activated, we assume
-		// the user wants to use his Gravatar automatically after registration
-		if(Yum::hasModule('avatar') && Yum::module('avatar')->enableGravatar)
+		// If the avatar module and avatar->enableGravatarDefault is activated, 
+		// we assume the user wants to use his Gravatar automatically after 
+		// registration
+		if(Yum::hasModule('avatar') 
+				&& Yum::module('avatar')->enableGravatar 
+				&& Yum::module('avatar')->enableGravatarDefault)
 			$this->avatar = 'gravatar';
 
 		if ($this->validate() && $profile->validate()) {
@@ -511,7 +514,7 @@ class YumUser extends YumActiveRecord
 			$profile->save();
 			$this->profile = $profile;
 
-			if(Yum::hasModule('role'))
+			if(Yum::hasModule('role') && Yum::hasModule('registration'))
 				foreach(Yum::module('registration')->defaultRoles as $role) 
 					Yii::app()->db->createCommand(sprintf(
 								'insert into %s (user_id, role_id) values(%s, %s)',
@@ -528,6 +531,10 @@ class YumUser extends YumActiveRecord
 
 			return $this;
 		}
+
+var_dump($this->getErrors());
+var_dump($profile->getErrors());
+die();
 
 		return false;
 	}

@@ -25,6 +25,10 @@ class YumWebUser extends CWebUser
 
 	public function can($action) {
 		Yii::import('application.modules.role.models.*');
+
+		if(Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
+			return true;
+
 		foreach ($this->data()->getPermissions() as $permission)
 			if ($permission == $action)
 				return true;
