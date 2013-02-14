@@ -170,6 +170,15 @@ class YumAuthController extends YumController {
 		return false;
 	}
 
+	public function logFailedLoginAttempt($user) {
+		Yum::log( Yum::t(
+					'Failed login attempt for user {username} (Ip-Address: {ip})', array(
+						'{ip}' => Yii::app()->request->getUserHostAddress(),
+						'{username}' => $this->loginForm->username)), 'error');
+		$user->failedloginattempts++;
+		$user->save(false, array('failedloginattempts'));
+	}
+
 	public function authenticate($user) {
 		$identity = new YumUserIdentity($user->username, $this->loginForm->password);
 		$identity->authenticate();
@@ -177,10 +186,17 @@ class YumAuthController extends YumController {
 			case YumUserIdentity::ERROR_NONE:
 				$duration = $this->loginForm->rememberMe ? 3600*24*30 : 0; // 30 days
 				Yii::app()->user->login($identity,$duration);
+				if($user->failedloginattempts > 0)
+					Yum::setFlash(Yum::t(
+								'Warning: there have been {count} failed login attempts', array(
+									'{count}' => $user->failedloginattempts)));
+				$user->failedloginattempts = 0;
+				$user->save(false, array('failedloginattempts'));
 				return $user;
 				break;
 			case YumUserIdentity::ERROR_EMAIL_INVALID:
 				$this->loginForm->addError("password",Yum::t('Username or Password is incorrect'));
+				$this->logFailedLoginAttempts($user);
 				break;
 			case YumUserIdentity::ERROR_STATUS_INACTIVE:
 				$this->loginForm->addError("status",Yum::t('This account is not activated.'));
@@ -192,10 +208,7 @@ class YumAuthController extends YumController {
 				$this->loginForm->addError('status', Yum::t('Your account has been deleted.'));
 				break;
 			case YumUserIdentity::ERROR_PASSWORD_INVALID:
-				Yum::log( Yum::t(
-							'Password invalid for user {username} (Ip-Address: {ip})', array(
-								'{ip}' => Yii::app()->request->getUserHostAddress(),
-								'{username}' => $this->loginForm->username)), 'error');
+				$this->logFailedLoginAttempt($user);
 
 				if(!$this->loginForm->hasErrors())
 					$this->loginForm->addError("password",Yum::t('Username or Password is incorrect'));
