@@ -532,10 +532,6 @@ class YumUser extends YumActiveRecord
 			return $this;
 		}
 
-var_dump($this->getErrors());
-var_dump($profile->getErrors());
-die();
-
 		return false;
 	}
 
