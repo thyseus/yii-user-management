@@ -161,8 +161,7 @@ class YumUser extends YumActiveRecord
 					));
 	}
 
-	public function beforeValidate()
-	{
+	public function beforeValidate() {
 		if ($this->isNewRecord) {
 			if(!$this->salt)
 				$this->salt = YumEncrypt::generateSalt();
@@ -172,15 +171,16 @@ class YumUser extends YumActiveRecord
 		return true;
 	}
 
-	public function setPassword($password, $salt = null)
-	{
-		if ($password != '') {
-			$this->password = YumEncrypt::encrypt($password, $salt);
+	public function setPassword($password, $salt = null) {
+		if ($password) {
 			$this->lastpasswordchange = time();
+			$this->password = $password;
 			$this->password_changed = true;
 			$this->salt = $salt;
-			if (!$this->isNewRecord)
+			if (!$this->isNewRecord && $this->validate()) {
+				$this->password = YumEncrypt::encrypt($password, $salt);
 				return $this->save();
+			}
 			else
 				return $this;
 		}
@@ -224,29 +224,33 @@ class YumUser extends YumActiveRecord
 
 	public function rules()
 	{
-		$passwordRequirements = Yum::module()->passwordRequirements;
 		$usernameRequirements = Yum::module()->usernameRequirements;
+		$passwordRequirements = Yum::module()->passwordRequirements;
 
 		$passwordrule = array_merge(array('password', 'YumPasswordValidator'), $passwordRequirements);
 
 		$rules[] = $passwordrule;
 
-		$rules[] = array('username', 'length',
-				'max' => $usernameRequirements['maxLen'],
-				'min' => $usernameRequirements['minLen'],
-				'message' => Yum::t(
-					'Username length needs to be between {minLen} and {maxlen} characters', array(
-						'{minLen}' => $usernameRequirements['minLen'],
-						'{maxLen}' => $usernameRequirements['maxLen'])));
+		if($usernameRequirements) {
+			$rules[] = array('username', 'length',
+					'max' => $usernameRequirements['maxLen'],
+					'min' => $usernameRequirements['minLen'],
+					'message' => Yum::t(
+						'Username length needs to be between {minLen} and {maxlen} characters', array(
+							'{minLen}' => $usernameRequirements['minLen'],
+							'{maxLen}' => $usernameRequirements['maxLen'])));
+			$rules[] = array(
+					'username',
+					'match',
+					'pattern' => $usernameRequirements['match'],
+					'message' => Yum::t($usernameRequirements['dontMatchMessage']));
+		}
+
 
 		$rules[] = array('username',
 				'unique',
-				'message' => Yum::t("This username already exists."));
-		$rules[] = array(
-				'username',
-				'match',
-				'pattern' => $usernameRequirements['match'],
-				'message' => Yum::t($usernameRequirements['dontMatchMessage']));
+				'message' => Yum::t('This username already exists.'));
+		
 		$rules[] = array('status', 'in', 'range' => array(0, 1, 2, 3, -1, -2));
 		$rules[] = array('superuser', 'in', 'range' => array(0, 1));
 		$rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
