@@ -300,7 +300,7 @@ class YumAuthController extends YumController {
 					$login_type = 'facebook';
 			}
 			if ($t & UserModule::LOGIN_BY_TWITTER && !$success) {
-				$sucess = $this->loginByTwitter();
+				$success = $this->loginByTwitter();
 				if ($success)
 					$login_type = 'twitter';
 			}
