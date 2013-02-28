@@ -65,7 +65,7 @@ class YumPrivacysetting extends YumActiveRecord
 			'message_new_friendship' => Yum::t('Receive a Email for new Friendship request'),
 			'message_new_message' => Yum::t('Receive a Email when new Message arrives'),
 			'message_new_profilecomment' => Yum::t('Receive a Email when a new profile comment was made'),
-			'log_profile_visits' => Yum::t('Profilbesuche preisgeben'),
+			'log_profile_visits' => Yum::t('Log profile visits'),
 
 		);
 	}
