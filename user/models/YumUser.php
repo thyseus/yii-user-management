@@ -1,8 +1,7 @@
 <?
 
 /**
- * This is the model class for a User in Yum. It is recommended to extend 
- * from this class in a project-specific User class.
+ * This is the model class for a User in Yum
  *
  * The followings are the available columns in table '{{users}}':
  * @property integer $id
@@ -110,6 +109,23 @@ class YumUser extends YumActiveRecord
 		return $this->status == YumUser::STATUS_ACTIVE;
 	}
 
+	// This function tries to generate a as human-readable password as possible
+	public static function generatePassword()
+	{
+		$consonants = array("b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "y", "z");
+		$vocals = array("a", "e", "i", "o", "u");
+
+		$password = '';
+
+		srand((double)microtime() * 1000000);
+		for ($i = 1; $i <= 4; $i++) {
+			$password .= $consonants[rand(0, 19)];
+			$password .= $vocals[rand(0, 4)];
+		}
+		$password .= rand(0, 9);
+
+		return $password;
+	}
 
 	// Which memberships are bought by the user
 	public function getActiveMemberships()
@@ -241,7 +257,7 @@ class YumUser extends YumActiveRecord
 
 		$rules[] = array('username',
 				'unique',
-				'message' => Yum::t("This username already exists."));
+				'message' => Yum::t("This user's name already exists."));
 		$rules[] = array(
 				'username',
 				'match',
@@ -493,19 +509,16 @@ class YumUser extends YumActiveRecord
 
 			$this->setPassword($password, $salt);
 		}
-		$this->activationKey = $this->generateActivationKey(false);
+		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
 		$this->createtime = time();
 		$this->superuser = 0;
 
 		// Users stay banned until they confirm their email address.
 		$this->status = YumUser::STATUS_INACTIVE;
 
-		// If the avatar module and avatar->enableGravatarDefault is activated, 
-		// we assume the user wants to use his Gravatar automatically after 
-		// registration
-		if(Yum::hasModule('avatar') 
-				&& Yum::module('avatar')->enableGravatar 
-				&& Yum::module('avatar')->enableGravatarDefault)
+		// If the avatar module and avatar->enableGravatar is activated, we assume
+		// the user wants to use his Gravatar automatically after registration
+		if(Yum::hasModule('avatar') && Yum::module('avatar')->enableGravatar)
 			$this->avatar = 'gravatar';
 
 		if ($this->validate() && $profile->validate()) {
@@ -514,7 +527,7 @@ class YumUser extends YumActiveRecord
 			$profile->save();
 			$this->profile = $profile;
 
-			if(Yum::hasModule('role') && Yum::hasModule('registration'))
+			if(Yum::hasModule('role'))
 				foreach(Yum::module('registration')->defaultRoles as $role) 
 					Yii::app()->db->createCommand(sprintf(
 								'insert into %s (user_id, role_id) values(%s, %s)',
@@ -531,10 +544,6 @@ class YumUser extends YumActiveRecord
 
 			return $this;
 		}
-
-var_dump($this->getErrors());
-var_dump($profile->getErrors());
-die();
 
 		return false;
 	}
@@ -704,6 +713,7 @@ die();
 	 */
 	public static function getUsersByRole($roleTitle)
 	{
+		Yii::import('application.modules.role.models.*');
 		$role = YumRole::model()->findByAttributes(array('title' => $roleTitle));
 		return $role ? $role->users : null;
 	}

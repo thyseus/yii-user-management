@@ -7,7 +7,7 @@ under an existing application is identical to these instructions.
 
 1.) Generate your Webapp:
 
-$ php yii-1.1.10/framework/yiic webapp testdrive
+$ php yii-1.1.13/framework/yiic webapp testdrive
 Create a Web application under '/var/www/testdrive'? [Yes|No] Yes
 
 [...]
@@ -80,7 +80,19 @@ role. This is explained in the detailed Documentation. It is good to let this
 line occur as the first included Model, so you can extend the User-Model with 
 your own in your Application models/ Directory if you like.
 
-6.) Run the User Management Installer in your Web-Browser:
+6.) Make sure to set a caching component in your application components
+section. Yum relies on it. If you do not want to use a cache, add
+
+	'components' => array(
+			'cache' => array('class' => 'system.caching.CDummyCache'),
+
+inside the components section of your config/main.php.
+
+Also see http://www.yiiframework.com/doc/guide/1.1/en/caching.overview about
+some general information about caching in yii.
+
+
+7.) Run the User Management Installer in your Web-Browser:
 
 http://localhost/testdrive/index.php/user/install
 or
@@ -88,7 +100,7 @@ http://localhost/testdrive/index.php?r=user/install
 
 depending on your URL route setup. 
 
-7.) Now the Installer of the User Management Module should appear.
+8.) Now the Installer of the User Management Module should appear.
 To the right you can set up alternate Table Names used by the
 Module. In most cases this is not needed and you can keep this 
 Settings. If you do change this, be sure to set up the correct table
@@ -100,18 +112,6 @@ create the database tables needed by the module(s). Then it will show
 you the neccesary modifications to be made. Add the Modules you need to your 
 Application Configuration as provided by the install script in config/main.php.
 You can also remove the Yum modules you don't want to use.
-
-
-8.) Make sure to set a caching component. Yum relies on it. If you do not
-want to cache, add
-
-	'components' => array(
-			'cache' => array('class' => 'system.caching.CDummyCache'),
-
-to your config/main.php.
-
-Also see http://www.yiiframework.com/doc/guide/1.1/en/caching.overview about
-some general information about caching in yii.
 
 9.) Congratulations, you have installed the User Management Module! Lets
 tidy up a little bit:
@@ -141,14 +141,12 @@ the Application Configuration. For example, you can add a
 in your config/main.php to get German Language strings. At the moment
 English, German, French and Polish are supported. 
 
-
 Quick Login Widget:
 -------------------
 If you want to display a quick login widget somewhere in your Web Application,
 just call in your view file:
 
 <? $this->widget('application.modules.user.components.LoginWidget'); ?>
-
 
 Password Requirements:
 ----------------------
@@ -166,12 +164,10 @@ option of the Module, for example:
 Please see components/CPasswordValidator.php for possible password 
 requirement options
 
-
 User Registration:
 ------------------
 Set the Variable 'enableActivationConfirmation' to false in the module configuration to 
 let users register for your application without needing to receive/click an emailed confirmation link.
-
 
 Role Management:
 ----------------
@@ -193,7 +189,6 @@ else
 
 Please see the file docs/logging.txt for information on how to set up
 the logging functions of the Yii User Management module.
-
 
 Where to go from now on?
 ------------------------
