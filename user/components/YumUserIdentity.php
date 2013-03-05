@@ -112,8 +112,7 @@ class YumUserIdentity extends CUserIdentity {
 	// Authenticate the user. When without_password is set to true, the user
 	// gets authenticated without providing a password. This is used for
 	// the option 'loginAfterSuccessfulActivation'
-	public function authenticate($without_password = false)
-	{
+	public function authenticate($without_password = false) {
 		$user = YumUser::model()->find('username = :username', array(
 					':username' => $this->username));
 

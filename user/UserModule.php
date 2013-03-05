@@ -161,6 +161,13 @@ class UserModule extends CWebModule {
 			'action' => 'action',
 			);
 
+	public $usernameRequirements=array(
+		'minLen'=>3,
+		'maxLen'=>30,
+		'match' => '/^[A-Za-z0-9_-]+$/u',
+		'dontMatchMessage' => 'Incorrect symbol\'s. (A-z0-9)',
+	);
+
 	public $passwordRequirements = array(
 			'minLen' => 6,
 			'maxLen' => 128,
@@ -170,12 +177,6 @@ class UserModule extends CWebModule {
 			'maxRepetition' => 3,
 			);
 
-	public $usernameRequirements=array(
-		'minLen'=>3,
-		'maxLen'=>30,
-		'match' => '/^[A-Za-z0-9_]+$/u',
-		'dontMatchMessage' => 'Incorrect symbol\'s. (A-z0-9)',
-	);
 
 	/**
 	 * Implements support for getting URLs, Tables and Views
