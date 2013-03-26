@@ -213,10 +213,8 @@ class YumUser extends YumActiveRecord
 			}
 
 			if ($this->isNewRecord) {
-				Yum::log(Yum::t('A user has been created: user: {user}', array(
+				Yum::log(Yum::t('A user has been created: {user}', array(
 								'{user}' => json_encode($this->attributes))));
-
-
 			}
 		}
 		return parent::afterSave();
@@ -462,17 +460,18 @@ class YumUser extends YumActiveRecord
 	// Friends can not be retrieve via the relations() method because a friend
 	// can either be in the invited_id or in the friend_id column.
 	// set $everything to true to also return pending and rejected friendships
-	public function getFriends($everything = false)
-	{
+	public function getFriends($everything = false) {
+		Yii::import('application.modules.friendship.models.YumFriendship');
+
 		if ($everything)
 			$condition = 'inviter_id = :uid';
 		else
 			$condition = 'inviter_id = :uid and status = 2';
 
 		$friends = array();
-		Yii::import('application.modules.friendship.models.YumFriendship');
 		$friendships = YumFriendship::model()->findAll($condition, array(
 					':uid' => $this->id));
+
 		if ($friendships != NULL && !is_array($friendships))
 			$friendships = array($friendships);
 
@@ -480,17 +479,11 @@ class YumUser extends YumActiveRecord
 			foreach ($friendships as $friendship)
 				$friends[] = YumUser::model()->findByPk($friendship->friend_id);
 
-		if ($everything)
-			$condition = 'friend_id = :uid';
-		else
-			$condition = 'friend_id = :uid and status = 2';
-
 		$friendships = YumFriendship::model()->findAll($condition, array(
 					':uid' => $this->id));
 
 		if ($friendships != NULL && !is_array($friendships))
 			$friendships = array($friendships);
-
 
 		if ($friendships)
 			foreach ($friendships as $friendship)

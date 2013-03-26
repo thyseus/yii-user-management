@@ -8,12 +8,12 @@ class YumRoleController extends YumController {
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('index', 'admin','delete','create','update', 'view'),
+					'actions'=>array('index', 'admin', 'delete', 'create', 'update', 'view'),
 					'expression' => 'Yii::app()->user->isAdmin()'
 					),
 				array('deny',  // deny all other users
-						'users'=>array('*'),
-						),
+					'users'=>array('*'),
+					),
 				);
 	}
 
@@ -32,7 +32,7 @@ class YumRoleController extends YumController {
 			$activeMemberships= new CActiveDataProvider('YumMembership', array(
 						'criteria' => array(
 							'condition' => "membership_id = {$model->id}")));
-}
+		}
 
 		$this->render('view',array(
 					'assignedUsers' => $assignedUsers,
@@ -79,11 +79,11 @@ class YumRoleController extends YumController {
 			if ($model->validate() && $model->save()) 
 				$this->redirect(array('view', 'id' => $model->id));
 		}
-	
+
 
 		$this->render('update', array(
-			'model' => $model,
-		));
+					'model' => $model,
+					));
 	}
 
 	public function actionAdmin() {
@@ -91,12 +91,12 @@ class YumRoleController extends YumController {
 		$dataProvider = new CActiveDataProvider('YumRole', array(
 					'pagination' => array(
 						'pageSize' => 20,
-					),
-				));
+						),
+					));
 
 		$this->render('admin', array(
-			'dataProvider' => $dataProvider,
-		));
+					'dataProvider' => $dataProvider,
+					));
 	}
 
 	public function actionDelete() {
@@ -114,6 +114,5 @@ class YumRoleController extends YumController {
 	public function actionIndex() {
 		$this->actionAdmin();
 	}
-
 
 }

@@ -5,6 +5,9 @@
  * @since 0.6
  * @package Yum.core
  *
+ * All Yum Controllers should extend from this class to provide
+ * basic functionality like possible ajax validation and
+ * online status syncronization.
  */
 
 abstract class YumController extends CController {
@@ -21,11 +24,11 @@ abstract class YumController extends CController {
 	}
 
 	public function beforeAction($action) {
-		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
-			Yii::app()->user->data()->setLastAction();
-
 		if(!isset(Yii::app()->cache))
 			throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
+	
+		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
+			Yii::app()->user->data()->setLastAction();
 
 		return parent::beforeAction($action);
 	}
