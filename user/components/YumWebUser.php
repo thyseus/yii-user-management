@@ -26,7 +26,9 @@ class YumWebUser extends CWebUser
 	public function can($action) {
 		Yii::import('application.modules.role.models.*');
 
-		if(YII_DEBUG && Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
+		if(Yum::hasModule('role') 
+				&& Yum::module('role')->adminIsGod 
+				&& Yii::app()->user->isAdmin())
 			return true;
 
 		foreach ($this->data()->getPermissions() as $permission)
@@ -65,17 +67,17 @@ class YumWebUser extends CWebUser
 		return $flag;
 	}
 
-	public function getRoles() {
-		$t = ' ';
-		$user = Yii::app()->user->data();
-		$roles = $user->roles;
-		if($user instanceof YumUser && $roles) 
-			foreach($roles as $role)
-				$t .= $role->title .' ';
+public function getRoles() {
+	$t = ' ';
+	$user = Yii::app()->user->data();
+	$roles = $user->roles;
+	if($user instanceof YumUser && $roles) 
+		foreach($roles as $role)
+			$t .= $role->title .' ';
 
-		return $t;
+	return $t;
 
-	}
+}
 
 	/**
 	 * Checks if this (non-admin) User can administrate the given user
@@ -98,7 +100,7 @@ class YumWebUser extends CWebUser
 			foreach($user->users as $userobj) 
 			{
 				if(in_array($userobj->username, $username) ||
-						in_array($userobj->id, $username))
+					in_array($userobj->id, $username))
 					return true;
 			}
 		return false;

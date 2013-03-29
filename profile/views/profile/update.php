@@ -1,4 +1,4 @@
-<? 
+<?php 
 $this->pageTitle = Yum::t( "Profile");
 $this->breadcrumbs=array(
 		Yum::t('Edit profile'));
@@ -7,41 +7,41 @@ $this->title = Yum::t('Edit profile');
 
 <div class="form">
 
-<? echo CHtml::beginForm(); ?>
+<?php echo CHtml::beginForm(); ?>
 
-<? echo Yum::requiredFieldNote(); ?>
+<?php echo Yum::requiredFieldNote(); ?>
 
-<? echo CHtml::errorSummary(array($user, $profile)); ?>
+<?php echo CHtml::errorSummary(array($user, $profile)); ?>
 
-<? if(Yum::module()->loginType & 1) { ?>
-<div class="row">
-<? echo CHtml::activeLabelEx($user,'username'); ?>
-<? echo CHtml::activeTextField($user,'username',array(
+<?php if(Yum::module()->loginType & 1) { ?>
+
+<?php echo CHtml::activeLabelEx($user,'username'); ?>
+<?php echo CHtml::activeTextField($user,'username',array(
 			'size'=>20,'maxlength'=>20)); ?>
-<? echo CHtml::error($user,'username'); ?>
-</div>
-<? } ?> 
+<?php echo CHtml::error($user,'username'); ?>
 
-<? if(isset($profile) && is_object($profile)) 
+<?php } ?> 
+
+<?php if(isset($profile) && is_object($profile)) 
 	$this->renderPartial('/profile/_form', array('profile' => $profile)); ?>
 
-	<div class="row buttons">
+	
 	<?
 
 	if(Yum::module('profile')->enablePrivacySetting)
 		echo CHtml::button(Yum::t('Privacy settings'), array(
 					'submit' => array('/profile/privacy/update'))); ?>
 
-	<? 
+	<?php 
 		if(Yum::hasModule('avatar'))
 			echo CHtml::button(Yum::t('Upload avatar Image'), array(
-				'submit' => array('/avatar/avatar/editAvatar'))); ?>
+				'submit' => array('/avatar/avatar/editAvatar'), 'class'=>'btn')); ?>
 
-	<? echo CHtml::submitButton($user->isNewRecord 
+	<?php echo CHtml::submitButton($user->isNewRecord 
 			? Yum::t('Create my profile') 
-			: Yum::t('Save profile changes')); ?>
-	</div>
+			: Yum::t('Save profile changes'), array('class'=>'btn')); ?>
 
-	<? echo CHtml::endForm(); ?>
+
+	<?php echo CHtml::endForm(); ?>
 
 	</div><!-- form -->

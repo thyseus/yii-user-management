@@ -1,4 +1,4 @@
-	<? echo CHtml::beginForm(array('/user/auth')); 
+	<?php echo CHtml::beginForm(array('/user/auth')); 
     
     $link = '//' .
     Yii::app()->controller->uniqueid .
@@ -6,16 +6,16 @@
     echo CHtml::hiddenField('quicklogin', $link);
     ?>
     
-        <? echo CHtml::errorSummary($model); ?>
+        <?php echo CHtml::errorSummary($model); ?>
         
         <div class="row">
-            <? echo CHtml::activeLabelEx($model,'username'); ?>
-            <? echo CHtml::activeTextField($model,'username', array('size' => 10)) ?>
+            <?php echo CHtml::activeLabelEx($model,'username'); ?>
+            <?php echo CHtml::activeTextField($model,'username', array('size' => 10)) ?>
         </div>
         
         <div class="row" style="padding-top:12px;">
-            <? echo CHtml::activeLabelEx($model,'password'); ?>
-            <? echo CHtml::activePasswordField($model,'password', array('size' => 10)); ?>
+            <?php echo CHtml::activeLabelEx($model,'password'); ?>
+            <?php echo CHtml::activePasswordField($model,'password', array('size' => 10)); ?>
         </div>
         
         <div class="row" style="font-size:10px;">
@@ -27,7 +27,7 @@
 			</div>
         
         <div class="row submit">
-            <? echo CHtml::submitButton(Yum::t('Login')); ?>
+            <?php echo CHtml::submitButton(Yum::t('Login')); ?>
         </div>
         
-    <? echo CHtml::endForm(); ?>
+    <?php echo CHtml::endForm(); ?>

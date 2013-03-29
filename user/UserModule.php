@@ -7,7 +7,7 @@ Yii::import('YumModule.models.*');
 Yii::import('YumModule.controllers.YumController');
 
 class UserModule extends CWebModule {
-	public $version = '0.8';
+	public $version = '0.9-dev';
 	public $debug = false;
 
 	//layout related control vars
@@ -15,6 +15,7 @@ class UserModule extends CWebModule {
 	public $layout = 'application.modules.user.views.layouts.yum';
 	public $loginLayout = 'application.modules.user.views.layouts.yum';
 	public $adminLayout = 'application.modules.user.views.layouts.yum';
+	public $useBootstrap = true;
 
 	public $enableLogging = true;
 	public $enableOnlineStatus = true;

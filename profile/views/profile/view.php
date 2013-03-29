@@ -11,8 +11,8 @@ Yum::renderFlash();
 
 <div id="profile">
 
-<? echo $model->getAvatar(); ?>
-<? $this->renderPartial(Yum::module('profile')->publicFieldsView, array(
+<?php echo $model->getAvatar(); ?>
+<?php $this->renderPartial(Yum::module('profile')->publicFieldsView, array(
 			'profile' => $model->profile)); ?>
 <br />
 <?

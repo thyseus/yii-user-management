@@ -1,4 +1,4 @@
-<? 
+<?php 
 Yii::app()->clientScript->registerCssFile(
 		Yii::app()->getAssetManager()->publish(
 			Yii::getPathOfAlias('YumModule.assets.css').'/yum.css'));
@@ -7,8 +7,8 @@ $module = Yum::module();
 $this->beginContent($module->baseLayout); ?>
 
 <div id="usermenu">
-<? Yum::renderFlash(); ?>
-<? $this->renderMenu(); ?>
+<?php Yum::renderFlash(); ?>
+<?php $this->renderMenu(); ?>
 </div>
 
 <div id="usercontent">
@@ -23,10 +23,10 @@ if (Yum::module()->debug) {
 }
 ?>
 
-<? 
+<?php 
 if($this->title)
-	printf('<h2> %s </h2>', $this->title);  ?>
-	<? echo $content;  ?>
+	printf('<h1> %s </h1>', $this->title);  ?>
+	<?php echo $content;  ?>
 </div>
 
-<? $this->endContent(); ?>
+<?php $this->endContent(); ?>

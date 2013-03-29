@@ -31,6 +31,6 @@ if you are not using a tablePrefix. If you are using one, of course set the appr
 <strong> Please change the Administrator Password to something better than
 the default password. </strong>
 
-<p><? 
+<p><?php 
 	echo CHtml::link("Administrate your Users",array('/user/login')); 
 ?></p>

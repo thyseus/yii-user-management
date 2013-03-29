@@ -1,7 +1,7 @@
-<? $this->title = Yum::t('Permission Denied'); ?>
+<?php $this->title = Yum::t('Permission Denied'); ?>
 <div class="hint">
-	<p> <? echo Yum::t('You are not allowed to view this profile.'); ?> </p>
-	<p> <? echo CHtml::link(
+	<p> <?php echo Yum::t('You are not allowed to view this profile.'); ?> </p>
+	<p> <?php echo CHtml::link(
 			Yum::t(
 				'Back to your profile'), array('profile/profile')); ?> </p>
 	</div>

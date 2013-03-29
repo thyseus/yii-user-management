@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 		);
 ?>
 
-<h1> <? echo Yum::t('Memberships'); ?></h1>
+<h1> <?php echo Yum::t('Memberships'); ?></h1>
 
 <?
 $locale = CLocale::getInstance(Yii::app()->language);

@@ -1,6 +1,6 @@
 <div class="view">
 
-<h2> <? echo $data->role->description; ?> </h2>
+<h2> <?php echo $data->role->description; ?> </h2>
 
 <?
 echo Yum::t('Order number'). ': '.$data->id . '<br />';
@@ -17,14 +17,14 @@ if($data->payment_date == 0)
 	}
 ?>
 
-<? if($data->role->price != 0) { ?>
+<?php if($data->role->price != 0) { ?>
 	<br /> 
-		<? echo Yum::t('Ordered at') . ': '; ?>
-		<? echo date('d. m. Y', $data->order_date); ?> 
+		<?php echo Yum::t('Ordered at') . ': '; ?>
+		<?php echo date('d. m. Y', $data->order_date); ?> 
 		<br /> 
-		<? echo Yum::t('Payment type') . ': '; ?>
-		<? if(isset($data->payment)) echo $data->payment->title . '<br />'; ?>
-		<? } ?>
+		<?php echo Yum::t('Payment type') . ': '; ?>
+		<?php if(isset($data->payment)) echo $data->payment->title . '<br />'; ?>
+		<?php } ?>
 
 	<?
 if($data->end_date != 0)
@@ -33,9 +33,9 @@ if($data->end_date != 0)
 	?>
 
 
-	<? if($data->isActive()) { ?>
-		<? echo CHtml::beginForm(array('//membership/membership/extend')); ?>
-			<p> <? echo Yum::t('When the membership expires'); ?>: </p>
+	<?php if($data->isActive()) { ?>
+		<?php echo CHtml::beginForm(array('//membership/membership/extend')); ?>
+			<p> <?php echo Yum::t('When the membership expires'); ?>: </p>
 			<?
 			$options = array(
 					0 => Yum::t('Automatically extend subscription'),
@@ -50,6 +50,6 @@ if($data->end_date != 0)
 				$data->subscribed == -1 ? 'cancel' : $data->subscribed, $options); 
 		echo CHtml::submitButton(Yum::t('Save'));
 		?>
-			<? echo CHtml::endForm(); ?>
-			<? } ?>
+			<?php echo CHtml::endForm(); ?>
+			<?php } ?>
 			</div>

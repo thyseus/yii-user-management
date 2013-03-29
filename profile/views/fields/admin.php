@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<? $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 		'position',

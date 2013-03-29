@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 	);
 ?>
 
-<h1><? echo Yii::t('app', 'View');?> Payment #<? echo $model->id; ?></h1>
+<h1><?php echo Yii::t('app', 'View');?> Payment #<?php echo $model->id; ?></h1>
 
 <?
 $locale = CLocale::getInstance(Yii::app()->language);
@@ -20,7 +20,7 @@ $locale = CLocale::getInstance(Yii::app()->language);
 
 
 <ul>
-<? foreach($model->memberships as $foreignobj) { 
+<?php foreach($model->memberships as $foreignobj) { 
 
 					printf('<li>%s</li>', CHtml::link($foreignobj->start, array('membership/view', 'id' => $foreignobj->id)));
 

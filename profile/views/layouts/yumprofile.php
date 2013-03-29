@@ -1,4 +1,4 @@
-<? 
+<?php 
 Yii::app()->clientScript->registerCssFile(
 		Yii::app()->getAssetManager()->publish(
 			Yii::getPathOfAlias('YumAssets').'/css/yum.css'));
@@ -7,8 +7,8 @@ $module = Yii::app()->getModule('user');
 $this->beginContent($module->baseLayout); ?>
 
 <div id="usermenu">
-<? Yum::renderFlash(); ?>
-<? 
+<?php Yum::renderFlash(); ?>
+<?php 
 if(Yum::hasModule('message')) {
 	Yii::import('application.modules.message.components.*');
 	$this->widget('MessageWidget');
@@ -22,7 +22,7 @@ $this->renderMenu(); ?>
 </div>
 
 <div id="usercontent">
-<? echo $content;  ?>
+<?php echo $content;  ?>
 </div>
 
-<? $this->endContent(); ?>
+<?php $this->endContent(); ?>

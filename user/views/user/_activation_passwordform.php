@@ -1,22 +1,22 @@
-<? echo CHtml::beginForm() ?>
-<? echo CHtml::errorSummary($form); ?>
+<?php echo CHtml::beginForm() ?>
+<?php echo CHtml::errorSummary($form); ?>
 <div class="row">
-<? echo CHtml::hiddenField('email', $email); ?>
-<? echo CHtml::hiddenField('activationKey', $key); ?>
+<?php echo CHtml::hiddenField('email', $email); ?>
+<?php echo CHtml::hiddenField('activationKey', $key); ?>
 </div>
 
 <div class="row">
-<? echo CHtml::activeLabelEx($form,'password'); ?>
-<? echo CHtml::activePasswordField($form,'password'); ?>
+<?php echo CHtml::activeLabelEx($form,'password'); ?>
+<?php echo CHtml::activePasswordField($form,'password'); ?>
 </div>
 
 <div class="row">
-<? echo CHtml::activeLabelEx($form,'verifyPassword'); ?>
-<? echo CHtml::activePasswordField($form,'verifyPassword'); ?>
+<?php echo CHtml::activeLabelEx($form,'verifyPassword'); ?>
+<?php echo CHtml::activePasswordField($form,'verifyPassword'); ?>
 </div>
 
 <div class="row">
-<? echo CHtml::submitButton() ?>
+<?php echo CHtml::submitButton() ?>
 </div>
-<? echo CHtml::endForm() ?>
+<?php echo CHtml::endForm() ?>
 

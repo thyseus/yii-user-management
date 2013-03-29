@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo Yum::t('Update payment');?>: <? echo $model->title; ?> </h1>
+<h1> <?php echo Yum::t('Update payment');?>: <?php echo $model->title; ?> </h1>
 <?
 $this->renderPartial('_form', array(
 			'model'=>$model));

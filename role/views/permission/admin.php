@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo Yum::t('Manage permissions'); ?> </h1>
+<h1> <?php echo Yum::t('Manage permissions'); ?> </h1>
 
-<? $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'action-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,

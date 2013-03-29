@@ -6,9 +6,9 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo $model->title; ?></h1>
+<h1> <?php echo $model->title; ?></h1>
 
-<? $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',

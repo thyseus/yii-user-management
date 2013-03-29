@@ -1,29 +1,29 @@
 <div class="view">
 
-<h3> <? echo CHtml::encode($data->title); ?> </h3> 
-	<b><? echo CHtml::encode($data->getAttributeLabel('owner_id')); ?>:</b>
-<? if(isset($data->owner))
+<h3> <?php echo CHtml::encode($data->title); ?> </h3> 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('owner_id')); ?>:</b>
+<?php if(isset($data->owner))
 	echo CHtml::encode($data->owner->username); ?>
 	<br />
 
 
-	<b><? echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<? echo CHtml::encode(substr($data->description, 0, 200)) . '... '; ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
+	<?php echo CHtml::encode(substr($data->description, 0, 200)) . '... '; ?>
 
 	<br />
-	<b><? echo Yum::t('Participant count'); ?> : </b>
-	<? echo count($data->participants); ?>
+	<b><?php echo Yum::t('Participant count'); ?> : </b>
+	<?php echo count($data->participants); ?>
 
 	<br />
-	<b><? echo Yum::t('Message count'); ?> : </b>
-	<? echo $data->messagesCount; ?>
+	<b><?php echo Yum::t('Message count'); ?> : </b>
+	<?php echo $data->messagesCount; ?>
 
 	<br />
 	<br />
 
-	<? echo CHtml::link(Yum::t('View Details'), array(
+	<?php echo CHtml::link(Yum::t('View Details'), array(
 					'//usergroup/groups/view', 'id' => $data->id)); ?>
-	<? 
+	<?php 
 	if(is_array($data->participants) &&
 			in_array(Yii::app()->user->id, $data->participants))
 	echo CHtml::link(Yum::t('Leave group'), array(

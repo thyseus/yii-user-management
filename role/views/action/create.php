@@ -6,6 +6,6 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo Yum::t('Create Action'); ?></h1>
+<h1> <?php echo Yum::t('Create Action'); ?></h1>
 
-<? echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

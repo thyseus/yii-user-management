@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo Yum::t('Membership'); ?> </h1>
+<h1> <?php echo Yum::t('Membership'); ?> </h1>
 <?
 $this->widget('zii.widgets.CDetailView', array(
 			'data'=>$model,

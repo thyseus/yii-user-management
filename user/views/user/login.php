@@ -1,35 +1,35 @@
-<?
+<?php
 if(!isset($model)) 
 	$model = new YumUserLogin();
 
 $module = Yum::module();
 
 $this->pageTitle = Yum::t('Login');
-if(isset($this->title))
-$this->title = Yum::t('Login');
 $this->breadcrumbs=array(Yum::t('Login'));
 
 Yum::renderFlash();
 ?>
 
-<div class="form">
-<p>
-<? 
-echo Yum::t(
-		'Please fill out the following form with your login credentials:'); ?>
-</p>
+<?php echo CHtml::beginForm(array('//user/auth/login'));  ?>
 
-<? echo CHtml::beginForm(array('//user/auth/login'));  ?>
-
-<?
+<?php
 if(isset($_GET['action']))
 	echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
 ?>
 
-<? echo CHtml::errorSummary($model); ?>
-	
-	<div class="row">
-		<? 
+<?php if($model->hasErrors()) { ?>}
+<div class="alert">
+<?php echo CHtml::errorSummary($model); ?>
+</div>
+<?php } ?>
+
+<div style="padding: 10px;"> 
+<p>
+<?php 
+echo Yum::t('Please fill out the following form with your login credentials:'); ?>
+</p>
+
+		<?php 
 		if($module->loginType & UserModule::LOGIN_BY_USERNAME 
 				|| $module->loginType & UserModule::LOGIN_BY_LDAP)
 		echo CHtml::activeLabelEx($model,'username'); 
@@ -38,21 +38,21 @@ if(isset($_GET['action']))
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			printf ('<label for="YumUserLogin_username">%s <span class="required">*</span></label>', Yum::t('OpenID username'));  ?>
 
-		<? echo CHtml::activeTextField($model,'username') ?>
-	</div>
+		<br />
+		<?php echo CHtml::activeTextField($model,'username') ?> 
 	
-	<div class="row">
-		<? echo CHtml::activeLabelEx($model,'password'); ?>
-		<? echo CHtml::activePasswordField($model,'password');
+		<br />
+
+		<?php echo CHtml::activeLabelEx($model,'password'); ?>
+		<br />
+		<?php echo CHtml::activePasswordField($model,'password');
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			echo '<br />'. Yum::t('When logging in with OpenID, password can be omitted');
  ?>
 		
-	</div>
 	
-	<div class="row">
 	<p class="hint">
-	<? 
+	<?php 
 	if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
 	echo CHtml::link(Yum::t("Registration"),
 			Yum::module('registration')->registrationUrl);
@@ -66,19 +66,17 @@ if(isset($_GET['action']))
 			Yum::module('registration')->recoveryUrl);
 	?>
 </p>
-	</div>
 
-<div class="row rememberMe">
-<? echo CHtml::activeCheckBox($model,'rememberMe', array('style' => 'display: inline;')); ?>
-<? echo CHtml::activeLabelEx($model,'rememberMe', array('style' => 'display: inline;')); ?>
+<?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
+
+<?php echo CHtml::endForm(); ?>
+
+
 </div>
 
-<div class="row submit">
-<? echo CHtml::submitButton(Yum::t('Login')); ?>
 </div>
 
-<? echo CHtml::endForm(); ?>
-</div><!-- form -->
+<div class="clearfix"></div>
 
 <?
 $form = new CForm(array(

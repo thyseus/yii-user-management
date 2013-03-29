@@ -4,9 +4,9 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>View Friendship #<? echo $model->id; ?></h1>
+<h1>View Friendship #<?php echo $model->id; ?></h1>
 
-<? $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',

@@ -14,9 +14,9 @@ echo $model->description;
  ?>
 
 <br />
-<? echo Yum::p('These users have been assigned to this role'); ?> 
+<?php echo Yum::p('These users have been assigned to this role'); ?> 
 
-<? 
+<?php 
 if($assignedUsers);
 $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$assignedUsers,

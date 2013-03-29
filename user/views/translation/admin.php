@@ -5,9 +5,9 @@ $this->breadcrumbs=array(
 		);
 ?>
 
-<h2><? echo Yum::t('Manage Translations'); ?> </h2>
+<h1><?php echo Yum::t('Manage Translations'); ?> </h1>
 
-<? $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>'category-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
@@ -32,4 +32,4 @@ $this->breadcrumbs=array(
 				),
 			)); ?>
 
-			<? echo CHtml::link(Yum::t('Create new Translation'), array('create')); ?>
+			<?php echo CHtml::link(Yum::t('Create new Translation'), array('create')); ?>

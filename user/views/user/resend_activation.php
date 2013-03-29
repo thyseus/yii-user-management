@@ -1,4 +1,4 @@
-<? 
+<?php 
 $this->pageTitle=Yii::t("UserModule.user", "Activate");
 
 $this->breadcrumbs=array(
@@ -8,27 +8,27 @@ $this->breadcrumbs=array(
 $this->title = Yum::t('Activate'); 
 ?>
 
-<? 
+<?php 
 if(Yii::app()->user->hasFlash('registration'))
 { 
 ?>
 <div class="success">
-<? echo Yii::app()->user->getFlash('registration'); ?>
+<?php echo Yii::app()->user->getFlash('registration'); ?>
 </div>
-<? 
+<?php 
 }
 ?>
 
-<? if($activateFromWeb): ?>
+<?php if($activateFromWeb): ?>
 <div class="form">
-<? echo CHtml::beginForm(array('registration/activation'),'GET',array()); ?> 
+<?php echo CHtml::beginForm(array('registration/activation'),'GET',array()); ?> 
 
 <div id="activatiion_code">
 <div class="row">
-<? echo Yii::t("UserModule.user", "Enter the activation code you received below."); ?>
+<?php echo Yii::t("UserModule.user", "Enter the activation code you received below."); ?>
 </div>
 <div class="row">
-<? if(isset($form->email)){ 
+<?php if(isset($form->email)){ 
 echo CHtml::hiddenField('email',$form->email);  
  }else{ 
 	echo CHtml::activeLabelEx($user,'email');
@@ -36,15 +36,15 @@ echo CHtml::hiddenField('email',$form->email);
 		}
 ?>
 
-<? echo CHtml::activeLabelEx($user,'activationKey'); ?>
-<? echo CHtml::textField('activationKey'); //fixme ?> 
+<?php echo CHtml::activeLabelEx($user,'activationKey'); ?>
+<?php echo CHtml::textField('activationKey'); //fixme ?> 
 </div>
 <div class="row_submit">
-<? echo CHtml::submitButton(Yii::t("UserModule.user", "Activate")); ?>
+<?php echo CHtml::submitButton(Yii::t("UserModule.user", "Activate")); ?>
 </div>
 </div>
-<? echo CHtml::endForm(); ?>
+<?php echo CHtml::endForm(); ?>
 </div> <!--form -->
-<? endif;?>
+<?php endif;?>
 
-<? echo $this->renderPartial('/user/_resend_activation_partial', array('user'=>$user,'form'=>$form)); ?>
+<?php echo $this->renderPartial('/user/_resend_activation_partial', array('user'=>$user,'form'=>$form)); ?>

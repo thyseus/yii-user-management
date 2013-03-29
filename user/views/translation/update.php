@@ -19,4 +19,4 @@ if($models[0]->isNewRecord)
 	echo Yum::t('Update translation {message}', array(
 				'{message}' => $models[0]->message)); ?></h2>
 
-<? echo $this->renderPartial('_form', array('models'=>$models)); ?>
+<?php echo $this->renderPartial('_form', array('models'=>$models)); ?>

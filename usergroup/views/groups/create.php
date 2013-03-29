@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<? $this->title = Yum::t('Create Usergroup'); ?> 
+<?php $this->title = Yum::t('Create Usergroup'); ?> 
 <?
 $this->renderPartial('_form', array(
 			'model' => $model,

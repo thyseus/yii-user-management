@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1> <? echo Yum::t('Create new payment type'); ?> </h1>
+<h1> <?php echo Yum::t('Create new payment type'); ?> </h1>
 <?
 $this->renderPartial('_form', array(
 			'model' => $model,

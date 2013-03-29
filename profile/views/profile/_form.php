@@ -6,7 +6,7 @@ Yii::app()->clientScript-> registerScriptFile(Yum::module()->rteadapter);
 
 if($profile)
 foreach($profile->loadProfileFields() as $field) {
-	echo CHtml::openTag('div',array('class'=>'row'));
+	echo CHtml::openTag('div',array());
 
 	if($field->hint)
 		echo CHtml::tag('div',array('class'=>'hint'),$field->hint,true);

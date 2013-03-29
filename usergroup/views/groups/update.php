@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1> <? echo Yii::t('app', 'Update');?> Usergroup #<? echo $model->id; ?> </h1>
+<h1> <?php echo Yii::t('app', 'Update');?> Usergroup #<?php echo $model->id; ?> </h1>
 <?
 $this->renderPartial('_form', array(
 			'model'=>$model));

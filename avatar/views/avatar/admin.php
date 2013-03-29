@@ -1,4 +1,4 @@
-<? $this->title = Yum::t('Avatar administration');
+<?php $this->title = Yum::t('Avatar administration');
 
 $this->breadcrumbs = array(
 	Yum::t('Users') => array('admin'),

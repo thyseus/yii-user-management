@@ -25,11 +25,11 @@ data: $(this).serialize()
 			");
 		?>
 
-<h1> <? echo Yii::t('app', 'Manage'); ?> Usergroups</h1>
+<h1> <?php echo Yii::t('app', 'Manage'); ?> Usergroups</h1>
 
-<? echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<? $this->renderPartial('_search',array(
+<?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div>

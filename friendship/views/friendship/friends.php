@@ -15,7 +15,7 @@ if($profile->show_friends == 2) {
 					echo $friend->getAvatar(true);
 				?>
 					<div class="username">
-					<? 
+					<?php 
 					echo CHtml::link(ucwords($friend->username),
 							Yii::app()->createUrl('//profile/profile/view',array(
 									'id'=>$friend->id)));

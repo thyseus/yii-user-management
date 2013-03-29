@@ -32,7 +32,7 @@ class RegistrationTest extends CDbTestCase
 			$profile = new YumRegistrationForm;
 			$profile->setAttributes(array(
 					'firstname' => 'My first Name !"§$%&/()=',
-					'lastname' => 'My last Name !"§$%&/()=<? die() ?>',
+					'lastname' => 'My last Name !"§$%&/()=<?php die() ?>',
 					'password' => 'hiddenpassword1', 
 					'verifyPassword' => 'hiddenpassword1', 
 

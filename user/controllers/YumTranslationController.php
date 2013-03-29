@@ -30,7 +30,7 @@ class YumTranslationController extends YumController
 	{
 		$models = array();
 		foreach(Yum::getAvailableLanguages() as $language) {
-			$models[] = $this->loadTranslationModel($category, $message, $language);
+			$models[] = $this->loadModel($category, $message, $language);
 		}
 
 		if(isset($_POST['YumTranslation'])) {
@@ -78,7 +78,7 @@ class YumTranslationController extends YumController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadTranslationModel($id)->delete();
+			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -100,7 +100,7 @@ class YumTranslationController extends YumController
 					));
 	}
 
-	public function loadTranslationModel($category, $message, $language = null)
+	public function loadModel($category, $message, $language = null)
 	{
 		$model=YumTranslation::model()->find('category = :category and message = :message and language = :language', array(
 					':category' => $category,
@@ -117,7 +117,7 @@ class YumTranslationController extends YumController
 		return $model;
 	}
 
-	protected function performAjaxValidation($model, $form)
+	protected function performAjaxValidation($model)
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='translation-form')
 		{

@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 
 echo Yum::renderFlash();
 
-$this->widget('application.modules.user.components.CsvGridView', array(
+$this->widget('bootstrap.widgets.TbGridView',array(
 	'dataProvider'=>$model->search(),
 	'filter' => $model,
 		'columns'=>array(
@@ -39,6 +39,7 @@ $this->widget('application.modules.user.components.CsvGridView', array(
 				'filter' => false,
 				'value'=>'YumUser::itemAlias("UserStatus",$data->status)',
 			),
+			'superuser',
 			array(
 				'name'=>Yum::t('Roles'),
 				'type' => 'raw',
@@ -51,6 +52,6 @@ $this->widget('application.modules.user.components.CsvGridView', array(
 			),
 ))); ?>
 
-<? echo CHtml::link(Yum::t('Create new User'), array(
+<?php echo CHtml::link(Yum::t('Create new User'), array(
 			'//user/user/create')); ?>
 

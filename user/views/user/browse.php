@@ -7,7 +7,7 @@ Yum::register('css/yum.css');
 ?>
 <div class="search_options">
 
-<? echo CHtml::beginForm(); ?>
+<?php echo CHtml::beginForm(); ?>
 
 <div style="float: left;">
 <?
