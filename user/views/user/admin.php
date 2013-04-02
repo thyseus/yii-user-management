@@ -36,10 +36,18 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 			),
 			array(
 				'name'=>'status',
-				'filter' => false,
+				'filter' => array(
+					'0' => Yum::t('Not active'),
+					'1' => Yum::t('Active'),
+					'-1' => Yum::t('Banned'),
+					'-2' => Yum::t('Deleted')),
 				'value'=>'YumUser::itemAlias("UserStatus",$data->status)',
 			),
-			'superuser',
+			array(
+				'name'=>'superuser',
+				'filter' => array(0 => Yum::t('No'), 1 => Yum::t('Yes')),
+				'value'=>'YumUser::itemAlias("AdminStatus",$data->superuser)',
+			),
 			array(
 				'name'=>Yum::t('Roles'),
 				'type' => 'raw',

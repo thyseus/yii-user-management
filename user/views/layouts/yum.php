@@ -3,30 +3,28 @@ Yii::app()->clientScript->registerCssFile(
 		Yii::app()->getAssetManager()->publish(
 			Yii::getPathOfAlias('YumModule.assets.css').'/yum.css'));
 
-$module = Yum::module();
-$this->beginContent($module->baseLayout); ?>
+$this->beginContent(Yum::module()->baseLayout); ?>
 
-<div id="usermenu">
-<?php Yum::renderFlash(); ?>
+<div class="nav span3">
 <?php $this->renderMenu(); ?>
 </div>
 
 <div id="usercontent">
-<?
+<?php
 if (Yum::module()->debug) {
-	echo CHtml::openTag('div', array(
-				'style' => 'background-color: red;color:white;padding:5px;'));
+	echo CHtml::openTag('div', array('class' => 'yumwarning'));
 	echo Yum::t(
 			'You are running the Yii User Management Module {version} in Debug Mode!', array(
 				'{version}' => Yum::module()->version));
 	echo CHtml::closeTag('div');
 }
-?>
 
-<?php 
+ Yum::renderFlash(); 
+
 if($this->title)
-	printf('<h1> %s </h1>', $this->title);  ?>
-	<?php echo $content;  ?>
+	printf('<h1> %s </h1>', $this->title);  
+	echo $content;  
+?>
 </div>
 
 <?php $this->endContent(); ?>

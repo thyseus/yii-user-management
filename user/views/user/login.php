@@ -1,32 +1,33 @@
-<?php
+<?
 if(!isset($model)) 
 	$model = new YumUserLogin();
 
 $module = Yum::module();
 
 $this->pageTitle = Yum::t('Login');
+if(isset($this->title))
+$this->title = Yum::t('Login');
 $this->breadcrumbs=array(Yum::t('Login'));
 
 Yum::renderFlash();
 ?>
 
+
 <?php echo CHtml::beginForm(array('//user/auth/login'));  ?>
 
-<?php
+<?
 if(isset($_GET['action']))
 	echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
 ?>
 
-<?php if($model->hasErrors()) { ?>}
 <div class="alert">
 <?php echo CHtml::errorSummary($model); ?>
 </div>
-<?php } ?>
 
-<div style="padding: 10px;"> 
 <p>
 <?php 
-echo Yum::t('Please fill out the following form with your login credentials:'); ?>
+echo Yum::t(
+		'Please fill out the following form with your login credentials:'); ?>
 </p>
 
 		<?php 
@@ -38,13 +39,9 @@ echo Yum::t('Please fill out the following form with your login credentials:'); 
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			printf ('<label for="YumUserLogin_username">%s <span class="required">*</span></label>', Yum::t('OpenID username'));  ?>
 
-		<br />
-		<?php echo CHtml::activeTextField($model,'username') ?> 
+		<?php echo CHtml::activeTextField($model,'username') ?>
 	
-		<br />
-
 		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<br />
 		<?php echo CHtml::activePasswordField($model,'password');
 		if($module->loginType & UserModule::LOGIN_BY_OPENID)
 			echo '<br />'. Yum::t('When logging in with OpenID, password can be omitted');
@@ -70,13 +67,6 @@ echo Yum::t('Please fill out the following form with your login credentials:'); 
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
 
 <?php echo CHtml::endForm(); ?>
-
-
-</div>
-
-</div>
-
-<div class="clearfix"></div>
 
 <?
 $form = new CForm(array(

@@ -21,11 +21,6 @@ abstract class YumController extends CController {
 	}
 
 	public function beforeAction($action) {
-		if(Yum::module()->useBootstrap)
-			Yii::app()->clientScript->registerCssFile(
-					Yii::app()->assetManager->publish(Yii::getPathOfAlias(
-							'application.modules.user.assets.css').'/bootstrap.min.css'));
-
 		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
 			Yii::app()->user->data()->setLastAction();
 
