@@ -243,7 +243,11 @@ class YumUserController extends YumController {
 
 	public function actionUpdate() {
 		$model = $this->loadUser();
+		$profile = false;
+		if(Yum::hasModule('profile')) 
+			$profile = $model->profile;
 		$passwordform = new YumUserChangePassword();
+
 
 		if(isset($_POST['YumUser'])) {
 			if(!isset($model->salt) || empty($model->salt))
@@ -256,12 +260,8 @@ class YumUserController extends YumController {
 				$model->roles = Relation::retrieveValues($_POST);
 			}
 
-			if(Yum::hasModule('profile')) {
-				$profile = $model->profile;
-
-				if(isset($_POST['YumProfile']) )
+			if($profile && isset($_POST['YumProfile']) )
 					$profile->attributes = $_POST['YumProfile'];
-			}
 
 			// Password change is requested ?
 			if(isset($_POST['YumUserChangePassword'])
@@ -282,7 +282,7 @@ class YumUserController extends YumController {
 		$this->render('update', array(
 					'model'=>$model,
 					'passwordform' =>$passwordform,
-					'profile' => isset($profile) ? $profile : false,
+					'profile' => $profile, 
 					));
 	}
 

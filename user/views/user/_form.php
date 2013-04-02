@@ -1,3 +1,4 @@
+<div class="span12">
 <div class="form">
 <?php 
 
@@ -17,7 +18,14 @@ if(isset($profile) && $profile !== false)
 	?>
 	</div>
 
-<div style="float: right; margin: 10px;">
+<div class="span4">
+<div class="row">
+<?php echo $form->labelEx($model, 'username');
+echo $form->textField($model, 'username');
+echo $form->error($model, 'username'); ?>
+</div>
+
+
 <div class="row">
 <?php echo $form->labelEx($model, 'superuser');
 echo $form->dropDownList($model, 'superuser',YumUser::itemAlias('AdminStatus'));
@@ -29,13 +37,21 @@ echo $form->error($model, 'superuser'); ?>
 echo $form->dropDownList($model,'status',YumUser::itemAlias('UserStatus'));
 echo $form->error($model,'status'); ?>
 </div>
+
+<p> Leave password <em> empty </em> to 
+<?php echo $model->isNewRecord 
+? 'generate a random Password' 
+: 'keep it <em> unchanged </em>'; ?> </p>
+<?php $this->renderPartial('/user/passwordfields', array(
+			'form'=>$passwordform)); ?>
+
 <?php if(Yum::hasModule('role')) { 
 	Yii::import('application.modules.role.models.*');
 ?>
 <div class="row roles">
-<p> <?php echo Yum::t('User belongs to these roles'); ?> </p>
+<label> <?php echo Yum::t('User belongs to these roles'); ?> </label>
 
-	<?php $this->widget('YumModule.components.Relation', array(
+<?php $this->widget('YumModule.components.Relation', array(
 				'model' => $model,
 				'relation' => 'roles',
 				'style' => 'dropdownlist',
@@ -47,25 +63,16 @@ echo $form->error($model,'status'); ?>
 
 </div>
 
+<div class="span5">
 
-<div class="row">
-<?php echo $form->labelEx($model, 'username');
-echo $form->textField($model, 'username');
-echo $form->error($model, 'username'); ?>
-</div>
-
-
-<div class="row">
-<p> Leave password <em> empty </em> to 
-<?php echo $model->isNewRecord 
-? 'generate a random Password' 
-: 'keep it <em> unchanged </em>'; ?> </p>
-<?php $this->renderPartial('/user/passwordfields', array(
-			'form'=>$passwordform)); ?>
-</div>
 <?php if(Yum::hasModule('profile')) 
 $this->renderPartial('application.modules.profile.views.profile._form', array(
 			'profile' => $profile)); ?>
+
+
+</div>
+
+<div class="clearfix"></div>
 
 <div class="row buttons">
 <?php echo CHtml::submitButton($model->isNewRecord
@@ -74,5 +81,6 @@ $this->renderPartial('application.modules.profile.views.profile._form', array(
 </div>
 
 <?php $this->endWidget(); ?>
+</div>
 </div>
 	<div style="clear:both;"></div>

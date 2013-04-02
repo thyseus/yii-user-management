@@ -5,11 +5,7 @@ Yii::app()->clientScript->registerCssFile(
 
 $this->beginContent(Yum::module()->baseLayout); ?>
 
-<div class="nav span3">
-<?php $this->renderMenu(); ?>
-</div>
-
-<div id="usercontent">
+<div class="span8">
 <?php
 if (Yum::module()->debug) {
 	echo CHtml::openTag('div', array('class' => 'yumwarning'));
@@ -26,5 +22,11 @@ if($this->title)
 	echo $content;  
 ?>
 </div>
+
+<div class="span3">
+<?php $this->renderMenu(); ?>
+</div>
+
+<div class="clearfix"></div>
 
 <?php $this->endContent(); ?>

@@ -4,7 +4,6 @@ div.form .tooltip { display: none; background-color:#EFFDFF; border:1px solid #7
 label { display: inline }
 .checkbox { float: left; margin-right: 5px; }
 .listbox { display: inline; } 
-.roles {float: right; }
 .membership { float: left;margin: 5px; }
 .info {background-color: lightgray; padding: 10px; margin:10px; border: 1px dotted black;}
 .new_messages td { border-bottom: 1px solid;} 

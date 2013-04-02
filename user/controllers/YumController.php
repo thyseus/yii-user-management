@@ -24,6 +24,9 @@ abstract class YumController extends CController {
 		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
 			Yii::app()->user->data()->setLastAction();
 
+		if(Yum::module()->enableBootstrap)
+			Yum::register('css/bootstrap.min.css');
+
 		if(!isset(Yii::app()->cache))
 			throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
 

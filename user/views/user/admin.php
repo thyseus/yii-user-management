@@ -2,12 +2,12 @@
 $this->title = Yum::t('Manage users');
 
 $this->breadcrumbs = array(
-	Yum::t('Users') => array('index'),
+	Yum::t('Users') => array('admin'),
 	Yum::t('Manage'));
 
 echo Yum::renderFlash();
 
-$this->widget('bootstrap.widgets.TbGridView',array(
+$this->widget('zii.widgets.grid.CGridView',array(
 	'dataProvider'=>$model->search(),
 	'filter' => $model,
 		'columns'=>array(
