@@ -186,18 +186,12 @@ class YumUserController extends YumController {
 
 		// When opening a empty user creation mask, we most probably want to
 		// insert an _active_ user
-		if(!isset($model->status))
+		if($model->status === null)
 			$model->status = 1;
 
 		if(isset($_POST['YumUser'])) {
 			$model->salt = YumEncrypt::generateSalt();
 			$model->attributes=$_POST['YumUser'];
-			
-			if(Yum::hasModule('role'))
-				$model->roles = Relation::retrieveValues($_POST);
-
-			if(Yum::hasModule('profile') && isset($_POST['YumProfile']) )
-				$profile->attributes = $_POST['YumProfile'];
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
@@ -212,25 +206,33 @@ class YumUserController extends YumController {
 						$model->setPassword($_POST['YumUserChangePassword']['password'], $model->salt);
 				}
 			}
-
-			$model->activationKey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
-
-			if($model->username == '' && isset($profile))
-				$model->username = $profile->email;
-
 			$model->validate();
+			if(!$model->hasErrors()) {
+				if(isset($_POST['YumUser']['roles']))
+					$model->syncRoles($_POST['YumUser']['roles']);
+				else
+					$model->syncRoles();
 
-			if(isset($profile))
-				$profile->validate();
+				if(Yum::hasModule('profile') && isset($_POST['YumProfile']) )
+					$profile->attributes = $_POST['YumProfile'];
 
-			if(!$model->hasErrors()
-					&& !$passwordform->hasErrors()) {
-				$model->save();
-				if(isset($profile)) {
-					$profile->user_id = $model->id;
-					$profile->save(array('user_id'), false);
+				$model->activationKey = YumEncrypt::encrypt(microtime() . $model->password, $model->salt);
+
+				if($model->username == '' && isset($profile))
+					$model->username = $profile->email;
+
+				if(isset($profile))
+					$profile->validate();
+
+				if(!$model->hasErrors()
+						&& !$passwordform->hasErrors()) {
+					$model->save();
+					if(isset($profile)) {
+						$profile->user_id = $model->id;
+						$profile->save(array('user_id'), false);
+					}
+					$this->redirect(array('view', 'id'=>$model->id));
 				}
-				$this->redirect(array('view', 'id'=>$model->id));
 			}
 		}
 
@@ -248,34 +250,37 @@ class YumUserController extends YumController {
 			$profile = $model->profile;
 		$passwordform = new YumUserChangePassword();
 
-
 		if(isset($_POST['YumUser'])) {
 			if(!isset($model->salt) || empty($model->salt))
 				$model->salt = YumEncrypt::generateSalt();
-			
-			$model->attributes = $_POST['YumUser'];
-			if(Yum::hasModule('role')) {
-				Yii::import('application.modules.role.models.*');
-				// Assign the roles and belonging Users to the model
-				$model->roles = Relation::retrieveValues($_POST);
-			}
+					
+					$model->attributes = $_POST['YumUser'];
 
-			if($profile && isset($_POST['YumProfile']) )
-					$profile->attributes = $_POST['YumProfile'];
+					$model->validate();
 
-			// Password change is requested ?
-			if(isset($_POST['YumUserChangePassword'])
-					&& $_POST['YumUserChangePassword']['password'] != '') {
-				$passwordform->attributes = $_POST['YumUserChangePassword'];
-				if($passwordform->validate())
-					$model->setPassword($_POST['YumUserChangePassword']['password'], $model->salt);
-			}
+			if(!$model->hasErrors()) {
+				if(isset($_POST['YumUser']['roles']))
+					$model->syncRoles($_POST['YumUser']['roles']);
+				else
+					$model->syncRoles();
 
-			if(!$passwordform->hasErrors() && $model->save()) {
-				if(isset($profile)) 
-					$profile->save();
-
-				$this->redirect(array('//user/user/view', 'id' => $model->id));
+					if($profile && isset($_POST['YumProfile']) )
+						$profile->attributes = $_POST['YumProfile'];
+							
+							// Password change is requested ?
+							if(isset($_POST['YumUserChangePassword'])
+									&& $_POST['YumUserChangePassword']['password'] != '') {
+								$passwordform->attributes = $_POST['YumUserChangePassword'];
+									if($passwordform->validate())
+										$model->setPassword($_POST['YumUserChangePassword']['password'], $model->salt);
+							}
+				
+					if(!$passwordform->hasErrors() && $model->save()) {
+						if(isset($profile)) 
+							$profile->save();
+								
+								$this->redirect(array('//user/user/view', 'id' => $model->id));
+					}
 			}
 		}
 

@@ -50,23 +50,6 @@
 <div style="clear: both;"> </div>
 <?php } ?>
 
-<div class="row">
-<?php echo CHtml::label(Yum::t('These users have been assigned to this role'), ''); ?> 
-
-<?php 
-$this->widget('YumModule.components.Relation', array(
-			'model' => $model,
-			'relation' => 'users',
-			'style' => 'dropdownlist',
-			'fields' => 'username',
-			'htmlOptions' => array(
-				'checkAll' => Yum::t('Choose All'),
-				'template' => '<div style="float:left;margin-right:5px;">{input}</div>{label}'),
-			'showAddButton' => false
-			));  
-?>
-</div>
-
 <div class="row buttons">
 <?php echo CHtml::submitButton($model->isNewRecord 
 		? Yum::t('Create role') 

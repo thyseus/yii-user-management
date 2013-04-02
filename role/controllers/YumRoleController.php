@@ -49,7 +49,6 @@ class YumRoleController extends YumController {
 
 		if(isset($_POST['YumRole'])) {
 			$model->attributes = $_POST['YumRole'];
-			$model->users = Relation::retrieveValues($_POST);
 
 			if($model->save()) {
 				if(Yum::module()->enableLogging == true) {
@@ -72,9 +71,6 @@ class YumRoleController extends YumController {
 
 		if(isset($_POST['YumRole'])) {
 			$model->attributes = $_POST['YumRole'];
-			$model->users = $_POST['YumRole'];
-
-			$model->users = Relation::retrieveValues($_POST);
 
 			if ($model->validate() && $model->save()) 
 				$this->redirect(array('view', 'id' => $model->id));

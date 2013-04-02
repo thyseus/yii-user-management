@@ -7,6 +7,9 @@ $form = $this->beginWidget('CActiveForm', array(
 			'enableAjaxValidation'=>false));
 ?>
 
+
+<div class="span4">
+
 <div class="note">
 <?php echo Yum::requiredFieldNote(); ?>
 
@@ -16,9 +19,8 @@ if(isset($profile) && $profile !== false)
 	$models[] = $profile;
 	echo CHtml::errorSummary($models);
 	?>
-	</div>
+</div>
 
-<div class="span4">
 <div class="row">
 <?php echo $form->labelEx($model, 'username');
 echo $form->textField($model, 'username');
@@ -51,12 +53,13 @@ echo $form->error($model,'status'); ?>
 <div class="row roles">
 <label> <?php echo Yum::t('User belongs to these roles'); ?> </label>
 
-<?php $this->widget('YumModule.components.Relation', array(
+<?php $this->widget('YumModule.components.select2.ESelect2', array(
 				'model' => $model,
-				'relation' => 'roles',
-				'style' => 'dropdownlist',
-				'fields' => 'title',
-				'showAddButton' => false
+				'attribute' => 'roles',
+				'htmlOptions' => array(
+					'multiple' => 'multiple',
+					'style' => 'width:220px;'),
+				'data' => CHtml::listData(YumRole::model()->findAll(), 'id', 'title'),
 				)); ?>
 </div>
 <?php } ?>

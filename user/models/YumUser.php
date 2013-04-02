@@ -741,6 +741,27 @@ class YumUser extends YumActiveRecord
 		return md5(strtolower(trim($this->profile->email)));		
 	}
 
+	public function syncRoles($roles = null) {
+		if(Yum::hasModule('role')){ 
+			Yii::import('application.modules.role.models.*');
+
+				$query = sprintf("delete from %s where user_id = %s",
+						Yum::module('role')->userRoleTable,
+						$this->id
+						);
+			$result = Yii::app()->db->createCommand($query)->execute();
+			if($roles)
+				foreach($roles as $role) {
+					$query = sprintf("insert into %s (user_id, role_id) values(%s, %s)",
+							Yum::module('role')->userRoleTable,
+							$this->id,
+							$role
+							);
+					$result = Yii::app()->db->createCommand($query)->execute();
+				}
+		}
+	}
+
 	public function getAvatar($thumb = false)
 	{
 		if (Yum::hasModule('avatar') && $this->profile) {
