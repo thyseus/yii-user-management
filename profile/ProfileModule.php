@@ -31,6 +31,9 @@ class ProfileModule extends CWebModule {
   public $profileEditView = '/profile/update';
   public $privacySettingView= '/privacy/update';
 
+	// Which columns should be displayed in the user administration Grid
+	public $gridColumns = array('email', 'firstname', 'lastname', 'street');
+
 	public $controllerMap=array(
 			'comments'=>array(
 				'class'=>'ProfileModule.controllers.YumProfileCommentController'),

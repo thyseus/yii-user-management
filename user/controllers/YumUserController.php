@@ -358,8 +358,7 @@ class YumUserController extends YumController {
 					));
 	}
 
-	public function actionList()
-	{
+	public function actionList() {
 		$dataProvider=new CActiveDataProvider('YumUser', array(
 					'pagination'=>array(
 						/*'criteria'=>array(
@@ -373,8 +372,7 @@ class YumUserController extends YumController {
 					));
 	}
 
-	public function actionAdmin()
-	{
+	public function actionAdmin() {
 		if(Yum::hasModule('role'))
 			Yii::import('application.modules.role.models.*');
 
@@ -385,7 +383,19 @@ class YumUserController extends YumController {
 		if(isset($_GET['YumUser']))
 			$model->attributes = $_GET['YumUser'];
 
-		$this->render('admin', array('model'=>$model));
+		if(Yum::hasModule('profile')) {
+			Yii::import('application.modules.profile.models.*');
+			$profile = new YumProfile;
+			if(isset($_GET['YumProfile'])) {
+				$profile->attributes = $_GET['YumProfile'];
+				$model->profile = $profile;
+			}
+		}
+
+		$this->render('admin', array(
+					'model'=>$model,
+					'profile'=>isset($profile) ? $profile : false,
+					));
 	}
 
 	/**

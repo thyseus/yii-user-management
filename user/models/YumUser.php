@@ -147,23 +147,23 @@ class YumUser extends YumActiveRecord
 		return $roles;
 	}
 
-	public function search()
-	{
+	public function search() {
 		$criteria = new CDbCriteria;
 
-		if (Yum::hasModule('profile') && $this->profile) {
+		if (Yum::hasModule('profile')) {
 			$criteria->with = array('profile');
-			if (isset($this->email))
-				$criteria->addSearchCondition('profile.email', $this->email, true);
-			else if ($this->profile && $this->profile->email)
-				$criteria->compare('profile.email', $this->profile->email, true);
+			$criteria->together = false;
+			if($this->profile) {
+				foreach(YumProfileField::model()->findAll() as $column) {
+					if ($this->profile->{$column->varname})
+						$criteria->compare(
+								'profile.'.$column->varname,
+								$this->profile->{$column->varname},
+								true);
+				}
+			}
 		}
 
-		// Show newest users first by default
-		if (!isset($_GET['YumUser_sort']))
-			$criteria->order = 't.createtime DESC';
-
-		$criteria->together = false;
 		$criteria->compare('t.id', $this->id, true);
 		$criteria->compare('t.username', $this->username, true);
 		$criteria->compare('t.status', $this->status);
@@ -171,8 +171,18 @@ class YumUser extends YumActiveRecord
 		$criteria->compare('t.createtime', $this->createtime, true);
 		$criteria->compare('t.lastvisit', $this->lastvisit, true);
 
+		$sort = new CSort();
+		foreach(YumProfileField::model()->findAll() as $column) {
+			$sort->attributes['profile.'.$column->varname] = array(
+					'asc'=>'profile.'.$column->varname,
+					'desc'=>'profile.'.$column->varname.' DESC',
+					);
+		}
+		$sort->attributes[] = '*'; 
+
 		return new CActiveDataProvider(get_class($this), array(
 					'criteria' => $criteria,
+					'sort' => $sort,
 					'pagination' => array('pageSize' => Yum::module()->pageSize),
 					));
 	}
@@ -668,7 +678,7 @@ class YumUser extends YumActiveRecord
 				'avatar' => Yum::t("Avatar image"),
 				);
 	}
-	
+
 	public function withRoles($roles)
 	{
 		if(!is_array($roles))
