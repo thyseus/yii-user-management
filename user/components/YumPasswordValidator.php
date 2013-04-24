@@ -77,9 +77,9 @@ class YumPasswordValidator extends CValidator
     {
       if (strlen($value) < $this->minLen)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} is too short (min. {num} characters).',
-            array('{num}' => $this->minLen));
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} is too short (min. {num} characters).', array(
+							'{num}' => $this->minLen));
 
         $this->addError($object, $attribute, $message);
       }
@@ -89,9 +89,9 @@ class YumPasswordValidator extends CValidator
     {
       if (strlen($value) > $this->maxLen)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} is too long (max. {num} characters).',
-            array('{num}' => $this->maxLen));
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} is too long (max. {num} characters).', array(
+							'{num}' => $this->maxLen));
 
         $this->addError($object, $attribute, $message);
       }
@@ -101,9 +101,9 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match_all('/[a-z]/', $value, $matches) < $this->minLowerCase)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} must include at least {num} lower case letters.',
-            array('{num}' => $this->minLowerCase));
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} must include at least {num} lower case letters.', array(
+							'{num}' => $this->minLowerCase));
 
         $this->addError($object, $attribute, $message);
       }
@@ -113,9 +113,9 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match_all('/[A-Z]/', $value, $matches) < $this->minUpperCase)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} must include at least {num} upper case letters.',
-            array('{num}' => $this->minUpperCase));
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} must include at least {num} upper case letters.', array(
+							'{num}' => $this->minUpperCase));
 
         $this->addError($object, $attribute, $message);
       }
@@ -125,10 +125,11 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match_all('/[0-9]/', $value, $matches) < $this->minDigits)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} must include at least {num} digits.',
-            array('{num}' => $this->minDigits));
-        $this->addError($object, $attribute, $message);
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} must include at least {num} digits.', array(
+							'{num}' => $this->minDigits));
+
+				$this->addError($object, $attribute, $message);
       }
     }
 
@@ -136,9 +137,9 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match_all('/\W/', $value, $matches) < $this->minSym)
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} must include at least {num} symbols.',
-            array('{num}' => $this->minSym));
+				$message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} must include at least {num} symbols.', array(
+							'{num}' => $this->minSym));
 
         $this->addError($object, $attribute, $message);
       }
@@ -148,9 +149,9 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match('/\s/', $value))
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
-            '{attribute} must not contain whitespace.',
-            array('{num}' => $this->minSym));
+        $message = $this->message !== null ? $this->message : Yum::t(
+						'{attribute} must not contain whitespace.', array(
+							'{num}' => $this->minSym));
 
         $this->addError($object, $attribute, $message);
       }
@@ -160,7 +161,7 @@ class YumPasswordValidator extends CValidator
     {
       if (preg_match('/(.){1}\\1{' . $this->maxRepetition . ',}/', $value))
       {
-        $message = $this->message !== null ? $this->message : Yii::t('UserModule.YumPasswordValidator',
+        $message = $this->message !== null ? $this->message : Yum::t(
             '{attribute} must not contain more than {num} sequentially repeated characters.',
             array('{num}' => $this->maxRepetition + 1));
 

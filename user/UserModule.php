@@ -20,6 +20,11 @@ class UserModule extends CWebModule {
 	public $enableLogging = true;
 	public $enableOnlineStatus = true;
 
+	// Cost for Password generation. See
+	// http://www.yiiframework.com/wiki/425/use-crypt-for-password-storage/
+	// for details 
+	public $passwordHashCost = 13;
+
 	// After how much seconds without an action does a user gets indicated as
 	// offline? Note that, of course, clicking the Logout button will indicate
 	// him as offline instantly anyway.
