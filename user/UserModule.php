@@ -13,7 +13,7 @@ class UserModule extends CWebModule {
 	//layout related control vars
 	public $baseLayout = 'application.views.layouts.main';
 	public $layout = 'application.modules.user.views.layouts.yum';
-	public $loginLayout = 'application.modules.user.views.layouts.yum';
+	public $loginLayout = 'application.modules.user.views.layouts.login';
 	public $adminLayout = 'application.modules.user.views.layouts.yum';
 	public $enableBootstrap = true;
 

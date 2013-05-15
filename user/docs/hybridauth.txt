@@ -1,18 +1,26 @@
 Using hybridauth with yii-user-management:
 
-1.) Configure 'loginType' in UserModule configuration to include 'hybridauth' in your
-application config/main.php
+0.) Read the Hybrid Auth User Guide to get an idea of what we are doing here:
+http://hybridauth.sourceforge.net/userguide.html
 
-2.) Select the providers you want to use in the 'hybridAuthProviders' array.
+1.) Configure 'loginType' in UserModule configuration to include 'hybridauth' in your
+application config/main.php. For example, set 'loginType' to 7, to allow login by
+username, email and hybridauth. Make sure to enable the profile submodule.
+
+2.) Select the providers you want to use in the 'hybridAuthProviders' array. For example,
+to use Facebook and Twitter, set this variable to array('Facebook', 'Twitter')
 
 3.) Take the modules/user/vendors/index.php, rename it to 'hybridauth.php' and place it 
-beside your application index.php bootstrap script. 
+beside your application index.php bootstrap script. This will be your hybrid auth
+entry script. 
 
 4.) Configure and place your hybridauth configuration file. Set the base_url
-to the hybridauth.php script configured above.
+to the hybridauth.php script configured above. 
 
-5.) Place the configuration file into your application
-protected/config/hybridauth.php. This path can be configured with the 
-hybridAuthConfigFile option. You can use the example provided by hybridauth in 
-user/vendors/hybridauth/config.php to get started. 
+5.) Place the hybrid auth configuration file into your application
+protected/config/hybridauth.php. If necessary, this path can be configured with 
+the hybridAuthConfigFile option. You can use the example provided by 
+hybridauth in user/vendors/hybridauth/config.php to get started. 
 
+6.) Navigate to your login page. The configured providers should appear beneath
+the login fields.

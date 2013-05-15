@@ -3,11 +3,17 @@ yii-user-management
 
 a user management module collection for the yii framework
 
-It has the following features:
+Features:
 
 * An automated Installer
 * User Administration
 * Role Administration
+* Hybrid auth is bundled and can easily be integrated, see docs/hybridauth.txt.
+* All providers of hybrid auth and hybrid auth extra package are integrated:
+AOL, Google, Mail.ru, Plurk, Tumblr, Yahoo, Disqus, Identica, Murmur, px500, 
+TwitchTV, Yandex, Facebook, Instagram, MySpace, QQ, Twitter, Foursquare, 
+LastFM, Odnoklassniki, Sina, Viadeo, GitHub, LinkedIn, OpenID, Skyrock, 
+Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Permission System with a mixture of RBAC and ACL (see docs)
 * Profiles & Profile history & Profile Comments & Profile Fields Administration
 * Messaging System (send/receive Messages between Users) Submodule

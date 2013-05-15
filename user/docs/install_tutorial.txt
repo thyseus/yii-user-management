@@ -196,6 +196,9 @@ There are some examples on how to extend from the Yii User Management
 Module and how to implement project-specific stuff. See the files in 
 the docs/ directory for all this.
 
+See docs/hybridauth.txt for instruction on how to use the wonderful
+hybrid auth framework that is bundled with yii-user-management.
+
 
 FAQ:
 ----

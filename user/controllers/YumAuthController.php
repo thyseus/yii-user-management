@@ -38,7 +38,8 @@ class YumAuthController extends YumController {
 	}
 
 	public function loginByUsername() {
-		if($this->getUser($this->loginForm->username))
+		$user = $this->getUser($this->loginForm->username);
+		if($user)
 			return $this->authenticate($user);
 		else {
 			Yum::log( Yum::t(
@@ -75,6 +76,7 @@ class YumAuthController extends YumController {
 			throw new CException(400, 'Hybrid auth needs the profile submodule to be enabled');
 
 		Yii::import('application.modules.user.vendors.hybridauth.Hybrid.Auth', true);
+
 		require_once(Yum::module()->hybridAuthConfigFile);
 
 		try {
@@ -82,45 +84,32 @@ class YumAuthController extends YumController {
 			$providers = Yum::module()->hybridAuthProviders;
 
 			if(count($providers) == 0)
-				throw new CHttpException(400, 'No Hybrid auth providers enabled in configuration file');
+				throw new CException('No Hybrid auth providers enabled in configuration file');
 
 			if(!in_array($provider, $providers))
-				throw new CHttpException(400, 'Requested provider is not enabled in configuration file');
+				throw new CException('Requested provider is not enabled in configuration file');
 
 			$success = $hybridauth->authenticate($provider);
 			if($success && $success->isUserConnected()) {
-				$hybridAuthProfile = $success->getUserProfile();
 				// User found and authenticated at foreign party. Is he already 
 				// registered at our application?
+				$hybridAuthProfile = $success->getUserProfile();
 				$user = $this->getUser($hybridAuthProfile->displayName);
-				if($user) {
-					// Yes he is, log in:
-					$identity = new YumUserIdentity($hybridAuthProfile->displayName, null);
-					$identity->authenticate(true);
-					$duration = $this->loginForm->rememberMe ? Yum::module()->cookieDuration : 0; 
-					Yii::app()->user->login($identity, $duration);
-				} else {
-					// No, he is not, register and login:
+				if(!$user) {
+					// No, he is not, so we register the user and sync the profile fields:
 					$user = new YumUser();
-					$profile = new YumProfile();
+					$user->registerByHybridAuth($hybridAuthProfile);
+				} 
 
-					$profile->firstname = $hybridAuthProfile->firstName;
-					$profile->lastname = $hybridAuthProfile->lastName;
-					$profile->email = $hybridAuthProfile->email;
-
-					$user->username = $hybridAuthProfile->displayName;
-					$user->createtime = time();
-
-					$user->save(false);
-					$profile->user_id = $user->id;
-					$profile->save(false);
-
+					Yum::log(Yum::t('User {username} logged in by hybrid {provider}', array(
+									'{username}' => $hybridAuthProfile->displayName,
+									'{provider}' => $provider)));
+										
 					$identity = new YumUserIdentity($user->username, null);
 					$identity->authenticate(true);
 					$duration = $this->loginForm->rememberMe ? Yum::module()->cookieDuration : 0; 
 					Yii::app()->user->login($identity, $duration);
 
-				}
 				$this->redirect(Yum::module()->returnUrl);
 			}
 		} catch (Exception $e) {

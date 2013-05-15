@@ -325,6 +325,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Grant permission', 'Berechtigung zuweisen', 'de', 'yum'),
 ('Grant permission', 'Otorgar permiso', 'es', 'yum'),
 ('Leave group', 'Gruppe verlassen', 'de', 'yum'),
+('You can also login by', 'Anmeldung auch möglich über', 'de', 'yum'),
 ('You have left this group', 'Du hast diese Gruppe verlassen', 'de', 'yum'),
 ('Group Name', 'Gruppenname', 'de', 'yum'),
  ('Group Name', 'Nombre de grupo', 'es', 'yum'),

@@ -509,6 +509,21 @@ class YumUser extends YumActiveRecord
 		return $friends;
 	}
 
+	public function registerByHybridAuth($hybridAuthProfile) {
+		$profile = new YumProfile();
+
+		$profile->firstname = $hybridAuthProfile->firstName;
+		$profile->lastname = $hybridAuthProfile->lastName;
+		$profile->email = $hybridAuthProfile->email;
+
+		$this->username = $hybridAuthProfile->displayName;
+		$this->createtime = time();
+
+		$this->save(false);
+		$profile->user_id = $this->id;
+		$profile->save(false);
+	}
+
 	// Registers a user 
 	public function register($username = null,
 			$password = null,

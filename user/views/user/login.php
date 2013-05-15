@@ -12,10 +12,14 @@ if(isset($_GET['action']))
 
 <div class="form">
 
+<?php if($model->hasErrors()) { ?>
 <div class="alert">
 <?php echo CHtml::errorSummary($model); ?>
 </div>
+<?php } ?>
 
+
+<div class="span5 loginform">
 <p> <?php echo Yum::t(
 		'Please fill out the following form with your login credentials:'); ?> </p>
 
@@ -34,18 +38,30 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 		<?php echo CHtml::activeLabelEx($model,'password'); ?>
 		<?php echo CHtml::activePasswordField($model,'password'); ?>
 </div>
+</div>
 		
-<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH && Yum::module()->hybridAuthProviders) { ?>
-<div class="row hybridauth">
-<?php echo Yum::t('You can also login by: '); 
-foreach(Yum::module()->hybridAuthProviders as $provider)
-echo CHtml::link($provider, $this->createUrl('//user/auth/login', array('hybridauth' => $provider))); 
-echo '&nbsp;';
+<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
+		&& Yum::module()->hybridAuthProviders) { ?>
+	<div class="span5 hybridauth">
+<?php echo Yum::t('You can also login by') . ': <br />'; 
+foreach(Yum::module()->hybridAuthProviders as $provider) 
+	echo CHtml::link(
+			CHtml::image(
+				Yii::app()->getAssetManager()->publish(
+					Yii::getPathOfAlias(
+						'application.modules.user.assets.images').'/'.strtolower($provider).'.png'),
+				$provider) . $provider, $this->createUrl(
+					'//user/auth/login', array('hybridauth' => $provider)), array(
+					'class' => 'social')) . '<br />'; 
 ?>
 </div>
 
+<div class="clearfix"></div>
+
 <?php } ?>
 
+<div class="span10">
+<div class="row">
 	<p class="hint">
 	<?php 
 	if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
@@ -62,11 +78,16 @@ echo '&nbsp;';
 	?>
 </p>
 
+</div>
 
+
+<div class="row">
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
 </div>
 
+</div>
+</div>
 </div>
 
 <?php echo CHtml::endForm(); ?>

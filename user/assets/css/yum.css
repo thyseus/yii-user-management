@@ -13,3 +13,4 @@ label { display: inline }
 .table_profile_fields { width: 50%; }
 .profilefieldlabel { float: left; margin-right: 5px; width: 100px;}
 .friend { margin: 5px; } 
+a.social { text-decoration: none; }
