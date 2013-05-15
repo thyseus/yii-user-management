@@ -1,12 +1,12 @@
 <?php
 
 /* 
-This Controller handles the authorization of users. 
-Yii User Management provides login by username.
-If using the profile submodule, we can also login by email address.
-When using hybridauth (see docs/hybridauth.txt) we can use all
-social networks provided by hybridauth.
-*/
+	 This Controller handles the authorization of users. 
+	 Yii User Management provides login by username.
+	 If using the profile submodule, we can also login by email address.
+	 When using hybridauth (see docs/hybridauth.txt) we can use all
+	 social networks provided by hybridauth.
+ */
 
 class YumAuthController extends YumController {
 	public $defaultAction = 'login';
@@ -28,15 +28,17 @@ class YumAuthController extends YumController {
 				);
 	}
 
-	public function loginByUsername() {
+	public function getUser($user) {
 		if(Yum::module()->caseSensitiveUsers)
-			$user = YumUser::model()->find('username = :username', array(
-						':username' => $this->loginForm->username));
+			return YumUser::model()->find('username = :username', array(
+						':username' => $user));
 		else
-			$user = YumUser::model()->find('upper(username) = :username', array(
-						':username' => strtoupper($this->loginForm->username)));
+			return YumUser::model()->find('upper(username) = :username', array(
+						':username' => strtoupper($user)));
+	}
 
-		if($user)
+	public function loginByUsername() {
+		if($this->getUser($this->loginForm->username))
 			return $this->authenticate($user);
 		else {
 			Yum::log( Yum::t(
@@ -63,6 +65,70 @@ class YumAuthController extends YumController {
 		} else
 			throw new CException(Yum::t(
 						'The profile submodule must be enabled to allow login by Email'));
+	}
+
+	public function loginByHybridAuth($provider) {
+		if(!Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH)
+			throw new CException(400, 'Hybrid authentification is not allowed');
+
+		if(!Yum::hasModule('profile'))
+			throw new CException(400, 'Hybrid auth needs the profile submodule to be enabled');
+
+		Yii::import('application.modules.user.vendors.hybridauth.Hybrid.Auth', true);
+		require_once(Yum::module()->hybridAuthConfigFile);
+
+		try {
+			$hybridauth = new Hybrid_Auth(Yum::module()->hybridAuthConfigFile);
+			$providers = Yum::module()->hybridAuthProviders;
+
+			if(count($providers) == 0)
+				throw new CHttpException(400, 'No Hybrid auth providers enabled in configuration file');
+
+			if(!in_array($provider, $providers))
+				throw new CHttpException(400, 'Requested provider is not enabled in configuration file');
+
+			$success = $hybridauth->authenticate($provider);
+			if($success && $success->isUserConnected()) {
+				$hybridAuthProfile = $success->getUserProfile();
+				// User found and authenticated at foreign party. Is he already 
+				// registered at our application?
+				$user = $this->getUser($hybridAuthProfile->displayName);
+				if($user) {
+					// Yes he is, log in:
+					$identity = new YumUserIdentity($hybridAuthProfile->displayName, null);
+					$identity->authenticate(true);
+					$duration = $this->loginForm->rememberMe ? Yum::module()->cookieDuration : 0; 
+					Yii::app()->user->login($identity, $duration);
+				} else {
+					// No, he is not, register and login:
+					$user = new YumUser();
+					$profile = new YumProfile();
+
+					$profile->firstname = $hybridAuthProfile->firstName;
+					$profile->lastname = $hybridAuthProfile->lastName;
+					$profile->email = $hybridAuthProfile->email;
+
+					$user->username = $hybridAuthProfile->displayName;
+					$user->createtime = time();
+
+					$user->save(false);
+					$profile->user_id = $user->id;
+					$profile->save(false);
+
+					$identity = new YumUserIdentity($user->username, null);
+					$identity->authenticate(true);
+					$duration = $this->loginForm->rememberMe ? Yum::module()->cookieDuration : 0; 
+					Yii::app()->user->login($identity, $duration);
+
+				}
+				$this->redirect(Yum::module()->returnUrl);
+			}
+		} catch (Exception $e) {
+			if(Yum::module()->debug)
+				throw new CException($e->getMessage());
+			else 
+				throw new CHttpException(403, Yum::t('Permission denied'));
+		}
 	}
 
 	public function logFailedLoginAttempts($user) {
@@ -108,13 +174,16 @@ class YumAuthController extends YumController {
 		}
 	}
 
-	public function actionLogin() {
+	public function actionLogin($hybridauth = false) {
 		// If the user is already logged in send them to the return Url 
 		if (!Yii::app()->user->isGuest)
 			$this->redirect(Yum::module()->returnUrl);   
 
 		$this->layout = Yum::module()->loginLayout;
 		$this->loginForm = new YumUserLogin('login');
+
+		if($hybridauth)
+			$this->loginByHybridAuth($hybridauth);
 
 		$success = false;
 		$action = 'login';
@@ -134,12 +203,6 @@ class YumAuthController extends YumController {
 					$success = $this->loginByEmail();
 					if ($success)
 						$login_type = 'email';
-				}
-				if ($t & UserModule::LOGIN_BY_HYBRIDAUTH && !$success) {
-					$this->loginForm->setScenario('openid');
-					$success = $this->loginByHybridAuth();
-					if ($success)
-						$login_type = 'hybridauth';
 				}
 			}
 

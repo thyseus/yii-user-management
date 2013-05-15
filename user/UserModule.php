@@ -88,17 +88,6 @@ class UserModule extends CWebModule {
 	public static $dateFormat = "m-d-Y";  //"d.m.Y H:i:s"
 	public $dateTimeFormat = 'm-d-Y G:i:s';  //"d.m.Y H:i:s"
 
-	// Use this to set dhcpOptions if using authentication over LDAP
-	public $ldapOptions = array(
-			'ldap_host' => '',
-			'ldap_port' => '',
-			'ldap_basedn' => '',
-			'ldap_protocol' => '',
-			'ldap_autocreate' => '',
-			'ldap_tls' => '',
-			'ldap_transfer_attr' => '',
-			'ldap_transfer_pw' => '');
-
 	private $_urls=array(
 			'login'=>array('//user/user'),
 			'return'=>array('//user/user/index'),
@@ -123,10 +112,16 @@ class UserModule extends CWebModule {
 	// and assign them to 'loginType' in the user module configuration. For 
 	// example, to allow login by username, email and hybridauth, set this 
 	// value to 7. Defaults to only allow login by username (value set to 1)
-	const LOGIN_BY_USERNAME		= 1;
-	const LOGIN_BY_EMAIL		= 2;
-	const LOGIN_BY_HYBRIDAUTH		= 4;
+	const LOGIN_BY_USERNAME	= 1;
+	const LOGIN_BY_EMAIL = 2;
+	const LOGIN_BY_HYBRIDAUTH	= 4;
 	public $loginType = 1;
+
+	public $hybridAuthConfigFile =  'protected/config/hybridauth.php';
+
+	// see user/vendors/hybridauth/Hybrid/Providers for supported providers.
+	// example: array('facebook', 'twitter')
+	public $hybridAuthProviders = array();
 
 	/**
 	 * Defines all Controllers of the User Management Module and maps them to

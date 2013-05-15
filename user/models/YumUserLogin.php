@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * LoginForm class.
@@ -21,20 +21,18 @@ class YumUserLogin extends YumFormModel {
 			$this->scenario = 'login';
 
 		$rules = array(
-			array('username, password', 'required', 'on' => 'login'),
-			array('username', 'required', 'on' => 'openid'),
-			array('rememberMe', 'boolean'),
-		);
+				array('username, password', 'required', 'on' => 'login'),
+				array('rememberMe', 'boolean'),
+				);
 
 		return $rules;
 	}
 
 	public function attributeLabels() {
 		return array(
-			'username'=>Yum::t('Name'),
-			'password'=>Yum::t("Password"),
-			'rememberMe'=>Yum::t("Remember me next time"),
-		);
+				'username'=>Yum::t('Name'),
+				'password'=>Yum::t("Password"),
+				'rememberMe'=>Yum::t("Remember me next time"),
+				);
 	}
-
 }

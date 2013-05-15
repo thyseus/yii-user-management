@@ -525,7 +525,7 @@ class YumUser extends YumActiveRecord
 
 			$this->setPassword($password, $salt);
 		}
-		$this->activationKey = $this->generateActivationKey(false/*, $password*/);
+		$this->activationKey = $this->generateActivationKey(false);
 		$this->createtime = time();
 		$this->superuser = 0;
 

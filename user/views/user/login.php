@@ -35,7 +35,17 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 		<?php echo CHtml::activePasswordField($model,'password'); ?>
 </div>
 		
-	
+<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH && Yum::module()->hybridAuthProviders) { ?>
+<div class="row hybridauth">
+<?php echo Yum::t('You can also login by: '); 
+foreach(Yum::module()->hybridAuthProviders as $provider)
+echo CHtml::link($provider, $this->createUrl('//user/auth/login', array('hybridauth' => $provider))); 
+echo '&nbsp;';
+?>
+</div>
+
+<?php } ?>
+
 	<p class="hint">
 	<?php 
 	if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
@@ -51,6 +61,7 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 			Yum::module('registration')->recoveryUrl);
 	?>
 </p>
+
 
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
