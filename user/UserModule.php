@@ -7,7 +7,7 @@ Yii::import('YumModule.models.*');
 Yii::import('YumModule.controllers.YumController');
 
 class UserModule extends CWebModule {
-	public $version = '0.8';
+	public $version = '0.9-git-wip';
 	public $debug = false;
 
 	//layout related control vars
@@ -38,6 +38,9 @@ class UserModule extends CWebModule {
 	// Disabled by default for security reasons.
 	public $enableRESTapi = false;
 
+	// Default cookie Duration is 3600*24*30 (30 days)
+	public $cookieDuration = 2592000;
+
 	// Set this to true to enable RESTful login over the same password as
 	// the admin account. This is set to false, so the password does not
 	// get over the network in cleartext. Use the md5 password to authenticate.
@@ -53,7 +56,6 @@ class UserModule extends CWebModule {
 	public $phpmailer = null; // PHPMailer array options.
 	public $adminEmail = 'admin@example.com';
 
-	public $facebookConfig = false;
 	public $pageSize = 10;
 
 	// if you want the users to be able to edit their profile TEXTAREAs with an
@@ -117,15 +119,13 @@ class UserModule extends CWebModule {
 			'messageCompose' =>'application.modules.message.views.message.compose');
 
 	// LoginType :
-	// If you want to activate many types of login just sum up the values below and assign them to 'loginType' in
-	// the user module configuration.
+	// If you want to activate many types of login just sum up the values below 
+	// and assign them to 'loginType' in the user module configuration. For 
+	// example, to allow login by username, email and hybridauth, set this 
+	// value to 7. Defaults to only allow login by username (value set to 1)
 	const LOGIN_BY_USERNAME		= 1;
 	const LOGIN_BY_EMAIL		= 2;
-	const LOGIN_BY_OPENID		= 4;
-	const LOGIN_BY_FACEBOOK		= 8;
-	const LOGIN_BY_TWITTER		= 16;
-	const LOGIN_BY_LDAP			= 32;
-	// Allow login only by username by default.
+	const LOGIN_BY_HYBRIDAUTH		= 4;
 	public $loginType = 1;
 
 	/**

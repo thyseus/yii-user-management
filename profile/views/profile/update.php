@@ -13,7 +13,7 @@ $this->title = Yum::t('Edit profile');
 
 <?php echo CHtml::errorSummary(array($user, $profile)); ?>
 
-<?php if(Yum::module()->loginType & 1) { ?>
+<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME) { ?>
 
 <?php echo CHtml::activeLabelEx($user,'username'); ?>
 <?php echo CHtml::activeTextField($user,'username',array(
@@ -24,9 +24,8 @@ $this->title = Yum::t('Edit profile');
 
 <?php if(isset($profile) && is_object($profile)) 
 	$this->renderPartial('/profile/_form', array('profile' => $profile)); ?>
-
 	
-	<?
+	<?php
 
 	if(Yum::module('profile')->enablePrivacySetting)
 		echo CHtml::button(Yum::t('Privacy settings'), array(
