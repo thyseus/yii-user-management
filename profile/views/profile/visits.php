@@ -19,7 +19,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 					'type' => 'raw',
 					'value' => 'CHtml::link($data->visited->username, array(
 							"/profile/profile/view",
-							"id" => $data->visited->profile->id))'),
+							"id" => $data->visited->id))'),
 				array(
 					'name' => 'timestamp_first_visit',
 					'filter' => false,

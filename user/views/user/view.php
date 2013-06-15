@@ -122,15 +122,21 @@ if(Yum::hasModule('role') && Yii::app()->user->isAdmin()) {
 	}
 }
 
-if(Yii::app()->user->isAdmin())
-	echo CHtml::Button(
-			Yum::t('Update User'), array(
-				'submit' => array('user/update', 'id' => $model->id)));
+if(Yii::app()->user->isAdmin()) {
+	echo CHtml::link(Yum::t('User administration'), 
+			array('//user/user/admin'), array(
+				'class' => 'btn'));
 
-	if(Yum::hasModule('profile'))
-	echo CHtml::Button(
-			Yum::t('Visit profile'), array(
-				'submit' => array('//profile/profile/view', 'id' => $model->id)));
+	echo CHtml::link(Yum::t('Update User'), 
+			array('user/update', 'id' => $model->id), array(
+				'class' => 'btn'));
+
+}
+
+if(Yum::hasModule('profile'))
+echo CHtml::link(Yum::t('Visit profile'), array(
+			'//profile/profile/view', 'id' => $model->id), array(
+'class' => 'btn'));
 
 
 	?>

@@ -4,7 +4,7 @@
 
 <div class="view_user" id="user_<?php echo $data->id;?>"> 
 
-<?
+<?php
 $online = '';
 if(Yum::hasModule('profile') && Yum::module('profile')->enablePrivacySetting) {
 	if($data->privacy && $data->privacy->show_online_status) {
@@ -23,7 +23,7 @@ if(Yum::hasModule('profile') && Yum::module('profile')->enablePrivacySetting) {
 			'//profile/profile/view', 'id' => $data->id)); ?>
 </div>
 
-<?
+<?php
 Yii::app()->clientScript->registerScript('tooltip_'.$data->id, "
 $('#user_{$data->id}').tooltip({
 'position': 'top',

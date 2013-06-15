@@ -22,9 +22,11 @@ class ProfileModule extends CWebModule {
 
 	public $publicFieldsView =
 		'application.modules.profile.views.profile.public_fields';
+	public $profileFormView =
+		'application.modules.profile.views.profile._form';
 	public $profileCommentView =
 		'application.modules.profile.views.profileComment._view';
-	public $profileCommentIndexView =
+		public $profileCommentIndexView =
 		'application.modules.profile.views.profileComment.index';
 	public $profileCommentCreateView =
 		'application.modules.profile.views.profileComment.create';
