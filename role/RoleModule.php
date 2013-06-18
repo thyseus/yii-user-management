@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('RoleModule' , dirname(__FILE__));
 
 class RoleModule extends CWebModule {
@@ -9,10 +9,10 @@ class RoleModule extends CWebModule {
 
 	public $layout = 'application.modules.user.views.layouts.yum';
 
-	public $roleTable = 'role';
-	public $permissionTable = 'permission';
-	public $actionTable = 'action';
-	public $userRoleTable = 'user_role';
+	public $roleTable = '{{role}}';
+	public $permissionTable = '{{permission}}';
+	public $actionTable = '{{action}}';
+	public $userRoleTable = '{{user_role}}';
 
 	// Set this to true if admin can do _everything_.
 	// Yii::app()->user->can() will always return true when

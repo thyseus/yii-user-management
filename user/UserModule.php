@@ -141,26 +141,8 @@ class UserModule extends CWebModule {
 		'login'=>array('class'=>'YumModule.controllers.YumUserController')
 	);
 
-	// Table names
-	private $_tables = array(
-			'user' => 'user',
-			'privacySetting' => 'privacysetting',
-			'translation' => 'translation',
-			'message' => 'message',
-			'usergroup' => 'usergroup',
-			'usergroupMessage' => 'usergroup_message',
-			'profile' => 'profile',
-			'profileComment' => 'profile_comment',
-			'profileVisit' => 'profile_visit',
-			'profileField' => 'profile_field',
-			'role' => 'role',
-			'userRole' => 'user_role',
-			'membership' => 'membership',
-			'payment' => 'payment',
-			'friendship' => 'friendship',
-			'permission' => 'permission',
-			'action' => 'action',
-			);
+	public $userTable = '{{user}}';
+	public $translationTable = '{{translation}}';
 
 	public $usernameRequirements=array(
 		'minLen'=>3,
@@ -180,7 +162,7 @@ class UserModule extends CWebModule {
 
 
 	/**
-	 * Implements support for getting URLs, Tables and Views
+	 * Implements support for getting URLs and Views
 	 * @param string $name
 	 */
 	public function __get($name) {
@@ -191,10 +173,6 @@ class UserModule extends CWebModule {
 		if(substr($name, -4) === 'View')
 			if(isset($this->_views[substr($name, 0, -4)]))
 				return $this->_views[substr($name, 0, -4)];
-
-		if(substr($name, -5) === 'Table')
-			if(isset($this->_tables[substr($name, 0, -5)]))
-				return $this->_tables[substr($name, 0, -5)];
 
 		return parent::__get($name);
 	}
@@ -212,10 +190,6 @@ class UserModule extends CWebModule {
 		if(substr($name,-4)==='View') {
 			if(isset($this->_views[substr($name,0,-4)]))
 				$this->_views[substr($name,0,-4)]=$value;
-		}
-		if(substr($name,-5)==='Table') {
-			if(isset($this->_tables[substr($name,0,-5)]))
-				$this->_tables[substr($name,0,-5)]=$value;
 		}
 
 		//parent::__set($name,$value);

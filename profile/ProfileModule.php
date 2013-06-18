@@ -11,11 +11,11 @@ class ProfileModule extends CWebModule {
 	public $enablePrivacySetting = true;
 	public $enableProfileComments = true;
 
-	public $profileTable = 'profile';
-	public $privacySettingTable = 'privacysetting';
-	public $profileCommentTable = 'profile_comment';
-	public $profileVisitTable = 'profile_visit';
-	public $profileFieldTable = 'profile_field';
+	public $profileTable = '{{profile}}';
+	public $privacySettingTable = '{{privacysetting}}';
+	public $profileCommentTable = '{{profile_comment}}';
+	public $profileVisitTable = '{{profile_visit}}';
+	public $profileFieldTable = '{{profile_field}}';
 
 	public $profileView = '/profile/view';
 	public $profileViewRoute = '//profile/profile/view';

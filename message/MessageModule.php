@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('MessageModule', dirname(__FILE__));
 
 Yii::import('MessageModule.models.*');
@@ -9,8 +9,9 @@ class MessageModule extends CWebModule
 	// new internal messages by email. Available options:
 	// None, Digest, Instant, User, Threshold
 	// 'User' means to use the user-specific option in the user table
-	public $messageTable = 'message';
 	public $notifyType = 'user';
+
+	public $messageTable = '{{message}}';
 
 	public $layout = 'application.modules.user.views.layouts.yum';
 
