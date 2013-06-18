@@ -1,4 +1,4 @@
-<?
+<?php
 class YumWebUser extends CWebUser
 {
 	public $_data;
@@ -17,10 +17,10 @@ class YumWebUser extends CWebUser
 
 	public function checkAccess($operation, $params=array(), $allowCaching=true)
 	{
-		if(!Yum::hasModule('role') ||	Yum::module('role')->useYiiCheckAccess )
+		if(!Yum::hasModule('role') ||	Yum::module('role')->useYiiCheckAccess)
 			return parent::checkAccess($operation, $params, $allowCaching);
-
-		return $this->can($operation);	
+		else
+			return $this->can($operation);	
 	}
 
 	public function can($action) {
