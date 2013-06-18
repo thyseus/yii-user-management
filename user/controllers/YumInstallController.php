@@ -45,8 +45,6 @@ class YumInstallController extends YumController
 					$tables = array(
 						'userTable',
 						'privacySettingTable',
-						'profileFieldTable',
-						'profileFieldsGroupTable',
 						'profileTable',
 						'profileCommentTable',
 						'profileVisitTable',
@@ -212,41 +210,12 @@ class YumInstallController extends YumController
 						$db->createCommand($sql)->execute();
 						$createdTables['profile']['privacySettingTable'] = $privacySettingTable;
 
-						// Create Profile Fields Table
-						$sql = "CREATE TABLE IF NOT EXISTS `" . $profileFieldTable . "` (
-							`id` int unsigned NOT NULL auto_increment,
-							`varname` varchar(50) NOT NULL DEFAULT '',
-							`title` varchar(255) NOT NULL DEFAULT '',
-							`hint` text NOT NULL,
-							`field_type` varchar(50) NOT NULL DEFAULT '',
-							`field_size` int(3) NOT NULL default '0',
-							`field_size_min` int(3) NOT NULL default '0',
-							`required` int(1) NOT NULL default '0',
-							`match` varchar(255) NOT NULL DEFAULT '',
-							`range` varchar(255) NOT NULL DEFAULT '',
-							`error_message` varchar(255) NOT NULL DEFAULT '',
-							`other_validator` varchar(255) NOT NULL DEFAULT '',
-							`default` varchar(255) NOT NULL DEFAULT '',
-							`position` int(3) NOT NULL default '0',
-							`visible` int(1) NOT NULL default '0',
-							`related_field_name` varchar(255) NOT NULL DEFAULT '',
-							PRIMARY KEY  (`id`),
-							KEY `varname` (`varname`,`visible`)
-						) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ; ";
-
-						$db->createCommand($sql)->execute();
-						$createdTables['profile']['profileFieldTable'] = $profileFieldTable;
-
 						// Create Profiles Table
 						$sql = "CREATE TABLE IF NOT EXISTS `" . $profileTable . "` (
 							`id` int unsigned NOT NULL auto_increment,
 							`user_id` int unsigned NOT NULL,
-							`timestamp` timestamp NOT NULL,
-							`privacy` ENUM('protected', 'private', 'public') NOT NULL,
 							`lastname` varchar(50) NOT NULL default '',
 							`firstname` varchar(50) NOT NULL default '',
-							`show_friends` tinyint(1) DEFAULT 1,
-							`allow_comments` tinyint(1) DEFAULT 1,
 							`email` varchar(255) NOT NULL default '',
 							`street` varchar(255),
 							`city` varchar(255),
@@ -413,16 +382,6 @@ class YumInstallController extends YumController
 							."(2, 2, 'demo','demo','demo@example.com')";
 						$db->createCommand($sql)->execute();
 
-						$sql = "INSERT INTO `" . $profileFieldTable . "` "
-							."(`varname`, `title`, `field_type`, `field_size`, `required`, `visible`, `other_validator`) VALUES "
-							."('email', 'E-Mail', 'VARCHAR', 255, 1, 3, 'CEmailValidator'),"
-							."('firstname', 'First name', 'VARCHAR', 255, 1, 3, ''),"
-							."('lastname', 'Last name', 'VARCHAR', 255, 1, 3, ''),"
-							."('street','Street', 'VARCHAR', 255, 0, 3, ''),"
-							."('city','City', 'VARCHAR', 255, 0, 3, ''),"
-							."('about', 'About', 'TEXT', 255, 0, 3, '')";
-						$db->createCommand($sql)->execute();
-
 					}
 
 					// Do it
@@ -452,7 +411,6 @@ class YumInstallController extends YumController
 					'profileTable' => 'profile',
 					'profileCommentTable' => 'profile_comment',
 					'profileVisitTable' => 'profile_visit',
-					'profileFieldTable' => 'profile_field',
 					'userRoleTable' => 'user_role',
 					'usergroupTable' => 'usergroup',
 					'usergroupMessageTable' => 'user_group_message',

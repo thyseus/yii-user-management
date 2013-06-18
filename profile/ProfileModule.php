@@ -2,13 +2,14 @@
 Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
 
 class ProfileModule extends CWebModule {
-	public $layout = 'yumprofile';
+	public $adminLayout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'application.modules.user.views.layouts.yum';
+
+	public $requiredProfileFields = array('firstname', 'lastname');
 
 	public $profileRules = array(
-			array('allow_comments, show_friends', 'numerical'),
 			array('email', 'unique'),
 			array('email', 'CEmailValidator'),
-			array('privacy', 'safe'),
 			);
 
 	// set this to true to allow all users to access user profiles
@@ -22,7 +23,6 @@ class ProfileModule extends CWebModule {
 	public $privacySettingTable = '{{privacysetting}}';
 	public $profileCommentTable = '{{profile_comment}}';
 	public $profileVisitTable = '{{profile_visit}}';
-	public $profileFieldTable = '{{profile_field}}';
 
 	public $profileView = '/profile/view';
 	public $profileViewRoute = '//profile/profile/view';
@@ -48,14 +48,8 @@ class ProfileModule extends CWebModule {
 				'class'=>'ProfileModule.controllers.YumProfileCommentController'),
 			'privacy'=>array(
 				'class'=>'ProfileModule.controllers.YumPrivacysettingController'),
-			'groups'=>array(
-				'class'=>'ProfileModule.controllers.YumUsergroupController'),
 			'profile'=>array(
 				'class'=>'ProfileModule.controllers.YumProfileController'),
-			'fields'=>array(
-				'class'=>'ProfileModule.controllers.YumFieldsController'),
-			'fieldsgroup'=>array(
-				'class'=>'ProfileModule.controllers.YumFieldsGroupController'),
 			);
 
 	public function init() {

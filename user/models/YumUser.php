@@ -149,18 +149,21 @@ class YumUser extends YumActiveRecord
 
 	public function search() {
 		$criteria = new CDbCriteria;
+		$sort = new CSort();
 
-		if (Yum::hasModule('profile')) {
+		if (Yum::hasModule('profile') && $this->profile) {
 			$criteria->with = array('profile');
 			$criteria->together = false;
-			if($this->profile) {
-				foreach(YumProfileField::model()->findAll() as $column) {
-					if ($this->profile->{$column->varname})
-						$criteria->compare(
-								'profile.'.$column->varname,
-								$this->profile->{$column->varname},
-								true);
-				}
+			foreach(YumProfile::getProfileFields() as $column) {
+				if ($this->profile->{$column})
+					$criteria->compare(
+							'profile.'.$column,
+							$this->profile->{$column},
+							true);
+				$sort->attributes['profile.'.$column] = array(
+						'asc'=>'profile.'.$column,
+						'desc'=>'profile.'.$column.' DESC',
+						);
 			}
 		}
 
@@ -171,13 +174,6 @@ class YumUser extends YumActiveRecord
 		$criteria->compare('t.createtime', $this->createtime, true);
 		$criteria->compare('t.lastvisit', $this->lastvisit, true);
 
-		$sort = new CSort();
-		foreach(YumProfileField::model()->findAll() as $column) {
-			$sort->attributes['profile.'.$column->varname] = array(
-					'asc'=>'profile.'.$column->varname,
-					'desc'=>'profile.'.$column->varname.' DESC',
-					);
-		}
 		$sort->attributes[] = '*'; 
 
 		return new CActiveDataProvider(get_class($this), array(

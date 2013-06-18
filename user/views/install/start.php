@@ -150,9 +150,9 @@ your Database is Accessible in protected/config/main.php. </p>
 
 	<div id="profiles">
 		<table>
-			<tr>
-				<td> Profile Fields </td>
-				<td> <?php echo CHtml::textField('profileFieldTable', Yii::app()->db->tablePrefix.$profileFieldTable);?> </td>
+			<tr> 
+				<td> Profiles </td>
+				<td> <?php echo CHtml::textField('profileTable', Yii::app()->db->tablePrefix.$profileTable); ?> </td>
 			</tr>
 			<tr> 
 				<td> Profile Visits</td>
@@ -162,10 +162,6 @@ your Database is Accessible in protected/config/main.php. </p>
 				<td> Profile Comments</td>
 				<td> <?php echo CHtml::textField('profileCommentTable', Yii::app()->db->tablePrefix.$profileCommentTable);?> </td>
 			</tr>			
-			<tr> 
-				<td> Profiles </td>
-				<td> <?php echo CHtml::textField('profileTable', Yii::app()->db->tablePrefix.$profileTable); ?> </td>
-			</tr>
 		<tr>
 			<td> Privacy settings</td>
 			<td> <?php echo CHtml::textField('privacySettingTable', Yii::app()->db->tablePrefix.$privacySettingTable); ?> </td>

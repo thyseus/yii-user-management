@@ -15,25 +15,18 @@ echo Yum::renderFlash();
 if(Yii::app()->user->isAdmin()) {
 	$attributes = array(
 			'id',
-	);
+			);
 
 	if(!Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 		$attributes[] = 'username';
 
-	if($profiles) {
-		$profileFields = YumProfileField::model()->forOwner()->findAll();
-		if ($profileFields && $model->profile) {
-			foreach($profileFields as $field) {
-				array_push($attributes, array(
-							'label' => Yum::t($field->title),
-							'type' => 'raw',
-							'value' => is_array($model->profile)
-							? $model->profile->getAttribute($field->varname)
-							: $model->profile->getAttribute($field->varname) ,
-							));
-			}
-		}
-	}
+	if($profiles && $model->profile) 
+		foreach(YumProfile::getProfileFields() as $field) 
+			array_push($attributes, array(
+						'label' => Yum::t($field),
+						'type' => 'raw',
+						'value' => $model->profile->getAttribute($field)
+						));
 
 	array_push($attributes,
 		/*

@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Manage users');
 
 $this->breadcrumbs = array(
@@ -8,6 +8,7 @@ $this->breadcrumbs = array(
 echo Yum::renderFlash();
 
 $columns = array(
+		array('class'=>'zii.widgets.grid.CButtonColumn'),
 		array(
 			'name'=>'id',
 			'filter' => false,
@@ -63,8 +64,6 @@ $columns[] = array(
 		'filter' => false,
 		'value'=>'$data->getRoles()',
 		);
-
-$columns[] = array('class'=>'zii.widgets.grid.CButtonColumn');
 
 $this->widget('zii.widgets.grid.CGridView',array(
 			'dataProvider'=>$model->search(),
