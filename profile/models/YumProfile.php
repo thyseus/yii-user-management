@@ -87,87 +87,12 @@ class YumProfile extends YumActiveRecord
 		return $this->_tableName;
 	}
 
+	// define your project-specific profile field rules in your 
+	// config/main.php 
 	public function rules()
 	{
-		$required = array();
-		$numerical = array();
-		$rules = array();
-		$safe = array();
+		return Yum::module('profile')->profileRules();
 
-		foreach (self::$fields as $field) {
-			$field_rule = array();
-
-			if ($field->required == 1)
-				array_push($required, $field->varname);
-
-			if ($field->field_type == 'int'
-					|| $field->field_type == 'FLOAT'
-					|| $field->field_type =='INTEGER'
-					|| $field->field_type =='BOOLEAN')
-				array_push($numerical, $field->varname);
-
-			if ($field->field_type == 'DROPDOWNLIST')
-				array_push($safe, $field->varname);
-
-			if ($field->field_type == 'VARCHAR' || $field->field_type == 'TEXT') {
-				$field_rule = array($field->varname,
-						'length',
-						'max'=>$field->field_size,
-						'min' => $field->field_size_min);
-
-				if ($field->error_message)
-					$field_rule['message'] = Yum::t($field->error_message);
-
-				array_push($rules,$field_rule);
-			}
-
-			if ($field->match) {
-				$field_rule = array($field->varname,
-						'match',
-						'pattern' => $field->match);
-
-				if ($field->error_message)
-					$field_rule['message'] = Yum::t( $field->error_message);
-
-				array_push($rules,$field_rule);
-			}
-
-			if ($field->range) {
-				// allow using commas and semicolons
-				$range=explode(';',$field->range);
-				if(count($range)===1)
-					$range=explode(',',$field->range);
-				$field_rule = array($field->varname,'in','range' => $range);
-
-				if ($field->error_message)
-					$field_rule['message'] = Yum::t( $field->error_message);
-				array_push($rules,$field_rule);
-			}
-
-			if ($field->other_validator) {
-				$field_rule = array($field->varname,
-						$field->other_validator);
-
-				if ($field->error_message)
-					$field_rule['message'] = Yum::t( $field->error_message);
-				array_push($rules, $field_rule);
-			}
-
-		}
-
-		array_push($rules,
-				array(implode(',',$required), 'required'));
-		array_push($rules,
-				array(implode(',',$numerical), 'numerical', 'integerOnly'=>true));
-		array_push($rules,
-				array(implode(',',$safe), 'safe'));
-
-		$rules[] = array('allow_comments, show_friends', 'numerical');
-		$rules[] = array('email', 'unique');
-		$rules[] = array('email', 'CEmailValidator');
-		$rules[] = array('privacy', 'safe');
-
-		return $rules;
 	}
 
 	public function relations()

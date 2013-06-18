@@ -4,6 +4,13 @@ Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
 class ProfileModule extends CWebModule {
 	public $layout = 'yumprofile';
 
+	public $profileRules = array(
+			array('allow_comments, show_friends', 'numerical'),
+			array('email', 'unique'),
+			array('email', 'CEmailValidator'),
+			array('privacy', 'safe'),
+			);
+
 	// set this to true to allow all users to access user profiles
 	public $profilesViewableByGuests = false;
 
