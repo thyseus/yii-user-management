@@ -1,43 +1,21 @@
 <?
 
 /**
- * This is the model class for a User in Yum
- *
- * The followings are the available columns in table '{{users}}':
- * @property integer $id
- * @property string $username
- * @property string $password
- * @property string $saltf
- * @property string $activationKey
- * @property integer $createtime
- * @property integer $lastvisit
- * @property integer $superuser
- * @property integer $status
- *
- * Relations
- * @property YumProfile $profile
- * @property array $roles array of YumRole
- * @property array $users array of YumUser
- *
- * Scopes:
- * @property YumUser $active
- * @property YumUser $notactive
- * @property YumUser $banned
- * @property YumUser $superuser
+ * This is the model class for a User in Yum.
  *
  */
 class YumUser extends YumActiveRecord
 {
+	const STATUS_BANNED = -2; // Removed by Admin
+	const STATUS_REMOVED = -1; // Removed by User himself
 	const STATUS_INACTIVE = 0;
 	const STATUS_ACTIVE = 1;
-	const STATUS_BANNED = -1;
-	const STATUS_REMOVED = -2;
 
 	public $username;
 	public $password;
 	public $salt;
 	public $activationKey;
-	public $password_changed = false;
+	public $password_changed = false; // flag for password change
 
 	public function behaviors()
 	{
@@ -243,8 +221,7 @@ class YumUser extends YumActiveRecord
 		return $this->_tableName;
 	}
 
-	public function rules()
-	{
+	public function rules() {
 		$usernameRequirements = Yum::module()->usernameRequirements;
 		$passwordRequirements = Yum::module()->passwordRequirements;
 
@@ -297,6 +274,7 @@ class YumUser extends YumActiveRecord
 					'minHeight' => 50,
 					'on' => 'avatarSizeCheck');
 		}
+
 		return $rules;
 	}
 

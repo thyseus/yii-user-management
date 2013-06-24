@@ -1,4 +1,29 @@
 <?php
+$form = new CForm(array(
+			'elements'=>array(
+				'username'=>array(
+					'type'=>'text',
+					'maxlength'=>32,
+					),
+				'password'=>array(
+					'type'=>'password',
+					'maxlength'=>32,
+					),
+				'rememberMe'=>array(
+					'type'=>'checkbox',
+					)
+				),
+
+			'buttons'=>array(
+				'login'=>array(
+					'type'=>'submit',
+					'label'=>'Login',
+					),
+				),
+			), $model);
+?>
+
+<?php
 $this->pageTitle = Yum::t('Login');
 $this->title = Yum::t('Login');
 $this->breadcrumbs=array(Yum::t('Login'));
@@ -38,6 +63,19 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 		<?php echo CHtml::activeLabelEx($model,'password'); ?>
 		<?php echo CHtml::activePasswordField($model,'password'); ?>
 </div>
+
+<?php if ($model->scenario == 'captcha' && CCaptcha::checkRequirements()) { ?>
+	<div class="row">
+		<?php echo CHtml::activeLabel($model, 'verifyCode'); ?>
+			<div>
+				<?php $this->widget('CCaptcha'); ?>
+				<?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
+		</div>
+		<?php echo CHtml::error($model, 'verifyCode'); ?>
+	</div>
+<?php } ?>
+
+
 </div>
 		
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
@@ -91,29 +129,4 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 </div>
 
 <?php echo CHtml::endForm(); ?>
-
-<?
-$form = new CForm(array(
-			'elements'=>array(
-				'username'=>array(
-					'type'=>'text',
-					'maxlength'=>32,
-					),
-				'password'=>array(
-					'type'=>'password',
-					'maxlength'=>32,
-					),
-				'rememberMe'=>array(
-					'type'=>'checkbox',
-					)
-				),
-
-			'buttons'=>array(
-				'login'=>array(
-					'type'=>'submit',
-					'label'=>'Login',
-					),
-				),
-			), $model);
-?>
 

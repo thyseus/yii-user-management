@@ -25,6 +25,10 @@ class UserModule extends CWebModule {
 	// for details 
 	public $passwordHashCost = 13;
 
+	// Show an Captcha after how many unsuccessful logins? Set to 0 to 
+	// always display an captcha, set to false to disable this function
+	public $captchaAfterUnsuccessfulLogins = 3;
+
 	// After how much seconds without an action does a user gets indicated as
 	// offline? Note that, of course, clicking the Logout button will indicate
 	// him as offline instantly anyway.

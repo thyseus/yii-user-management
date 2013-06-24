@@ -3,6 +3,8 @@ Changelog for Yii User Management Module (Yum)
 0.9 wip:
 
 - ENH: added hybridauth support - see docs/hybridauth.txt
+- ENH: added captchaAfterUnsuccessfulLogins (default to 3)
+- ENH: overhauled profile management
 
 New in 0.8 final release:
 

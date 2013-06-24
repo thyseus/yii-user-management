@@ -12,10 +12,19 @@ class YumAuthController extends YumController {
 	public $defaultAction = 'login';
 	public $loginForm = null;
 
+	public function actions() {
+		return array(
+				'captcha' => array(
+					'class' => 'CCaptchaAction',
+					'backColor' => 0xFFFFFF,
+					),
+				);
+	}
+
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('login'),
+					'actions'=>array('login', 'captcha'),
 					'users'=>array('*'),
 					),
 				array('allow',
@@ -169,10 +178,17 @@ class YumAuthController extends YumController {
 			$this->redirect(Yum::module()->returnUrl);   
 
 		$this->layout = Yum::module()->loginLayout;
-		$this->loginForm = new YumUserLogin('login');
 
 		if($hybridauth)
 			$this->loginByHybridAuth($hybridauth);
+
+		$this->loginForm = new YumUserLogin('login');
+
+		if(Yum::module()->captchaAfterUnsuccessfulLogins !== false &&
+				Yii::app()->user->getState('yum-login-attempts') 
+				>= Yum::module()->captchaAfterUnsuccessfulLogins)
+		$this->loginForm->scenario = 'captcha';
+
 
 		$success = false;
 		$action = 'login';
@@ -193,9 +209,9 @@ class YumAuthController extends YumController {
 					if ($success)
 						$login_type = 'email';
 				}
-			}
+			} 
 
-			if ($success instanceof YumUser) {
+			if ($success !== false && $success instanceof YumUser) {
 				//cookie with login type for later flow control in app
 				if ($login_type) {
 					$cookie = new CHttpCookie('login_type', serialize($login_type));
@@ -212,11 +228,20 @@ class YumAuthController extends YumController {
 				if(Yum::module()->afterLogin !== false) 
 					call_user_func(Yum::module()->afterLogin);
 
+				Yii::app()->user->setState('yum-login-attempts', 0);
 				$this->redirectUser($success);
-			} else
+			} else {
 				$this->loginForm->addError('username',
 						Yum::t('Login is not possible with the given credentials'));
+				Yii::app()->user->setState('yum-login-attempts',
+						Yii::app()->user->getState('yum-login-attempts', 0) + 1);
+			}
 		}
+
+		if(Yum::module()->captchaAfterUnsuccessfulLogins !== false &&
+				Yii::app()->user->getState('yum-login-attempts') 
+				>= Yum::module()->captchaAfterUnsuccessfulLogins)
+		$this->loginForm->scenario = 'captcha';
 
 		$this->render(Yum::module()->loginView, array(
 					'model' => $this->loginForm));

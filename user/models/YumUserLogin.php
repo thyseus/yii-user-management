@@ -9,14 +9,14 @@ class YumUserLogin extends YumFormModel {
 	public $username;
 	public $password;
 	public $rememberMe;
+	public $verifyCode; // captcha 
 
 	/**
 	 * Declares the validation rules.
 	 * The rules state that username and password are required,
 	 * and password needs to be authenticated.
 	 */
-	public function rules()
-	{
+	public function rules() {
 		if(!isset($this->scenario))
 			$this->scenario = 'login';
 
@@ -24,6 +24,13 @@ class YumUserLogin extends YumFormModel {
 				array('username, password', 'required', 'on' => 'login'),
 				array('rememberMe', 'boolean'),
 				);
+
+		if(Yum::module()->captchaAfterUnsuccessfulLogins !== false) {
+			$rules[] = array( 'verifyCode', 'captcha', 'on' => 'captcha',
+					'allowEmpty' => !CCaptcha::checkRequirements(),
+					);
+			$rules[] = array('username, password', 'required', 'on' => 'captcha');
+		}
 
 		return $rules;
 	}
@@ -33,6 +40,7 @@ class YumUserLogin extends YumFormModel {
 				'username'=>Yum::t('Name'),
 				'password'=>Yum::t("Password"),
 				'rememberMe'=>Yum::t("Remember me next time"),
+				'verifyCode'=>Yum::t("Verification code"),
 				);
 	}
 }
