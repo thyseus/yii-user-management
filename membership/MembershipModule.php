@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('MembershipModule' , dirname(__FILE__));
 
 class MembershipModule extends CWebModule {

@@ -1,4 +1,4 @@
-<?
+<?php
 // This is a customized variant of CMenu for Yii-User-Management
 // @since 0.8 
 

@@ -22,7 +22,7 @@
 <?php echo $form->error($model,'description'); ?>
 </div>
 
-<?
+<?php
 echo CHtml::Button(Yum::t('Cancel'), array(
 			'submit' => array('groups/index'))); 
 echo CHtml::submitButton(Yum::t('Save')); 

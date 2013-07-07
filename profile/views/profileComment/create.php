@@ -15,7 +15,7 @@ echo CHtml::hiddenField('YumProfileComment[profile_id]', $profile->id); ?>
 <?php echo $form->error($comment,'comment'); ?>
 </div>
 
-<?
+<?php
 echo CHtml::Button(Yum::t('Write comment'), array(
 			'id' => 'write_comment',
 			));

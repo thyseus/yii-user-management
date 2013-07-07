@@ -19,7 +19,7 @@
         </div>
         
         <div class="row" style="font-size:10px;">
-			<?
+			<?php
 			if(Yum::hasModule('registration') 
 					&& Yum::module('registration')->enableRecovery)
 			echo CHtml::link(Yum::t('Lost password?'), 

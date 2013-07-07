@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Create role');
 
 $this->breadcrumbs=array(

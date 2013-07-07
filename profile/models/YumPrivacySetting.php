@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumPrivacysetting extends YumActiveRecord
 {

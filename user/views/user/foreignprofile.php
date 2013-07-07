@@ -1,4 +1,4 @@
-<?
+<?php
 $this->pageTitle=Yii::t('UserModule.user', "Profile");
 $this->title = Yii::t('UserModule.user', 'Profile of ') . $model->username;
 $this->breadcrumbs = array(Yii::t('UserModule.user', "Profile"), $model->username); 
@@ -26,7 +26,7 @@ $this->breadcrumbs = array(Yii::t('UserModule.user', "Profile"), $model->usernam
     <td><?php echo CHtml::encode($profile->getAttribute($field->varname)); ?>
 </td>
 </tr>
-			<?
+			<?php
 			}
 		}
 ?>

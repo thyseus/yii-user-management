@@ -24,7 +24,7 @@
 </div>
 
 
-<?
+<?php
 echo CHtml::Button(
 	Yii::t('app', 'Cancel'),
 	array(

@@ -1,4 +1,4 @@
-<?
+<?php
 /* This is the controller for the internal messaging System of
  * the Yii User Management Module. */
 

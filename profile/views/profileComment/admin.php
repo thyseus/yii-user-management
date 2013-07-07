@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	'Profile Comments'=>array(Yii::t('app', 'index')),
 	Yii::t('app', 'Manage'),
@@ -34,7 +34,7 @@ data: $(this).serialize()
 )); ?>
 </div>
 
-<?
+<?php
 $locale = CLocale::getInstance(Yii::app()->language);
 
  $this->widget('zii.widgets.grid.CGridView', array(

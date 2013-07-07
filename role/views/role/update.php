@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Update role');
 
 $this->breadcrumbs=array(

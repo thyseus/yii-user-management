@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	 The Relation widget is used in forms, where the User can choose
 	 between a selection of model elements, that this models belongs to.

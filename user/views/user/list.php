@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title=Yii::t('UserModule.user','User list');
 ?>
 

@@ -146,7 +146,7 @@ Quick Login Widget:
 If you want to display a quick login widget somewhere in your Web Application,
 just call in your view file:
 
-<? $this->widget('application.modules.user.components.LoginWidget'); ?>
+<?php $this->widget('application.modules.user.components.LoginWidget'); ?>
 
 Password Requirements:
 ----------------------

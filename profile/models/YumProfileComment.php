@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumProfileComment extends YumActiveRecord{
 	public static function model($className=__CLASS__)

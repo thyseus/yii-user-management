@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Groups'),
 	Yum::t('Browse'));
@@ -24,7 +24,7 @@ $this->breadcrumbs=array(
 
 </div>
 
-<?
+<?php
  $this->widget('zii.widgets.CListView', array(
 	'id'=>'usergroup-grid',
 	'dataProvider'=>$model->search(),

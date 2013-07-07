@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 		Yum::t('Memberships')=>array('index'),
 		Yum::t('Update'),
@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 ?>
 
 <h1> <?php echo Yum::t('Membership'); ?> </h1>
-<?
+<?php
 $this->widget('zii.widgets.CDetailView', array(
 			'data'=>$model,
 			'attributes'=>array(

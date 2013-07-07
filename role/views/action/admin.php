@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Actions')=>array('index'),
 	Yum::t('Manage'),

@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 		Yum::t('Memberships')=>array('index'),
 		Yum::t('Manage'),
@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 <h1> <?php echo Yum::t('Memberships'); ?></h1>
 
-<?
+<?php
 $locale = CLocale::getInstance(Yii::app()->language);
 
 $this->widget('zii.widgets.grid.CGridView', array(

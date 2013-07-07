@@ -1,4 +1,4 @@
-<?
+<?php
 if(Yum::module('message')->messageSystem != YumMessage::MSG_NONE 
 		&& $model->id != Yii::app()->user->id) {
 

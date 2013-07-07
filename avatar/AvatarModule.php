@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('AvatarModule' , dirname(__FILE__));
 
 class AvatarModule extends CWebModule {

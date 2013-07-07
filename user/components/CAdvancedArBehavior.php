@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CAdvancedArBehavior class file.
  *

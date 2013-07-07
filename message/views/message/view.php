@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = $model->title;
 $this->breadcrumbs=array(Yum::t('Messages')=>array('index'),$model->title);
 ?>
@@ -15,7 +15,7 @@ echo ': ' . $model->title; ?>
 </div>
 
 <hr />
-<?
+<?php
 echo CHtml::link(Yum::t('Back to inbox'), array(
 			'//message/message/index')) . '<br />';
 

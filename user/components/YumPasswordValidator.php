@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * YumPasswordValidator class file.

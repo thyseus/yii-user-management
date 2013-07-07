@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CSerializeBehavior class file.
  *

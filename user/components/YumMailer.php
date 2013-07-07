@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * YumMailer just implements the send() method that handles (guess what)

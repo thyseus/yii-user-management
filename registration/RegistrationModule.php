@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
 
 class RegistrationModule extends CWebModule {

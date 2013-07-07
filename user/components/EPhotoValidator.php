@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::import('application.modules.user.UserModule');
 /**
  * EPhotoValidator class file.
