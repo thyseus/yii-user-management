@@ -766,9 +766,9 @@ class YumUser extends YumActiveRecord
 		if (Yum::hasModule('avatar') && $this->profile) {
 			$options = array();
 			if ($thumb)
-				$options = array('class' => 'avatar', 'style' => 'width: ' . Yum::module('avatar')->avatarThumbnailWidth . ' px;');
+				$options = array('class' => 'avatar', 'style' => 'width: ' . Yum::module('avatar')->avatarThumbnailWidth . 'px;');
 			else
-				$options = array('class' => 'avatar', 'style' => 'width: ' . Yum::module('avatar')->avatarDisplayWidth . ' px;');
+				$options = array('class' => 'avatar', 'style' => 'width: ' . Yum::module('avatar')->avatarDisplayWidth . 'px;');
 
 			$return = '<div class="avatar">';
 

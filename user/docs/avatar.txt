@@ -11,6 +11,10 @@ application configuration like this:
 					)
 				);
 
+Location of avatar images:
+By default, the avatar images are loaded into the 'images' directory in the root of your Yii application.
+You can change this location using the 'avatarPath' configuration option.  Be sure to set the permissions
+of this directory so that the web server can write to it.
 
 See the file avatar/AvatarModule.php for possible configuration options.
 
