@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 		Yum::t('Translation')=>array('admin'),
 		Yum::t('Manage'),

@@ -18,7 +18,7 @@
 	</div>
 	
 	<div class="guestbook-footer">
-			<?
+			<?php
 				// the owner of the profile as well as the owner of the comment can remove
 				if($data->user_id == Yii::app()->user->id
 						|| $data->profile_id == Yii::app()->user->id) {

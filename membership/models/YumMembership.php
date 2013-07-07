@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::import('application.modules.role.models.*'); 
 
 class YumMembership extends YumActiveRecord{

@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::import('application.modules.user.controllers.YumController');
 Yii::import('application.modules.user.models.Yum');
 Yii::import('application.modules.role.models.*');

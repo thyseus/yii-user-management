@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * export a csv file (string) from given CSqlDataProvider

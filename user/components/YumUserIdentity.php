@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumUserIdentity extends CUserIdentity {
 	private $id;

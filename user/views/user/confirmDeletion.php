@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Confirm deletion');
 
 $this->breadcrumbs = array(

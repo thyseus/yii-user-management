@@ -1,5 +1,5 @@
 <div class="form">
-<?
+<?php
 $this->title = Yum::t('Upload avatar');
 
 $this->breadcrumbs = array(

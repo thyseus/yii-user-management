@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('Statistics');
 
 $this->breadcrumbs = array(

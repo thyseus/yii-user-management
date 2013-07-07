@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Translation')=>array('admin'),
 	sprintf('%s-%s-%s',
@@ -11,7 +11,7 @@ $models[0]->message),
 ?>
 
 <h2>
-<?
+<?php
 
 if($models[0]->isNewRecord)
 	echo Yum::t('New translation');

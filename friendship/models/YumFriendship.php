@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumFriendship extends YumActiveRecord {
 	const FRIENDSHIP_NONE = 0; 

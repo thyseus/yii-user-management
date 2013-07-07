@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 <p> <?php echo $model->description; ?> </p>
 
-<?
+<?php
 
 if($model->owner)
 	printf('%s: %s',
@@ -28,7 +28,7 @@ $this->widget('zii.widgets.CListView', array(
 ?>
 
  <div style="clear: both;"> </div> 
-<?
+<?php
 printf('<h3> %s </h3>', Yum::t('Messages'));
 
 $this->widget('zii.widgets.CListView', array(

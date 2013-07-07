@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * UserChangePassword class.
  * UserChangePassword is the data structure for keeping

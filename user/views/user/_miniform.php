@@ -49,7 +49,7 @@
 <td><?php echo $form->error($model,'status') ?></td>
 </tr>
 </table>	
-<?
+<?php
 echo CHtml::Button(Yii::t('app', 'Cancel'), array(
 			'onClick' => "$('#dialog_yumuser').dialog('close');"));  
 echo CHtml::AjaxSubmitButton(Yii::t('app', 'Create'), array(

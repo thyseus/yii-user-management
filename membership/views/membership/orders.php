@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	'Pakete',
 	'Bestellungen'
@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 <h1> Bestellungen </h1>
 
-<?
+<?php
 $locale = CLocale::getInstance(Yii::app()->language);
 
  $this->widget('zii.widgets.grid.CGridView', array(

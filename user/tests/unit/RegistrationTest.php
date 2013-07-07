@@ -1,4 +1,4 @@
-<?
+<?php
 // This unit test tests, if the Registration and Activation process provided 
 // by Yum works
 

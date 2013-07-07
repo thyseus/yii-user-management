@@ -22,7 +22,7 @@
 </div>
 
 
-<?
+<?php
 echo CHtml::Button(Yum::t('Cancel'), array(
 			'submit' => array('payment/admin'))); 
 echo CHtml::submitButton($model->isNewRecord

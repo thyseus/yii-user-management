@@ -15,23 +15,23 @@
 <?php echo CHtml::errorSummary(array($form, $profile)); ?>
 
 <div class="row">
-<div class="span12"> <?
+<div class="span12"> <?php
 echo $activeform->labelEx($form,'username');
 echo $activeform->textField($form,'username');
 ?> </div></div>
 
 <div class="row">
-<div class="span12"> <?
+<div class="span12"> <?php
 echo $activeform->labelEx($profile,'email');
 echo $activeform->textField($profile,'email');
 ?> </div></div>
 
-<div class="row"><div class="span12"> <?
+<div class="row"><div class="span12"> <?php
 echo $activeform->labelEx($profile,'firstname');
 echo $activeform->textField($profile,'firstname');
 ?> </div></div>
 
-<div class="row"><div class="span12"> <?
+<div class="row"><div class="span12"> <?php
 echo $activeform->labelEx($profile,'lastname');
 echo $activeform->textField($profile,'lastname');
 ?> </div></div>

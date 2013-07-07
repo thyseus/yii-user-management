@@ -2,7 +2,7 @@
 
 <h2> <?php echo $data->role->description; ?> </h2>
 
-<?
+<?php
 echo Yum::t('Order number'). ': '.$data->id . '<br />';
 	if($data->role->price != 0)
 if($data->payment_date == 0) 
@@ -26,7 +26,7 @@ if($data->payment_date == 0)
 		<?php if(isset($data->payment)) echo $data->payment->title . '<br />'; ?>
 		<?php } ?>
 
-	<?
+	<?php
 if($data->end_date != 0)
 	echo Yum::t('This membership is still active {days} days', array(
 				'{days}' => $data->daysLeft()));
@@ -36,7 +36,7 @@ if($data->end_date != 0)
 	<?php if($data->isActive()) { ?>
 		<?php echo CHtml::beginForm(array('//membership/membership/extend')); ?>
 			<p> <?php echo Yum::t('When the membership expires'); ?>: </p>
-			<?
+			<?php
 			$options = array(
 					0 => Yum::t('Automatically extend subscription'),
 					'cancel' => Yum::t('Cancel Subscription'));

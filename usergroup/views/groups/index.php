@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs = array(
 		Yum::t('Usergroups'),
 		Yum::t('Browse'),

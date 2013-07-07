@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 		Yum::t('Privacysettings')=>array('index'),
 		$model->user->username=>array(
@@ -23,7 +23,7 @@ echo $form->errorSummary($model);
 ?>
 
 <div class="profile_field_selection">
-<?
+<?php
 echo '<h3>' . Yum::t('Profile field public options') . '</h3>';
 echo '<p>' . Yum::t('Select the fields that should be public') . ':</p>';
 $i = 1;
@@ -158,7 +158,7 @@ echo '<div class="clear"></div>';
 </div>
 </div>
 
-<?
+<?php
 echo CHtml::Button(Yum::t( 'Cancel'), array(
 			'submit' => array('//profile/profile/view')));
 echo CHtml::submitButton(Yum::t('Save')); 

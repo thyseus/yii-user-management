@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Translation')=>array('index'),
 	Yum::t('Create'),

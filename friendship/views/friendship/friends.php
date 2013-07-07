@@ -1,4 +1,4 @@
-<?
+<?php
 if(!$profile = @$model->profile)
 	return false;
 
@@ -11,7 +11,7 @@ if($profile->show_friends == 2) {
 				?>
 					<div class="friend">
 					<div class="avatar">
-					<?
+					<?php
 					echo $friend->getAvatar(true);
 				?>
 					<div class="username">
@@ -23,7 +23,7 @@ if($profile->show_friends == 2) {
 					</div>
 					</div>
 					</div>
-					<?
+					<?php
 			}
 		} else {
 			echo Yum::t('{username} has no friends yet', array(

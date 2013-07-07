@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	Yum::t('Friendships')=>array('index'),
 	$model->id=>array('view','id'=>$model->id),

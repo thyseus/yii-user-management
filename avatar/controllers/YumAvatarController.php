@@ -1,4 +1,4 @@
-<?
+<?php
 // This controller handles the administration, upload and the deletion 
 // of an Avatar image for the user profile.
 

@@ -29,7 +29,7 @@
 		</div>
 		<?php echo $form->error($model,'membership_id'); ?>
 
-	<?
+	<?php
 		echo CHtml::submitButton(Yum::t('Order membership'));
 		
 	?>
@@ -44,7 +44,7 @@
 			<div class="membership-content"></div>
 		</div>
 	</div>
-	<?
+	<?php
     Yii::app()->clientScript->registerScript('toggle', "
 		$('#detail-information').hide();	  
 		$('#more-information').click(function() {

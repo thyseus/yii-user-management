@@ -1,4 +1,4 @@
-<?
+<?php
 
 Yii::import('application.modules.user.controllers.YumController');
 class YumUserController extends YumController {

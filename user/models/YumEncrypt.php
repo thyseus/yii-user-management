@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This class file holds static encryption functions used by Yum.
  *

@@ -1,5 +1,5 @@
 <div class="row buttons">
-	<?
+	<?php
 	if(isset($_GET['returnTo']))
 		$url = array($_GET['returnTo']);
 	if(!isset($url)) 

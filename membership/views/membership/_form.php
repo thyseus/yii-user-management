@@ -16,7 +16,7 @@ YumRole::model()->findAll('price != 0'), 'id', 'title')); ?>
 <?php echo $form->error($model,'type'); ?>
 </div>
 
-<?
+<?php
 echo CHtml::Button(Yii::t('app', 'Cancel'), array(
 			'submit' => array('membership/index'))); 
 echo CHtml::submitButton(Yum::t('Buy membership')); 

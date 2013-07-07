@@ -1,4 +1,4 @@
-<?
+<?php
 if(!$profile = $model->profile)
 	$profile = new YumProfile;
 
@@ -15,18 +15,18 @@ Yum::renderFlash();
 <?php $this->renderPartial(Yum::module('profile')->publicFieldsView, array(
 			'profile' => $model->profile)); ?>
 <br />
-<?
+<?php
 if(Yum::hasModule('friendship'))
 $this->renderPartial(
 		'application.modules.friendship.views.friendship.friends', array(
 			'model' => $model)); ?>
 <br />
-<?
+<?php
 if(@Yum::module('message')->messageSystem != 0)
 $this->renderPartial('/message/write_a_message', array(
 			'model' => $model)); ?>
 <br />
-<?
+<?php
 if(Yum::module('profile')->enableProfileComments
 		&& Yii::app()->controller->action->id != 'update'
 		&& isset($model->profile))
@@ -34,7 +34,7 @@ if(Yum::module('profile')->enableProfileComments
 			 'model' => $model->profile)); ?>
  </div>
 
-<?
+<?php
  if(!Yii::app()->user->isGuest && Yii::app()->user->id == $model->id) {
 	echo CHtml::link(Yum::t('Edit profile'), array('//profile/profile/update'));
 	echo '&nbsp;';

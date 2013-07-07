@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs = array(
 	'Payments',
 	Yii::t('app', 'Index'),

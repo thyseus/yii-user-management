@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	'Actions'=>array('index'),
 	$model->title=>array('view','id'=>$model->id),

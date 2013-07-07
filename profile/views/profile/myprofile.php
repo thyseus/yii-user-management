@@ -1,5 +1,5 @@
 <div id="profile">
-<?
+<?php
 $this->pageTitle= Yum::t('Profile');
 $this->breadcrumbs=array(Yum::t('Profile'));
 $this->title = Yum::t('Your profile');
@@ -19,7 +19,7 @@ $this->renderPartial('/messages/new_messages');?>
     <td><?php echo CHtml::encode($model->username); ?>
 </td>
 </tr>
-<?
+<?php
 }
 		$profileFields = YumProfileField::model()->forOwner()->sort()->with('group')->together()->findAll();
 		if ($profileFields && Yum::hasModule('profile')) {
@@ -29,12 +29,12 @@ $this->renderPartial('/messages/new_messages');?>
 			<tr>
 				<th class="label"><?php echo CHtml::encode(Yum::t($field->title)); ?>
 				</th>
-				<td><?
+				<td><?php
 				if(is_object($model->profile->{ucfirst($field->varname)}))
 					echo CHtml::encode($model->profile->{ucfirst($field->varname)}->{$field->related_field_name}); ?>
 						</td>
 						</tr>
-				<?
+				<?php
 		} else {
 			?>
 				<tr>
@@ -43,7 +43,7 @@ $this->renderPartial('/messages/new_messages');?>
 				<td><?php echo CHtml::encode($model->profile->getAttribute($field->varname)); ?>
 				</td>
 				</tr>
-				<?
+				<?php
 		}
 	}
 }
@@ -78,18 +78,18 @@ $this->renderPartial('/messages/new_messages');?>
 
 <div id="friends">
 <h1> <?php echo Yum::t('My friends'); ?> </h1>
-<?
+<?php
 if(Yum::hasModule('friendship') && $model->friends)
 {
 foreach($friends as $friend) {
 ?>
 <div id="friend">
 <div id="avatar">
-<?
+<?php
 $model->renderAvatar($friend);
 ?>
 <div id='user'>
-<?
+<?php
 echo CHtml::link(ucwords($friend->username),
 		Yii::app()->createUrl('profile/profile/view',array(
 				'id'=>$friend->id)));
@@ -98,7 +98,7 @@ echo CHtml::link(ucwords($friend->username),
 </div>
 </div>
 </div>
-<?
+<?php
 }
 }else {
 		echo Yum::t('You have no friends yet');
@@ -107,7 +107,7 @@ echo CHtml::link(ucwords($friend->username),
 </div>
 <div id="visits">
 <h1> <?php echo Yum::t('These users have visited my profile'); ?> </h1>
-<?
+<?php
 	if($model->visits) {
 		$format = Yum::module()->dateTimeFormat;
 		echo '<table>';

@@ -1,4 +1,4 @@
-<?
+<?php
 $this->title = Yum::t('{role}', array(
 			'{role}' => $model->title));
 
@@ -28,7 +28,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 ?>
 <br />
 
-<?
+<?php
 if(Yum::hasModule('membership') && $model->membership_priority) {
 		echo Yum::t('Membership priority') . ': '. $model->membership_priority . '<br />';
 		echo Yum::t('Membership price') . ': '. $model->price . '<br />';

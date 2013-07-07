@@ -1,4 +1,4 @@
-	<?
+<?php
 if(isset($actions))
 	foreach($actions as $action) {
 		printf('<h2>%s</h2>', $action->title);

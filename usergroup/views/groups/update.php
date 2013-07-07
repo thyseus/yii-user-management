@@ -1,4 +1,4 @@
-<?
+<?php
 $this->breadcrumbs=array(
 	'Usergroups'=>array('index'),
 	$model->title=>array('view','id'=>$model->id),
@@ -14,7 +14,7 @@ $this->menu=array(
 ?>
 
 <h1> <?php echo Yii::t('app', 'Update');?> Usergroup #<?php echo $model->id; ?> </h1>
-<?
+<?php
 $this->renderPartial('_form', array(
 			'model'=>$model));
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
 
 class ProfileModule extends CWebModule {

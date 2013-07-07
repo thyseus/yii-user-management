@@ -1,4 +1,4 @@
-<?
+<?php
 
 class YumStatisticsController extends YumController {
 	const PAGE_SIZE=10;

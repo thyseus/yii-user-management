@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Base controller class
  * @author tomasz.suchanek
