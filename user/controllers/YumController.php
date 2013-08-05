@@ -1,13 +1,16 @@
 <?php
 /**
- * Base controller class
+ * Base controller class that contains commonly used Controller functions.
+ * Also checks if yum is installed properly at each request.
+ * All yii user management core classes should inherit from this class.
+ *
+ * @author thyseus@gmail.com
  * @author tomasz.suchanek
  * @since 0.6
  * @package Yum.core
- *
  */
 
-abstract class YumController extends CController {
+abstract class YumController extends Controller {
 	public $breadcrumbs = array();
 	public $menu = array();
 	public $title ='';
@@ -22,7 +25,9 @@ abstract class YumController extends CController {
 
 	public function beforeAction($action) {
 		if(!Yii::app()->user instanceof YumWebUser)
-			throw new CException(Yum::t('Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
+			throw new CException(
+					Yum::t(
+						'Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
 
 		if(!isset(Yii::app()->cache))
 			throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
