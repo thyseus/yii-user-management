@@ -30,7 +30,7 @@ $i = 1;
 
 $counter=0;
 
-foreach(YumProfileField::model()->findAll() as $field) {
+foreach(YumProfile::getProfileFields() as $field) {
 	$counter++;
 	if ($counter==1)echo '<div class="float-left" style="width: 175px;">';
 
@@ -38,7 +38,7 @@ foreach(YumProfileField::model()->findAll() as $field) {
 			CHtml::checkBox("privacy_for_field_{$i}",
 				$model->public_profile_fields & $i),
 			$i,
-			Yum::t($field->title)
+			Yum::t($field)
 
 			);
 	$i *= 2;
@@ -72,7 +72,7 @@ echo '<div class="clear"></div>';
 
 		<?php if(Yum::module('profile')->enableProfileComments) { ?>
 
-				<div class="row message_new_profilecomment">
+			<div class="row message_new_profilecomment">
 				<?php echo $form->labelEx($model,'message_new_profilecomment'); ?>
 				<?php echo $form->dropDownList($model, 'message_new_profilecomment', array(
 							0 => Yum::t('No'),
