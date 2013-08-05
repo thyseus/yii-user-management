@@ -1,5 +1,4 @@
-<?php if(Yum::module('profile')->enableProfileComments 
-		&& $model->allow_comments) { ?>
+<?php if(Yum::module('profile')->enableProfileComments ) { ?>
 	<h1> <?php echo Yum::t('Profile Comments'); ?> </h1>
 
 <?php 
@@ -19,6 +18,5 @@ $this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$dataProvider,
 			'itemView'=>Yum::module('profile')->profileCommentView,
 			));  
-
 }
 ?>
