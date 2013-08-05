@@ -1,3 +1,4 @@
+<div class="container">
 <?php 
 Yii::app()->clientScript->registerCssFile(
 		Yii::app()->getAssetManager()->publish(
@@ -20,5 +21,5 @@ if (Yum::module()->debug) {
 ?>
 
 <div class="clearfix"></div>
-
+</div>
 <?php $this->endContent(); ?>
