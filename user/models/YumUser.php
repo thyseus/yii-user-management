@@ -278,12 +278,30 @@ class YumUser extends YumActiveRecord
 		return $rules;
 	}
 
-	public function hasRole($role_title)
-	{
+	public function assignRole($role_title) {
+		Yii::import('application.modules.role.models.*');
+		if($this->hasRole($role_title))
+			return true;
+
+		$role = YumRole::model()->find('title = :title', array(
+					':title' => $role_title));
+
+		if($role)
+			return Yii::app()->db->createCommand(sprintf(
+						'insert into %s (user_id, role_id) values(%s, %s)',
+						Yum::module('role')->userRoleTable,
+						$this->id,
+						$role->id))->execute(); 
+		else 
+			return false;
+	}
+
+	public function hasRole($role_title) {
+		Yii::import('application.modules.role.models.*');
+
 		if (!Yum::hasModule('role'))
 			return false;
 
-		Yii::import('application.modules.role.models.*');
 
 		$roles = $this->roles;
 
@@ -742,7 +760,7 @@ class YumUser extends YumActiveRecord
 
 	public function syncRoles($roles = null) {
 		if(Yum::hasModule('role')){ 
-			Yii::import('application.modules.role.models.*');
+			Yii::import('application.modules.role.models.*');
 
 				$query = sprintf("delete from %s where user_id = %s",
 						Yum::module('role')->userRoleTable,
