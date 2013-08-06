@@ -24,7 +24,9 @@ class YumRegistrationForm extends YumUser {
 
 		$rules[] = array('username', 'required');
 		$rules[] = array('newsletter, terms', 'safe');
-		$rules[] = array('password, verifyPassword', 'required');
+		// password requirement is already checked in YumUser model, its sufficient
+		// to check for verifyPasswort here
+		$rules[] = array('verifyPassword', 'required');
 		$rules[] = array('password', 'compare',
 				'compareAttribute'=>'verifyPassword',
 				'message' => Yum::t("Retype password is incorrect."));
