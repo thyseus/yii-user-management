@@ -8,6 +8,7 @@
  */
 class YumRegistrationForm extends YumUser {
 	public $email;
+	public $terms; 
 	public $newsletter;
 	public $username;
 	public $password;
@@ -21,18 +22,8 @@ class YumRegistrationForm extends YumUser {
 	{
 		$rules = parent::rules();
 
-		/* FIXME: As soon as i grasp how i can dynamically add variables to a 
-			 class in PHP, i will enable this code snippet for flexibility:
-
-			 $profile = new YumProfile;
-			 $profile_rules = $profile->rules();
-			 foreach($profile_rules as $rule) 
-			 if(isset($rule[0]) && is_string($rule[0]))
-			 $this->${$rule[0]} = ''; 
-
-			 $rules = array_merge($rules, $profile->rules());	 */
-
 		$rules[] = array('username', 'required');
+		$rules[] = array('newsletter, terms', 'safe');
 		$rules[] = array('password, verifyPassword', 'required');
 		$rules[] = array('password', 'compare',
 				'compareAttribute'=>'verifyPassword',
