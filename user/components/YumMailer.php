@@ -71,7 +71,6 @@ class YumMailer {
 			if($header == null) {
 				$header  = 'MIME-Version: 1.0' . "\n";
 				$header .= 'Content-type: text/html; charset=utf-8' . "\n";
-				$header .= 'To: ' . $to['to'] . "\n";
 				if(Yum::hasModule('message')) 
 					$header .= 'From: ' . Yum::module('message')->adminEmail . "\r\n";
 				else

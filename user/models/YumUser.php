@@ -280,6 +280,9 @@ class YumUser extends YumActiveRecord
 
 	public function assignRole($role_title) {
 		Yii::import('application.modules.role.models.*');
+		if($this->isNewRecord || !$this->id)
+			return false;
+
 		if($this->hasRole($role_title))
 			return true;
 
@@ -534,6 +537,7 @@ class YumUser extends YumActiveRecord
 		}
 		$this->activationKey = $this->generateActivationKey(false);
 		$this->createtime = time();
+		$this->lastvisit = 0;
 		$this->superuser = 0;
 
 		// Users stay banned until they confirm their email address.
