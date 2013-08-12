@@ -43,8 +43,8 @@ class YumInstallController extends YumController
 			if(!isset(Yii::app()->db->tablePrefix))
 				throw new CHttpException(500, 'Please set a table prefix, at least \'\', to your db configuration for yii-user-management to work.');
 
-			if(!class_exists('CPasswordHelper', false))
-				throw new CHttpException(500, 'CPasswordHelper not found. Please make sure to use at least Yii version 1.1.14.');
+			if(!version_compare(Yii::getVersion(), '1.1.14', '>='))
+				throw new CHttpException(500, 'Please make sure to use at least Yii version 1.1.14.'); 
 
 						if (Yii::app()->request->isPostRequest) {
 				// A associative array containing the tables to be created.
