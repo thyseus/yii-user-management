@@ -165,5 +165,24 @@ class Yum
 					),true);		
 	}
 
+	// This function tries to generate a as human-readable password as possible
+	public static function generatePassword() {
+		$vocals = array("a", "e", "i", "o", "u");
+		$consonants = array(
+				"b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p",
+				"r", "s", "t", "v", "w", "x", "y", "z");
+
+		$password = '';
+
+		srand((double)microtime() * 1000000);
+		for ($i = 1; $i <= 4; $i++) {
+			$password .= $consonants[rand(0, 19)];
+			$password .= $vocals[rand(0, 4)];
+		}
+		$password .= rand(0, 9);
+
+		return $password;
+	}
+
 }
 ?>

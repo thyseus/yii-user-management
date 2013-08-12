@@ -2,6 +2,8 @@ Changelog for Yii User Management Module (Yum)
 
 0.9 wip:
 
+- ENH: uses CPasswordHelper of yii 1.1.14. This release of yii is now 
+- mandatory.
 - ENH: added hybridauth support - see docs/hybridauth.txt
 - ENH: added captchaAfterUnsuccessfulLogins (default to 3)
 - ENH: overhauled profile management

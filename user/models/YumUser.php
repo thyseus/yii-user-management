@@ -13,7 +13,6 @@ class YumUser extends YumActiveRecord
 
 	public $username;
 	public $password;
-	public $salt;
 	public $activationKey;
 	public $password_changed = false; // flag for password change
 
@@ -162,27 +161,29 @@ class YumUser extends YumActiveRecord
 	}
 
 	public function beforeValidate() {
-		if ($this->isNewRecord) {
-			if(!$this->salt)
-				$this->salt = YumEncrypt::generateSalt();
+		if ($this->isNewRecord) 
 			$this->createtime = time();
-		}
 
 		return true;
 	}
 
-	public function setPassword($password, $salt = null) {
+	// Sets a new password. Password can not be empty. If the model already
+	// exists in the database, we save the new password by save(), otherwise we
+	// only set the fields. Returns $this so this method can be chained.
+	public function setPassword($password) {
 		if ($password) {
 			$this->lastpasswordchange = time();
 			$this->password = $password;
 			$this->password_changed = true;
-			$this->salt = $salt;
 			if ($this->validate()) {
-				$this->password = YumEncrypt::encrypt($password, $salt);
-				$this->save(false, array('password'));
+				$this->password = CPasswordHelper::hashPassword(
+						$password,
+						Yum::module()->passwordHashCost);
+				if(!$this->isNewRecord)
+					$this->save(false, array('password'));
 			}
-			return $this;
 		}
+		return $this;
 	}
 
 	public function afterSave()
@@ -257,7 +258,6 @@ class YumUser extends YumActiveRecord
 		$rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
 		$rules[] = array('notifyType, avatar', 'safe');
 		$rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
-		$rules[] = array('salt', 'required', 'on' => array('insert', 'registration'));
 		$rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
 
 		if (Yum::hasModule('avatar')) {
@@ -522,18 +522,14 @@ class YumUser extends YumActiveRecord
 	// Registers a user 
 	public function register($username = null,
 			$password = null,
-			$profile = null,
-			$salt = null) {
+			$profile = null) {
 		if (!($profile instanceof YumProfile)) 
 			return false;
 
 		if ($username !== null && $password !== null) {
 			// Password equality is checked in Registration Form
 			$this->username = $username;
-			if(!$salt)
-				$salt = YumEncrypt::generateSalt();
-
-			$this->setPassword($password, $salt);
+			$this->setPassword($password);
 		}
 		$this->activationKey = $this->generateActivationKey(false);
 		$this->createtime = time();
@@ -611,13 +607,11 @@ class YumUser extends YumActiveRecord
 	 * -2 : Wrong activation key
 	 * -3 : Profile found, but no user - database inconsistency?
 	 */
-	public static function activate($email, $key)
-	{
+	public static function activate($email, $key) {
 		Yii::import('application.modules.profile.models.*');
 
 		if ($profile = YumProfile::model()->find("email = :email", array(
-						':email' => $email))
-			 ) {
+						':email' => $email))) {
 			if ($user = $profile->user) {
 				if ($user->status != self::STATUS_INACTIVE)
 					return -1;
@@ -627,10 +621,9 @@ class YumUser extends YumActiveRecord
 					if ($user->save(false, array('activationKey', 'status'))) {
 						Yum::log(Yum::t('User {username} has been activated', array(
 										'{username}' => $user->username)));
-						if (Yum::hasModule('messages')
-								&& Yum::module('registration')->enableActivationConfirmation
-							 ) {
-							Yii::import('application.modules.messages.models.YumMessage');
+						if (Yum::hasModule('message')
+								&& Yum::module('registration')->enableActivationConfirmation) {
+							Yii::import('application.modules.message.models.YumMessage');
 							YumMessage::write($user, 1,
 									Yum::t('Your activation succeeded'),
 									strtr(
@@ -664,7 +657,8 @@ class YumUser extends YumActiveRecord
 			$this->activationKey = $activate;
 			$this->save(false, array('activationKey'));
 		} else
-			$this->activationKey = YumEncrypt::encrypt(microtime() . $this->password, $this->salt);
+			$this->activationKey = CPasswordHelper::hashPassword(
+					microtime() . $this->password, Yum::module()->passwordHashCost);
 
 		if(!$this->isNewRecord)
 			$this->save(false, array('activationKey'));

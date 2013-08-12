@@ -33,7 +33,20 @@ class YumInstallController extends YumController
 	public function actionInstall()
 	{
 		if ($this->module->debug === true) {
-			if (Yii::app()->request->isPostRequest) {
+		
+			if(!Yii::app()->user instanceof YumWebUser)
+				throw new CHttpException(500, Yum::t('Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
+
+			if(!isset(Yii::app()->cache))
+				throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
+
+			if(!isset(Yii::app()->db->tablePrefix))
+				throw new CHttpException(500, 'Please set a table prefix, at least \'\', to your db configuration for yii-user-management to work.');
+
+			if(!class_exists('CPasswordHelper', false))
+				throw new CHttpException(500, 'CPasswordHelper not found. Please make sure to use at least Yii version 1.1.14.');
+
+						if (Yii::app()->request->isPostRequest) {
 				// A associative array containing the tables to be created.
 				$createdTables = array();
 				if ($db = Yii::app()->db) {
@@ -78,8 +91,7 @@ class YumInstallController extends YumController
 					$sql = "CREATE TABLE IF NOT EXISTS `" . $userTable . "` (
 						`id` int unsigned NOT NULL auto_increment,
 						`username` varchar(255) NOT NULL,
-						`password` varchar(128) NOT NULL,
-						`salt` varchar(128) NOT NULL,
+						`password` char(64) CHARACTER SET latin1 NOT NULL,
 						`activationKey` varchar(128) NOT NULL default '',
 						`createtime` int(11) NOT NULL default '0',
 						`lastvisit` int(11) NOT NULL default '0',
@@ -325,12 +337,10 @@ class YumInstallController extends YumController
 					}
 
 					// Generate demo data
-					$salt1 = YumEncrypt::generateSalt();
-					$salt2 = YumEncrypt::generateSalt();
 					$sql = "INSERT INTO `" . $userTable
-					   ."` (`id`, `username`, `password`, `salt`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
-					   ."(1, 'admin', '" . YumEncrypt::encrypt('admin', $salt1) . "', '" . $salt1 . "', '', " . time() . ", 0, 1, 1),"
-					   ."(2, 'demo', '" . YumEncrypt::encrypt('demo', $salt2) . "', '" . $salt2 . "', '', " . time() . ", 0, 0, 1)";
+					   ."` (`id`, `username`, `password`, `activationKey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES "
+					   ."(1, 'admin', '" . CPasswordHelper::hashPassword('admin', Yum::module()->passwordHashCost) . "', '', " . time() . ", 0, 1, 1),"
+					   ."(2, 'demo', '" . CPasswordHelper::hashPassword('demo', Yum::module()->passwordHashCost) . "', '', " . time() . ", 0, 0, 1)";
 					$db->createCommand($sql)->execute();
 
 					if (isset($_POST['installMembership'])) {

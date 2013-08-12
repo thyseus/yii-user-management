@@ -40,8 +40,7 @@ class YumUserController extends YumController {
 				$user = new YumUser();
 				$user->username = sprintf('Demo_%d_%d', rand(1, 50000), $i);
 				$user->roles = array($_POST['role']);
-				$user->salt = YumEncrypt::generateSalt();
-				$user->password = YumEncrypt::encrypt($_POST['password'], $user->salt);
+				$user->setPassword ($_POST['password']);
 				$user->createtime = time();
 				$user->status = $_POST['status'];
 
@@ -120,15 +119,13 @@ class YumUserController extends YumController {
 			$form->attributes = $_POST['YumUserChangePassword'];
 			$form->validate();
 
-			if(!YumEncrypt::validate_password($form->currentPassword,
-						YumUser::model()->findByPk($id)->password,
-						YumUser::model()->findByPk($id)->salt))
+			if(!CPasswordHelper::verifyPassword($form->currentPassword,
+						YumUser::model()->findByPk($id)->password))
 				$form->addError('currentPassword',
 						Yum::t('Your current password is not correct'));
 
 			if(!$form->hasErrors()) {
-				if(YumUser::model()->findByPk($id)->setPassword($form->password,
-							YumUser::model()->findByPk($id)->salt)) {
+				if(YumUser::model()->findByPk($id)->setPassword($form->password)) {
 					Yum::setFlash('The new password has been saved');
 					Yum::log(Yum::t('User {username} has changed his password', array(
 									'{username}' => Yii::app()->user->name)));
@@ -188,20 +185,19 @@ class YumUserController extends YumController {
 			$user->status = 1;
 
 		if(isset($_POST['YumUser'])) {
-			$user->salt = YumEncrypt::generateSalt();
 			$user->attributes=$_POST['YumUser'];
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
-					$password = YumEncrypt::generatePassword();
-					$user->setPassword($password, $user->salt);
+					$password = Yum::generatePassword();
+					$user->setPassword($password);
 					Yum::setFlash(Yum::t('The generated Password is {password}', array(
 									'{password}' => $password)));
 				} else {
 					$passwordform->attributes = $_POST['YumUserChangePassword'];
 
 					if($passwordform->validate())
-						$user->setPassword($_POST['YumUserChangePassword']['password'], $user->salt);
+						$user->setPassword($_POST['YumUserChangePassword']['password']);
 				}
 			}
 			$user->validate();
@@ -215,7 +211,8 @@ class YumUserController extends YumController {
 					$user->syncRoles();
 
 
-				$user->activationKey = YumEncrypt::encrypt(microtime() . $user->password, $user->salt);
+				$user->activationKey = CPasswordHelper::hashPassword(
+						microtime() . $user->password, Yum::module()->passwordHashCost);
 
 				if($user->username == '' && isset($profile))
 					$user->username = $profile->email;
@@ -249,9 +246,6 @@ class YumUserController extends YumController {
 		$passwordform = new YumUserChangePassword();
 
 		if(isset($_POST['YumUser'])) {
-			if(!isset($user->salt) || empty($user->salt))
-				$user->salt = YumEncrypt::generateSalt();
-
 			$user->attributes = $_POST['YumUser'];
 
 			$user->validate();
@@ -270,7 +264,7 @@ class YumUserController extends YumController {
 						&& $_POST['YumUserChangePassword']['password'] != '') {
 					$passwordform->attributes = $_POST['YumUserChangePassword'];
 					if($passwordform->validate())
-						$user->setPassword($_POST['YumUserChangePassword']['password'], $user->salt);
+						$user->setPassword($_POST['YumUserChangePassword']['password']);
 				}
 
 				if(!$passwordform->hasErrors() && $user->save()) {
@@ -311,8 +305,8 @@ class YumUserController extends YumController {
 					$this->redirect('//user/user/admin');
 			}
 		} else if(isset($_POST['confirmPassword'])) {
-			if(YumEncrypt::validate_password($_POST['confirmPassword'],
-						$user->password, $user->salt)) {
+			if(CPasswordHelper::verifyPassword($_POST['confirmPassword'],
+						$user->password)) {
 				if($user->delete()) {
 					Yii::app()->user->logout();
 					$this->actionLogout();

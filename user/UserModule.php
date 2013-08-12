@@ -20,9 +20,8 @@ class UserModule extends CWebModule {
 	public $enableLogging = true;
 	public $enableOnlineStatus = true;
 
-	// Cost for Password generation. See
-	// http://www.yiiframework.com/wiki/425/use-crypt-for-password-storage/
-	// for details 
+	// Cost for Password generation. See CPasswordHelper::hashPassword() for
+	// details. 
 	public $passwordHashCost = 13;
 
 	// Show an Captcha after how many unsuccessful logins? Set to 0 to 

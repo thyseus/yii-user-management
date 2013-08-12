@@ -1,6 +1,9 @@
 <?php
 /**
  * This class file holds static encryption functions used by Yum.
+ * It is obsolete since the release of Yii 1.1.14. YumPasswordHelper is used
+ * since yii-user-management 0.9. This file is OUTDATED and will be removed
+ * later.
  *
  * The password encryption system is based on:
  *

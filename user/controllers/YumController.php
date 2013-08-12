@@ -24,17 +24,6 @@ abstract class YumController extends Controller {
 	}
 
 	public function beforeAction($action) {
-		if(!Yii::app()->user instanceof YumWebUser)
-			throw new CException(
-					Yum::t(
-						'Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
-
-		if(!isset(Yii::app()->cache))
-			throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
-
-		if(!isset(Yii::app()->db->tablePrefix))
-			throw new CHttpException(500, 'Please set a table prefix, at least \'\', to your db configuration for yii-user-management to work.');
-
 		if(Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest)
 			Yii::app()->user->data()->setLastAction();
 

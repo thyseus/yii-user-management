@@ -2280,6 +2280,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Write a message','Ecrire un message','fr','yum'),
 ('Write a message','Scrivi messaggio','it','yum'),
 ('Write a message','Napisz wiadomosc','pl','yum'),
+('Warning: there have been {count} failed login attempts','Achtung: {count} fehlgeschlagene Anmeldeversuche seit der letzten Anmeldung', 'de','yum'),
 ('Write a message to this User','Ecrire un message a ce membre','fr','yum'),
 ('Write a message to this User','Scrivi messaggio a questo utente','it','yum'),
 ('Write a message to {username}','Message ecrire a {username}','fr','yum'),

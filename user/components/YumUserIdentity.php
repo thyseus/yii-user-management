@@ -31,7 +31,7 @@ class YumUserIdentity extends CUserIdentity {
 
 		if($without_password)
 			$this->credentialsConfirmed($user);
-		else if(!YumEncrypt::validate_password($this->password, $user->password, $user->salt))
+		else if(!CPasswordHelper::verifyPassword($this->password, $user->password))
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else if($user->status == YumUser::STATUS_INACTIVE)
 			$this->errorCode=self::ERROR_STATUS_INACTIVE;
