@@ -576,12 +576,12 @@ class YumUser extends YumActiveRecord
 		/**
 		 * Quick check for a enabled Registration Module
 		 */
-		if (Yum::module('registration')) {
+		if (Yum::hasModule('registration')) {
 			$activationUrl = Yum::module('registration')->activationUrl;
 			if (is_array($activationUrl) && isset($this->profile)) {
 				$activationUrl = $activationUrl[0];
-				$params['key'] = $this->activationKey;
 				$params['email'] = $this->profile->email;
+				$params['key'] = urlencode($this->activationKey);
 
 				return Yii::app()->controller->createAbsoluteUrl($activationUrl, $params);
 			}
@@ -615,7 +615,7 @@ class YumUser extends YumActiveRecord
 			if ($user = $profile->user) {
 				if ($user->status != self::STATUS_INACTIVE)
 					return -1;
-				if ($user->activationKey == $key) {
+				if ($user->activationKey == urldecode($key)) {
 					$user->activationKey = $user->generateActivationKey(true);
 					$user->status = self::STATUS_ACTIVE;
 					if ($user->save(false, array('activationKey', 'status'))) {
@@ -651,8 +651,7 @@ class YumUser extends YumActiveRecord
 	 * When user is activating, activation key becomes micortime()
 	 * @return string
 	 */
-	public function generateActivationKey($activate = false)
-	{
+	public function generateActivationKey($activate = false) {
 		if($activate) {
 			$this->activationKey = $activate;
 			$this->save(false, array('activationKey'));
