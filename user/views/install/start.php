@@ -26,7 +26,7 @@ your Database is Accessible in protected/config/main.php. </p>
 	<tr>
 	<td>
 
-	<label for="installRole"> User Management </label>
+	<label> User Management </label>
 		<p>&nbsp;</p>
 	<table>
 		<tr>
@@ -113,7 +113,7 @@ your Database is Accessible in protected/config/main.php. </p>
 	</td>
 	<td>
 
-	<label for="installMessages"> Usergroups submodule </label>
+	<label for="installUsergroup"> Usergroups submodule </label>
 	<?php echo CHtml::checkBox('installUsergroup', true); ?>
 	<div id="usergroup">
 		<table>
@@ -132,7 +132,7 @@ your Database is Accessible in protected/config/main.php. </p>
 	</td>
 	<td>
 
-	<label for="installMessages"> Friendship submodule </label>
+	<label for="installFriendship"> Friendship submodule </label>
 	<?php echo CHtml::checkBox('installFriendship', true); ?>
 	<div id="friendship">
 		<table>
@@ -145,7 +145,7 @@ your Database is Accessible in protected/config/main.php. </p>
 	</td>
 	<td>
 
-	<label for="installRole"> Profiles submodule </label>
+	<label for="installProfiles"> Profiles submodule </label>
 	<?php echo CHtml::checkBox('installProfiles', true); ?>
 
 	<div id="profiles">
