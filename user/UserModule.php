@@ -28,6 +28,13 @@ class UserModule extends CWebModule {
 	public $enablepStrength = true;
 	public $displayPasswordStrength = true;
 
+	public $passwordGeneratorOptions = array(
+			'length' => 8,
+			'capitals' => 1,
+			'numerals' => 1,
+			'symbols' => 1,
+			);
+
 	// Show an Captcha after how many unsuccessful logins? Set to 0 to 
 	// always display an captcha, set to false to disable this function
 	public $captchaAfterUnsuccessfulLogins = 3;

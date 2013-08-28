@@ -11,11 +11,23 @@ class YumUserController extends YumController {
 					'users'=>array('*'),
 					),
 				array('allow',
-					'actions'=>array('profile', 'logout', 'changepassword', 'passwordexpired', 'delete', 'browse'),
+					'actions'=>array('profile',
+						'logout',
+						'changepassword',
+						'passwordexpired',
+						'delete',
+						'browse'),
 					'users'=>array('@'),
 					),
 				array('allow',
-					'actions'=>array('admin','delete','create','update', 'list', 'assign', 'generateData', 'csv'),
+					'actions'=>array('admin',
+						'delete',
+						'create',
+						'update',
+						'list',
+						'assign',
+						'generateData',
+						'csv'),
 					'expression' => 'Yii::app()->user->isAdmin()'
 					),
 				array('allow',
@@ -189,7 +201,13 @@ class YumUserController extends YumController {
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
-					$password = Yum::generatePassword();
+					Yii::import('application.modules.user.components.EPasswordGenerator');
+					$generatorOptions = Yum::module()->passwordGeneratorOptions;
+					$password = EPasswordGenerator::generate(
+							$generatorOptions['length'],
+							$generatorOptions['capitals'],
+							$generatorOptions['numerals'],
+							$generatorOptions['symbols']);
 					$user->setPassword($password);
 					Yum::setFlash(Yum::t('The generated Password is {password}', array(
 									'{password}' => $password)));
