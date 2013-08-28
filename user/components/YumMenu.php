@@ -25,7 +25,8 @@ class YumMenu extends CMenu {
 				echo CHtml::tag('span',isset($item['linkOptions']) ? $item['linkOptions'] : array(), $item['label']);
 			if(isset($item['items']) && count($item['items']))
 			{
-				echo "\n".CHtml::openTag('ul',$this->submenuHtmlOptions)."\n";
+				echo "\n".
+				CHtml::openTag('ul',$this->submenuHtmlOptions)."\n";
 				$this->renderMenuRecursive($item['items']);
 				echo CHtml::closeTag('ul')."\n";
 			}

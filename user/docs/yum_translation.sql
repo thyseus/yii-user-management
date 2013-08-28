@@ -116,6 +116,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Category', 'Kategorie', 'de', 'yum'),
 ('Change admin Password', 'Administratorpasswort ändern', 'de', 'yum'),
 ('Change admin Password', 'Cambiar contraseña de Admin', 'es', 'yum'),
+('Password strength', 'Passwortstärke', 'de', 'yum'),
 ('change password', 'cambiar contraseña', 'es', 'yum'),
 ('change Password', 'cambiar Contraseña', 'es', 'yum'),
 ('Change password', 'Cambiar contraseña', 'es', 'yum'),

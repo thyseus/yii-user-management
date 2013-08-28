@@ -5,7 +5,7 @@ Yii::app()->clientScript->registerCssFile(
 
 $this->beginContent(Yum::module()->baseLayout); ?>
 
-<div class="span8">
+<div class="span12">
 <?php
 if (Yum::module()->debug) {
 	echo CHtml::openTag('div', array('class' => 'yumwarning'));
@@ -15,18 +15,12 @@ if (Yum::module()->debug) {
 	echo CHtml::closeTag('div');
 }
 
- Yum::renderFlash(); 
+Yum::renderFlash(); 
 
-if($this->title)
-	printf('<h1> %s </h1>', $this->title);  
-	echo $content;  
+if(!Yii::app()->user->isGuest)
+	echo $this->renderMenu();
+echo $content;  
 ?>
 </div>
-
-<div class="span3">
-<?php $this->renderMenu(); ?>
-</div>
-
-<div class="clearfix"></div>
 
 <?php $this->endContent(); ?>

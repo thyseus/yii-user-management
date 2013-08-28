@@ -142,11 +142,11 @@ class YumUserController extends YumController {
 		}
 
 		if(Yii::app()->request->isAjaxRequest)
-			$this->renderPartial('changepassword', array(
+			$this->renderPartial(Yum::module()->changePasswordView, array(
 						'form'=>$form,
 						'expired' => $expired));
 		else
-			$this->render('changepassword', array(
+			$this->render(Yum::module()->changePasswordView, array(
 						'form'=>$form,
 						'expired' => $expired));
 	}

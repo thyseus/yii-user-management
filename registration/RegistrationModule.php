@@ -2,7 +2,6 @@
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
 
 class RegistrationModule extends CWebModule {
-	// why enableRegistration ? - in case you only want a recovery ! 
 	public $layout = 'application.modules.user.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;

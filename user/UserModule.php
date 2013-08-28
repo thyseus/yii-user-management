@@ -24,6 +24,10 @@ class UserModule extends CWebModule {
 	// details. 
 	public $passwordHashCost = 13;
 
+	// enable pStrength jquery widget
+	public $enablepStrength = true;
+	public $displayPasswordStrength = true;
+
 	// Show an Captcha after how many unsuccessful logins? Set to 0 to 
 	// always display an captcha, set to false to disable this function
 	public $captchaAfterUnsuccessfulLogins = 3;
@@ -108,6 +112,7 @@ class UserModule extends CWebModule {
 			'activate' => '/user/resend_activation',
 			'message' => '/user/message',
 			'passwordForm' => '/user/_activation_passwordform',
+			'changePassword' => 'changepassword',
 			'messageCompose' =>'application.modules.message.views.message.compose');
 
 	// LoginType :
