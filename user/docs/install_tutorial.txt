@@ -38,8 +38,8 @@ available.
 $ cd testdrive/protected
 $ mkdir modules
 $ cd modules
-$ wget http://www.yiiframework.com/extension/yii-user-management/files/User_Management_Module_0.8.tar.bz2
-$ tar xvf User_Management_Module_0.8.tar.bz2
+$ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.8.tar.bz2
+$ tar xvf yii-user-management_0.8.tar.bz2
 
 4.) The Yii-user-management module contains submodules that you just extracted
 into your application's modules/ directory. The installation script will provide
