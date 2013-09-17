@@ -17,6 +17,7 @@ class YumMailer {
 		if(!is_array($to)) 
 			$to = array(
 					'to' => $to,
+					'from' => Yum::module('message')->adminEmail,
 					'subject' => $subject,
 					'body' => $body);
 
