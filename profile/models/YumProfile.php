@@ -32,8 +32,7 @@ class YumProfile extends YumActiveRecord
 
 	// define your project-specific profile field rules in your 
 	// config/main.php  'profile' => 'profileRules' section
-	public function rules()
-	{
+	public function rules() {
 		$rules = array();
 		foreach(YumProfile::getProfileFields() as $field)
 			$rules[] = array($field, 'safe');

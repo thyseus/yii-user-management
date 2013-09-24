@@ -2,6 +2,7 @@
 Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
 
 class RegistrationModule extends CWebModule {
+	// why enableRegistration ? - in case you only want a recovery ! 
 	public $layout = 'application.modules.user.views.layouts.yum';
 	public $enableRegistration = true;
 	public $enableRecovery = true;
@@ -19,8 +20,10 @@ class RegistrationModule extends CWebModule {
 	public $registrationEmail='register@website.com';
 	public $recoveryEmail='restore@website.com';
 
-	// Which roles should be assigned automatically to a registered user 
+	// Which roles should be assigned automatically to a fresh registered user?
+	// Use role id, for example array(1,4,5)  
 	public $defaultRoles = array();
+	public $defaultHybridAuthRoles = array();
 
 	public $registrationView = '/registration/registration';
 	public $changePasswordView = 

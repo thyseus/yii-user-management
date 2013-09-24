@@ -1,14 +1,3 @@
-<?php if(Yum::module()->enablepStrength) {  
-Yum::register('js/pStrength.jquery.js'); 
-Yii::app()->clientScript->registerScript('', "
-	$('#YumRegistrationForm_password').pStrength({
-		'onPasswordStrengthChanged' : function(passwordStrength, percentage) {
-		$('#password-strength').html('".Yum::t('Password strength').":' + percentage + '%');
-		},
-});
-");
-}
-?>
 <h1> <?php echo Yum::t('Registration'); ?> </h1>
 
 <?php $this->breadcrumbs = array(Yum::t('Registration')); ?>
@@ -22,43 +11,43 @@ Yii::app()->clientScript->registerScript('', "
 			));
 ?>
 
-<div class="row">
-<div class="span12">
 <?php echo Yum::requiredFieldNote(); ?>
 <?php echo CHtml::errorSummary(array($form, $profile)); ?>
-</div>
-</div>
-
 
 <div class="row">
-<div class="span5"> 
-<?php echo $activeform->labelEx($profile,'firstname'); ?>
-<?php echo $activeform->textField($profile,'firstname'); ?> 
+<div class="span12"> <?php
+echo $activeform->labelEx($form,'username');
+echo $activeform->textField($form,'username');
+?> </div></div>
 
-<?php echo $activeform->labelEx($profile,'lastname'); ?>
-<?php echo $activeform->textField($profile,'lastname'); ?>
+<div class="row">
+<div class="span12"> <?php
+echo $activeform->labelEx($profile,'email');
+echo $activeform->textField($profile,'email');
+?> </div></div>
 
-<?php echo $activeform->labelEx($form,'username'); ?>
-<?php echo $activeform->textField($form,'username'); ?> 
-</div>
-<div class="span5"> 
-<?php echo $activeform->labelEx($profile,'email'); ?>
-<?php echo $activeform->textField($profile,'email'); ?> 
+<div class="row"><div class="span12"> <?php
+echo $activeform->labelEx($profile,'firstname');
+echo $activeform->textField($profile,'firstname');
+?> </div></div>
 
+<div class="row"><div class="span12"> <?php
+echo $activeform->labelEx($profile,'lastname');
+echo $activeform->textField($profile,'lastname');
+?> </div></div>
+
+<div class="row">
+<div class="span12">
 <?php echo $activeform->labelEx($form,'password'); ?>
 <?php echo $activeform->passwordField($form,'password'); ?>
+</div>
+</div>
 
-<?php if(Yum::module()->displayPasswordStrength) { ?>
-<div id="password-strength"></div>
-<?php } ?>
-
+<div class="row">
+<div class="span12">
 <?php echo $activeform->labelEx($form,'verifyPassword'); ?>
 <?php echo $activeform->passwordField($form,'verifyPassword'); ?>
-
-
-</div>
-</div>
-
+</div></div>
 
 <?php if(extension_loaded('gd') 
 			&& Yum::module('registration')->enableCaptcha): ?>
@@ -74,7 +63,7 @@ Yii::app()->clientScript->registerScript('', "
 		<br/><?php echo Yum::t('Letters are not case-sensitive.'); ?></p>
 	</div></div>
 	<?php endif; ?>
-
+	
 	<div class="row submit">
     <div class="span12">
 		<?php echo CHtml::submitButton(Yum::t('Registration'), array('class'=>'btn')); ?>

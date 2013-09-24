@@ -85,6 +85,7 @@ class YumAuthController extends YumController {
 			throw new CException(400, 'Hybrid auth needs the profile submodule to be enabled');
 
 		Yii::import('application.modules.user.vendors.hybridauth.Hybrid.Auth', true);
+		Yii::import('application.modules.profile.models.*');
 
 		require_once(Yum::module()->hybridAuthConfigFile);
 
@@ -104,19 +105,27 @@ class YumAuthController extends YumController {
 				// registered at our application?
 				$hybridAuthProfile = $success->getUserProfile();
 				$user = $this->getUser($hybridAuthProfile->displayName);
-				if(!$user) {
-					// No, he is not, so we register the user and sync the profile fields:
+				if(!$user && !YumProfile::model()->findByAttributes(array(
+								'email' => $hybridAuthProfile->email))) {
+					// No, he is not, so we register the user and sync the profile fields
 					$user = new YumUser();
-					$user->registerByHybridAuth($hybridAuthProfile);
+					if(!$user->registerByHybridAuth($hybridAuthProfile)) {
+						Yum::setFlash(Yum::t('Registration by external provider failed'));
+						$this->redirect(Yum::module()->returnUrl);
+					} else Yum::setFlash('Registration successful');
 				} 
 
+				$identity = new YumUserIdentity($user->username, null);
+
+				if($identity->authenticate(true)) {
 					Yum::log(Yum::t('User {username} logged in by hybrid {provider}', array(
 									'{username}' => $hybridAuthProfile->displayName,
+									'{email}' => $hybridAuthProfile->displayName,
 									'{provider}' => $provider)));
-										
-					$identity = new YumUserIdentity($user->username, null);
-					$identity->authenticate(true);
+
 					Yii::app()->user->login($identity, Yum::module()->cookieDuration);
+				} else
+					Yum::setFlash(Yum::t('Login by external provider failed'));
 
 				$this->redirect(Yum::module()->returnUrl);
 			}

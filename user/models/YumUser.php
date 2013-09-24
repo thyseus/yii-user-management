@@ -206,7 +206,8 @@ class YumUser extends YumActiveRecord
 		$usernameRequirements = Yum::module()->usernameRequirements;
 		$passwordRequirements = Yum::module()->passwordRequirements;
 
-		$passwordrule = array_merge(array('password', 'YumPasswordValidator'), $passwordRequirements);
+		$passwordrule = array_merge(array('password', 'YumPasswordValidator'),
+				$passwordRequirements);
 
 		$rules[] = $passwordrule;
 
@@ -225,9 +226,9 @@ class YumUser extends YumActiveRecord
 					'message' => Yum::t($usernameRequirements['dontMatchMessage']));
 		}
 
-		$rules[] = array('username',
-				'unique',
-				'message' => Yum::t("This user's name already exists."));
+		$rules[] = array('username', 'unique',
+				'message' => Yum::t('This username already exists'));
+
 		$rules[] = array(
 				'username',
 				'match',
@@ -482,6 +483,7 @@ class YumUser extends YumActiveRecord
 	}
 
 	public function registerByHybridAuth($hybridAuthProfile) {
+		Yii::import('application.modules.profile.models.*');
 		$profile = new YumProfile();
 
 		$profile->firstname = $hybridAuthProfile->firstName;
@@ -489,11 +491,23 @@ class YumUser extends YumActiveRecord
 		$profile->email = $hybridAuthProfile->email;
 
 		$this->username = $hybridAuthProfile->displayName;
+		$this->status = 1;
 		$this->createtime = time();
+		$this->password = md5(time()); // obfuscated password
 
 		$this->save(false);
 		$profile->user_id = $this->id;
 		$profile->save(false);
+
+		if(Yum::hasModule('role'))
+			foreach(Yum::module('registration')->defaultHybridAuthRoles as $role) 
+				Yii::app()->db->createCommand(sprintf(
+							'insert into %s (user_id, role_id) values(%s, %s)',
+							Yum::module('role')->userRoleTable,
+							$this->id,
+							$role))->execute(); 
+
+		return true;
 	}
 
 	// Registers a user 

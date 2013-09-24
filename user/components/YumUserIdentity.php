@@ -29,20 +29,19 @@ class YumUserIdentity extends CUserIdentity {
 		if(!$user)
 			return self::ERROR_STATUS_USER_DOES_NOT_EXIST;
 
-		if($without_password)
-			$this->credentialsConfirmed($user);
-		else if(!CPasswordHelper::verifyPassword($this->password, $user->password))
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else if($user->status == YumUser::STATUS_INACTIVE)
+		if($user->status == YumUser::STATUS_INACTIVE)
 			$this->errorCode=self::ERROR_STATUS_INACTIVE;
 		else if($user->status == YumUser::STATUS_BANNED)
 			$this->errorCode=self::ERROR_STATUS_BANNED;
 		else if($user->status == YumUser::STATUS_REMOVED)
 			$this->errorCode=self::ERROR_STATUS_REMOVED;
+		else if($without_password)
+			$this->credentialsConfirmed($user);
+		else if(!CPasswordHelper::verifyPassword($this->password, $user->password))
+			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 			$this->credentialsConfirmed($user);
 		return !$this->errorCode;
-
 	}
 
 	function credentialsConfirmed($user) {
