@@ -14,3 +14,4 @@ label { display: inline }
 .profilefieldlabel { float: left; margin-right: 5px; width: 100px;}
 .friend { margin: 5px; } 
 a.social { text-decoration: none; }
+.admin-user select, .admin-user input, .admin-user textarea, .admin-user .uneditable-input { width: 75px !important; }

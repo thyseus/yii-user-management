@@ -1,3 +1,7 @@
+<div class="container">
+<div class="span12">
+<div class="row">
+
 <?php
 
 if(empty($tabularIdx))
@@ -19,3 +23,6 @@ echo $this->renderPartial('/user/_form', array(
 			'tabularIdx'=> isset($tabularIdx) ? $tabularIdx : 0)
 		);
 ?>
+</div>
+</div>
+</div>

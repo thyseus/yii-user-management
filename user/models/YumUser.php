@@ -18,9 +18,7 @@ class YumUser extends YumActiveRecord
 
 	public function behaviors()
 	{
-		return array(
-				'CAdvancedArBehavior' => array(
-					'class' => 'application.modules.user.components.CAdvancedArBehavior'));
+		return array();
 	}
 
 	public static function model($className = __CLASS__)
@@ -360,10 +358,7 @@ class YumUser extends YumActiveRecord
 
 	// possible relations are cached because they depend on the active submodules
 	// and it takes many expensive milliseconds to evaluate them all the time
-	public function relations()
-	{
-		Yii::import('application.modules.profile.models.*');
-
+	public function relations() {
 		$relations = Yii::app()->cache->get('yum_user_relations');
 		if($relations === false) {
 			$relations = array();
@@ -396,8 +391,8 @@ class YumUser extends YumActiveRecord
 						self::HAS_MANY, 'YumMessage', 'from_user_id');
 
 			}
-
 			if (Yum::hasModule('profile')) {
+				Yii::import('application.modules.profile.models.*');
 				$relations['visits'] = array(
 						self::HAS_MANY, 'YumProfileVisit', 'visited_id');
 				$relations['visited'] = array(

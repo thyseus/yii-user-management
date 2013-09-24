@@ -24,14 +24,15 @@ class YumWebUser extends CWebUser
 	}
 
 	public function can($action) {
+		if(!Yum::hasModule('role'))
+			throw new CException(Yum::t('Role module is not activated'));
+
 		Yii::import('application.modules.role.models.*');
 
-		if(Yum::hasModule('role') 
-				&& Yum::module('role')->adminIsGod 
-				&& Yii::app()->user->isAdmin())
+		if(Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
 			return true;
 
-		foreach ($this->data()->getPermissions() as $permission)
+		foreach($this->data()->getPermissions() as $permission)
 			if ($permission == $action)
 				return true;
 

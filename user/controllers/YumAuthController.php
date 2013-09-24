@@ -116,8 +116,7 @@ class YumAuthController extends YumController {
 										
 					$identity = new YumUserIdentity($user->username, null);
 					$identity->authenticate(true);
-					$duration = $this->loginForm->rememberMe ? Yum::module()->cookieDuration : 0; 
-					Yii::app()->user->login($identity, $duration);
+					Yii::app()->user->login($identity, Yum::module()->cookieDuration);
 
 				$this->redirect(Yum::module()->returnUrl);
 			}

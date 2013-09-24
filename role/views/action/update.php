@@ -1,3 +1,7 @@
+<div class="container">
+<div class="span12">
+<div class="row">
+
 <?php
 $this->breadcrumbs=array(
 	'Actions'=>array('index'),
@@ -16,3 +20,8 @@ $this->menu=array(
 <h1>Update Action <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+</div>
+</div>
+</div>
+
