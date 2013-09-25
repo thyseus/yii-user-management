@@ -9,8 +9,6 @@ $this->breadcrumbs = array(
 		Yum::t('Users'),
 		Yum::t('Manage'));
 
-echo Yum::renderFlash();
-
 echo CHtml::link(Yum::t('Create new User'), array(
 			'//user/user/create'), array('class' => 'btn')); 
 
@@ -76,10 +74,11 @@ $columns[] = array(
 
 if(Yum::hasModule('role'))
 $columns[] = array(
-		'name'=>Yum::t('Roles'),
+		'header'=>Yum::t('Roles'),
+		'name'=>'filter_role',
 		'type' => 'raw',
 		'visible' => Yum::hasModule('role'),
-		'filter' => false,
+		'filter' => CHtml::listData(YumRole::model()->findAll(), 'id', 'title'),
 		'value'=>'$data->getRoles()',
 		'headerHtmlOptions' => array('class' => 'span1'),
 		);

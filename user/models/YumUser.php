@@ -14,6 +14,7 @@ class YumUser extends YumActiveRecord
 	public $username;
 	public $password;
 	public $activationKey;
+	public $filter_role;
 	public $password_changed = false; // flag for password change
 
 	public function behaviors()
@@ -122,6 +123,11 @@ class YumUser extends YumActiveRecord
 						'desc'=>'profile.'.$column.' DESC',
 						);
 			}
+		}
+
+		if (Yum::hasModule('role') && $this->filter_role) {
+			$criteria->join = 'left join user_role on t.id = user_role.user_id';
+			$criteria->addCondition('user_role.role_id = '.$this->filter_role);
 		}
 
 		$criteria->compare('t.id', $this->id, true);
@@ -255,6 +261,10 @@ class YumUser extends YumActiveRecord
 					'minHeight' => 50,
 					'on' => 'avatarSizeCheck');
 		}
+
+
+		if (Yum::hasModule('role')) 
+			$rules[] = array('filter_role', 'safe');
 
 		return $rules;
 	}
