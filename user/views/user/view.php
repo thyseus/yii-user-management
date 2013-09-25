@@ -1,4 +1,4 @@
-<?php
+<?
 $profiles = Yum::hasModule('profile');
 
 if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL & $profiles)
@@ -29,6 +29,9 @@ if(Yii::app()->user->isAdmin()) {
 						));
 
 	array_push($attributes,
+		/*
+		There is no added value to showing the password/salt/activationKey because 
+		these are all encrypted 'password', 'salt', 'activationKey',*/
 		array(
 			'name' => 'createtime',
 			'value' => date(UserModule::$dateFormat,$model->createtime),
@@ -66,13 +69,13 @@ if(Yii::app()->user->isAdmin()) {
 			);
 
 	if($profiles) {
-		$profileFields = YumProfileField::model()->forAll()->findAll();
+		$profileFields = YumProfile::getProfileFields();
 		if ($profileFields) {
 			foreach($profileFields as $field) {
 				array_push($attributes,array(
-							'label' => Yii::t('UserModule.user', $field->title),
-							'name' => $field->varname,
-							'value' => $model->profile->getAttribute($field->varname),
+							'label' => Yum::t($field),
+							'name' => $field,
+							'value' => $model->profile->getAttribute($field),
 							));
 			}
 		}
