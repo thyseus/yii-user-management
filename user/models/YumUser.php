@@ -174,7 +174,8 @@ class YumUser extends YumActiveRecord
 
 	public function afterSave()
 	{
-		if (Yum::hasModule('profile') && Yum::module('profile')->enablePrivacySetting) {
+		if (Yum::hasModule('profile') 
+				&& Yum::module('profile')->enablePrivacySetting) {
 			// create a new privacy setting, if not already available
 			$setting = YumPrivacySetting::model()->findByPk($this->id);
 			if (!$setting) {

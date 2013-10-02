@@ -228,12 +228,6 @@ class YumUserController extends YumController {
 				$profile->attributes = $_POST['YumProfile'];
 
 			if(!$user->hasErrors()) {
-				if(isset($_POST['YumUser']['roles']))
-					$user->syncRoles($_POST['YumUser']['roles']);
-				else
-					$user->syncRoles();
-
-
 				$user->activationKey = CPasswordHelper::hashPassword(
 						microtime() . $user->password, Yum::module()->passwordHashCost);
 
@@ -245,6 +239,12 @@ class YumUserController extends YumController {
 
 				if(!$user->hasErrors() && !$passwordform->hasErrors()) {
 					$user->save();
+
+					if(isset($_POST['YumUser']['roles']))
+						$user->syncRoles($_POST['YumUser']['roles']);
+					else
+						$user->syncRoles();
+
 					if(isset($profile)) {
 						$profile->user_id = $user->id;
 						$profile->save(array('user_id'), false);
@@ -261,8 +261,8 @@ class YumUserController extends YumController {
 					));
 	}
 
-	public function actionUpdate() {
-		$user = $this->loadUser();
+	public function actionUpdate($id) {
+		$user = $this->loadUser($id);
 		$profile = false;
 		if(Yum::hasModule('profile')) 
 			$profile = $user->profile;
