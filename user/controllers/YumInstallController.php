@@ -352,23 +352,19 @@ class YumInstallController extends YumController
 
 					if (isset($_POST['installRole']) && isset($_POST['installPermission'])) {
 						$sql = "INSERT INTO `" . $actionTable . "` (`title`) VALUES "
-							."('message_write'),"
-							."('message_receive'),"
-							."('user_create'),"
-							."('user_update'),"
-							."('user_remove'),"
-							."('user_admin')";
+							."('create'),"
+							."('read'),"
+							."('update'),"
+							."('delete'),"
+							."('message'),"
+							."('user')";
 
 						$db->createCommand($sql)->execute();
 
-						$sql = "INSERT INTO `{$permissionTable}` (`principal_id`, `subordinate_id`, `type`, `action`, `template`, `comment`) VALUES "
-							."(2, 0, 'role', 1, 0, 'Users can write messages'),"
-							."(2, 0, 'role', 2, 0, 'Users can receive messages'),"
-							."(2, 0, 'role', 3, 0, 'Users are able to view visits of his profile'),"
-							."(1, 0, 'role', 4, 0, ''),"
-							."(1, 0, 'role', 5, 0, ''),"
-							."(1, 0, 'role', 6, 0, ''),"
-							."(1, 0, 'role', 7, 0, '');";
+						$sql = "INSERT INTO `{$permissionTable}` (`principal_id`, `subordinate_id`, `type`, `action`, `subaction`, `template`, `comment`) VALUES "
+							."(2, 0, 'role', 5, 1, 0, 'Demo role can write messages'),"
+							."(2, 0, 'role', 5, 2, 0, 'Demo role can read messages'),"
+							."(1, 0, 'role', 6, 2, 0, 'User Manager can read other users');";
 
 						$db->createCommand($sql)->execute();
 
