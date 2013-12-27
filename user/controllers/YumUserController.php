@@ -281,7 +281,6 @@ class YumUserController extends YumController {
 				else
 					$user->syncRoles();
 
-
 				// Password change is requested ?
 				if(isset($_POST['YumUserChangePassword'])
 						&& $_POST['YumUserChangePassword']['password'] != '') {
@@ -291,10 +290,10 @@ class YumUserController extends YumController {
 				}
 
 				if(!$passwordform->hasErrors() && $user->save()) {
-					if(isset($profile)) 
+					if(isset($profile) && $profile) 
 						$profile->save();
 
-					$this->redirect(array('//user/user/view', 'id' => $user->id));
+					$this->redirect(array('admin'));
 				}
 			}
 		}

@@ -9,8 +9,6 @@
 	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
@@ -76,13 +74,21 @@
 		</div>
 		</div>
 
-
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'action'); ?>
 		<?php $this->widget('Relation', array(
 					'model' => $model,
 					'relation' => 'Action',
+					'fields' => 'title',
+					));?>
+		<?php echo $form->error($model,'action'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'subaction'); ?>
+		<?php $this->widget('Relation', array(
+					'model' => $model,
+					'relation' => 'Subaction',
 					'fields' => 'title',
 					));?>
 		<?php echo $form->error($model,'action'); ?>

@@ -30,11 +30,23 @@ echo CHtml::link(Yum::t('Assign permission'), array(
 						)
 					),
 				array(
-					'filter' => false,
-					'name' => 'principal',
+					'filter' => $rolefilter,
+					'name' => 'principal_id',
 					'value' => '$data->type == "user" ? $data->principal->username : @$data->principal_role->title'
 					), 
-				'Action.title',
+          array(
+            'name' => 'action',
+            'filter' => $actionfilter,
+            'header' => Yum::t('Action'),
+            'value' => '$data->Action->title',
+          ),
+          array(
+            'name' => 'subaction',
+            'filter' => $actionfilter,
+            'header' => Yum::t('Subaction'),
+            'value' => '$data->Subaction->title',
+          ),
+				'comment',
 				'Action.comment',
 			array(
 					'class'=>'CButtonColumn',

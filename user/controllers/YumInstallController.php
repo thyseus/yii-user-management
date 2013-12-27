@@ -289,10 +289,10 @@ class YumInstallController extends YumController
 						$db->createCommand($sql)->execute();
 						$createdTables['role']['userRoleTable'] = $userRoleTable;
 
-						// Install permission support (at the end will it be a submodule?)
+						// Install permission support (submodule anytime?)
 						if (isset($_POST['installPermission'])) {
 							$sql = "CREATE TABLE IF NOT EXISTS `" . $actionTable . "` (
-							`id` int(11) NOT NULL AUTO_INCREMENT,
+							`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 							`title` varchar(255) NOT NULL,
 							`comment` text,
 							`subject` varchar(255) DEFAULT NULL,
@@ -305,10 +305,11 @@ class YumInstallController extends YumController
 							`principal_id` int(11) NOT NULL,
 							`subordinate_id` int(11) NULL,
 							`type` enum('user','role') NOT NULL,
-							`action` int(11) NOT NULL,
+							`action` int(11) unsigned NOT NULL,
+							`subaction` int(11) unsigned NOT NULL,
 							`template` tinyint(1) NOT NULL,
 							`comment` text,
-							PRIMARY KEY (`principal_id`,`subordinate_id`,`type`,`action`)
+							PRIMARY KEY (`principal_id`,`subordinate_id`,`type`,`action`, `subaction`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8; ";
 
 							$db->createCommand($sql)->execute();

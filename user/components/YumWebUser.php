@@ -23,21 +23,17 @@ class YumWebUser extends CWebUser
 			return $this->can($operation);	
 	}
 
-	public function can($action) {
-		if(!Yum::hasModule('role'))
-			throw new CException(Yum::t('Role module is not activated'));
+  public function can($action, $subaction = null) {
+    if(!Yum::hasModule('role'))
+      throw new CException(Yum::t('Role module is not activated'));
 
-		Yii::import('application.modules.role.models.*');
+    Yii::import('application.modules.role.models.*');
 
-		if(Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
-			return true;
+    if(Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
+      return true;
 
-		foreach($this->data()->getPermissions() as $permission)
-			if ($permission == $action)
-				return true;
-
-		return false;
-	}
+    return $this->data()->can($action, $subaction);
+  }
 
 	/**
 	 * Checks if this (non-admin) User can administrate some users

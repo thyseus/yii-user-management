@@ -17,8 +17,13 @@ For example, if we assign the user 'Bob' the permission to run a action
 
 if(YumUser::model()->find('username = bob')->can('removeUsers')) { ...
 
-A Permission can also have a Subordinate. With this feature, you can 
+A Permission can have a Subordinate. With this feature, you can 
 further restrict, what a action can affect. 
+
+A Permission can also have a Subaction. For example, to check if the current
+user can remove users:
+
+if(Yii::app()->user->can('User', 'remove')) { ...
 
 A Membership system is also available. A membership acts as a temporary
 role assignment to a user that expires after some time.
