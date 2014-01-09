@@ -1,27 +1,28 @@
 <?php
 class YumWebUser extends CWebUser
 {
-	public $_data;
+  public $loginUrl = array('//user/auth/login');
+  public $_data;
 
-	// Use this function to access the AR Model of the actually
-	// logged in user, for example
-	// echo Yii::app()->user->data()->profile->firstname;
-	public function data() {
-		if($this->_data instanceof YumUser)
-			return $this->_data;
-		else if($this->id && $this->_data = YumUser::model()->findByPk($this->id))
-			return $this->_data;
-		else
-			return $this->_data = new YumUser();
-	}
+  // Use this function to access the AR Model of the actually
+  // logged in user, for example
+  // echo Yii::app()->user->data()->profile->firstname;
+  public function data() {
+    if($this->_data instanceof YumUser)
+      return $this->_data;
+    else if($this->id && $this->_data = YumUser::model()->findByPk($this->id))
+      return $this->_data;
+    else
+      return $this->_data = new YumUser();
+  }
 
-	public function checkAccess($operation, $params=array(), $allowCaching=true)
-	{
-		if(!Yum::hasModule('role') ||	Yum::module('role')->useYiiCheckAccess)
-			return parent::checkAccess($operation, $params, $allowCaching);
-		else
-			return $this->can($operation);	
-	}
+  public function checkAccess($operation, $params=array(), $allowCaching=true)
+  {
+    if(!Yum::hasModule('role') ||	Yum::module('role')->useYiiCheckAccess)
+      return parent::checkAccess($operation, $params, $allowCaching);
+    else
+      return $this->can($operation);	
+  }
 
   public function can($action, $subaction = null) {
     if(!Yum::hasModule('role'))
@@ -35,125 +36,125 @@ class YumWebUser extends CWebUser
     return $this->data()->can($action, $subaction);
   }
 
-	/**
-	 * Checks if this (non-admin) User can administrate some users
-	 */
-	public static function hasUsers($uid = 0)
-	{
-		if($uid == 0)
-			$uid = Yii::app()->user->id;
+  /**
+   * Checks if this (non-admin) User can administrate some users
+   */
+  public static function hasUsers($uid = 0)
+  {
+    if($uid == 0)
+      $uid = Yii::app()->user->id;
 
-		$user = YumUser::model()->cache(500)->findByPk($uid);
+    $user = YumUser::model()->cache(500)->findByPk($uid);
 
-		return isset($user->users) && $user->users !== array();
-	}
+    return isset($user->users) && $user->users !== array();
+  }
 
-	public static function hasRoles($uid = 0)
-	{
-		if($uid == 0)
-			$uid = Yii::app()->user->id;
+  public static function hasRoles($uid = 0)
+  {
+    if($uid == 0)
+      $uid = Yii::app()->user->id;
 
-		$user = YumUser::model()->cache(500)->findByPk($uid);
+    $user = YumUser::model()->cache(500)->findByPk($uid);
 
-		$flag = false;
-		if(isset($user->roles))
-			foreach($user->roles as $role) 
-				if (isset($role->roles) && $role->roles !== array())
-					$flag = true;
+    $flag = false;
+    if(isset($user->roles))
+      foreach($user->roles as $role) 
+        if (isset($role->roles) && $role->roles !== array())
+          $flag = true;
 
-		return $flag;
-	}
+    return $flag;
+  }
 
-public function getRoles() {
-	$t = ' ';
-	$user = Yii::app()->user->data();
-	$roles = $user->roles;
-	if($user instanceof YumUser && $roles) 
-		foreach($roles as $role)
-			$t .= $role->title .' ';
+  public function getRoles() {
+    $t = ' ';
+    $user = Yii::app()->user->data();
+    $roles = $user->roles;
+    if($user instanceof YumUser && $roles) 
+      foreach($roles as $role)
+        $t .= $role->title .' ';
 
-	return $t;
+    return $t;
 
-}
+  }
 
-	/**
-	 * Checks if this (non-admin) User can administrate the given user
-	 */
-	public static function hasUser($username, $uid = 0)
-	{
-		if($uid == 0)
-			$uid = Yii::app()->user->getId();
+  /**
+   * Checks if this (non-admin) User can administrate the given user
+   */
+  public static function hasUser($username, $uid = 0)
+  {
+    if($uid == 0)
+      $uid = Yii::app()->user->getId();
 
-		// Every user can modify himself
-		if($username == $uid)
-			return true;
+    // Every user can modify himself
+    if($username == $uid)
+      return true;
 
-		$user = YumUser::model()->cache(500)->findByPk($uid);
+    $user = YumUser::model()->cache(500)->findByPk($uid);
 
-		if(!is_array($username))
-			$username = array ($username);
+    if(!is_array($username))
+      $username = array ($username);
 
-		if(isset($user->users)) 
-			foreach($user->users as $userobj) 
-			{
-				if(in_array($userobj->username, $username) ||
-					in_array($userobj->id, $username))
-					return true;
-			}
-		return false;
-	}
+    if(isset($user->users)) 
+      foreach($user->users as $userobj) 
+      {
+        if(in_array($userobj->username, $username) ||
+          in_array($userobj->id, $username))
+          return true;
+      }
+    return false;
+  }
 
-	/**
-	 * Checks if the user has the given Role
-	 * @mixed Role string or array of strings that should be checked
-	 * @int (optional) id of the user that should be checked 
-	 * @return bool Return value tells if the User has access or hasn't access.
-	 */
-	public function hasRole($role, $uid = 0) {
-		if(Yum::hasModule('role')) {
-			Yii::import('application.modules.role.models.*');
+  /**
+   * Checks if the user has the given Role
+   * @mixed Role string or array of strings that should be checked
+   * @int (optional) id of the user that should be checked 
+   * @return bool Return value tells if the User has access or hasn't access.
+   */
+  public function hasRole($role, $uid = 0) {
+    if(Yum::hasModule('role')) {
+      Yii::import('application.modules.role.models.*');
 
-			if($uid == 0)
-				$uid = Yii::app()->user->id;
+      if($uid == 0)
+        $uid = Yii::app()->user->id;
 
-			if(!is_array($role))
-				$role = array ($role);
+      if(!is_array($role))
+        $role = array ($role);
 
-			if($uid && $user = YumUser::model()->with('roles')->find(
-						't.id = '.$uid)) {
-				// Check if a user has a active membership and, if so, add this
-				// to the roles
-				$roles = $user->roles;
-				if(Yum::hasModule('membership'))
-					$roles = array_merge($roles, $user->getActiveMemberships());
+      if($uid && $user = YumUser::model()->with('roles')->find(
+        't.id = '.$uid)) {
+          // Check if a user has a active membership and, if so, add this
+          // to the roles
+          $roles = $user->roles;
+          if(Yum::hasModule('membership'))
+            $roles = array_merge($roles, $user->getActiveMemberships());
 
-				if(isset($roles)) 
-					foreach($roles as $roleobj) {
-						if(in_array($roleobj->title, $role) ||
-								in_array($roleobj->id, $role))
-							return true;
-					}
-			}
-		}
+          if(isset($roles)) 
+            foreach($roles as $roleobj) {
+              if(in_array($roleobj->title, $role) ||
+                in_array($roleobj->id, $role))
+                return true;
+            }
+        }
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	public function loggedInAs() {
-		if($this->isGuest)
-			return Yum::t('Guest');
-		else
-			return $this->data()->username;
-	}
-	/**
-	 * Return admin status.
-	 * @return boolean
-	 */
-	public function isAdmin() {
-		if($this->isGuest)
-			return false;
-		else 
-			return Yii::app()->user->data()->superuser;
-	}
+  public function loggedInAs() {
+    if($this->isGuest)
+      return Yum::t('Guest');
+    else
+      return $this->data()->username;
+  }
+  /**
+   * Return admin status.
+   * @return boolean
+   */
+  public function isAdmin() {
+    if($this->isGuest)
+      return false;
+    else 
+      return Yii::app()->user->data()->superuser;
+  }
 }
 ?>
