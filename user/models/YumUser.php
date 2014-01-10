@@ -76,7 +76,7 @@ class YumUser extends YumActiveRecord
   {
     if (Yum::module()->enableOnlineStatus && !Yii::app()->user->isGuest) {
       $this->lastaction = 0;
-      $this->save('lastaction');
+      $this->save(false, array('lastaction'));
     }
   }
 
