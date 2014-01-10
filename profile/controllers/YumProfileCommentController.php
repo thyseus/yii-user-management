@@ -1,10 +1,8 @@
 <?php
 Yii::import('application.modules.user.models.*');
 
-class YumProfileCommentController extends YumController
-{
-	public function accessRules()
-	{
+class YumProfileCommentController extends YumController {
+	public function accessRules() {
 		return array(
 				array('allow',  
 					'actions'=>array('index'),
@@ -47,9 +45,10 @@ class YumProfileCommentController extends YumController
 		if($comment->user_id == Yii::app()->user->id
 				|| $comment->profile_id == Yii::app()->user->id) {
 			$comment->delete();
-			$this->redirect(array(Yum::module()->profileView, 'id' => $comment->profile->user_id));
-		} else
-			throw new CHttpException(400,
+      $this->redirect(array(
+        Yum::module('profile')->profileView, 'id' => $comment->profile->user_id));
+        } else
+			throw new CHttpException(403,
 					Yum::t('You are not the owner of this Comment or this Profile!'));
 	}
 

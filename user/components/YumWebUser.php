@@ -16,8 +16,7 @@ class YumWebUser extends CWebUser
       return $this->_data = new YumUser();
   }
 
-  public function checkAccess($operation, $params=array(), $allowCaching=true)
-  {
+  public function checkAccess($operation, $params=array(), $allowCaching=true) {
     if(!Yum::hasModule('role') ||	Yum::module('role')->useYiiCheckAccess)
       return parent::checkAccess($operation, $params, $allowCaching);
     else
@@ -39,8 +38,7 @@ class YumWebUser extends CWebUser
   /**
    * Checks if this (non-admin) User can administrate some users
    */
-  public static function hasUsers($uid = 0)
-  {
+  public static function hasUsers($uid = 0) {
     if($uid == 0)
       $uid = Yii::app()->user->id;
 
@@ -49,8 +47,7 @@ class YumWebUser extends CWebUser
     return isset($user->users) && $user->users !== array();
   }
 
-  public static function hasRoles($uid = 0)
-  {
+  public static function hasRoles($uid = 0) {
     if($uid == 0)
       $uid = Yii::app()->user->id;
 
@@ -146,6 +143,7 @@ class YumWebUser extends CWebUser
     else
       return $this->data()->username;
   }
+
   /**
    * Return admin status.
    * @return boolean
