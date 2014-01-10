@@ -16,6 +16,8 @@ class UserModule extends CWebModule {
 	public $loginLayout = 'application.modules.user.views.layouts.login';
 	public $adminLayout = 'application.modules.user.views.layouts.yum';
 	public $enableBootstrap = true;
+	
+	public $profileView = '//profile/profile/view';
 
 	public $enableLogging = true;
 	public $enableOnlineStatus = true;
