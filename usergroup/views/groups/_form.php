@@ -1,6 +1,6 @@
 <div class="form">
 <p class="note">
-<?php echo Yii::t('app','Fields with');?> <span class="required">*</span> <?php echo Yii::t('app','are required');?>.
+<?php echo Yum::t('Fields with <span class="required">*</span> are required.');?>
 </p>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
