@@ -8,10 +8,10 @@ if($profile)
 	foreach(YumProfile::getProfileFields() as $field) {
 		echo CHtml::openTag('div',array());
 
-		echo CHtml::activeLabelEx($profile, $field);
-		echo CHtml::activeTextField($profile,
+		echo $form->LabelEx($profile, $field);
+		echo $form->TextField($profile,
 				$field);
-		echo CHtml::error($profile,$field); 
+		echo $form->error($profile,$field); 
 
 		echo CHtml::closeTag('div');
 	}

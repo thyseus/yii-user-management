@@ -7,23 +7,25 @@ $this->title = Yum::t('Edit profile');
 
 <div class="form">
 
-<?php echo CHtml::beginForm(); ?>
+<?php $form=$this->beginWidget('zii.widgets.CActiveForm', array(
+    'id'=>'profile-form',
+)); ?>
 
 <?php echo Yum::requiredFieldNote(); ?>
 
-<?php echo CHtml::errorSummary(array($user, $profile)); ?>
+<?php echo $form->errorSummary(array($user, $profile)); ?>
 
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME) { ?>
 
-<?php echo CHtml::activeLabelEx($user,'username'); ?>
-<?php echo CHtml::activeTextField($user,'username',array(
+<?php echo $form->LabelEx($user,'username'); ?>
+<?php echo $form->activeTextField($user,'username',array(
 			'size'=>20,'maxlength'=>20)); ?>
-<?php echo CHtml::error($user,'username'); ?>
+<?php echo $form->error($user,'username'); ?>
 
 <?php } ?> 
 
 <?php if(isset($profile) && is_object($profile)) 
-	$this->renderPartial('/profile/_form', array('profile' => $profile)); ?>
+	$this->renderPartial('/profile/_form', array('profile' => $profile, 'form'=>$form)); ?>
 	
 	<?php
 
@@ -41,6 +43,6 @@ $this->title = Yum::t('Edit profile');
 			: Yum::t('Save profile changes'), array('class'=>'btn')); ?>
 
 
-	<?php echo CHtml::endForm(); ?>
+	<?php $this->endWidget(); ?>
 
 	</div><!-- form -->

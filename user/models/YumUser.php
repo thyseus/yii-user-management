@@ -235,12 +235,7 @@ class YumUser extends YumActiveRecord
 
     $rules[] = array('username', 'unique',
       'message' => Yum::t('This username already exists'));
-
-    $rules[] = array(
-      'username',
-      'match',
-      'pattern' => $usernameRequirements['match'],
-      'message' => Yum::t($usernameRequirements['dontMatchMessage']));
+      
     $rules[] = array('status', 'in', 'range' => array(0, 1, 2, 3, -1, -2));
     $rules[] = array('superuser', 'in', 'range' => array(0, 1));
     $rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
