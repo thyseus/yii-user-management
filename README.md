@@ -29,14 +29,23 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Almost complete Translation to spain thanks to bigchirv@gmail.com
 * Incomplete Translations to russian and polish
 
+Demo Application:
+-----------------
+
+Starting from 0.9, a demo application is provided in the demo_app folder.
+
+To use it, copy it into your webroot, extract all modules into the modules/
+folder, adjust the database configuration in protected/config/main.php
+and run http://localhost/demo_app/index.php/user/install
+
 Installation Instructions:
 --------------------------
 
 * The Yii User Management Module needs a mysql Database Connection to 
-work. 
+work.
 
 * Extract the Yii User Management Module under the modules/ directory
-of your Web Application. 
+of your Web Application.
 
 ```
 $ cd testdrive/protected
