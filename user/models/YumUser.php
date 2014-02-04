@@ -507,7 +507,7 @@ class YumUser extends YumActiveRecord
 		$profile->lastname = $hybridAuthProfile->lastName;
 		$profile->email = $hybridAuthProfile->email;
 
-		$this->username = $hybridAuthProfile->displayName;
+		$this->username = $hybridAuthProfile->email;
 		$this->status = 1;
 		$this->createtime = time();
 		$this->password = md5(time()); // obfuscated password

@@ -1,7 +1,7 @@
 yii-user-management
 ===================
 
-A user management module collection for the yii framework 1.1.x
+A user management module collection for the yii framework >= 1.1.14
 
 Features:
 ---------
@@ -29,17 +29,18 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Almost complete Translation to spain thanks to bigchirv@gmail.com
 * Incomplete Translations to russian and polish
 
-Demo Application:
------------------
+Quick & Dirty Demo Application:
+-------------------------------
 
 Starting from 0.9, a demo application is provided in the demo_app folder.
 
-To use it, copy it into your webroot, extract all modules into the modules/
+To use it, copy it into your webroot, set the path to your yii framework
+folder in index.php, extract all wanted modules into the modules/
 folder, adjust the database configuration in protected/config/main.php
 and run http://localhost/demo_app/index.php/user/install
 
-Installation Instructions:
---------------------------
+Detailed Installation Instructions:
+-----------------------------------
 
 * The Yii User Management Module needs a mysql Database Connection to 
 work.
@@ -53,6 +54,7 @@ $ mkdir modules
 $ cd modules
 $ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.9.tar.bz2
 $ tar xvf yii-user-management_0.9.tar.bz2
+$ rm -rf demo_app # folder is not necessary
 ```
 
 * The Yii-user-management module contains submodules that you just extracted

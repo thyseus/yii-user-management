@@ -31,7 +31,7 @@ class YumAuthController extends YumController {
 					'actions'=>array('logout'),
 					'users'=>array('@'),
 					),
-				array('deny',  // deny all other users
+				array('deny',
 					'users'=>array('*'),
 					),
 				);
@@ -45,6 +45,14 @@ class YumAuthController extends YumController {
 			return YumUser::model()->find('upper(username) = :username', array(
 						':username' => strtoupper($user)));
 	}
+
+  public function getUserByEmail($email) {
+    $profile = YumProfile::model()->find('email = :email', array(
+      ':email' => $email));
+    if($profile && $profile->user)
+      return $profile->user;
+  }
+
 
 	public function loginByUsername() {
 		$user = $this->getUser($this->loginForm->username);
@@ -100,11 +108,14 @@ class YumAuthController extends YumController {
 				throw new CException('Requested provider is not enabled in configuration file');
 
 			$success = $hybridauth->authenticate($provider);
+
 			if($success && $success->isUserConnected()) {
 				// User found and authenticated at foreign party. Is he already 
 				// registered at our application?
 				$hybridAuthProfile = $success->getUserProfile();
-				$user = $this->getUser($hybridAuthProfile->displayName);
+
+				$user = $this->getUserByEmail($hybridAuthProfile->email);
+
 				if(!$user && !YumProfile::model()->findByAttributes(array(
 								'email' => $hybridAuthProfile->email))) {
 					// No, he is not, so we register the user and sync the profile fields
