@@ -599,7 +599,7 @@ class YumUser extends YumActiveRecord
 
 	public function isPasswordExpired()
 	{
-		$distance = Yum::module('user')->password_expiration_time * 60 * 60;
+		$distance = Yum::module('user')->password_expiration_time * 60 * 60 * 24;
 		return $this->lastpasswordchange - $distance > time();
 	}
 
