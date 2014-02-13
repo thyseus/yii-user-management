@@ -37,7 +37,7 @@ class YumUserLogin extends YumFormModel {
 
 	public function attributeLabels() {
 		return array(
-				'username'=>Yum::t('Name'),
+				'username'=>Yum::t("Username"),
 				'password'=>Yum::t("Password"),
 				'rememberMe'=>Yum::t("Remember me next time"),
 				'verifyCode'=>Yum::t("Verification code"),
