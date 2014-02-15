@@ -1,4 +1,4 @@
-<?
+<?php
 $profiles = Yum::hasModule('profile');
 
 if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL & $profiles)
