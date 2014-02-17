@@ -1,0 +1,20 @@
+{
+    "name": "thyseus/yii-user-management",
+    "description": "A user management module collection for the yii framework",
+    "type": "library",
+     "keywords": ["user","role", "profile"],
+    "homepage": "http://github.com/thyseus/yii-user-management",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Herbert Maschke",
+            "email": "thyseus@gmail.com",
+            "homepage": "http://www.litecode.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "yiisoft/yii": ">=1.1.14"
+    }
+}

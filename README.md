@@ -32,12 +32,13 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 Quick & Dirty Demo Application:
 -------------------------------
 
-Starting from 0.9, a demo application is provided in the demo_app folder.
+Starting from 0.9, a demo application is provided in the repository.
 
-To use it, copy it into your webroot, set the path to your yii framework
-folder in index.php, extract all wanted modules into the modules/
-folder, adjust the database configuration in protected/config/main.php
-and run http://localhost/demo_app/index.php/user/install
+To use it:
+
+* set the path to your yii framework folder in index.php,
+* adjust the database configuration in protected/config/main.php
+* and run http://localhost/yii-user-management/index.php/user/install
 
 Detailed Installation Instructions:
 -----------------------------------
@@ -45,8 +46,8 @@ Detailed Installation Instructions:
 * The Yii User Management Module needs a mysql Database Connection to 
 work.
 
-* Extract the Yii User Management Module under the modules/ directory
-of your Web Application.
+* Extract the Yii User Management Modules (protected/modules/) under the 
+modules/ directory of your Web Application.
 
 ```
 $ cd testdrive/protected
