@@ -49,34 +49,21 @@ class YumUserController extends YumController {
 				);
 	}
 
-	public function actionGenerateData() {
-		if(Yum::hasModule('role'))
-			Yii::import('application.modules.role.models.*');
-		if(isset($_POST['user_amount'])) {
-			for($i = 0; $i < $_POST['user_amount']; $i++) {
-				$user = new YumUser();
-				$user->username = sprintf('Demo_%d_%d', rand(1, 50000), $i);
-				$user->roles = array($_POST['role']);
-				$user->setPassword ($_POST['password']);
-				$user->createtime = time();
-				$user->status = $_POST['status'];
+  public function actionGenerateData() {
+    if(!Yum::module()->debug)
+      throw new CHttpException(500, Yum::t('Generation of Demo users only allowed in debug mode'));
 
-				if($user->save()) {
-					if(Yum::hasModule('profile')) {
-						$profile = new YumProfile();
-						$profile->user_id = $user->id;
-						$profile->timestamp = time();
-						$profile->firstname = $user->username;
-						$profile->lastname = $user->username;
-						$profile->privacy = 'protected';
-						$profile->email = 'e@mail.de';
-						$profile->save();
-					} 
-				}
-			}
-		}
-		$this->render('generate_data');
-	}
+    if(Yum::hasModule('role'))
+      Yii::import('application.modules.role.models.*');
+
+    if(isset($_POST['user_amount'])) {
+      for($i = 0; $i < $_POST['user_amount']; $i++) {
+        Yum::generateDemoUser($_POST['role'], $_POST['password'], $_POST['status']);
+      }
+    }
+
+    $this->render('generate_data');
+  }
 
 	public function actionIndex() {
 		// If the user is not logged in, so we redirect to the actionLogin,

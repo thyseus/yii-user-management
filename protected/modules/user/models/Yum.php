@@ -166,5 +166,31 @@ class Yum
 					),true);		
 	}
 
+  public static function generateDemoUser($roles, $password, $status) {
+    $firstnames = array( 'Kacie', 'Minh', 'Tammera', 'Rocco', 'Violet', 'Suzi', 'Lavone', 'Judie', 'Nathaniel', 'Lena', 'Garth', 'Maryjane', 'Nyla', 'Marisha', 'Karla', 'Virgina', 'Conception', 'Jillian', 'Chere', 'Orpha', 'Damaris', 'Freeda', 'Rosalyn', 'Dierdre', 'Rae', 'Joel', 'Willia', 'Megan', 'Ozell', 'Enola', 'Esteban', 'Farah', 'Trevor', 'Joslyn', 'Lydia', 'Latoyia', 'Doretha', 'Kristine', 'Loraine', 'In', 'Ebonie', 'Rhiannon', 'Chase', 'Yu', 'Pamula', 'Akilah', 'Teofila', 'Elnora', 'Mike', 'Florida');
+
+    $lastnames = array( 'Tosi', 'Bicknell', 'Deguzman', 'Elizalde', 'Gillock', 'Groff', 'Bradish', 'Hilario', 'Cashen', 'Peralez', 'Hyre', 'Leverich', 'Asher', 'Mcray', 'Pearson', 'Montana', 'Mattingly', 'Christofferse', 'Trybus', 'Danford', 'Pennel', 'Singletary', 'Cosme', 'Felt', 'Formby', 'Hurrell', 'Aguero', 'Arnold', 'Holmstrom', 'Watchman', 'Busch', 'Osbourn', 'Sine', 'Mcglinchey', 'Sherrick', 'Meyerhoff', 'Chaffins', 'Cranor', 'Macmillan', 'Killen', 'Gambill', 'Delosantos', 'Bevill', 'Giannini', 'Rhein', 'Sadberry', 'Baird');
+
+    $firstname = $firstnames[rand(0, count($firstnames) - 1)];
+    $lastname = $lastnames[rand(0, count($lastnames) - 1)];
+
+    $user = new YumUser();
+    $user->username = sprintf('%s_%s', $firstname, $lastname);
+    $user->roles = array($_POST['role']);
+    $user->setPassword ($_POST['password']);
+    $user->status = $_POST['status'];
+    $user->createtime = time();
+
+    if($user->save()) {
+      if(Yum::hasModule('profile')) {
+        $profile = new YumProfile();
+        $profile->user_id = $user->id;
+        $profile->firstname = $firstname;
+        $profile->lastname = $lastname;
+        $profile->email = sprintf('%s@%s.com', $firstname, $lastname);
+        $profile->save();
+      }
+    }
+  }
 }
 ?>
