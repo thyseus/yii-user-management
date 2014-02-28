@@ -36,8 +36,8 @@ if(Yum::module('profile')->enableProfileComments
 
 <?php
  if(!Yii::app()->user->isGuest && Yii::app()->user->id == $model->id) {
-	echo CHtml::link(Yum::t('Edit profile'), array('//profile/profile/update'));
+	echo CHtml::link(Yum::t('Edit profile'), array('//profile/profile/update'), array('class' => 'btn'));
 	echo '&nbsp;';
-	echo CHtml::link(Yum::t('Upload avatar image'), array('//avatar/avatar/editAvatar'));
+	echo CHtml::link(Yum::t('Upload avatar image'), array('//avatar/avatar/editAvatar'), array('class' => 'btn'));
 }
 

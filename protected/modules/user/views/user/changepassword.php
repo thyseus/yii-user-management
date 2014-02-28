@@ -15,18 +15,16 @@ if(isset($expired) && $expired)
 	<?php echo CHtml::errorSummary($form); ?>
 
 	<?php if(!Yii::app()->user->isGuest) {
-		echo '<div class="row">';
 		echo CHtml::activeLabelEx($form,'currentPassword'); 
 		echo CHtml::activePasswordField($form,'currentPassword'); 
-		echo '</div>';
 	} ?>
 
 <?php $this->renderPartial(
 		'application.modules.user.views.user.passwordfields', array(
 			'form'=>$form)); ?>
 
-	<div class="row submit">
-	<?php echo CHtml::submitButton(Yum::t("Save")); ?>
+	<div class="submit">
+	<?php echo CHtml::submitButton(Yum::t("Save"), array('class' => 'btn')); ?>
 	</div>
 
 <?php echo CHtml::endForm(); ?>

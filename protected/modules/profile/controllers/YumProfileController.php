@@ -37,7 +37,6 @@ class YumProfileController extends YumController {
 			$profile->attributes = @$_POST['YumProfile'];
 			$profile->user_id = $user->id;
 
-
 			$profile->validate();
 			$user->validate();
 

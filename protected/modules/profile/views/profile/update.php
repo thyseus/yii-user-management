@@ -7,7 +7,7 @@ $this->title = Yum::t('Edit profile');
 
 <div class="form">
 
-<?php $form=$this->beginWidget('zii.widgets.CActiveForm', array(
+<?php $form=$this->beginWidget('CActiveForm', array(
     'id'=>'profile-form',
 )); ?>
 
@@ -18,22 +18,23 @@ $this->title = Yum::t('Edit profile');
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME) { ?>
 
 <?php echo $form->LabelEx($user,'username'); ?>
-<?php echo $form->activeTextField($user,'username',array(
+<?php echo $form->textField($user,'username',array(
 			'size'=>20,'maxlength'=>20)); ?>
 <?php echo $form->error($user,'username'); ?>
 
-<?php } ?> 
+<?php } ?>
 
-<?php if(isset($profile) && is_object($profile)) 
+<?php if(isset($profile) && is_object($profile))
 	$this->renderPartial('/profile/_form', array('profile' => $profile, 'form'=>$form)); ?>
 	
 	<?php
 
 	if(Yum::module('profile')->enablePrivacySetting)
-		echo CHtml::button(Yum::t('Privacy settings'), array(
-					'submit' => array('/profile/privacy/update'))); ?>
+    echo CHtml::button(Yum::t('Privacy settings'), array(
+      'submit' => array('/profile/privacy/update'),
+      'class' => 'btn')); ?>
 
-	<?php 
+	<?php
 		if(Yum::hasModule('avatar'))
 			echo CHtml::button(Yum::t('Upload avatar Image'), array(
 				'submit' => array('/avatar/avatar/editAvatar'), 'class'=>'btn')); ?>

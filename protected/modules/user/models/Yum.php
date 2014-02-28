@@ -8,7 +8,7 @@
  *
  */
 class Yum
-{ 
+{
 	/** Register an asset file of Yum */
 	public static function register($file)
 	{
@@ -23,6 +23,32 @@ class Yum
 
 		return $path;
 	}
+
+  public static function userStatus() {
+    if(Yii::app()->user->isGuest)
+      return Yum::t('Not logged in');
+
+    $user = Yii::app()->user->data();
+    $string = Yum::t('Logged in as: ');
+    $string .= $user->username;
+
+    if(Yum::hasModule('profile') && $user->profile)
+      $string .= ' ' . Yum::t('%{firstname} | %{lastname} | %{email}', array(
+        '%{firstname}' => Yii::app()->user->data()->profile->firstname,
+        '%{lastname}' => Yii::app()->user->data()->profile->lastname,
+        '%{email}' => Yii::app()->user->data()->profile->email));
+
+    if(Yum::hasModule('profile') && count($user->roles) > 0) {
+      $string .= '&nbsp;( ';
+      foreach($user->roles as $role)
+        $string .= $role->title . '&nbsp;';
+      $string .= ')';
+    }
+
+    if(Yii::app()->user->isAdmin())
+      $string .= Yum::t('(Administrator)');
+    return $string;
+  }
 
 	public static function hint($message) 
 	{
@@ -86,7 +112,7 @@ class Yum
 	public static function renderFlash()
 	{
 		if(Yum::hasFlash()) {
-			echo '<div class="info">';
+			echo '<div class="alert">';
 			echo Yum::getFlash();
 			echo '</div>';
 			Yii::app()->clientScript->registerScript('fade',"

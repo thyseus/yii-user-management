@@ -10,18 +10,13 @@ Yii::app()->clientScript->registerScript('', "
 }
 ?>
 
-<div class="row">
 <?php echo CHtml::activeLabelEx($form,'password'); ?>
 <?php echo CHtml::activePasswordField($form,'password'); ?>
-</div>
 
 <?php if(Yum::module()->displayPasswordStrength) { ?>
 <div id="password-strength"></div>
 <?php } ?>
 
-
-<div class="row">
 <?php echo CHtml::activeLabelEx($form,'verifyPassword'); ?>
 <?php echo CHtml::activePasswordField($form,'verifyPassword'); ?>
-</div>
 
