@@ -78,12 +78,12 @@ class UserModule extends CWebModule {
   public $rteadapter = false; // Don't use an Adapter
 
 	public $customCsvExportCriteria = '1';
-	
+
 	// valid callback function that executes after user login
 	public $afterLogin = false;
 
 	// Set this to true to really remove users instead of setting the status
-	// to -2 (YumUser::REMOVED)	
+	// to -2 (YumUser::REMOVED)
 	// Handle with care. User and Profile will get removed physically from the db.
 	public $trulyDelete = false;
 
@@ -114,6 +114,7 @@ class UserModule extends CWebModule {
 
 	private $_views = array(
 			'login' => '/user/login',
+			'loginDebug' => '/user/login_debug',
 			'menu' => '/user/menu',
 			'registration' => '/registration/registration',
 			'activate' => '/user/resend_activation',

@@ -53,7 +53,6 @@ class YumAuthController extends YumController {
       return $profile->user;
   }
 
-
 	public function loginByUsername() {
 		$user = $this->getUser($this->loginForm->username);
 		if($user)
@@ -71,19 +70,27 @@ class YumAuthController extends YumController {
 		return false;
 	}
 
-	public function loginByEmail() {
-		if(Yum::hasModule('profile')) {
-			Yii::import('application.modules.profile.models.*');
+  public function loginByEmail() {
+    if(!Yum::hasModule('profile'))
+      throw new CException(Yum::t(
+        'The profile submodule must be enabled to allow login by Email'));
 
-			$profile = YumProfile::model()->find('email = :email', array(
-						':email' => $this->loginForm->username));
+    Yii::import('application.modules.profile.models.*');
 
-			if($profile && $profile->user)
-				return $this->authenticate($profile->user);
-		} else
-			throw new CException(Yum::t(
-						'The profile submodule must be enabled to allow login by Email'));
-	}
+    $profile = YumProfile::model()->find('email = :email', array(
+      ':email' => $this->loginForm->username));
+
+    if($profile && $profile->user)
+      return $this->authenticate($profile->user);
+  }
+
+  public function loginByDebug() {
+    $user = $this->getUser($this->loginForm->username);
+    $identity = new YumUserIdentity($user->username, 'foobar');
+    $identity->authenticate(true);
+    Yii::app()->user->login($identity, 3600);
+    return $user;
+  }
 
 	public function loginByHybridAuth($provider) {
 		if(!Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH)
@@ -124,7 +131,7 @@ class YumAuthController extends YumController {
 						Yum::setFlash(Yum::t('Registration by external provider failed'));
 						$this->redirect(Yum::module()->returnUrl);
 					} else Yum::setFlash('Registration successful');
-				} 
+				}
 
 				$identity = new YumUserIdentity($user->username, null);
 
@@ -149,8 +156,7 @@ class YumAuthController extends YumController {
 	}
 
 	public function logFailedLoginAttempts($user) {
-		Yum::log(
-				Yum::t(
+		Yum::log( Yum::t(
 					'Failed login attempt for user {username} (Ip-Address: {ip})', array(
 						'{ip}' => Yii::app()->request->getUserHostAddress(),
 						'{username}' => $this->loginForm->username)), 'error');
@@ -192,9 +198,9 @@ class YumAuthController extends YumController {
 	}
 
 	public function actionLogin($hybridauth = false) {
-		// If the user is already logged in send them to the return Url 
+		// If the user is already logged in send them to the return Url
 		if (!Yii::app()->user->isGuest)
-			$this->redirect(Yum::module()->returnUrl);   
+			$this->redirect(Yum::module()->returnUrl);
 
 		$this->layout = Yum::module()->loginLayout;
 
@@ -203,11 +209,10 @@ class YumAuthController extends YumController {
 
 		$this->loginForm = new YumUserLogin('login');
 
-		if(Yum::module()->captchaAfterUnsuccessfulLogins !== false &&
-				Yii::app()->user->getState('yum-login-attempts') 
-				>= Yum::module()->captchaAfterUnsuccessfulLogins)
+    if(!Yum::module()->debug &&
+      Yum::module()->captchaAfterUnsuccessfulLogins &&
+				Yii::app()->user->getState('yum-login-attempts') >= Yum::module()->captchaAfterUnsuccessfulLogins)
 		$this->loginForm->scenario = 'captcha';
-
 
 		$success = false;
 		$action = 'login';
@@ -216,8 +221,10 @@ class YumAuthController extends YumController {
 			$this->loginForm->attributes = $_POST['YumUserLogin'];
 			$t = Yum::module()->loginType;
 
-			// validate user input for the rest of login methods
-			if ($this->loginForm->validate()) {
+      if(Yum::module()->debug) {
+        $success = $this->loginByDebug();
+        $login_type = 'debug';
+      } else if ($this->loginForm->validate()) {
 				if ($t & UserModule::LOGIN_BY_USERNAME) {
 					$success = $this->loginByUsername();
 					if ($success)
@@ -228,15 +235,16 @@ class YumAuthController extends YumController {
 					if ($success)
 						$login_type = 'email';
 				}
-			} 
+      }
 
 			if ($success !== false && $success instanceof YumUser) {
 				//cookie with login type for later flow control in app
-				if ($login_type) {
+				if ($login_type && $login_type != 'debug') {
 					$cookie = new CHttpCookie('login_type', serialize($login_type));
 					$cookie->expire = time() + Yum::module()->cookieDuration;
 					Yii::app()->request->cookies['login_type'] = $cookie;
 				}
+
 				Yum::log(Yum::t(
 							'User {username} successfully logged in by {login_type} (Ip: {ip})', array(
 								'{login_type}' => $login_type,
@@ -244,7 +252,7 @@ class YumAuthController extends YumController {
 								'{username}' => $success->username)));
 
 				// call a function if defined in module configuration
-				if(Yum::module()->afterLogin !== false) 
+				if(Yum::module()->afterLogin !== false)
 					call_user_func(Yum::module()->afterLogin);
 
 				Yii::app()->user->setState('yum-login-attempts', 0);
@@ -257,13 +265,16 @@ class YumAuthController extends YumController {
 			}
 		}
 
-		if(Yum::module()->captchaAfterUnsuccessfulLogins !== false &&
-				Yii::app()->user->getState('yum-login-attempts') 
+    if(!Yum::module()->debug &&
+      Yum::module()->captchaAfterUnsuccessfulLogins !== false &&
+      Yii::app()->user->getState('yum-login-attempts')
 				>= Yum::module()->captchaAfterUnsuccessfulLogins)
 		$this->loginForm->scenario = 'captcha';
 
-		$this->render(Yum::module()->loginView, array(
-					'model' => $this->loginForm));
+    $this->render(Yum::module()->debug
+      ? Yum::module()->loginDebugView
+      : Yum::module()->loginView, array(
+        'model' => $this->loginForm));
 	}
 
 	public function redirectUser($user) {

@@ -2,10 +2,11 @@ Changelog for Yii User Management Module (Yum)
 
 0.9 wip:
 
+- ENH: no password necessary in debug mode
 - ENH: integrated EPasswordGenerator
 (https://github.com/ibrarturi/EPasswordGenerator)
 - ENH: Integrated pStrength jquery widget
-- ENH: uses CPasswordHelper of yii 1.1.14. This release of yii is now 
+- ENH: uses CPasswordHelper of yii 1.1.14. This release of yii is now
 - mandatory.
 - ENH: added hybridauth support - see docs/hybridauth.txt
 - ENH: added captchaAfterUnsuccessfulLogins (default to 3)

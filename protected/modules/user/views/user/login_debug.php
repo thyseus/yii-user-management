@@ -50,32 +50,15 @@ if(isset($_GET['action']))
 
 <div class="row">
 <?php
-  if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME)
-    echo CHtml::activeLabelEx($model,'username'); 
-if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
-  printf ('<label for="YumUserLogin_username">%s <span class="required">*</span></label>', Yum::t('E-Mail address')); 
+  printf ('<label for="YumUserLogin_username">%s: <span class="required">*</span></label>', Yum::t('Login as'));
 ?>
 
-    <?php echo CHtml::activeTextField($model,'username') ?>
+<?php echo CHtml::activeDropDownList($model,'username', CHtml::listData(
+  YumUser::model()->findAll(), 'username', 'username')); 
+
+printf ('<label>%s</label>', Yum::t('No password necessary since debug mode is active'));
+?>
 </div>
-
-<div class="row">
-    <?php echo CHtml::activeLabelEx($model,'password'); ?>
-    <?php echo CHtml::activePasswordField($model,'password'); ?>
-</div>
-
-<?php if ($model->scenario == 'captcha' && CCaptcha::checkRequirements()) { ?>
-  <div class="row">
-    <?php echo CHtml::activeLabel($model, 'verifyCode'); ?>
-      <div>
-        <?php $this->widget('CCaptcha'); ?>
-        <?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
-    </div>
-    <?php echo CHtml::error($model, 'verifyCode'); ?>
-  </div>
-<?php } ?>
-
-
 </div>
 
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
