@@ -1,6 +1,6 @@
 <div class="span12">
 <div class="form">
-<?php 
+<?php
 $form = $this->beginWidget('CActiveForm', array(
 			'id'=>'user-form',
 			'enableAjaxValidation'=>false,
@@ -74,7 +74,8 @@ echo $form->error($user, 'superuser'); ?>
 <div class="span6">
 <?php if(Yum::hasModule('profile')) 
 $this->renderPartial(Yum::module('profile')->profileFormView, array(
-			'profile' => $profile)); ?>
+  'form' => $form,
+  'profile' => $profile)); ?>
 </div>
 
 <div class="clearfix"></div>

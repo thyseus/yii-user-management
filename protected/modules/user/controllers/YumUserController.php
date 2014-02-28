@@ -251,7 +251,7 @@ class YumUserController extends YumController {
 	public function actionUpdate($id) {
 		$user = $this->loadUser($id);
 		$profile = false;
-		if(Yum::hasModule('profile')) 
+		if(Yum::hasModule('profile'))
 			$profile = $user->profile;
 		$passwordform = new YumUserChangePassword();
 
@@ -288,7 +288,7 @@ class YumUserController extends YumController {
 		$this->render('update', array(
 					'user'=>$user,
 					'passwordform' =>$passwordform,
-					'profile' => $profile, 
+					'profile' => $profile,
 					));
 	}
 
