@@ -6,14 +6,15 @@ A user management module collection for the yii framework >= 1.1.14
 Features:
 ---------
 
-* An automated Installer
+* Demo Project
+* Installer
 * User Administration
 * Role Administration
 * Hybrid auth is bundled and can easily be integrated, see docs/hybridauth.txt.
 * All providers of hybrid auth and hybrid auth extra package are integrated:
-AOL, Google, Mail.ru, Plurk, Tumblr, Yahoo, Disqus, Identica, Murmur, px500, 
-TwitchTV, Yandex, Facebook, Instagram, MySpace, QQ, Twitter, Foursquare, 
-LastFM, Odnoklassniki, Sina, Viadeo, GitHub, LinkedIn, OpenID, Skyrock, 
+AOL, Google, Mail.ru, Plurk, Tumblr, Yahoo, Disqus, Identica, Murmur, px500,
+TwitchTV, Yandex, Facebook, Instagram, MySpace, QQ, Twitter, Foursquare,
+LastFM, Odnoklassniki, Sina, Viadeo, GitHub, LinkedIn, OpenID, Skyrock,
 Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Permission System with a mixture of RBAC and ACL (see docs)
 * Profiles & Profile history & Profile Comments & Profile Fields Administration
@@ -24,29 +25,36 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Password Recovery
 * Friendship system
 * Mailing component (users can choose which messages he gets by email)
-* Base Language: English 
+* Base Language: English
 * Complete Translations to german, french
 * Almost complete Translation to spain thanks to bigchirv@gmail.com
 * Incomplete Translations to russian and polish
 
-Quick & Dirty Demo Application:
+Usage:
 -------------------------------
 
 Starting from 0.9, a demo application is provided in the repository.
 
-To use it:
+* Extract the package to your webroot:
+```
+$ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.9.tar.bz2
+$ tar xvf yii-user-management_0.9.tar.bz2
+```
+or
 
-* set the path to your yii framework folder in index.php,
-* adjust the database configuration in protected/config/main.php
-* and run http://localhost/yii-user-management/index.php/user/install
+```
+$ git clone https://github.com/thyseus/yii-user-management
+```
+* Set the path to your yii framework folder in index.php,
+* Run http://localhost/yii-user-management/index.php
 
 Detailed Installation Instructions:
 -----------------------------------
 
-* The Yii User Management Module needs a mysql Database Connection to 
+* The Yii User Management Module needs a mysql Database Connection to
 work.
 
-* Extract the Yii User Management Modules (protected/modules/) under the 
+* Extract the Yii User Management Modules (protected/modules/) under the
 modules/ directory of your Web Application.
 
 ```
@@ -55,7 +63,6 @@ $ mkdir modules
 $ cd modules
 $ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.9.tar.bz2
 $ tar xvf yii-user-management_0.9.tar.bz2
-$ rm -rf demo_app # folder is not necessary
 ```
 
 * The Yii-user-management module contains submodules that you just extracted
@@ -74,11 +81,11 @@ Add these lines:
 		),
 ```
 
-The debug option is needed for the installation and should be set to false 
-after the installation. 
+The debug option is needed for the installation and should be set to false
+after the installation.
 
 * To let your Web Application use the Authentification Methods of
-the User Management Module, we need to overwrite the default 
+the User Management Module, we need to overwrite the default
 CWebUser Component with YumWebUser in your Application Configuration:
 
 ```
@@ -90,16 +97,16 @@ CWebUser Component with YumWebUser in your Application Configuration:
         [...]
       ),
 
- 'import'=>array(  
+ 'import'=>array(
   'application.modules.user.models.*',
 	[...]
 ```
-    
+
 This tells our Web Application that is can access the Model 'User'
 even when not in the modules/user environment. This is needed for calling
 User::hasRole($role) in your Code to check if the logged in User belongs to the
-role. This is explained in the detailed Documentation. It is good to let this 
-line occur as the first included Model, so you can extend the User-Model with 
+role. This is explained in the detailed Documentation. It is good to let this
+line occur as the first included Model, so you can extend the User-Model with
 your own in your Application models/ Directory if you like.
 
 * Make sure to set a caching component in your application components
@@ -121,18 +128,18 @@ http://localhost/testdrive/index.php/user/install
 or
 http://localhost/testdrive/index.php?r=user/install
 
-depending on your URL route setup. 
+depending on your URL route setup.
 
 * Now the Installer of the User Management Module should appear.
 To the right you can set up alternate Table Names used by the
-Module. In most cases this is not needed and you can keep this 
+Module. In most cases this is not needed and you can keep this
 Settings. If you do change this, be sure to set up the correct table
 Names in your Application Configuration, so the User Module can access
 them.
 
 Click 'Install Module'. After clicking it, the install script will
 create the database tables needed by the module(s). Then it will show
-you the neccesary modifications to be made. Add the Modules you need to your 
+you the neccesary modifications to be made. Add the Modules you need to your
 Application Configuration as provided by the install script in config/main.php.
 You can also remove the Yum modules you don't want to use.
 
@@ -141,7 +148,7 @@ tidy up a little bit:
 
 * Login as admin/admin and navigate to index.php?r=user/user/admin.
 This is your user management administration panel. Click on "Administrate your Users"
-Now you are taken to the default Front-End Login-Screen of the User 
+Now you are taken to the default Front-End Login-Screen of the User
 Management Module. Log in with the Username admin and Password admin.
 
 * Click on the 'update Icon' (the pencil) of your administrator User.
@@ -157,12 +164,12 @@ Configuration of your freshly installed User Management Module:
 Language:
 ---------
 The Yii-User Management Module uses the language that is set in
-the Application Configuration. For example, you can add a 
+the Application Configuration. For example, you can add a
 
 'language' => 'de',
 
 in your config/main.php to get German Language strings. At the moment
-English, German, French and Polish are supported. 
+English, German, French and Polish are supported.
 
 Quick Login Widget:
 -------------------
@@ -173,23 +180,23 @@ just call in your view file:
 
 Password Requirements:
 ----------------------
-You can setup the password Requirements within the 'passwordRequirements' 
+You can setup the password Requirements within the 'passwordRequirements'
 option of the Module, for example:
 
  'user' => array(
-        'passwordRequirements' => array(                                        
+        'passwordRequirements' => array(
           'minLen' => 4,
           'maxLen' => 16,
           'maxRepetition' => 2,
           'minDigits' => 3,
           ),
 
-Please see components/CPasswordValidator.php for possible password 
+Please see components/CPasswordValidator.php for possible password
 requirement options
 
 User Registration:
 ------------------
-Set the Variable 'enableActivationConfirmation' to false in the module configuration to 
+Set the Variable 'enableActivationConfirmation' to false in the module configuration to
 let users register for your application without needing to receive/click an emailed confirmation link.
 
 Role Management:
@@ -217,7 +224,7 @@ the logging functions of the Yii User Management module.
 Where to go from now on?
 ------------------------
 There are some examples on how to extend from the Yii User Management
-Module and how to implement project-specific stuff. See the files in 
+Module and how to implement project-specific stuff. See the files in
 the docs/ directory for all this.
 
 See docs/hybridauth.txt for instruction on how to use the wonderful
@@ -254,7 +261,7 @@ A: Please make sure that you have the following in your application configuratio
 
 Q: Why doesn´ t the yii-user-management have submodules?
 
-A: Submodules are supported by yii, but having a path like 
+A: Submodules are supported by yii, but having a path like
 application.modules.user.modules.role.controllers.YumRoleController
 really looks strange, so we decided it is better to keep all modules inside
 the root modules/ directory.
@@ -272,11 +279,11 @@ Insert the translation data manually in a cmd window as:
 mysql -u yourusername -p testyum < docs/yum_translation.sql
 
 
-Q: I still got errors ! 
+Q: I still got errors !
 
 A: Make sure to enable a caching component, at least CDummyCache, in your config/main.php:
 
-'cache'=>array( 'class'=>'system.caching.CDummyCache',	),  
+'cache'=>array( 'class'=>'system.caching.CDummyCache',	),
 
 Q: I still got errors !
 

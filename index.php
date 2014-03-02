@@ -1,13 +1,10 @@
 <?php
 
-// change the following paths if necessary
-$yii=dirname(__FILE__).'/../yii-git/framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/main.php';
+// This is the bootstrap script of the yii user management demo application.
+// It is not meant for any productive 
+// Change the following path to your yii installation
+require_once(dirname(__FILE__).'/../yii-git/framework/yii.php');
 
-// remove the following lines when in production mode
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-// specify how many levels of call stack should be shown in each log message
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);
+define('YII_DEBUG',true);
 
-require_once($yii);
-Yii::createWebApplication($config)->run();
+Yii::createWebApplication('/protected/config/main.php')->run();
