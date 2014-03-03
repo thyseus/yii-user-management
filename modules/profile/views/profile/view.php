@@ -2,7 +2,6 @@
 if(!$profile = $model->profile)
 	$profile = new YumProfile;
 
-
 $this->pageTitle = Yum::t('Profile');
 $this->title = CHtml::activeLabel($model,'username');
 $this->breadcrumbs = array(Yum::t('Profile'), $model->username);
@@ -35,9 +34,11 @@ if(Yum::module('profile')->enableProfileComments
  </div>
 
 <?php
- if(!Yii::app()->user->isGuest && Yii::app()->user->id == $model->id) {
-	echo CHtml::link(Yum::t('Edit profile'), array('//profile/profile/update'), array('class' => 'btn'));
-	echo '&nbsp;';
-	echo CHtml::link(Yum::t('Upload avatar image'), array('//avatar/avatar/editAvatar'), array('class' => 'btn'));
+if(!Yii::app()->user->isGuest && Yii::app()->user->id == $model->id) {
+  echo CHtml::link(Yum::t('Edit profile'), array('//profile/profile/update'), array('class' => 'btn'));
+  if(Yum::hasModule('avatar')) {
+    echo '&nbsp;';
+    echo CHtml::link(Yum::t('Upload avatar image'), array('//avatar/avatar/editAvatar'), array('class' => 'btn'));
+  }
 }
 

@@ -10,10 +10,8 @@
 class Yum
 {
 	/** Register an asset file of Yum */
-	public static function register($file)
-	{
-		$url = Yii::app()->getAssetManager()->publish(
-				Yii::getPathOfAlias('application.modules.user.assets'));
+	public static function register($file) {
+		$url = Yii::app()->getAssetManager()->publish(dirname(__FILE__).'/../assets');
 
 		$path = $url . '/' . $file;
 		if(strpos($file, 'js') !== false)
