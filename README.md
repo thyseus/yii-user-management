@@ -46,6 +46,7 @@ or
 $ git clone https://github.com/thyseus/yii-user-management
 ```
 * Set the path to your yii framework folder in index.php,
+* create an empty folder assets/ and runtime/ with write access
 * Run http://localhost/yii-user-management/index.php
 
 Detailed Installation Instructions:

@@ -1,7 +1,8 @@
 <?php
 
-class SiteController extends Controller {
+class SiteController extends CController {
   public $layout = 'main';
+  public $breadcrumbs = array();
 
   public function actionIndex() {
     $this->render('index');
