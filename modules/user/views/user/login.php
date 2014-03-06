@@ -23,6 +23,8 @@ $form = new CForm(array(
 ), $model);
 ?>
 
+
+
 <?php
 $this->pageTitle = Yum::t('Login');
 $this->title = Yum::t('Login');
@@ -35,20 +37,20 @@ if(isset($_GET['action']))
 
 ?>
 
-<div class="form">
 
+<div class="row-fluid">
 <?php if($model->hasErrors()) { ?>
 <div class="alert">
-<?php echo CHtml::errorSummary($model); ?>
+	<?php echo CHtml::errorSummary($model); ?>
 </div>
 <?php } ?>
 
 
-<div class="span5 loginform">
+<div class="span6 loginform">
 <p> <?php echo Yum::t(
   'Please fill out the following form with your login credentials:'); ?> </p>
 
-<div class="row">
+
 <?php
   if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME)
     echo CHtml::activeLabelEx($model,'username'); 
@@ -57,22 +59,22 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 ?>
 
     <?php echo CHtml::activeTextField($model,'username') ?>
-</div>
 
-<div class="row">
+
+
     <?php echo CHtml::activeLabelEx($model,'password'); ?>
     <?php echo CHtml::activePasswordField($model,'password'); ?>
-</div>
+
 
 <?php if ($model->scenario == 'captcha' && CCaptcha::checkRequirements()) { ?>
-  <div class="row">
+ 
     <?php echo CHtml::activeLabel($model, 'verifyCode'); ?>
-      <div>
+     
         <?php $this->widget('CCaptcha'); ?>
         <?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
-    </div>
+   
     <?php echo CHtml::error($model, 'verifyCode'); ?>
-  </div>
+ 
 <?php } ?>
 
 
@@ -80,7 +82,7 @@ if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
 
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
 && Yum::module()->hybridAuthProviders) { ?>
-  <div class="span5 hybridauth">
+  <div class="span6 hybridauth">
 <?php echo Yum::t('You can also login by') . ': <br />'; 
 foreach(Yum::module()->hybridAuthProviders as $provider) 
   echo CHtml::link(
@@ -93,13 +95,15 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
           'class' => 'social')) . '<br />'; 
 ?>
 </div>
+</div>
 
-<div class="clearfix"></div>
 
 <?php } ?>
 
-<div class="span10">
-<div class="row">
+
+<div class="row-fluid">
+<div class="span12">
+
   <p class="hint">
 <?php 
 if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
@@ -115,15 +119,14 @@ if(Yum::hasModule('registration')
     Yum::module('registration')->recoveryUrl);
 ?>
 </p>
-
+</div>
 </div>
 
 
-<div class="row">
+<div class="row-fluid">
+<div class="span12">
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
-</div>
-
 </div>
 </div>
 </div>

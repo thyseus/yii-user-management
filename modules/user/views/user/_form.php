@@ -1,5 +1,3 @@
-<div class="span12">
-<div class="form">
 <?php
 $form = $this->beginWidget('CActiveForm', array(
 			'id'=>'user-form',
@@ -25,25 +23,22 @@ if($m->hasErrors())
 	?>
 
 <?php echo Yum::requiredFieldNote(); ?>
-<div class="span5">
+<div class="row-fluid">
+<div class="span6">
 
-<div class="row">
 <?php echo $form->labelEx($user, 'username');
 echo $form->textField($user, 'username');
 echo $form->error($user, 'username'); ?>
-</div>
 
-<div class="row">
 <?php echo $form->labelEx($user,'status');
 echo $form->dropDownList($user,'status',YumUser::itemAlias('UserStatus'));
 echo $form->error($user,'status'); ?>
-</div>
 
-<div class="row">
+
 <?php echo $form->labelEx($user, 'superuser');
 echo $form->dropDownList($user, 'superuser',YumUser::itemAlias('AdminStatus'));
 echo $form->error($user, 'superuser'); ?>
-</div>
+
 
 <p> Leave password <em> empty </em> to 
 <?php echo $user->isNewRecord 
@@ -55,7 +50,7 @@ echo $form->error($user, 'superuser'); ?>
 <?php if(Yum::hasModule('role')) { 
 	Yii::import('application.modules.role.models.*');
 ?>
-<div class="row roles">
+
 <label> <?php echo Yum::t('User belongs to these roles'); ?> </label>
 
 <?php $this->widget('YumModule.components.select2.ESelect2', array(
@@ -66,7 +61,6 @@ echo $form->error($user, 'superuser'); ?>
 					'style' => 'width:220px;'),
 				'data' => CHtml::listData(YumRole::model()->findAll(), 'id', 'title'),
 				)); ?>
-</div>
 <?php } ?>
 
 </div>
@@ -78,15 +72,14 @@ $this->renderPartial(Yum::module('profile')->profileFormView, array(
   'profile' => $profile)); ?>
 </div>
 
-<div class="clearfix"></div>
 
-<div class="row buttons">
+
 <?php echo CHtml::submitButton($user->isNewRecord
 			? Yum::t('Create')
 			: Yum::t('Save')); ?>
+
 </div>
 
+
 <?php $this->endWidget(); ?>
-</div>
-</div>
-<div class="clearfix"></div>
+

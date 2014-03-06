@@ -22,7 +22,6 @@ $form = new CForm(array(
   ),
 ), $model);
 ?>
-
 <?php
 $this->pageTitle = Yum::t('Login');
 $this->title = Yum::t('Login');
@@ -35,7 +34,6 @@ if(isset($_GET['action']))
 
 ?>
 
-<div class="form">
 
 <?php if($model->hasErrors()) { ?>
 <div class="alert">
@@ -43,12 +41,12 @@ if(isset($_GET['action']))
 </div>
 <?php } ?>
 
-
+<div class="row-fluid">
 <div class="span5 loginform">
 <p> <?php echo Yum::t(
   'Please fill out the following form with your login credentials:'); ?> </p>
 
-<div class="row">
+
 <?php
   printf ('<label for="YumUserLogin_username">%s: <span class="required">*</span></label>', Yum::t('Login as'));
 ?>
@@ -63,6 +61,7 @@ printf ('<label>%s</label>', Yum::t('No password necessary since debug mode is a
 
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
 && Yum::module()->hybridAuthProviders) { ?>
+<div class="row-fluid">
   <div class="span5 hybridauth">
 <?php echo Yum::t('You can also login by') . ': <br />'; 
 foreach(Yum::module()->hybridAuthProviders as $provider) 
@@ -76,13 +75,13 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
           'class' => 'social')) . '<br />'; 
 ?>
 </div>
+</div>
 
-<div class="clearfix"></div>
 
 <?php } ?>
+<div class="row-fluid">
+<div class="span12">
 
-<div class="span10">
-<div class="row">
   <p class="hint">
 <?php 
 if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
@@ -100,9 +99,11 @@ if(Yum::hasModule('registration')
 </p>
 
 </div>
+</div>
 
 
-<div class="row">
+<div class="row-fluid">
+<div class="span12">
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
 </div>

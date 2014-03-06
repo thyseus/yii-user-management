@@ -9,7 +9,7 @@ Yum::register('css/yum.css');
 
 <?php echo CHtml::beginForm(); ?>
 
-<div style="float: left;">
+
 <?php
 echo CHtml::label(Yum::t('Search for username'), 'search_username') . '<br />';
 echo CHtml::textField('search_username',
@@ -18,7 +18,7 @@ echo CHtml::textField('search_username',
 echo CHtml::submitButton(Yum::t('Search'));
 ?>
 
-</div>
+
 
 <?php
 echo CHtml::endForm();
@@ -36,7 +36,3 @@ $this->widget('zii.widgets.CListView', array(
 ?>
 
 </div>
-
-<div style="clear: both;"> </div>
-
-

@@ -20,14 +20,17 @@ if(Yii::app()->user->hasFlash('registration'))
 ?>
 
 <?php if($activateFromWeb): ?>
-<div class="form">
+
 <?php echo CHtml::beginForm(array('registration/activation'),'GET',array()); ?> 
 
 <div id="activatiion_code">
-<div class="row">
+<div class="row-fluid">
+<div class="span12">
 <?php echo Yii::t("UserModule.user", "Enter the activation code you received below."); ?>
 </div>
-<div class="row">
+</div>
+<div class="row-fluid">
+<div class="span12">
 <?php if(isset($form->email)){ 
 echo CHtml::hiddenField('email',$form->email);  
  }else{ 
@@ -39,12 +42,12 @@ echo CHtml::hiddenField('email',$form->email);
 <?php echo CHtml::activeLabelEx($user,'activationKey'); ?>
 <?php echo CHtml::textField('activationKey'); //fixme ?> 
 </div>
-<div class="row_submit">
+</div>
+<div class="row-fluid_submit row-fluid">
+<div class="span12">
 <?php echo CHtml::submitButton(Yii::t("UserModule.user", "Activate")); ?>
 </div>
 </div>
 <?php echo CHtml::endForm(); ?>
-</div> <!--form -->
 <?php endif;?>
-
 <?php echo $this->renderPartial('/user/_resend_activation_partial', array('user'=>$user,'form'=>$form)); ?>

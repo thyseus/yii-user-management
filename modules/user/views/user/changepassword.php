@@ -9,7 +9,7 @@ if(isset($expired) && $expired)
 	$this->renderPartial('password_expired');
 ?>
 
-<div class="form">
+
 <?php echo CHtml::beginForm(); ?>
 	<?php echo Yum::requiredFieldNote(); ?>
 	<?php echo CHtml::errorSummary($form); ?>
@@ -28,4 +28,4 @@ if(isset($expired) && $expired)
 	</div>
 
 <?php echo CHtml::endForm(); ?>
-</div><!-- form -->
+
