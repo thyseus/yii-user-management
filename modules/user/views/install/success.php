@@ -3,7 +3,7 @@
 		margin-left: 25px;
 	}
 </style>
-<h1> Congratulations, you have Installed the Yii User Management Module ! </h1>
+<h3> Congratulations, you have Installed the Yii User Management Module ! </h3>
 
 <p> Don't forget to look in the Documentation in the docs/ directory to 
 see the module specific options that can be set in your Application 

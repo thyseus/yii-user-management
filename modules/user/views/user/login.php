@@ -21,22 +21,17 @@ $form = new CForm(array(
     ),
   ),
 ), $model);
-?>
 
 
-
-<?php
 $this->pageTitle = Yum::t('Login');
 $this->title = Yum::t('Login');
 $this->breadcrumbs=array(Yum::t('Login'));
 
-echo CHtml::beginForm(array('//user/auth/login'));  
+echo CHtml::beginForm(array('//user/auth/login'));
 
 if(isset($_GET['action']))
   echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
-
 ?>
-
 
 <div class="row-fluid">
 <?php if($model->hasErrors()) { ?>
@@ -50,31 +45,25 @@ if(isset($_GET['action']))
 <p> <?php echo Yum::t(
   'Please fill out the following form with your login credentials:'); ?> </p>
 
-
 <?php
   if(Yum::module()->loginType & UserModule::LOGIN_BY_USERNAME)
-    echo CHtml::activeLabelEx($model,'username'); 
+    echo CHtml::activeLabelEx($model,'username');
 if(Yum::module()->loginType & UserModule::LOGIN_BY_EMAIL)
   printf ('<label for="YumUserLogin_username">%s <span class="required">*</span></label>', Yum::t('E-Mail address')); 
 ?>
 
     <?php echo CHtml::activeTextField($model,'username') ?>
 
-
-
     <?php echo CHtml::activeLabelEx($model,'password'); ?>
     <?php echo CHtml::activePasswordField($model,'password'); ?>
 
 
 <?php if ($model->scenario == 'captcha' && CCaptcha::checkRequirements()) { ?>
- 
     <?php echo CHtml::activeLabel($model, 'verifyCode'); ?>
-     
-        <?php $this->widget('CCaptcha'); ?>
-        <?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
-   
+    <?php $this->widget('CCaptcha'); ?>
+    <?php echo CHtml::activeTextField($model, 'verifyCode'); ?>
+
     <?php echo CHtml::error($model, 'verifyCode'); ?>
- 
 <?php } ?>
 
 

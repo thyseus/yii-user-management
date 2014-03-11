@@ -5,7 +5,6 @@ td td { border: 1px dotted; }
 input { width: 100px; } 
 </style>
 <div style="width: 800px;">
-<h1> Yii User Management Module Installation </h1>
 
 <?php echo CHtml::beginForm(array('install')); ?>
 	<p> You are about to install the Yii User management Module version

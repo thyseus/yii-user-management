@@ -2,7 +2,6 @@
 
 class YumInstallController extends YumController
 {
-  public $layout = 'install';
   public $defaultAction = 'install';
 
   public function accessRules()
@@ -33,7 +32,6 @@ class YumInstallController extends YumController
   public function actionInstall()
   {
     if ($this->module->debug === true) {
-
       if(!Yii::app()->user instanceof YumWebUser)
         throw new CHttpException(500, Yum::t('Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
 
@@ -44,7 +42,7 @@ class YumInstallController extends YumController
         throw new CHttpException(500, 'Please set a table prefix, at least \'\', to your db configuration for yii-user-management to work.');
 
       if(!version_compare(Yii::getVersion(), '1.1.14', '>='))
-        throw new CHttpException(500, 'Please make sure to use at least Yii version 1.1.14.'); 
+        throw new CHttpException(500, 'Please make sure to use at least Yii version 1.1.14.');
 
       if (Yii::app()->request->isPostRequest) {
         // A associative array containing the tables to be created.

@@ -21,17 +21,12 @@ $form = new CForm(array(
     ),
   ),
 ), $model);
-?>
-<?php
+
 $this->pageTitle = Yum::t('Login');
 $this->title = Yum::t('Login');
 $this->breadcrumbs=array(Yum::t('Login'));
 
-echo CHtml::beginForm(array('//user/auth/login'));  
-
-if(isset($_GET['action']))
-  echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
-
+echo CHtml::beginForm(array('//user/auth/login'));
 ?>
 
 
@@ -52,19 +47,19 @@ if(isset($_GET['action']))
 ?>
 
 <?php echo CHtml::activeDropDownList($model,'username', CHtml::listData(
-  YumUser::model()->findAll(), 'username', 'username')); 
+  YumUser::model()->findAll(), 'username', 'username'));
 
-printf ('<label>%s</label>', Yum::t('No password necessary since debug mode is active'));
+printf ('<p class="hint">%s</p>', Yum::t('No password necessary since debug mode is active'));
 ?>
 </div>
 </div>
 
-<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH 
+<?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH
 && Yum::module()->hybridAuthProviders) { ?>
 <div class="row-fluid">
   <div class="span5 hybridauth">
-<?php echo Yum::t('You can also login by') . ': <br />'; 
-foreach(Yum::module()->hybridAuthProviders as $provider) 
+<?php echo Yum::t('You can also login by') . ': <br />';
+foreach(Yum::module()->hybridAuthProviders as $provider)
   echo CHtml::link(
     CHtml::image(
       Yii::app()->getAssetManager()->publish(
@@ -76,8 +71,6 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 ?>
 </div>
 </div>
-
-
 <?php } ?>
 <div class="row-fluid">
 <div class="span12">
@@ -87,12 +80,12 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 if(Yum::hasModule('registration') && Yum::module('registration')->enableRegistration)
   echo CHtml::link(Yum::t("Registration"),
     Yum::module('registration')->registrationUrl);
-if(Yum::hasModule('registration') 
+if(Yum::hasModule('registration')
   && Yum::module('registration')->enableRegistration
   && Yum::module('registration')->enableRecovery)
   echo ' | ';
-if(Yum::hasModule('registration') 
-  && Yum::module('registration')->enableRecovery) 
+if(Yum::hasModule('registration')
+  && Yum::module('registration')->enableRecovery)
   echo CHtml::link(Yum::t("Lost password?"),
     Yum::module('registration')->recoveryUrl);
 ?>

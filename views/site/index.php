@@ -1,6 +1,13 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<p> This is the <?php echo CHtml::link('Yii User Management', 'https://github.com/thyseus/yii-user-management'); ?> Demo Application. </p>
+<header class="jumbotron subhead">
+    <div class="container">
+        <h2>Yii User Management Module</h1>
+    </div>
+</header>
+
+<p> This is the <?php echo CHtml::link( 'Yii User Management',
+  'https://github.com/thyseus/yii-user-management'); ?> Demo Application. </p>
 
 <p> <?php echo CHtml::link('Start the Installation', array('//user/install')); ?>.
 

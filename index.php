@@ -21,6 +21,13 @@ Yii::createWebApplication(
         'loginType' => 7, // username, email and hybridauth
         'hybridAuthProviders' => array('Facebook', 'Twitter'),
       ),
+      'role' => array(),
+      'registration' => array(),
+      'profile' => array(),
+      'avatar' => array(),
+      'usergroup' => array(),
+      'friendship' => array(),
+      'message' => array(),
     ),
     'components'=>array(
       'cache' => array('class' => 'system.caching.CFileCache'),
