@@ -23,7 +23,7 @@ if($m->hasErrors())
 	?>
 
 <?php echo Yum::requiredFieldNote(); ?>
-<div class="row-fluid">
+<div class="row">
 <div class="span6">
 
 <?php echo $form->labelEx($user, 'username');

@@ -24,12 +24,12 @@ if(Yii::app()->user->hasFlash('registration'))
 <?php echo CHtml::beginForm(array('registration/activation'),'GET',array()); ?> 
 
 <div id="activatiion_code">
-<div class="row-fluid">
+<div class="row">
 <div class="span12">
 <?php echo Yii::t("UserModule.user", "Enter the activation code you received below."); ?>
 </div>
 </div>
-<div class="row-fluid">
+<div class="row">
 <div class="span12">
 <?php if(isset($form->email)){ 
 echo CHtml::hiddenField('email',$form->email);  
@@ -43,7 +43,7 @@ echo CHtml::hiddenField('email',$form->email);
 <?php echo CHtml::textField('activationKey'); //fixme ?> 
 </div>
 </div>
-<div class="row-fluid_submit row-fluid">
+<div class="row_submit row">
 <div class="span12">
 <?php echo CHtml::submitButton(Yii::t("UserModule.user", "Activate")); ?>
 </div>

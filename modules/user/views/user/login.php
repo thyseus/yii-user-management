@@ -33,7 +33,11 @@ if(isset($_GET['action']))
   echo CHtml::hiddenField('returnUrl', urldecode($_GET['action']));
 ?>
 
+
+
+
 <div class="row-fluid">
+
 <?php if($model->hasErrors()) { ?>
 <div class="alert">
 	<?php echo CHtml::errorSummary($model); ?>
@@ -90,7 +94,7 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 <?php } ?>
 
 
-<div class="row-fluid">
+<div class="row">
 <div class="span12">
 
   <p class="hint">
@@ -112,7 +116,7 @@ if(Yum::hasModule('registration')
 </div>
 
 
-<div class="row-fluid">
+<div class="row">
 <div class="span12">
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>

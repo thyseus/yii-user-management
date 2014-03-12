@@ -13,7 +13,7 @@ echo CHtml::hiddenField('email',$form->email);
 	<div id="resend_activation_text">
 	<?php echo Yii::t("UserModule.user", "If you failed to recieve the activation email, click the Resend Activation button."); ?>
 	</div>
-	<div class="row-fluid_submit">
+	<div class="row_submit">
 		<?php echo CHtml::submitButton(Yii::t("UserModule.user", "Resend Activation")); ?>
 	</div>
 
