@@ -40,7 +40,7 @@ echo CHtml::beginForm(array('//user/auth/login'));
 </div>
 <?php } ?>
 
-<div class="row">
+<div class="row-fluid">
 <div class="span5 loginform">
 <p> <?php echo Yum::t(
   'Please fill out the following form with your login credentials:'); ?> </p>
@@ -60,7 +60,7 @@ printf ('<p class="hint">%s</p>', Yum::t('No password necessary since debug mode
 
 <?php if(Yum::module()->loginType & UserModule::LOGIN_BY_HYBRIDAUTH
 && Yum::module()->hybridAuthProviders) { ?>
-<div class="row">
+<div class="row-fluid">
   <div class="span5 hybridauth">
 <?php echo Yum::t('You can also login by') . ': <br />';
 foreach(Yum::module()->hybridAuthProviders as $provider)
@@ -76,7 +76,7 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 </div>
 </div>
 <?php } ?>
-<div class="row">
+<div class="row-fluid">
 <div class="span12">
 
   <p class="hint">
@@ -98,8 +98,7 @@ if(Yum::hasModule('registration')
 </div>
 </div>
 
-
-<div class="row">
+<div class="row-fluid">
 <div class="span12">
 <div class="buttons">
 <?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
