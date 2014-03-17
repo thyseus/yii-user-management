@@ -1,6 +1,6 @@
 <?php
+Yii::import('user.controllers.YumController');
 
-Yii::import('application.modules.user.controllers.YumController');
 class YumUserController extends YumController {
 	public $defaultAction = 'login';
 

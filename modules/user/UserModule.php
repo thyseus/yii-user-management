@@ -121,7 +121,7 @@ class UserModule extends CWebModule {
     'message' => '/user/message',
     'passwordForm' => '/user/_activation_passwordform',
     'changePassword' => 'changepassword',
-    'messageCompose' =>'application.modules.message.views.message.compose');
+    'messageCompose' =>'user.message.views.message.compose');
 
   // LoginType :
   // If you want to activate many types of login just sum up the values below 

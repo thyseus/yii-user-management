@@ -1,9 +1,9 @@
 <?php
-Yii::setPathOfAlias('ProfileModule' , dirname(__FILE__));
+Yii::setPathOfAlias('profile' , dirname(__FILE__));
 
 class ProfileModule extends CWebModule {
-	public $adminLayout = 'application.modules.user.views.layouts.yum';
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $adminLayout = 'profile.views.layouts.yum';
+	public $layout = 'profile.views.layouts.yum';
 
 	public $requiredProfileFields = array('firstname', 'lastname');
 
@@ -28,15 +28,15 @@ class ProfileModule extends CWebModule {
 	public $profileViewRoute = '//profile/profile/view';
 
 	public $publicFieldsView =
-		'application.modules.profile.views.profile.public_fields';
+		'profile.views.profile.public_fields';
 	public $profileFormView =
-		'application.modules.profile.views.profile._form';
+		'profile.views.profile._form';
 	public $profileCommentView =
-		'application.modules.profile.views.profileComment._view';
+		'profile.views.profileComment._view';
 		public $profileCommentIndexView =
-		'application.modules.profile.views.profileComment.index';
+		'profile.views.profileComment.index';
 	public $profileCommentCreateView =
-		'application.modules.profile.views.profileComment.create';
+		'profile.views.profileComment.create';
   public $profileEditView = '/profile/update';
   public $privacySettingView= '/privacy/update';
 
@@ -54,10 +54,10 @@ class ProfileModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-			'application.modules.user.controllers.*',
-			'application.modules.user.models.*',
-			'ProfileModule.components.*',
-			'ProfileModule.models.*',
+			'user.controllers.*',
+			'user.models.*',
+			'profile.components.*',
+			'profile.models.*',
 		));
 	}
 }
