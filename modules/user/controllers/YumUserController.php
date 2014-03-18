@@ -193,7 +193,7 @@ class YumUserController extends YumController {
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
-					Yii::import('user.user.components.EPasswordGenerator');
+					Yii::import('user.components.EPasswordGenerator');
 					$generatorOptions = Yum::module()->passwordGeneratorOptions;
 					$password = EPasswordGenerator::generate(
 							$generatorOptions['length'],

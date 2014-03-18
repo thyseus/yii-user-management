@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 $this->widget('zii.widgets.CDetailView', array(
 			'data'=>$model,
 			'attributes'=>array(
-				'user.username',
+				'username',
 						'role.price',
 		'payment.title',
 

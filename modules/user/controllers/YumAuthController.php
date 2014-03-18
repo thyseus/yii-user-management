@@ -99,7 +99,7 @@ class YumAuthController extends YumController {
 		if(!Yum::hasModule('profile'))
 			throw new CException(400, 'Hybrid auth needs the profile submodule to be enabled');
 
-		Yii::import('user.user.vendors.hybridauth.Hybrid.Auth', true);
+		Yii::import('user.vendors.hybridauth.Hybrid.Auth', true);
 		Yii::import('user.profile.models.*');
 
 		require_once(Yum::module()->hybridAuthConfigFile);

@@ -1,7 +1,7 @@
 <?php
 
-Yii::import('user.user.controllers.YumController');
-Yii::import('user.user.models.*');
+Yii::import('user.controllers.YumController');
+Yii::import('user.models.*');
 Yii::import('user.role.models.*');
 
 class YumRoleController extends YumController {

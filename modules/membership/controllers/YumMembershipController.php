@@ -1,6 +1,6 @@
 <?php
-Yii::import('user.user.controllers.YumController');
-Yii::import('user.user.models.Yum');
+Yii::import('user.controllers.YumController');
+Yii::import('user.models.Yum');
 Yii::import('user.role.models.*');
 Yii::import('user.membership.models.*');
 

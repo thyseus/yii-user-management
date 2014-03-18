@@ -31,7 +31,7 @@ class YumUsergroupController extends YumController {
 	}
 
 	public function actionWrite() {
-		Yii::import('user.usergroup.models.YumUsergroupMessage');
+		Yii::import('usergroup.models.YumUsergroupMessage');
 		$message = new YumUsergroupMessage;
 
 		if(isset($_POST['YumUsergroupMessage'])) {

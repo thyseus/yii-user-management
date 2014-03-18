@@ -2,7 +2,7 @@
 // This controller handles the administration, upload and the deletion 
 // of an Avatar image for the user profile.
 
-Yii::import('user.user.controllers.YumController');
+Yii::import('user.controllers.YumController');
 
 class YumAvatarController extends YumController {
 	public function beforeAction($action) {

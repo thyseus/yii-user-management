@@ -13,7 +13,7 @@ class MessageModule extends CWebModule
 
 	public $messageTable = '{{message}}';
 
-	public $layout = 'user.user.views.layouts.yum';
+	public $layout = 'user.views.layouts.yum';
 
 	public $dateFormat = 'Y-m-d G:i:s';
 

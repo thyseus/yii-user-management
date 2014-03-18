@@ -2,7 +2,7 @@
 /* This is the controller for the internal messaging System of
  * the Yii User Management Module. */
 
-Yii::import('user.user.controllers.YumController');
+Yii::import('user.controllers.YumController');
 Yii::import('user.message.models.YumMessage');
 
 class YumMessageController extends YumController {

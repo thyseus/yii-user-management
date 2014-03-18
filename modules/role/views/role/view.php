@@ -41,7 +41,7 @@ if(Yum::hasModule('membership') && $model->membership_priority) {
 						'dataProvider'=>$activeMemberships,
 						'columns'=>array(
 							'id',
-							'user.username',
+							'username',
 							array(
 								'name'=>'order_date',
 								'value' =>'date("Y. m. d G:i:s", $data->order_date)'),

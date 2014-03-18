@@ -20,7 +20,7 @@ if(isset($expired) && $expired)
 	} ?>
 
 <?php $this->renderPartial(
-		'user.user.views.user.passwordfields', array(
+		'user.views.user.passwordfields', array(
 			'form'=>$form)); ?>
 
 	<div class="submit">

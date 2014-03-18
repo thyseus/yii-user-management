@@ -1,5 +1,5 @@
 <?php
-Yii::import('user.user.models.*');
+Yii::import('user.models.*');
 
 class YumProfileCommentController extends YumController {
 	public function accessRules() {
