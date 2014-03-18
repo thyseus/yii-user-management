@@ -1,4 +1,7 @@
 <?php
+
+Yii::import('user.models.YumUser');
+
 class YumWebUser extends CWebUser
 {
   public $loginUrl = array('//user/auth/login');

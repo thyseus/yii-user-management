@@ -6,10 +6,8 @@
  * Registration process. If this example does exactly what you want in your
  * Project, then you can feel lucky already! */
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.profile.models.*');
-Yii::import('application.modules.registration.models.*');
+Yii::import('user.controllers.YumController');
+Yii::import('user.models.*');
 
 class YumRegistrationController extends YumController {
 	public $defaultAction = 'registration';
@@ -28,7 +26,10 @@ class YumRegistrationController extends YumController {
 		if(!Yum::hasModule('profile'))
 			throw new CHttpException(401, 'The Registration submodule depends on the profile submodule. Please see the installation instructions or registration/RegistrationModule.php for details');
 
-		if(!Yii::app()->user->isGuest) 
+    Yii::import('profile.models.*');
+    Yii::import('registration.models.*');
+
+		if(!Yii::app()->user->isGuest)
 			$this->redirect(Yii::app()->user->returnUrl);
 
 		$this->layout = Yum::module('registration')->layout;

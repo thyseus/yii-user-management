@@ -50,8 +50,10 @@ echo CHtml::beginForm(array('//user/auth/login'));
   printf ('<label for="YumUserLogin_username">%s: <span class="required">*</span></label>', Yum::t('Login as'));
 ?>
 
-<?php echo CHtml::activeDropDownList($model,'username', CHtml::listData(
-  YumUser::model()->findAll(), 'username', 'username'));
+<?php echo CHtml::activeDropDownList($model,
+  'username', CHtml::listData(
+    YumUser::model()->findAll(
+      'status > 0'), 'username', 'username'));
 
 printf ('<p class="hint">%s</p>', Yum::t('No password necessary since debug mode is active'));
 ?>
