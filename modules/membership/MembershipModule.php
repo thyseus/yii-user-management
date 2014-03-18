@@ -13,7 +13,7 @@ class MembershipModule extends CWebModule {
 	public $paymentTable = '{{payment}}';
 
 	// override this with your custom layout, if available
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'user.user.views.layouts.yum';
 
 
 	public $controllerMap=array(

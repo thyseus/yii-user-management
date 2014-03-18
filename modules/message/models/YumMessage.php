@@ -1,5 +1,5 @@
 <?php
-Yii::import('application.modules.user.models.*');
+Yii::import('user.user.models.*');
 
 /**
  * This is the model class for the Message subsystem of the Yii User 

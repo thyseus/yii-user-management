@@ -24,7 +24,7 @@ class YumCsvController extends YumController
 				$fields .= $field .',';
 			$fields = substr($fields, 0, -1);
 
-			Yii::import('application.modules.user.components.CSVExport');
+			Yii::import('user.user.components.CSVExport');
 			$sql = sprintf('select %s from %s where %s',
 					$fields, 
 					Yum::module('profile')->profileTable,

@@ -25,7 +25,7 @@ specific user:
 array(
 	'class'=>'CEmailLogRoute',
 	'levels'=>'error',
-	'categories' => 'application.modules.user.*',
+	'categories' => 'user.user.*',
 	'emails' => 'emergency_admin@example.com'
 	),
 
@@ -36,7 +36,7 @@ If we want to log our Information to the database, we use the CDbLogRoute like t
 					'class'=>'CDbLogRoute',
 					'connectionID' => 'db',
 					'levels'=>'error, warning, info',
-					'categories' => 'application.modules.user.*',
+					'categories' => 'user.user.*',
 					'logTableName' => 'user_activities'
 				), 
 

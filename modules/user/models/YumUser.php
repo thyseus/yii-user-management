@@ -91,8 +91,8 @@ class YumUser extends YumActiveRecord
     if (!Yum::hasModule('membership'))
       return array();
 
-    Yii::import('application.modules.role.models.*');
-    Yii::import('application.modules.membership.models.*');
+    Yii::import('user.role.models.*');
+    Yii::import('user.membership.models.*');
 
     $roles = array();
 
@@ -266,7 +266,7 @@ class YumUser extends YumActiveRecord
   }
 
   public function assignRole($role_title) {
-    Yii::import('application.modules.role.models.*');
+    Yii::import('user.role.models.*');
     if($this->isNewRecord || !$this->id)
       return false;
 
@@ -287,7 +287,7 @@ class YumUser extends YumActiveRecord
   }
 
   public function hasRole($role_title) {
-    Yii::import('application.modules.role.models.*');
+    Yii::import('user.role.models.*');
 
     if (!Yum::hasModule('role'))
       return false;
@@ -311,7 +311,7 @@ class YumUser extends YumActiveRecord
   public function getRoles()
   {
     if (Yum::hasModule('role')) {
-      Yii::import('application.modules.role.models.*');
+      Yii::import('user.role.models.*');
       $roles = '';
       foreach ($this->roles as $role)
         $roles .= ' ' . $role->title;
@@ -330,7 +330,7 @@ class YumUser extends YumActiveRecord
     if (!Yum::hasModule('role') || !$this->id)
       return array();
 
-    Yii::import('application.modules.role.models.*');
+    Yii::import('user.role.models.*');
     $roles = $this->roles;
 
     if (Yum::hasModule('membership'))
@@ -382,7 +382,7 @@ class YumUser extends YumActiveRecord
 			$relations = array();
 
 			if (Yum::hasModule('role')) {
-				Yii::import('application.modules.role.models.*');
+				Yii::import('user.role.models.*');
 				$relations['permissions'] = array(
 						self::HAS_MANY, 'YumPermission', 'principal_id');
 
@@ -395,7 +395,7 @@ class YumUser extends YumActiveRecord
 			}
 
 			if (Yum::hasModule('message')) {
-				Yii::import('application.modules.message.models.*');
+				Yii::import('user.message.models.*');
 				$relations['messages'] = array(
 						self::HAS_MANY, 'YumMessage', 'to_user_id',
 						'order' => 'timestamp DESC');
@@ -410,7 +410,7 @@ class YumUser extends YumActiveRecord
 
 			}
 			if (Yum::hasModule('profile')) {
-				Yii::import('application.modules.profile.models.*');
+				Yii::import('user.profile.models.*');
 				$relations['visits'] = array(
 						self::HAS_MANY, 'YumProfileVisit', 'visited_id');
 				$relations['visited'] = array(
@@ -432,7 +432,7 @@ class YumUser extends YumActiveRecord
 			}
 
 			if (Yum::hasModule('membership')) {
-				Yii::import('application.modules.membership.models.*');
+				Yii::import('user.membership.models.*');
 				$relations['memberships'] = array(
 						self::HAS_MANY, 'YumMembership', 'user_id');
 			}
@@ -470,7 +470,7 @@ class YumUser extends YumActiveRecord
 			$condition = 'inviter_id = :uid and status = 2';
 
 		$friends = array();
-		Yii::import('application.modules.friendship.models.YumFriendship');
+		Yii::import('user.friendship.models.YumFriendship');
 		$friendships = YumFriendship::model()->findAll($condition, array(
 					':uid' => $this->id));
 		if ($friendships != NULL && !is_array($friendships))
@@ -500,7 +500,7 @@ class YumUser extends YumActiveRecord
 	}
 
 	public function registerByHybridAuth($hybridAuthProfile) {
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('user.profile.models.*');
 		$profile = new YumProfile();
 
 		$profile->firstname = $hybridAuthProfile->firstName;
@@ -616,7 +616,7 @@ class YumUser extends YumActiveRecord
 	 * -3 : Profile found, but no user - database inconsistency?
 	 */
 	public static function activate($email, $key) {
-		Yii::import('application.modules.profile.models.*');
+		Yii::import('user.profile.models.*');
 
 		if ($profile = YumProfile::model()->find("email = :email", array(
 						':email' => $email))) {
@@ -631,7 +631,7 @@ class YumUser extends YumActiveRecord
 										'{username}' => $user->username)));
 						if (Yum::hasModule('message')
 								&& Yum::module('registration')->enableActivationConfirmation) {
-							Yii::import('application.modules.message.models.YumMessage');
+							Yii::import('user.message.models.YumMessage');
 							YumMessage::write($user, 1,
 									Yum::t('Your activation succeeded'),
 									strtr(
@@ -741,7 +741,7 @@ class YumUser extends YumActiveRecord
 	 */
 	public static function getUsersByRole($roleTitle)
 	{
-		Yii::import('application.modules.role.models.*');
+		Yii::import('user.role.models.*');
 		$role = YumRole::model()->findByAttributes(array('title' => $roleTitle));
 		return $role ? $role->users : null;
 	}
@@ -765,7 +765,7 @@ class YumUser extends YumActiveRecord
 
 	public function syncRoles($roles = null) {
 		if(Yum::hasModule('role')){ 
-			Yii::import('application.modules.role.models.*');
+			Yii::import('user.role.models.*');
 
 				$query = sprintf("delete from %s where user_id = %s",
 						Yum::module('role')->userRoleTable,

@@ -1,5 +1,5 @@
 <?php
-Yii::import('application.modules.user.UserModule');
+Yii::import('user.user.UserModule');
 Yii::import('zii.widgets.CPortlet');
 
 class ProfileCommentsWidget extends CPortlet

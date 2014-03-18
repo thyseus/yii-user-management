@@ -68,7 +68,7 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
     CHtml::image(
       Yii::app()->getAssetManager()->publish(
         Yii::getPathOfAlias(
-          'application.modules.user.assets.images').'/'.strtolower($provider).'.png'),
+          'user.user.assets.images').'/'.strtolower($provider).'.png'),
       $provider) . $provider, $this->createUrl(
         '//user/auth/login', array('hybridauth' => $provider)), array(
           'class' => 'social')) . '<br />'; 
