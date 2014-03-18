@@ -12,8 +12,8 @@ Yii::createWebApplication(
     'import'=>array(
       'application.models.*',
       'application.components.*',
-      'application.modules.user.components.*',
-      'application.modules.user.models.*',
+      'user.user.components.*',
+      'user.user.models.*',
     ),
     'modules'=>array(
       'user' => array(
@@ -32,7 +32,7 @@ Yii::createWebApplication(
     'components'=>array(
       'cache' => array('class' => 'system.caching.CFileCache'),
       'user'=>array(
-        'class' => 'application.modules.user.components.YumWebUser',
+        'class' => 'user.user.components.YumWebUser',
         'allowAutoLogin'=>true,
       ),
       'urlManager'=>array(

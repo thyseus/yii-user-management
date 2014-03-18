@@ -6,8 +6,8 @@ class UsergroupModule extends CWebModule {
 	public $usergroupMessageTable = '{{usergroup_message}}';
 	public $userparticipationTable = '{{user_usergroup}}';
 
-	public $adminLayout = 'application.modules.user.views.layouts.yum';
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $adminLayout = 'user.user.views.layouts.yum';
+	public $layout = 'user.user.views.layouts.yum';
 
 	public $controllerMap=array(
 			'groups'=>array(
@@ -16,10 +16,10 @@ class UsergroupModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'application.modules.user.controllers.*',
-					'application.modules.user.models.*',
-					'application.modules.usergroup.controllers.*',
-					'application.modules.usergroup.models.*',
+					'user.user.controllers.*',
+					'user.user.models.*',
+					'user.usergroup.controllers.*',
+					'user.usergroup.models.*',
 					));
 	}
 

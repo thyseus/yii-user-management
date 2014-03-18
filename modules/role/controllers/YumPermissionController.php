@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.role.models.*');
+Yii::import('user.user.controllers.YumController');
+Yii::import('user.user.models.*');
+Yii::import('user.role.models.*');
 
 class YumPermissionController extends YumController
 {
