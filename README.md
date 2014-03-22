@@ -80,7 +80,7 @@ folder:
 ```
 $ mv user/* .
 (optional: remove demo application)
-$ rm index.php composer.json
+$ rm -rf index.php composer.json hybridauth.php controllers views
 ```
 
 $ [youreditor] protected/config/main.php
