@@ -10,13 +10,13 @@ Features:
 * Installer
 * User Administration
 * Role Administration
-* Hybrid auth is bundled and can easily be integrated, see docs/hybridauth.txt.
+* Hybrid auth is bundled and can easily be integrated, see user/docs/hybridauth.txt.
 * All providers of hybrid auth and hybrid auth extra package are integrated:
 AOL, Google, Mail.ru, Plurk, Tumblr, Yahoo, Disqus, Identica, Murmur, px500,
 TwitchTV, Yandex, Facebook, Instagram, MySpace, QQ, Twitter, Foursquare,
 LastFM, Odnoklassniki, Sina, Viadeo, GitHub, LinkedIn, OpenID, Skyrock,
 Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
-* Permission System with a mixture of RBAC and ACL (see docs)
+* Permission System with a mixture of RBAC and ACL (see user/docs)
 * Profiles & Profile history & Profile Comments & Profile Fields Administration
 * Messaging System (send/receive Messages between Users) Submodule
 * User groups (user can add new groups, other users can join)
@@ -30,45 +30,58 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 * Almost complete Translation to spain thanks to bigchirv@gmail.com
 * Incomplete Translations to russian and polish
 
-Usage:
+Usage with demo application:
 -------------------------------
 
 Starting from 0.9, a demo application is provided in the repository.
 
-* Extract the package to your webroot:
-```
-$ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.9.tar.bz2
-$ tar xvf yii-user-management_0.9.tar.bz2
-```
-or
-
+* Clone the package:
 ```
 $ git clone https://github.com/thyseus/yii-user-management
 ```
 * Set the path to your yii framework folder in index.php,
 * create an empty folder assets/ and runtime/ with write access
-* Run http://localhost/yii-user-management/index.php
+* Navigate to http://localhost/yii-user-management/index.php
 
-Detailed Installation Instructions:
+Installation using composer:
+--------------------
+
+* Add yii user management to your project requirements:
+```
+php composer.phar require thyseus/yii-user-management
+```
+* Add the vendor folder to the aliases in your yii configuration:
+
+```
+array(
+    'aliases' => array(
+      'vendor' => '/path/to/vendor',
+      ),
+    ),
+```
+
+Manual Installation Instructions:
 -----------------------------------
 
 * The Yii User Management Module needs a mysql Database Connection to
 work.
 
-* Extract the Yii User Management Modules (protected/modules/) under the
-modules/ directory of your Web Application.
-
+* Clone the package into your projects modules/ directory:
 ```
-$ cd testdrive/protected
-$ mkdir modules
-$ cd modules
-$ wget http://www.yiiframework.com/extension/yii-user-management/files/yii-user-management_0.9.tar.bz2
-$ tar xvf yii-user-management_0.9.tar.bz2
+$ cd protected/modules
+$ git clone https://github.com/thyseus/yii-user-management
 ```
 
 * The Yii-user-management module contains submodules that you just extracted
-into your application's modules/ directory. You can remove all submodules
-you do not need.
+into your application's modules/user directory. You can remove all submodules
+you do not need. Move the files one folder up so they are inside your modules/
+folder:
+
+```
+$ mv user/* .
+(optional: remove demo application)
+$ rm index.php composer.json
+```
 
 $ [youreditor] protected/config/main.php
 
@@ -76,14 +89,14 @@ Add these lines:
 
 ```
 'modules' => array(
-		'user' => array(
-			'debug' => true,
-			)
-		),
+    'user' => array(
+      'debug' => true,
+      )
+    ),
 ```
 
-The debug option is needed for the installation and should be set to false
-after the installation.
+The debug option is needed for the installation and is helpful during
+development. It should be set to false when running in production.
 
 * To let your Web Application use the Authentification Methods of
 the User Management Module, we need to overwrite the default
@@ -219,16 +232,16 @@ else
 }
 ```
 
-Please see the file docs/logging.txt for information on how to set up
+Please see the file user/docs/logging.txt for information on how to set up
 the logging functions of the Yii User Management module.
 
 Where to go from now on?
 ------------------------
 There are some examples on how to extend from the Yii User Management
 Module and how to implement project-specific stuff. See the files in
-the docs/ directory for all this.
+the user/docs/ directory for all this.
 
-See docs/hybridauth.txt for instruction on how to use the wonderful
+See user/docs/hybridauth.txt for instruction on how to use the wonderful
 hybrid auth framework that is bundled with yii-user-management.
 
 
