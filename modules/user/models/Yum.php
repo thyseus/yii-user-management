@@ -52,9 +52,8 @@ class Yum
     return $string;
   }
 
-  public static function hint($message) 
-  {
-    return '<div class="hint">' . Yum::t($message) . '</div>'; 
+  public static function hint($message) {
+    return '<div class="hint">' . Yum::t($message) . '</div>';
   }
 
   public static function getAvailableLanguages () {
@@ -220,5 +219,20 @@ class Yum
       }
     }
   }
+
+  // Import a batch of users. Usually coming from an .csv file.
+  // First line contains the attributes, which can either be
+  // a attribute for the user or for the profile table.
+  public static function import($data, $delimiter = ',', $enclosure = '"',
+    $escape = '\\') {
+      if(!$data)
+        throw new CException('No data given');
+
+      $rows = str_getcsv($data, $delimiter, $enclosure, $escape);
+      $attributes = $rows[0];
+      foreach($attributes as $attribute) {
+        var_dump($attribute);
+      }
+    }
 }
 ?>
