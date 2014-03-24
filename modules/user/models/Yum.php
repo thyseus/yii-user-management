@@ -7,10 +7,9 @@
  * @package Yum.core
  *
  */
-class Yum
-{
+class Yum {
   public static function powered() {
-   return sprintf('Yii User Management version %s.', Yum::module()->version);
+    return sprintf('Yii User Management version %s.', Yum::module()->version);
   }
 
   /** Register an asset file of Yum */
@@ -223,15 +222,73 @@ class Yum
   // Import a batch of users. Usually coming from an .csv file.
   // First line contains the attributes, which can either be
   // a attribute for the user or for the profile table.
+  // Existing users will be overwritten with the values from the csv.
+  // set $roles with an comma separated list of role titles for roles
+  // that should automatically be assigned on creation of new users.
   public static function import($data, $delimiter = ',', $enclosure = '"',
-    $escape = '\\') {
+    $escape = '\\', $roles = '') {
       if(!$data)
         throw new CException('No data given');
 
-      $rows = str_getcsv($data, $delimiter, $enclosure, $escape);
-      $attributes = $rows[0];
-      foreach($attributes as $attribute) {
-        var_dump($attribute);
+      $rows = explode("\n", $data);
+
+      $firstrow = str_getcsv($rows[0], $delimiter, $enclosure, $escape);
+      $attributes = array();
+      $i = 0;
+      foreach($firstrow as $row) {
+        $attributes[$i] = $row;
+        $i++;
+      }
+
+      unset($rows[0]);
+
+      foreach($rows as $row) {
+        $values = str_getcsv($row, $delimiter, $enclosure, $escape);
+
+        $user = YumUser::model()->findByPk($values[0]);
+
+        // Update existing User
+        if($user) {
+          $profile = $user->profile;
+          foreach($attributes as $key => $attribute) {
+            if(isset($user->$attribute) && isset($values[$key]))
+              $user->$attribute = htmlentities($values[$key], ENT_IGNORE, 'utf-8', FALSE);
+            else if(isset($profile->$attribute) && isset($values[$key]))
+              $profile->$attribute = htmlentities($values[$key], ENT_IGNORE, 'utf-8', FALSE);
+          }
+
+          $user->save(false);
+          if($profile instanceof YumProfile)
+            $profile->save(false);
+
+          if($roles)
+            foreach(explode(',', $roles) as $role)
+              $user->assignRole(trim($role));
+
+        } else if(!$user) { // Create new User
+          $user = new YumUser;
+          $profile = new YumProfile;
+
+          foreach($attributes as $key => $attribute) {
+            if(isset($user->$attribute) && isset($values[$key]))
+              $user->$attribute = htmlentities($values[$key], ENT_IGNORE, 'utf-8', FALSE);
+            else if(isset($profile->$attribute) && isset($values[$key]))
+              $profile->$attribute = htmlentities($values[$key], ENT_IGNORE, 'utf-8', FALSE);
+          }
+
+          $user->id = $values[0];
+          if(!$user->username && $profile->email)
+            $user->username = $profile->email;
+          if(!$user->status)
+            $user->status = 1;
+          $user->createtime = time();
+
+          if($user->username) {
+            $user->save(false);
+            $profile->user_id = $user->id;
+            $profile->save(false);
+          }
+        }
       }
     }
 }
