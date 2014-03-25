@@ -92,8 +92,8 @@ class YumProfile extends YumActiveRecord
 	}
 
 	public function afterSave() {
-		if($this->isNewRecord) 
-			Yii::log(Yum::t( 'A profile been created: {profile}', array(
+		if($this->isNewRecord)
+			Yii::log(Yum::t( 'A profile has been created: {profile}', array(
 							'{profile}' => json_encode($this->attributes))));
 		else
 			Yii::log(Yum::t( 'A profile has been updated: {profile}', array(
