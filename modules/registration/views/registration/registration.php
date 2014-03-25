@@ -2,10 +2,7 @@
 
 <?php $this->breadcrumbs = array(Yum::t('Registration')); ?>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fe835ff5957c362c26b938d679d70d13c4d7c496
 <?php $activeform = $this->beginWidget('CActiveForm', array(
   'id'=>'registration-form',
   'enableAjaxValidation'=>true,
@@ -77,7 +74,3 @@ echo $activeform->textField($profile,'lastname');
   </div>
 
 <?php $this->endWidget(); ?>
-<<<<<<< HEAD
-
-=======
->>>>>>> fe835ff5957c362c26b938d679d70d13c4d7c496
