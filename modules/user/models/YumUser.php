@@ -378,74 +378,67 @@ class YumUser extends YumActiveRecord
     return false;
   }
 
-	// possible relations are cached because they depend on the active submodules
-	// and it takes many expensive milliseconds to evaluate them all the time
-	public function relations() {
-		$relations = Yii::app()->cache->get('yum_user_relations');
-		if($relations === false) {
-			$relations = array();
+  public function relations() {
+    $relations = array();
 
-			if (Yum::hasModule('role')) {
-				Yii::import('user.role.models.*');
-				$relations['permissions'] = array(
-						self::HAS_MANY, 'YumPermission', 'principal_id');
+    if (Yum::hasModule('role')) {
+      Yii::import('user.role.models.*');
+      $relations['permissions'] = array(
+        self::HAS_MANY, 'YumPermission', 'principal_id');
 
-				$relations['managed_by'] = array(
-						self::HAS_MANY, 'YumPermission', 'subordinate_id');
+      $relations['managed_by'] = array(
+        self::HAS_MANY, 'YumPermission', 'subordinate_id');
 
-				$relations['roles'] = array(
-						self::MANY_MANY, 'YumRole',
-						Yum::module('role')->userRoleTable . '(user_id, role_id)');
-			}
+      $relations['roles'] = array(
+        self::MANY_MANY, 'YumRole',
+        Yum::module('role')->userRoleTable . '(user_id, role_id)');
+    }
 
-			if (Yum::hasModule('message')) {
-				Yii::import('user.message.models.*');
-				$relations['messages'] = array(
-						self::HAS_MANY, 'YumMessage', 'to_user_id',
-						'order' => 'timestamp DESC');
+    if (Yum::hasModule('message')) {
+      Yii::import('user.message.models.*');
+      $relations['messages'] = array(
+        self::HAS_MANY, 'YumMessage', 'to_user_id',
+        'order' => 'timestamp DESC');
 
-				$relations['unread_messages'] = array(
-						self::HAS_MANY, 'YumMessage', 'to_user_id',
-						'condition' => 'message_read = 0',
-						'order' => 'timestamp DESC');
+      $relations['unread_messages'] = array(
+        self::HAS_MANY, 'YumMessage', 'to_user_id',
+        'condition' => 'message_read = 0',
+        'order' => 'timestamp DESC');
 
-				$relations['sent_messages'] = array(
-						self::HAS_MANY, 'YumMessage', 'from_user_id');
+      $relations['sent_messages'] = array(
+        self::HAS_MANY, 'YumMessage', 'from_user_id');
 
-			}
-			if (Yum::hasModule('profile')) {
-				Yii::import('user.profile.models.*');
-				$relations['visits'] = array(
-						self::HAS_MANY, 'YumProfileVisit', 'visited_id');
-				$relations['visited'] = array(
-						self::HAS_MANY, 'YumProfileVisit', 'visitor_id');
-				$relations['profile'] = array(
-						self::HAS_ONE, 'YumProfile', 'user_id');
-				$relations['privacy'] = array(
-						self::HAS_ONE, 'YumPrivacySetting', 'user_id');
-			}
+    }
+    if (Yum::hasModule('profile')) {
+      Yii::import('user.profile.models.*');
+      $relations['visits'] = array(
+        self::HAS_MANY, 'YumProfileVisit', 'visited_id');
+      $relations['visited'] = array(
+        self::HAS_MANY, 'YumProfileVisit', 'visitor_id');
+      $relations['profile'] = array(
+        self::HAS_ONE, 'YumProfile', 'user_id');
+      $relations['privacy'] = array(
+        self::HAS_ONE, 'YumPrivacySetting', 'user_id');
+    }
 
-			if (Yum::hasModule('friendship')) {
-				$relations['friendships'] = array(
-						self::HAS_MANY, 'YumFriendship', 'inviter_id');
-				$relations['friendships2'] = array(
-						self::HAS_MANY, 'YumFriendship', 'friend_id');
-				$relations['friendship_requests'] = array(
-						self::HAS_MANY, 'YumFriendship', 'friend_id',
-						'condition' => 'status = 1'); // 1 = FRIENDSHIP_REQUEST
-			}
+    if (Yum::hasModule('friendship')) {
+      $relations['friendships'] = array(
+        self::HAS_MANY, 'YumFriendship', 'inviter_id');
+      $relations['friendships2'] = array(
+        self::HAS_MANY, 'YumFriendship', 'friend_id');
+      $relations['friendship_requests'] = array(
+        self::HAS_MANY, 'YumFriendship', 'friend_id',
+        'condition' => 'status = 1'); // 1 = FRIENDSHIP_REQUEST
+    }
 
-			if (Yum::hasModule('membership')) {
-				Yii::import('user.membership.models.*');
-				$relations['memberships'] = array(
-						self::HAS_MANY, 'YumMembership', 'user_id');
-			}
+    if (Yum::hasModule('membership')) {
+      Yii::import('user.membership.models.*');
+      $relations['memberships'] = array(
+        self::HAS_MANY, 'YumMembership', 'user_id');
+    }
 
-			Yii::app()->cache->set('yum_user_relations', $relations, 3600);
-		}
-
-		return $relations;
-	}
+    return $relations;
+  }
 
 	public function isFriendOf($invited_id)
 	{

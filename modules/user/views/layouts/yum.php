@@ -1,28 +1,18 @@
 <?php 
-Yii::app()->clientScript->registerCssFile(
-  Yii::app()->getAssetManager()->publish(
-    Yii::getPathOfAlias('user.assets.css').'/yum.css'));
-
-$this->beginContent(Yum::module()->baseLayout); ?>
-
-<div class="span12">
+	Yii::app()->clientScript->registerCssFile(
+  	Yii::app()->getAssetManager()->publish(
+    	Yii::getPathOfAlias('user.assets.css').'/yum.css'));
+	$this->beginContent(Yum::module()->baseLayout); ?>
 <?php
-if (Yum::module()->debug) {
-  echo CHtml::openTag('div', array('class' => 'container yumwarning'));
-  echo sprintf(
-    'You are running the Yii User Management Module %s in Debug Mode!',
-    Yum::module()->version);
-  echo CHtml::closeTag('div');
-}
+	if (Yum::module()->debug) {
+	  echo CHtml::openTag('div', array('class' => 'alert alert-danger'));
+	  echo sprintf(
+		'You are running the Yii User Management Module %s in Debug Mode!',
+		Yum::module()->version);
+	  echo CHtml::closeTag('div');
+	}
 ?>
 
-<div class="container">
 <?php echo Yum::renderFlash(); ?>
-</div>
-
-<div class="container">
 <?php echo $content; ?>
-</div>
-</div>
-
 <?php $this->endContent(); ?>

@@ -2,7 +2,7 @@
 
 <?php $this->breadcrumbs = array(Yum::t('Registration')); ?>
 
-<div class="form">
+
 <?php $activeform = $this->beginWidget('CActiveForm', array(
   'id'=>'registration-form',
   'enableAjaxValidation'=>true,
@@ -15,37 +15,37 @@
 <?php echo CHtml::errorSummary(array($form, $profile)); ?>
 
 <?php if(!Yum::module('registration')->registration_by_email) { ?>
-<div class="row">
+<div class="row-fluid">
   <div class="span12"> <?php
 echo $activeform->labelEx($form,'username');
 echo $activeform->textField($form,'username');
 ?> </div></div>
 <?php } ?>
 
-<div class="row">
+<div class="row-fluid">
 <div class="span12"> <?php
 echo $activeform->labelEx($profile,'email');
 echo $activeform->textField($profile,'email');
 ?> </div></div>
 
-  <div class="row"><div class="span12"> <?php
+  <div class="row-fluid"><div class="span12"> <?php
 echo $activeform->labelEx($profile,'firstname');
 echo $activeform->textField($profile,'firstname');
 ?> </div></div>
 
-  <div class="row"><div class="span12"> <?php
+  <div class="row-fluid"><div class="span12"> <?php
 echo $activeform->labelEx($profile,'lastname');
 echo $activeform->textField($profile,'lastname');
 ?> </div></div>
 
-<div class="row">
+<div class="row-fluid">
 <div class="span12">
 <?php echo $activeform->labelEx($form,'password'); ?>
 <?php echo $activeform->passwordField($form,'password'); ?>
 </div>
 </div>
 
-<div class="row">
+<div class="row-fluid">
 <div class="span12">
 <?php echo $activeform->labelEx($form,'verifyPassword'); ?>
 <?php echo $activeform->passwordField($form,'verifyPassword'); ?>
@@ -54,7 +54,7 @@ echo $activeform->textField($profile,'lastname');
 <?php if(extension_loaded('gd')
 && !Yum::module()->debug
 && Yum::module('registration')->enableCaptcha): ?>
-  <div class="row">
+  <div class="row-fluid">
       <div class="span12">
     <?php echo CHtml::activeLabelEx($form,'verifyCode'); ?>
     <div>
@@ -67,11 +67,10 @@ echo $activeform->textField($profile,'lastname');
   </div></div>
   <?php endif; ?>
 
-  <div class="row submit">
+  <div class="row-fluid submit">
     <div class="span12">
     <?php echo CHtml::submitButton(Yum::t('Registration'), array('class'=>'btn')); ?>
         </div>
   </div>
 
 <?php $this->endWidget(); ?>
-</div><!-- form -->
