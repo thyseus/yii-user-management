@@ -5,7 +5,7 @@ class ProfileModule extends CWebModule {
 	public $adminLayout = 'profile.views.layouts.yum';
 	public $layout = 'profile.views.layouts.yum';
 
-	public $requiredProfileFields = array('firstname', 'lastname');
+	public $requiredProfileFields = array('email', 'firstname', 'lastname');
 
 	public $profileRules = array(
 			array('email', 'unique'),

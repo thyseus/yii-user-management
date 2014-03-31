@@ -22,7 +22,9 @@ class YumRegistrationForm extends YumUser {
   {
     $rules = parent::rules();
 
-    $rules[] = array('username', 'required');
+    if(!(Yum::hasModule('registration') && Yum::module('registration')->registration_by_email))
+      $rules[] = array('username', 'required');
+
     $rules[] = array('newsletter, terms', 'safe');
     // password requirement is already checked in YumUser model, its sufficient
     // to check for verifyPassword here

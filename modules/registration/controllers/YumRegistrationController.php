@@ -99,13 +99,13 @@ class YumRegistrationController extends YumController {
         Yum::setFlash('Thank you for your registration. Please check your email.');
         $this->redirect(Yum::module()->loginUrl);
       }
-    } 
+    }
 
     $this->render(Yum::module()->registrationView, array(
       'form' => $form,
       'profile' => $profile,
     )
-  );  
+  );
   }
 
   // Send the Email to the given user object. 

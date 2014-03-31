@@ -235,10 +235,14 @@ class YumUser extends YumActiveRecord
 
     $rules[] = array('username', 'unique',
       'message' => Yum::t('This username already exists'));
-      
+
     $rules[] = array('status', 'in', 'range' => array(0, 1, 2, 3, -1, -2));
     $rules[] = array('superuser', 'in', 'range' => array(0, 1));
-    $rules[] = array('username, createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
+
+    if(!(Yum::hasModule('registration') && Yum::module('registration')->registration_by_email))
+      $rules[] = array('username', 'required');
+
+    $rules[] = array('createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
     $rules[] = array('notifyType, avatar', 'safe');
     $rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
     $rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
@@ -259,7 +263,7 @@ class YumUser extends YumActiveRecord
     }
 
 
-    if (Yum::hasModule('role')) 
+    if (Yum::hasModule('role'))
       $rules[] = array('filter_role', 'safe');
 
     return $rules;
