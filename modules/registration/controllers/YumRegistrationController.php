@@ -62,19 +62,21 @@ class YumRegistrationController extends YumController {
   }
 
   /*
-   * an Example implementation of an registration of an new User in the system.
+   * example implementation of an registration of an new User in the system.
    *
-   * please see the documentation of yii-user-management for examples on how to
+   * you can see the documentation of yii-user-management for examples on how to
    * extend from this class and implement your own registration logic in
    * user/docs/registration.txt
    */
   public function actionRegistration() {
-    // When we override the registrationUrl, this one is not valid anymore!
+    // When we override the registrationUrl, this one should not be accessible
+    // anymore
     if(Yum::module('registration')->registrationUrl != array(
       '//registration/registration/registration'))
       throw new CHttpException(403);
 
     Yii::import('user.profile.models.*');
+
     $form = new YumRegistrationForm;
     $profile = new YumProfile;
 
@@ -101,7 +103,7 @@ class YumRegistrationController extends YumController {
       }
     }
 
-    $this->render(Yum::module()->registrationView, array(
+    $this->render(Yum::module('registration')->registrationView, array(
       'form' => $form,
       'profile' => $profile,
     )
