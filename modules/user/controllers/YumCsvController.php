@@ -1,13 +1,13 @@
 <?php
 /**
- * 
+ *
  **/
 class YumCsvController extends YumController
 {
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('select', 'export'),
+					'actions'=>array('select', 'export', 'import'),
 					'expression' => 'Yii::app()->user->isAdmin()'
 					),
 				array('deny',  // deny all other users
@@ -15,6 +15,16 @@ class YumCsvController extends YumController
 						),
 				);
 	}
+
+  public function actionImport() {
+    if(isset($_FILES['filename']) && isset($_FILES['filename']['name'])) {
+      if (is_uploaded_file($_FILES['filename']['tmp_name']))
+        $fileData = file_get_contents($_FILES['filename']['tmp_name']);
+      var_dump($fileData);
+    }
+
+    $this->render('import');
+  }
 
 	public function actionExport() {
 		if(isset($_POST['profile_fields'])) {
@@ -26,14 +36,14 @@ class YumCsvController extends YumController
 
 			Yii::import('application.modules.user.components.CSVExport');
 			$sql = sprintf('select %s from %s where %s',
-					$fields, 
+					$fields,
 					Yum::module('profile')->profileTable,
 					Yum::module()->customCsvExportCriteria);
 			$result = Yii::app()->db->createCommand($sql)->queryAll();
 			$csv = new CSVExport($result);
 			$content = $csv->toCSV();
 			$filename = Yii::app()->basePath.'/runtime/yum_user_export.csv';
-			$content = $csv->toCSV($filename, ",", "\"");                 
+			$content = $csv->toCSV($filename, ",", "\"");
 			Yii::app()->getRequest()->sendFile(basename($filename),
 					@file_get_contents($filename),
 					"text/csv", false);

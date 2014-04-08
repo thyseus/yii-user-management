@@ -21,6 +21,21 @@ class YumAction extends YumActiveRecord{
 		);
 	}
 
+  // return all users that have the possibility to run this action
+  public function getUsers() {
+    $users = array();
+
+    foreach($this->permissions as $permission) {
+      if($permission->type == 'role')
+        foreach(YumRole::model()->findByPk($permission->principal_id)->users as $user)
+          $users[$user->id] = $user;
+      else if($permission->type == 'user')
+        $users[$permission->principal_id] = $permission->principal;
+
+      return $users;
+    }
+  }
+
 	public function relations()
 	{
 		return array(
