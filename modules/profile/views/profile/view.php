@@ -17,7 +17,7 @@ Yum::renderFlash();
 <?php
 if(Yum::hasModule('friendship'))
 $this->renderPartial(
-		'application.modules.friendship.views.friendship.friends', array(
+		'user.friendship.views.friendship.friends', array(
 			'model' => $model)); ?>
 <br />
 <?php

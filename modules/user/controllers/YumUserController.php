@@ -1,6 +1,6 @@
 <?php
+Yii::import('user.controllers.YumController');
 
-Yii::import('application.modules.user.controllers.YumController');
 class YumUserController extends YumController {
 	public $defaultAction = 'login';
 
@@ -54,7 +54,7 @@ class YumUserController extends YumController {
       throw new CHttpException(500, Yum::t('Generation of Demo users only allowed in debug mode'));
 
     if(Yum::hasModule('role'))
-      Yii::import('application.modules.role.models.*');
+      Yii::import('user.role.models.*');
 
     if(isset($_POST['user_amount'])) {
       for($i = 0; $i < $_POST['user_amount']; $i++) {
@@ -193,7 +193,7 @@ class YumUserController extends YumController {
 
 			if(isset($_POST['YumUserChangePassword'])) {
 				if($_POST['YumUserChangePassword']['password'] == '') {
-					Yii::import('application.modules.user.components.EPasswordGenerator');
+					Yii::import('user.components.EPasswordGenerator');
 					$generatorOptions = Yum::module()->passwordGeneratorOptions;
 					$password = EPasswordGenerator::generate(
 							$generatorOptions['length'],
@@ -375,7 +375,7 @@ class YumUserController extends YumController {
 
 	public function actionAdmin() {
 		if(Yum::hasModule('role'))
-			Yii::import('application.modules.role.models.*');
+			Yii::import('user.role.models.*');
 
 		$this->layout = Yum::module()->adminLayout;
 
@@ -385,7 +385,7 @@ class YumUserController extends YumController {
 			$model->attributes = $_GET['YumUser'];
 
 		if(Yum::hasModule('profile')) {
-			Yii::import('application.modules.profile.models.*');
+			Yii::import('user.profile.models.*');
 			$profile = new YumProfile;
 			if(isset($_GET['YumProfile'])) {
 				$profile->attributes = $_GET['YumProfile'];

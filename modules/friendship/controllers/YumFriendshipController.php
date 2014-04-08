@@ -1,8 +1,8 @@
 <?php
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.components.*');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.friendship.models.*');
+Yii::import('user.controllers.YumController');
+Yii::import('user.components.*');
+Yii::import('user.models.*');
+Yii::import('user.friendship.models.*');
 
 class YumFriendshipController extends YumController {
 	// make sure that friendship is enabled in the configuration

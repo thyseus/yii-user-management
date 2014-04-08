@@ -1,4 +1,7 @@
 <?php
+
+Yii::import('user.models.YumUser');
+
 class YumWebUser extends CWebUser
 {
   public $loginUrl = array('//user/auth/login');
@@ -27,7 +30,7 @@ class YumWebUser extends CWebUser
     if(!Yum::hasModule('role'))
       throw new CException(Yum::t('Role module is not activated'));
 
-    Yii::import('application.modules.role.models.*');
+    Yii::import('user.role.models.*');
 
     if(Yum::module('role')->adminIsGod && Yii::app()->user->isAdmin())
       return true;
@@ -109,7 +112,7 @@ class YumWebUser extends CWebUser
    */
   public function hasRole($role, $uid = 0) {
     if(Yum::hasModule('role')) {
-      Yii::import('application.modules.role.models.*');
+      Yii::import('user.role.models.*');
 
       if($uid == 0)
         $uid = Yii::app()->user->id;

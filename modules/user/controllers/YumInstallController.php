@@ -33,7 +33,7 @@ class YumInstallController extends YumController
   {
     if ($this->module->debug === true) {
       if(!Yii::app()->user instanceof YumWebUser)
-        throw new CHttpException(500, Yum::t('Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. Please see the installation instructions.'));
+        throw new CHttpException(500, 'Please make sure that Yii uses the YumWebUser component instead of CWebUser in your config/main.php components section. See the installation instructions.');
 
       if(!isset(Yii::app()->cache))
         throw new CHttpException(500, 'Please enable a caching component for yii-user-management to work.');
@@ -123,7 +123,7 @@ class YumInstallController extends YumController
 
           // Insert the translation strings that come with yum
           $sql = file_get_contents(Yii::getPathOfAlias(
-            'application.modules.user.docs') . '/yum_translation.sql');
+            'user.docs') . '/yum_translation.sql');
 
           $db->createCommand($sql)->execute();
 
@@ -397,13 +397,13 @@ class YumInstallController extends YumController
         }
         else
         {
-          throw new CException(Yum::t('Database connection is not working'));
+          throw new CException('Database connection is not working');
         }
       }
       else {
         if(Yii::app()->db->getSchema()->getTable('user'))
-          throw new CHttpException(403, Yum::t(
-            'Yii-user-management is already installed. Please remove it manually to continue'));
+          throw new CHttpException(403,
+            'Yii-user-management is already installed. Please remove it manually to continue');
 
         $this->render('start', array(
           'userTable' => 'user',
@@ -425,7 +425,7 @@ class YumInstallController extends YumController
         ));
       }
     } else {
-      throw new CException(Yum::t('User management module is not in Debug Mode'));
+      throw new CException('Yii User management module is not in Debug Mode');
     }
   }
 

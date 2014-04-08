@@ -8,7 +8,7 @@ class YumUsergroup extends YumActiveRecord{
 
 	public function behaviors() {
 		return array('CSerializeBehavior' => array(
-					'class' => 'application.modules.user.components.CSerializeBehavior',
+					'class' => 'user.components.CSerializeBehavior',
 					'serialAttributes' => array('participants')));
 	}
 
@@ -56,7 +56,7 @@ class YumUsergroup extends YumActiveRecord{
 	}
 
 	public function getMessageDataProvider() {
-		Yii::import('application.modules.usergroup.models.*');
+		Yii::import('usergroup.models.*');
 		$criteria = new CDbCriteria;
 		$criteria->compare('group_id', $this->id);
 	

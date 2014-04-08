@@ -48,12 +48,12 @@ echo $form->error($user, 'superuser'); ?>
 			'form'=>$passwordform)); ?>
 
 <?php if(Yum::hasModule('role')) { 
-	Yii::import('application.modules.role.models.*');
+	Yii::import('user.role.models.*');
 ?>
 
 <label> <?php echo Yum::t('User belongs to these roles'); ?> </label>
 
-<?php $this->widget('YumModule.components.select2.ESelect2', array(
+<?php $this->widget('user.components.select2.ESelect2', array(
 				'model' => $user,
 				'attribute' => 'roles',
 				'htmlOptions' => array(
@@ -66,7 +66,7 @@ echo $form->error($user, 'superuser'); ?>
 </div>
 
 <div class="span6">
-<?php if(Yum::hasModule('profile')) 
+<?php if(Yum::hasModule('profile'))
 $this->renderPartial(Yum::module('profile')->profileFormView, array(
   'form' => $form,
   'profile' => $profile)); ?>

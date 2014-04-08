@@ -1,48 +1,51 @@
 <?php
-Yii::setPathOfAlias('RegistrationModule' , dirname(__FILE__));
+Yii::setPathOfAlias('registration' , dirname(__FILE__));
 
 class RegistrationModule extends CWebModule {
-	// why enableRegistration ? - in case you only want a recovery ! 
-	public $layout = 'application.modules.user.views.layouts.yum';
-	public $enableRegistration = true;
-	public $enableRecovery = true;
+  // why enableRegistration ? - in case you only want a recovery !
+  public $layout = 'user.views.layouts.yum';
+  public $enableRegistration = true;
+  public $enableRecovery = true;
 
-	public $registrationUrl = array('//registration/registration/registration');
-	public $activationUrl = array('//registration/registration/activation');
-	public $recoveryUrl = array('//registration/registration/recovery');
+  public $recoveryUrl     = array('//registration/registration/recovery');
+  public $activationUrl   = array('//registration/registration/activation');
+  public $registrationUrl = array('//registration/registration/registration');
 
-	public $activationSuccessView = '/registration/activation_success';
-	public $activationFailureView = '/registration/activation_failure';
+  public $activationSuccessView = '/registration/activation_success';
+  public $activationFailureView = '/registration/activation_failure';
 
-	// Whether to confirm the activation of an user by email
-	public $enableActivationConfirmation = true; 
+  // Whether to confirm the activation of an user by email
+  public $enableActivationConfirmation = true;
 
-	public $registrationEmail='register@website.com';
-	public $recoveryEmail='restore@website.com';
+  public $registrationEmail='register@website.com';
+  public $recoveryEmail='restore@website.com';
 
-	// Which roles should be assigned automatically to a fresh registered user?
-	// Use role id, for example array(1,4,5)  
-	public $defaultRoles = array();
-	public $defaultHybridAuthRoles = array();
+  // If set to true, no username is needed on registration.
+  // The user only needs to give his email address.
+  // The 'username' is set to given email automatically.
+  public $registration_by_email = false;
 
-	public $registrationView = '/registration/registration';
-	public $changePasswordView = 
-		'application.modules.user.views.user.changepassword';
-	public $recoverPasswordView = 
-		'application.modules.registration.views.registration.recovery';
+  // Which roles should be assigned automatically to a fresh registered user?
+  // Use role id, for example array(1,4,5)
+  public $defaultRoles = array();
+  public $defaultHybridAuthRoles = array();
 
-	/**
-	 * Whether to use captcha in registration process
-	 * @var boolean
-	 */
-	public $enableCaptcha = true;
+  public $registrationView    = '/registration/registration';
+  public $changePasswordView  = 'user.views.user.changepassword';
+  public $recoverPasswordView = 'registration.views.registration.recovery';
 
-	public $loginAfterSuccessfulActivation = false;
-	public $loginAfterSuccessfulRecovery = false;
+  /**
+   * Whether to use captcha in registration process
+   * @var boolean
+   */
+  public $enableCaptcha = true;
 
-	public $controllerMap=array(
-			'registration'=>array(
-				'class'=>'RegistrationModule.controllers.YumRegistrationController'),
-			);
+  public $loginAfterSuccessfulRecovery   = false;
+  public $loginAfterSuccessfulActivation = false;
+
+  public $controllerMap=array(
+    'registration'=>array(
+      'class'=>'registration.controllers.YumRegistrationController'),
+  );
 
 }

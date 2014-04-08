@@ -13,11 +13,11 @@ class MessageModule extends CWebModule
 
 	public $messageTable = '{{message}}';
 
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $layout = 'user.views.layouts.yum';
 
 	public $dateFormat = 'Y-m-d G:i:s';
 
-	public $inboxView = 'application.modules.message.views.message.index';
+	public $inboxView = 'user.message.views.message.index';
 	public $inboxRoute = array('index');
 
 	// Send a message to the user if the email changing has been succeeded

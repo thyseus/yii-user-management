@@ -10,8 +10,8 @@ class AvatarModule extends CWebModule {
 	public $enableGravatarDefault = true;
 
 	// override this with your custom layout, if available
-	public $adminLayout = 'application.modules.user.views.layouts.yum';
-	public $layout = 'application.modules.user.views.layouts.yum';
+	public $adminLayout = 'user.views.layouts.yum';
+	public $layout = 'user.views.layouts.yum';
 
 	public $avatarPath = 'images';
 
@@ -28,10 +28,10 @@ class AvatarModule extends CWebModule {
 
 	public function init() {
 		$this->setImport(array(
-					'application.modules.user.controllers.*',
-					'application.modules.user.models.*',
-					'application.modules.avatar.controllers.*',
-					'application.modules.avatar.models.*',
+					'user.controllers.*',
+					'user.models.*',
+					'user.avatar.controllers.*',
+					'user.avatar.models.*',
 					));
 	}
 }

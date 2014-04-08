@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.modules.user.controllers.YumController');
-Yii::import('application.modules.user.models.*');
-Yii::import('application.modules.membership.models.*');
+Yii::import('user.controllers.YumController');
+Yii::import('user.models.*');
+Yii::import('user.membership.models.*');
 
 class YumPaymentController extends YumController {
 

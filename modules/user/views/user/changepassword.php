@@ -1,6 +1,6 @@
 <?php 
 $this->pageTitle = Yum::t("change password");
-echo '<h2>'. Yum::t('change password') .'</h2>';
+echo '<h1>'. Yum::t('change password') .'</h1>';
 
 $this->breadcrumbs = array(
 	Yum::t("Change password"));
@@ -20,7 +20,7 @@ if(isset($expired) && $expired)
 	} ?>
 
 <?php $this->renderPartial(
-		'application.modules.user.views.user.passwordfields', array(
+		'user.views.user.passwordfields', array(
 			'form'=>$form)); ?>
 
 	<div class="submit">

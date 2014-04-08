@@ -36,7 +36,7 @@ if(isset($_GET['action']))
 
 
 
-<div class="row-fluid">
+<div class="row-fluid-fluid">
 
 <?php if($model->hasErrors()) { ?>
 <div class="alert">
@@ -82,7 +82,7 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
     CHtml::image(
       Yii::app()->getAssetManager()->publish(
         Yii::getPathOfAlias(
-          'application.modules.user.assets.images').'/'.strtolower($provider).'.png'),
+          'user.assets.images').'/'.strtolower($provider).'.png'),
       $provider) . $provider, $this->createUrl(
         '//user/auth/login', array('hybridauth' => $provider)), array(
           'class' => 'social')) . '<br />'; 
@@ -94,7 +94,7 @@ foreach(Yum::module()->hybridAuthProviders as $provider)
 <?php } ?>
 
 
-<div class="row">
+<div class="row-fluid">
 <div class="span12">
 
   <p class="hint">
@@ -116,11 +116,12 @@ if(Yum::hasModule('registration')
 </div>
 
 
-<div class="row">
-<div class="span12">
+<div class="row-fluid">
+<div class="span3">
 <div class="buttons">
-<?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?>
+<p><?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?></p>
 </div>
+<div class="alert alert-danger"> You can register <?php echo CHtml::link('here', Yum::module('registration')->registrationUrl);?></div>
 </div>
 </div>
 

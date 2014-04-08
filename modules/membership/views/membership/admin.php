@@ -17,7 +17,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 			'columns'=>array(
 				array('name' => 'id',
 					'htmlOptions' => array('style' => 'width: 20px;')),
-				'user.username',
+				'username',
 				'role.title',
 				array(
 					'name'=>'order_date',
