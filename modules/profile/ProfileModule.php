@@ -45,11 +45,11 @@ class ProfileModule extends CWebModule {
 
   public $controllerMap=array(
     'comments'=>array(
-      'class'=>'ProfileModule.controllers.YumProfileCommentController'),
+      'class'=>'profile.controllers.YumProfileCommentController'),
     'privacy'=>array(
-      'class'=>'ProfileModule.controllers.YumPrivacysettingController'),
+      'class'=>'profile.controllers.YumPrivacysettingController'),
     'profile'=>array(
-      'class'=>'ProfileModule.controllers.YumProfileController'),
+      'class'=>'profile.controllers.YumProfileController'),
   );
 
   public function init() {
