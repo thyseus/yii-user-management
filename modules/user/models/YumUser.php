@@ -661,9 +661,7 @@ class YumUser extends YumActiveRecord
 			$this->activationKey = $activate;
 			$this->save(false, array('activationKey'));
 		} else
-			$this->activationKey = CPasswordHelper::hashPassword(
-					microtime() . $this->password, Yum::module()->passwordHashCost);
-
+      $this->activationKey = md5sum(microtime() . $this->password, Yum::module()->passwordHashCost);
 		if(!$this->isNewRecord)
 			$this->save(false, array('activationKey'));
 
