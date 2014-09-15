@@ -1,7 +1,7 @@
 <?php
 
 // This is the bootstrap script of the yii user management demo application.
-// It is not meant for any productive 
+// It is not meant for any productive use.
 // Change the following path to your yii installation
 require_once(dirname(__FILE__).'/../yii-git/framework/yii.php');
 
@@ -12,8 +12,8 @@ Yii::createWebApplication(
     'import'=>array(
       'application.models.*',
       'application.components.*',
-      'user.components.*',
-      'user.models.*',
+      'application.modules.user.components.*',
+      'application.modules.user.models.*',
     ),
     'modules'=>array(
       'user' => array(

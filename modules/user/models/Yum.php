@@ -109,16 +109,23 @@ class Yum {
         return Yii::log(Yum::t($message), $level, $category);
     }
 
-  public static function renderFlash()
-  {
+  public static function renderFlash() {
     if(Yum::hasFlash()) {
       echo '<div class="alert">';
       echo Yum::getFlash();
       echo '</div>';
       Yii::app()->clientScript->registerScript('fade',"
         setTimeout(function() { $('.info').fadeOut('slow'); },
-    {$_SESSION['yum_delay']});	
-      "); 
+    {$_SESSION['yum_delay']});
+      ");
+    }
+
+    if (Yum::module()->debug) {
+      echo CHtml::openTag('div', array('class' => 'yumwarning'));
+      echo Yum::t(
+        'You are running the Yii User Management Module {version} in Debug Mode!', array(
+          '{version}' => Yum::module()->version));
+      echo CHtml::closeTag('div');
     }
   }
 
