@@ -7,26 +7,15 @@ class YumUserController extends YumController {
 	public function accessRules() {
 		return array(
 				array('allow',
-					'actions'=>array('index', 'view', 'login'),
+					'actions'=>array('login'),
 					'users'=>array('*'),
 					),
 				array('allow',
-					'actions'=>array('profile',
-						'logout',
-						'changepassword',
-						'passwordexpired',
-						'delete',
-						'browse'),
+					'actions'=>array('profile', 'logout', 'changepassword', 'passwordexpired', 'delete', 'browse'),
 					'users'=>array('@'),
 					),
 				array('allow',
-					'actions'=>array('admin',
-						'delete',
-						'create',
-						'update',
-						'list',
-						'assign',
-						'generateData',
+					'actions'=>array('admin', 'index', 'view', 'delete', 'create', 'update', 'list', 'assign', 'generateData',
 						'csv'),
 					'expression' => 'Yii::app()->user->isAdmin()'
 					),
@@ -416,5 +405,4 @@ class YumUserController extends YumController {
 		}
 		return $this->_model;
 	}
-
 }
