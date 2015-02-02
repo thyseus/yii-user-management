@@ -181,7 +181,7 @@ class YumRegistrationController extends YumController {
           $user = $profile->user;
           if($user->status <= 0)
             throw new CHttpException(403, 'User is not active');
-          else if($user->activationKey == $key) {
+          else if($user->activationKey == urldecode($key)) {
             $passwordform = new YumUserChangePassword;
             if (isset($_POST['YumUserChangePassword'])) {
               $passwordform->attributes = $_POST['YumUserChangePassword'];
@@ -222,12 +222,12 @@ class YumRegistrationController extends YumController {
 
         if ($form->validate()) {
           if($form->user instanceof YumUser) {
-            if($form->user->status <= 0)	
+            if($form->user->status <= 0)
               throw new CHttpException(403, 'User is not active');
             $form->user->generateActivationKey();
             $recovery_url = $this->createAbsoluteUrl(
               Yum::module('registration')->recoveryUrl[0], array(
-                'key' => $form->user->activationKey,
+                'key' => urlencode($form->user->activationKey),
                 'email' => $form->user->profile->email));
 
             Yum::log(Yum::t(
