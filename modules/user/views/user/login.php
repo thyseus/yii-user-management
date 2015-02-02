@@ -121,7 +121,6 @@ if(Yum::hasModule('registration')
 <div class="buttons">
 <p><?php echo CHtml::submitButton(Yum::t('Login'), array('class' => 'btn')); ?></p>
 </div>
-<div class="alert alert-danger"> You can register <?php echo CHtml::link('here', Yum::module('registration')->registrationUrl);?></div>
 </div>
 </div>
 
