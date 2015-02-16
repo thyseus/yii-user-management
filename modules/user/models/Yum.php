@@ -111,7 +111,7 @@ class Yum {
 
   public static function renderFlash() {
     if(Yum::hasFlash()) {
-      echo '<div class="alert">';
+      echo '<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>';
       echo Yum::getFlash();
       echo '</div>';
       Yii::app()->clientScript->registerScript('fade',"
