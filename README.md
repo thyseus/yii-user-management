@@ -6,8 +6,8 @@ A user management module collection for the yii framework >= 1.1.14
 Features:
 ---------
 
-* Demo Project
-* Installer
+* Demo Project (https://github.com/thyseus/yii-user-management-demo)
+* Installer (will probably be replaced with migrations)
 * User Administration
 * Role Administration
 * Hybrid auth is bundled and can easily be integrated, see user/docs/hybridauth.txt.
@@ -33,15 +33,9 @@ Vimeo, Goodreads, Live, Pixnet, Steam, Vkontakte
 Usage with demo application:
 -------------------------------
 
-Starting from 0.9, a demo application is provided in the repository.
+Starting from 0.9, a demo application is available here:
 
-* Clone the package:
-```
-$ git clone https://github.com/thyseus/yii-user-management
-```
-* Set the path to your yii framework folder in index.php,
-* create an empty folder assets/ and runtime/ with write access
-* Navigate to http://localhost/yii-user-management/index.php
+https://github.com/thyseus/yii-user-management-demo
 
 Installation using composer:
 --------------------

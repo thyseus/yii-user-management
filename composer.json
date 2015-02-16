@@ -2,7 +2,7 @@
     "name": "thyseus/yii-user-management",
     "description": "A user management module collection for the yii framework",
     "type": "library",
-     "keywords": ["user","role", "profile"],
+     "keywords": ["user","role", "profile", "friendship"],
     "homepage": "http://github.com/thyseus/yii-user-management",
     "license": "GPL",
     "authors": [
