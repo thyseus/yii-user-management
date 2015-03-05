@@ -19,19 +19,6 @@ class YumUserController extends YumController {
 						'csv'),
 					'expression' => 'Yii::app()->user->isAdmin()'
 					),
-				array('allow',
-					'actions'=>array('update'),
-					'expression' => 'Yii::app()->user->can("admin-user-update")'
-					),
-
-				array('allow',
-					'actions'=>array('create'),
-					'expression' => 'Yii::app()->user->can("admin-user-create")'
-					),
-				array('allow',
-					'actions'=>array('admin'),
-					'expression' => 'Yii::app()->user->can("admin-user")'
-					),
 				array('deny',  // deny all other users
 						'users'=>array('*'),
 						),
