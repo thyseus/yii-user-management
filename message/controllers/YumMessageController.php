@@ -64,11 +64,15 @@ class YumMessageController extends YumController {
 
 	public function actionCompose($to_user_id = null, $answer_to = 0) {
 		$model = new YumMessage;
-		$this->performAjaxValidation('YumMessage', 'yum-message-form');
+		$model->from_user_id = Yii::app()->user->id; /* NOTE: This line is moved here, because
+		    * otherwise 'from_user' relation will remain empty in YumMessage->beforeValidate()
+		    * method (line 34) and thus - "Trying to get property of non-object" error will be
+		    * raised.
+		    */
+		$this->performAjaxValidation($model, 'yum-message-form');
 
 		if(isset($_POST['YumMessage'])) {
 			$model->attributes = $_POST['YumMessage'];
-			$model->from_user_id = Yii::app()->user->id;
 			$model->validate();
 			if(!$model->hasErrors()) {
 				$model->save();
