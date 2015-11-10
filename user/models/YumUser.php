@@ -347,8 +347,8 @@ class YumUser extends YumActiveRecord
 
     $cmd = Yii::app()->db->createCommand()
       ->select('id, action.title')
-      ->from('permission')
-      ->join('action', 'action.id = permission.action')
+      ->from('{{permission}} as permission')
+      ->join('{{action}} as action', 'action.id = permission.action')
       ->where(array('and', "type = 'role'",
         array('in', 'principal_id', $role_ids)));
 
