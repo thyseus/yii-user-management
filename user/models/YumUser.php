@@ -126,7 +126,7 @@ class YumUser extends YumActiveRecord
     }
 
     if (Yum::hasModule('role') && $this->filter_role) {
-      $criteria->join = 'left join user_role on t.id = user_role.user_id';
+      $criteria->join = 'left join {{user_role}} user_role on t.id = user_role.user_id';
       $criteria->addCondition('user_role.role_id = '.$this->filter_role);
     }
 
