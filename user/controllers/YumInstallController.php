@@ -301,7 +301,7 @@ class YumInstallController extends YumController
 
               $sql = "CREATE TABLE IF NOT EXISTS `" . $permissionTable . "` (
                 `principal_id` int(11) NOT NULL,
-                `subordinate_id` int(11) NULL,
+                `subordinate_id` int(11) NOT NULL,
                 `type` enum('user','role') NOT NULL,
                 `action` int(11) unsigned NOT NULL,
                 `subaction` int(11) unsigned NOT NULL,
