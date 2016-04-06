@@ -32,22 +32,17 @@ class YumUser extends YumActiveRecord
     if (Yum::module()->trulyDelete) {
       if($this->profile)
         $this->profile->delete();
+      Yum::log(Yum::t('User {username} (id: {id}) has been deleted permanently', array(
+        '{username}' => $this->username,
+        '{id}' => $this->id)));
       return parent::delete();
     } else {
       $this->status = self::STATUS_REMOVED;
+      Yum::log(Yum::t('User {username} (id: {id}) has been set to status "removed"', array(
+        '{username}' => $this->username,
+        '{id}' => $this->id)));
       return $this->save(false, array('status'));
     }
-  }
-
-  public function afterDelete()
-  {
-    if (Yum::hasModule('profiles') && $this->profile !== null)
-      $this->profile->delete();
-
-    Yum::log(Yum::t('User {username} (id: {id}) has been deleted', array(
-      '{username}' => $this->username,
-      '{id}' => $this->id)));
-    return parent::afterDelete();
   }
 
   public function isOnline()
@@ -130,14 +125,14 @@ class YumUser extends YumActiveRecord
       $criteria->addCondition('user_role.role_id = '.$this->filter_role);
     }
 
-    $criteria->compare('t.id', $this->id, true);
+    $criteria->compare('t.id', $this->id, false);
     $criteria->compare('t.username', $this->username, true);
     $criteria->compare('t.status', $this->status);
     $criteria->compare('t.superuser', $this->superuser);
     $criteria->compare('t.createtime', $this->createtime, true);
     $criteria->compare('t.lastvisit', $this->lastvisit, true);
 
-    $sort->attributes[] = '*'; 
+    $sort->attributes[] = '*';
 
     return new CActiveDataProvider(get_class($this), array(
       'criteria' => $criteria,
@@ -147,7 +142,7 @@ class YumUser extends YumActiveRecord
   }
 
   public function beforeValidate() {
-    if ($this->isNewRecord) 
+    if ($this->isNewRecord)
       $this->createtime = time();
 
     return true;
@@ -243,7 +238,7 @@ class YumUser extends YumActiveRecord
       $rules[] = array('username', 'required');
 
     $rules[] = array('createtime, lastvisit, lastpasswordchange, superuser, status', 'required');
-    $rules[] = array('notifyType, avatar', 'safe');
+    $rules[] = array('notifyType, avatar, id', 'safe');
     $rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
     $rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
 
@@ -251,7 +246,7 @@ class YumUser extends YumActiveRecord
       // require an avatar image in the avatar upload screen
       $rules[] = array('avatar', 'required', 'on' => 'avatarUpload');
 
-      // if automatic scaling is deactivated, require the exact size	
+      // if automatic scaling is deactivated, require the exact size
       $rules[] = array('avatar', 'EPhotoValidator',
         'allowEmpty' => true,
         'mimeType' => array('image/jpeg', 'image/png', 'image/gif'),
