@@ -14,16 +14,8 @@ class YumActionController extends YumController {
 
 	public function accessRules() {
 		return array(
-			array('allow',  
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', 
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', 
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete'),
 				'expression' => 'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  
