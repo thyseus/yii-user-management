@@ -3,6 +3,8 @@ yii-user-management
 
 A user management module collection for the yii framework >= 1.1.14
 
+Hint: For Yii2 i highly suggest the dektrium/yii2-user module: https://github.com/dektrium/yii2-user .
+
 Features:
 ---------
 
