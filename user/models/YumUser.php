@@ -241,6 +241,9 @@ class YumUser extends YumActiveRecord
     $rules[] = array('notifyType, avatar, id', 'safe');
     $rules[] = array('password', 'required', 'on' => array('insert', 'registration'));
     $rules[] = array('createtime, lastvisit, lastaction, superuser, status', 'numerical', 'integerOnly' => true);
+    
+    $rules[] = array('superuser', 'safe', 'on'=> 'managerUserUpdate');
+    $rules[] = array('superuser', 'unsafe', 'on'=> 'userUpdate, registration, insert, update');
 
     if (Yum::hasModule('avatar')) {
       // require an avatar image in the avatar upload screen
