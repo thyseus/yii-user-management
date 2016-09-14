@@ -233,6 +233,7 @@ class YumUserController extends YumController {
 
 		if(isset($_POST['YumUser'])) {
 			$user->attributes = $_POST['YumUser'];
+			$user->scenario = Yii::app()->user->hasRole('UserManager') ? 'managerUserUpdate' : 'userUpdate';
 
 			$user->validate();
 			if($profile && isset($_POST['YumProfile']) )
